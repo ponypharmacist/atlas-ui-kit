@@ -1,22 +1,23 @@
 {
   "name": "@ponypharmacist/atlas-ui-kit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Atlas ui kit test run",
   "author": "ponypharmacist",
   "license": "MIT",
   "private": false,
-
   "main": "dist/@ponypharmacist/atlas-ui-kit.ssr.js",
   "browser": "dist/@ponypharmacist/atlas-ui-kit.esm.js",
   "module": "dist/@ponypharmacist/atlas-ui-kit.esm.js",
   "unpkg": "dist/@ponypharmacist/atlas-ui-kit.min.js",
-
   "files": [
     "dist/*",
     "src/**/*.vue"
   ],
   "sideEffects": false,
-
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ponypharmacist/atlas-ui-kit"
+  },
   "scripts": {
     "serve": "vue-cli-service serve dev/serve.js",
     "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
@@ -24,10 +25,7 @@
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
   },
-
-  "dependencies": {
-  },
-
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
