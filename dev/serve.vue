@@ -14,5 +14,7 @@ export default Vue.extend({
 <template>
   <div id="app">
     <au-input />
+    <br>
+    <au-button>Кнопуля</au-button>
   </div>
 </template>

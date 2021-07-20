@@ -56,7 +56,7 @@ function _arrayLikeToArray(arr, len) {
 function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }//
-var script = Vue__default['default'].component('AuInput', {
+var script$1 = Vue__default['default'].component('AuInput', {
   name: 'AuInput',
   props: {
     value: {
@@ -168,10 +168,10 @@ var script = Vue__default['default'].component('AuInput', {
     }
     return script;
 }/* script */
-var __vue_script__ = script;
+var __vue_script__$1 = script$1;
 /* template */
 
-var __vue_render__ = function __vue_render__() {
+var __vue_render__$1 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -263,16 +263,61 @@ var __vue_render__ = function __vue_render__() {
   }, []);
 };
 
+var __vue_staticRenderFns__$1 = [];
+/* style */
+
+var __vue_inject_styles__$1 = undefined;
+/* scoped */
+
+var __vue_scope_id__$1 = "data-v-5cfde153";
+/* module identifier */
+
+var __vue_module_identifier__$1 = "data-v-5cfde153";
+/* functional template */
+
+var __vue_is_functional_template__$1 = false;
+/* style inject */
+
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+var __vue_component__$1 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$1,
+  staticRenderFns: __vue_staticRenderFns__$1
+}, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, undefined, undefined, undefined);//
+var script = Vue__default['default'].component('AuButton', {
+  name: 'AuButton',
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  }
+});/* script */
+var __vue_script__ = script;
+/* template */
+
+var __vue_render__ = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c('button', [_c('scope', [_vm._v("Кнопка")])], 1);
+};
+
 var __vue_staticRenderFns__ = [];
 /* style */
 
 var __vue_inject_styles__ = undefined;
 /* scoped */
 
-var __vue_scope_id__ = undefined;
+var __vue_scope_id__ = "data-v-bb6d72e0";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-57f6f173";
+var __vue_module_identifier__ = "data-v-bb6d72e0";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
@@ -285,7 +330,7 @@ var __vue_is_functional_template__ = false;
 var __vue_component__ = /*#__PURE__*/normalizeComponent({
   render: __vue_render__,
   staticRenderFns: __vue_staticRenderFns__
-}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, undefined, undefined);/* eslint-disable import/prefer-default-export */var components$1=/*#__PURE__*/Object.freeze({__proto__:null,AuInput: __vue_component__});var install = function installAtlasUiKit(Vue) {
+}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, undefined, undefined);/* eslint-disable import/prefer-default-export */var components$1=/*#__PURE__*/Object.freeze({__proto__:null,AuInput: __vue_component__$1,AuButton: __vue_component__});var install = function installAtlasUiKit(Vue) {
   Object.entries(components$1).forEach(function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
         componentName = _ref2[0],
@@ -294,7 +339,7 @@ var __vue_component__ = /*#__PURE__*/normalizeComponent({
     Vue.component(componentName, component);
   });
 }; // Create module definition for Vue.use()
-var components=/*#__PURE__*/Object.freeze({__proto__:null,'default': install,AuInput: __vue_component__});// only expose one global var, with component exports exposed as properties of
+var components=/*#__PURE__*/Object.freeze({__proto__:null,'default': install,AuInput: __vue_component__$1,AuButton: __vue_component__});// only expose one global var, with component exports exposed as properties of
 // that global var (eg. plugin.component)
 
 Object.entries(components).forEach(function (_ref) {

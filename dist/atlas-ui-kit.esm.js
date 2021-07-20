@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 //
-var script = Vue.component('AuInput', {
+var script$1 = Vue.component('AuInput', {
   name: 'AuInput',
   props: {
     value: {
@@ -119,10 +119,10 @@ function normalizeComponent(template, style, script, scopeId, isFunctionalTempla
 }
 
 /* script */
-const __vue_script__ = script;
+const __vue_script__$1 = script$1;
 /* template */
 
-var __vue_render__ = function () {
+var __vue_render__$1 = function () {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -214,13 +214,62 @@ var __vue_render__ = function () {
   });
 };
 
+var __vue_staticRenderFns__$1 = [];
+/* style */
+
+const __vue_inject_styles__$1 = undefined;
+/* scoped */
+
+const __vue_scope_id__$1 = "data-v-5cfde153";
+/* module identifier */
+
+const __vue_module_identifier__$1 = undefined;
+/* functional template */
+
+const __vue_is_functional_template__$1 = false;
+/* style inject */
+
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+const __vue_component__$1 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$1,
+  staticRenderFns: __vue_staticRenderFns__$1
+}, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, undefined, undefined, undefined);
+
+//
+var script = Vue.component('AuButton', {
+  name: 'AuButton',
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  }
+});
+
+/* script */
+const __vue_script__ = script;
+/* template */
+
+var __vue_render__ = function () {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c('button', [_c('scope', [_vm._v("Кнопка")])], 1);
+};
+
 var __vue_staticRenderFns__ = [];
 /* style */
 
 const __vue_inject_styles__ = undefined;
 /* scoped */
 
-const __vue_scope_id__ = undefined;
+const __vue_scope_id__ = "data-v-bb6d72e0";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
@@ -242,7 +291,8 @@ const __vue_component__ = /*#__PURE__*/normalizeComponent({
 
 var components = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  AuInput: __vue_component__
+  AuInput: __vue_component__$1,
+  AuButton: __vue_component__
 });
 
 // Import vue components
@@ -254,4 +304,4 @@ const install = function installAtlasUiKit(Vue) {
 }; // Create module definition for Vue.use()
 
 export default install;
-export { __vue_component__ as AuInput };
+export { __vue_component__ as AuButton, __vue_component__$1 as AuInput };

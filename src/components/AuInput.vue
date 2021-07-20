@@ -56,4 +56,4 @@ export default Vue.component('AuInput', {
 })
 </script>
 
-<style></style>
+<style scoped></style>

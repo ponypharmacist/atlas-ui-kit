@@ -85,7 +85,7 @@ if (!argv.format || argv.format === 'es') {
     input: 'src/entry.esm.js',
     external,
     output: {
-      file: 'dist/@ponypharmacist/atlas-ui-kit.esm.js',
+      file: 'dist/atlas-ui-kit.esm.js',
       format: 'esm',
       exports: 'named',
     },
@@ -117,7 +117,7 @@ if (!argv.format || argv.format === 'cjs') {
     external,
     output: {
       compact: true,
-      file: 'dist/@ponypharmacist/atlas-ui-kit.ssr.js',
+      file: 'dist/atlas-ui-kit.ssr.js',
       format: 'cjs',
       name: 'atlasUiKit',
       exports: 'auto',
@@ -146,7 +146,7 @@ if (!argv.format || argv.format === 'iife') {
     external,
     output: {
       compact: true,
-      file: 'dist/@ponypharmacist/atlas-ui-kit.min.js',
+      file: 'dist/atlas-ui-kit.min.js',
       format: 'iife',
       name: 'atlasUiKit',
       exports: 'auto',
