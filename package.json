@@ -1,14 +1,14 @@
 {
   "name": "@ponypharmacist/atlas-ui-kit",
-  "version": "0.1.1",
+  "version": "0.1.11",
   "description": "Atlas ui kit test run",
   "author": "ponypharmacist",
   "license": "MIT",
   "private": false,
-  "main": "dist/@ponypharmacist/atlas-ui-kit.ssr.js",
-  "browser": "dist/@ponypharmacist/atlas-ui-kit.esm.js",
-  "module": "dist/@ponypharmacist/atlas-ui-kit.esm.js",
-  "unpkg": "dist/@ponypharmacist/atlas-ui-kit.min.js",
+  "main": "dist/atlas-ui-kit.ssr.js",
+  "browser": "dist/atlas-ui-kit.esm.js",
+  "module": "dist/atlas-ui-kit.esm.js",
+  "unpkg": "dist/atlas-ui-kit.min.js",
   "files": [
     "dist/*",
     "src/**/*.vue"
