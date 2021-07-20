@@ -1,0 +1,29 @@
+{
+  "name": "@ponypharmacist/atlas-ui-kit",
+  "version": "0.1.0",
+  "description": "Atlas ui kit test run",
+  "author": "ponypharmacist",
+  "license": "MIT",
+  "private": false,
+
+  "main": "dist/au-input.umd.js",
+  "module": "dist/au-input.esm.js",
+  "unpkg": "dist/au-input.min.js",
+  "browser": {
+    "./sfc": "src/components/AuInput/AuInput.vue"
+  },
+  "scripts": {
+    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/au-input.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/au-input.esm.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/au-input.min.js"
+  },
+  "devDependencies": {
+    "rollup": "^1.17.0",
+    "@rollup/plugin-buble": "^0.21.3",
+    "@rollup/plugin-commonjs": "^11.1.0",
+    "rollup-plugin-vue": "^5.0.1",
+    "vue": "^2.6.10",
+    "vue-template-compiler": "^2.6.10"
+  }
+}
