@@ -1,0 +1,55 @@
+@import "./params";
+
+@mixin title {
+  font-family: 'Ruda', sans-serif;
+  font-weight: 800;
+  color: $darkblue;
+  position: relative;
+}
+
+@mixin table-item {
+  padding:  ($mm-value * 3) + px ($mm-value * 4) + px;
+  border-radius: 2px;
+}
+
+@mixin no-scrollbar {
+  &::-webkit-scrollbar
+  {
+    width: 0;
+  }
+}
+
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar-track
+  {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border-radius: 10px;
+    background-color: transparent;
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar
+  {
+    position: absolute;
+    right: 0;
+    width: 6px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb
+  {
+    background-color: rgba(0,0,0,0);
+    border-radius: 4px;
+    border: 2px solid #fff;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: #a0a0a5;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color:#a0a0a5;
+    border:4px solid #f4f4f4
+  }
+}

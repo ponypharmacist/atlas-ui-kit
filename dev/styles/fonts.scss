@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ruda:wght@700;900&display=swap');
+
+$rubik: 'Rubik', Avenir, Helvetica, Arial, sans-serif;
+$ruda: 'Ruda', Helvetica, Arial, sans-serif;
+
+// Rubik: 400, 500
+@mixin rubikRegular {
+  font-family: $rubik;
+  font-weight: 400;
+}
+
+@mixin rubikMedium {
+  font-family: $rubik;
+  font-weight: 500;
+}
+
+// Ruda: 700
+@mixin rudaBold {
+  font-family: $ruda;
+  font-weight: 700;
+}
+
+@mixin rudaExtraBold {
+  font-family: $ruda;
+  font-weight: 900;
+}

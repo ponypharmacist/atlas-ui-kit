@@ -1,0 +1,98 @@
+@import 'fonts';
+@import 'variables';
+
+/* prettier-ignore */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, code, strong, em, img, b, u, i, ol, ul, li,
+table, tbody, tfoot, thead, tr, th, td,
+header, menu, nav, footer, article, aside {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background-color: #f1f1f1;
+}
+
+#app {
+  @include rubikRegular;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  color: #2c3e50;
+  
+  height: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: #fff;
+  border-left: thin solid #e1e1e1;
+  border-right: thin solid #e1e1e1;
+}
+
+input {
+  outline: none;
+}
+
+b {
+  font-weight: 700;
+}
+
+h1 {
+  @include rudaExtraBold;
+  padding: 24px 0 22px;
+  font-size: 32px;
+  line-height: 32px;
+}
+
+h2 {
+  @include rudaExtraBold;
+  padding: 16px 0;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+a {
+  color: $color-link;
+  text-decoration: none;
+
+  &:hover {
+    color: #2c3e50;
+  }
+}
+
+img {
+  max-width: 100%;
+  object-fit: cover;
+}
+
+pre {
+  display: inline-block;
+  min-width: 240px;
+  margin: 6px 12px 6px 0;
+  padding: 6px 48px 6px 12px;
+  border-radius: 10px;
+  border: 1px solid #e1e1ff;
+  background-color: #f1f1ff;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+// 
+.d-flex {
+  display: flex;
+
+  & > * {
+    margin-right: 16px;
+  }
+}
+.align-center {
+  align-items: center;
+}

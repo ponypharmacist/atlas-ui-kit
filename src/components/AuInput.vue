@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from 'vue';
 
 export default Vue.component('AuInput', {
   name: 'AuInput',
@@ -42,7 +42,7 @@ export default Vue.component('AuInput', {
       },
       set(val) {
         if (val && this.regex) {
-          if (new RegExp('^' + this.regex + '$').test(val)) {
+          if (new RegExp(`^${this.regex}$`).test(val)) {
             this.$emit('input', val);
           } else {
             this.$refs.input.value = this.value || '';
@@ -50,10 +50,10 @@ export default Vue.component('AuInput', {
         } else {
           this.$emit('input', val);
         }
-      }
-    }
-  }
-})
+      },
+    },
+  },
+});
 </script>
 
 <style scoped></style>
