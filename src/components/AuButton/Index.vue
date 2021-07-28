@@ -1,18 +1,14 @@
 <template>
   <router-link v-if="!!to" :to="to" :tag="tag" :class="classObject">
-    <slot>
-      <au-icon v-if="icon" :icon="icon" />
-      <span v-if="label" class="label">{{ label }}</span>
-      <span v-if="!icon && !label">Submit</span>
-    </slot>
+    <au-icon v-if="icon" :icon="icon" />
+    <span v-if="label" class="label">{{ label }}</span>
+    <slot v-else>Submit</slot>
   </router-link>
 
   <a v-else-if="!!href" :href="href" :class="classObject">
-    <slot>
-      <au-icon v-if="icon" :icon="icon" />
-      <span v-if="label" class="label">{{ label }}</span>
-      <span v-if="!icon && !label">Submit</span>
-    </slot>
+    <au-icon v-if="icon" :icon="icon" />
+    <span v-if="label" class="label">{{ label }}</span>
+    <slot v-else>Submit</slot>
   </a>
 
   <button
@@ -21,15 +17,13 @@
     :type="type"
     @click.stop="$emit('click', $event)"
   >
-    <slot>
-      <au-icon v-if="icon" :icon="icon" />
-      <span v-if="label" class="label">{{ label }}</span>
-      <span v-if="!icon && !label">Submit</span>
+    <au-icon v-if="icon" :icon="icon" />
+    <span v-if="label" class="label">{{ label }}</span>
+    <slot v-else>Submit</slot>
 
-      <div v-if="isLoading" class="button-loader">
-        <au-spinner :color="spinnerColor" />
-      </div>
-    </slot>
+    <div v-if="isLoading" class="button-loader">
+      <au-spinner :color="spinnerColor" />
+    </div>
   </button>
 
 </template>
