@@ -17,6 +17,7 @@ export default {
     icon: {
       type: String,
       default: null,
+      required: true,
     },
     title: {
       type: String,
@@ -34,15 +35,34 @@ export default {
 
   computed: {
     styles() {
-      return `width: ${this.size}px; height: ${this.size}px;`;
+      let style = '';
+
+      if (this.size) style += `width: ${this.size}px; height: ${this.size}px;`;
+
+      if (this.color) style += `background-color: ${this.color};`;
+
+      style += `-webkit-mask: url('${this.getIconUrl}') no-repeat 0 0 / 100% 100%;`;
+      style += `mask: url('${this.getIconUrl}') no-repeat 0 0 / 100% 100%;`;
+
+      return style;
+    },
+
+    getIconUrl() {
+      if (this.icon.includes('mdi-')) {
+        const images = require.context('@mdi/svg/svg/', false, /\.svg$/);
+
+        return images(`./${this.icon.slice(4)}.svg`);
+      }
+
+      const images = require.context('@/assets/icons/', false, /\.svg$/);
+
+      return images(`./${this.icon}.svg`);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "./icons.scss";
-
 $default-size: 12px;
 
 .au-icon {

@@ -2,8 +2,10 @@ import SpinnerDots from './SpinnerDots.vue';
 import SpinnerFadingCircle from './SpinnerFadingCircle.vue';
 
 export default {
-  name: 'spinner',
+  name: 'au-spinner',
+
   inheritAttrs: false,
+
   props: {
     size: Number,
     color: String,
@@ -13,6 +15,7 @@ export default {
       validator: (prop) => ['dots', 'fading-circle'].includes(prop),
     },
   },
+
   render(h) {
     const props = { size: this.size, color: this.color };
 

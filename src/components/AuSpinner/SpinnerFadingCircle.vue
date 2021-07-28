@@ -61,7 +61,7 @@ $spinkit-size: 36px;
       transform: rotate(360deg / $circle-count * ($i - 1));
 
       &::before {
-        $a: -$animation-duration + ($i - 1) * $animation-duration/$circle-count;
+        $a: -$animation-duration + ($i - 1) * $animation-duration / $circle-count;
         animation-delay: $a;
       }
     }

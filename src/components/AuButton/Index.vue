@@ -2,7 +2,7 @@
   <router-link v-if="!!to" :to="to" :tag="tag" :class="classObject">
     <slot>
       <template>
-        <au-icon v-if="icon" :name="icon" />
+        <au-icon v-if="icon" :icon="icon" />
         <span v-if="label" class="label">{{ label }}</span>
         <span v-if="!icon && !label">Submit</span>
       </template>
@@ -12,7 +12,7 @@
   <a v-else-if="!!href" :href="href" :class="classObject">
     <slot>
       <template>
-        <au-icon v-if="icon" :name="icon" />
+        <au-icon v-if="icon" :icon="icon" />
         <span v-if="label" class="label">{{ label }}</span>
         <span v-if="!icon && !label">Submit</span>
       </template>
@@ -27,13 +27,13 @@
   >
     <slot>
       <template>
-        <au-icon v-if="icon" :name="icon" />
+        <au-icon v-if="icon" :icon="icon" />
         <span v-if="label" class="label">{{ label }}</span>
         <span v-if="!icon && !label">Submit</span>
       </template>
 
       <div v-if="isLoading" class="button-loader">
-        <!-- <spinner :color="inverse ? '#FFFFFF' : '#3F6ADA'" /> -->
+        <au-spinner :color="spinnerColor" />
       </div>
     </slot>
   </button>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-// import Spinner from '@/components/UI/Spinner';
+import AuSpinner from '@/components/AuSpinner';
 import AuIcon from '@/components/AuIcon';
 
 export default {
@@ -49,6 +49,7 @@ export default {
 
   components: {
     AuIcon,
+    AuSpinner,
   },
 
   inheritAttrs: false,
@@ -75,7 +76,6 @@ export default {
       type: String,
       default: 'button',
     },
-    blockedRights: Array,
     red: Boolean,
     fullWidth: Boolean,
     bordered: Boolean,
@@ -95,6 +95,12 @@ export default {
         'is-loading': this.isLoading,
         disabled: this.disabled,
       };
+    },
+
+    spinnerColor() {
+      if (this.inverse || this.red) return '#FFFFFF';
+
+      return '#3F6ADA';
     },
   },
 };
@@ -119,12 +125,6 @@ export default {
   outline: none;
   cursor: pointer;
   padding: 0 ($mm-value * 4) + px;
-
-  &.is-loading {
-    .au-icon, span {
-      opacity: 0;
-    }
-  }
 
   &.is-full-width {
     width: 100%;
@@ -211,10 +211,6 @@ export default {
     min-width: 207px;
   }
 
-  & .au-icon {
-    margin-right: 8px;
-  }
-
   & .label{
     white-space: nowrap;
   }
@@ -228,6 +224,17 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+}
+
+.au-icon {
+  margin-right: 8px;
+  background-color: $blue;
+}
+
+.is-loading {
+  .au-icon, span {
+    opacity: 0;
   }
 }
 </style>

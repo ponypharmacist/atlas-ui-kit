@@ -8,6 +8,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
+import postcss from 'rollup-plugin-postcss';
 import minimist from 'minimist';
 
 // Get browserslist config and remove ie from es build targets
@@ -93,6 +94,9 @@ if (!argv.format || argv.format === 'es') {
       replace(baseConfig.plugins.replace),
       ...baseConfig.plugins.preVue,
       vue(baseConfig.plugins.vue),
+      postcss({
+        extract: true,
+      }),
       ...baseConfig.plugins.postVue,
       babel({
         ...baseConfig.plugins.babel,
