@@ -7,8 +7,14 @@ export default {
   inheritAttrs: false,
 
   props: {
-    size: Number,
-    color: String,
+    size: {
+      type: Number,
+      required: false,
+    },
+    color: {
+      type: String,
+      default: '#999',
+    },
     type: {
       type: String,
       default: 'dots',

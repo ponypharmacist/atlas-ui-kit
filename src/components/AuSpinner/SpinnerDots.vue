@@ -8,6 +8,7 @@
 export default {
   name: 'spinner-dots',
   inheritAttrs: false,
+
   props: {
     size: {
       type: Number,
@@ -15,13 +16,16 @@ export default {
     },
     color: {
       type: String,
+      required: true,
     },
   },
+
   computed: {
     containerStyle() {
       const size = this.size && `${this.size}px`;
       return { width: size, height: size };
     },
+
     blobStyle() {
       const size = this.size && `${this.size / 3}px`;
       return { color: this.color, width: size, height: size };

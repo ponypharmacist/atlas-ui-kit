@@ -43,19 +43,14 @@ export default {
   inheritAttrs: false,
 
   props: {
-    icon: String,
-    label: String,
-    isLoading: Boolean,
-    disabled: Boolean,
-
-    small: Boolean,
-    large: Boolean,
-    shadow: Boolean,
-    inverse: Boolean,
-
-    link: Boolean,
-    to: [Object, String],
-    href: String,
+    to: {
+      type: [Object, String],
+      default: null,
+    },
+    href: {
+      type: String,
+      default: null,
+    },
     tag: {
       type: String,
       default: 'a',
@@ -64,7 +59,22 @@ export default {
       type: String,
       default: 'button',
     },
+
+    // Content
+    icon: String,
+    label: String,
+
+    // State
+    isLoading: Boolean,
+    disabled: Boolean,
+
+    // Styling
+    link: Boolean,
+    small: Boolean,
+    large: Boolean,
+    shadow: Boolean,
     red: Boolean,
+    white: Boolean,
     fullWidth: Boolean,
     bordered: Boolean,
   },
@@ -74,9 +84,9 @@ export default {
       return {
         [this.$options.name]: true,
         'is-red': this.red,
+        'is-white': this.white,
         'is-shadow': this.shadow,
         'is-full-width': this.fullWidth,
-        'is-inverse': this.inverse,
         'is-large': this.large,
         'is-bordered': this.bordered,
         'is-link': this.link,
@@ -86,7 +96,7 @@ export default {
     },
 
     spinnerColor() {
-      if (this.inverse || this.red) return '#FFFFFF';
+      if (this.red || !this.white) return '#FFFFFF';
 
       return '#3F6ADA';
     },
@@ -105,14 +115,36 @@ export default {
   align-items: center;
   font-size: 12px;
   font-weight: 500;
-  color: $blue;
-  background-color: $white;
   height: 32px;
   border-radius: 4px;
   border: none;
   outline: none;
   cursor: pointer;
   padding: 0 ($mm-value * 4) + px;
+
+  // Default blue button
+  color: $white;
+  background-color: $blue;
+  transition: .3s;
+
+  background-image: linear-gradient(
+    180deg,
+    rgba(152, 210, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  &:hover {
+    background-image: linear-gradient(
+      180deg,
+      rgba($blue, 0.3) 0%,
+      rgba($blue, 0) 100%
+    );
+  }
+
+  .au-icon {
+    margin-right: 8px;
+    background-color: $white;
+  }
 
   &.is-full-width {
     width: 100%;
@@ -122,32 +154,64 @@ export default {
     box-shadow: 0 2px 2px rgba(20,20,20, 0.15);
   }
 
-  &.is-inverse {
-    background-color: $blue;
-    transition: .3s;
-    background-image: linear-gradient(
-        180deg,
-        rgba(152, 210, 255, 0.3) 0%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    color: $white;
-    &:hover {
-      background-image: linear-gradient(
-          180deg,
-          rgba($blue, 0.3) 0%,
-          rgba($blue, 0) 100%
-      );
+  &.is-white {
+    color: $blue;
+    background-color: $white;
+    background-image: none;
+
+    .au-icon {
+      background-color: $blue;
     }
   }
 
   &.is-link {
     background-color: transparent!important;
+    background-image: none;
+    color: $blue;
 
+    .au-icon {
+      background-color: $blue;
+    }
+
+    &:hover {
+      color: $darkblue;
+
+      .au-icon {
+        background-color: $darkblue;
+      }
+    }
+
+    // red link
     &.is-red {
       color: $red2;
 
+      .au-icon {
+        background-color: $red2;
+      }
+
       &:hover {
         color: #eb5f4d;
+
+        .au-icon {
+          background-color: #eb5f4d;
+        }
+      }
+    }
+
+    // white link
+    &.is-white {
+      color: $white;
+
+      .au-icon {
+        background-color: $white;
+      }
+
+      &:hover {
+        color: #fafafa;
+
+        .au-icon {
+          background-color: #fafafa;
+        }
       }
     }
   }
@@ -160,21 +224,16 @@ export default {
   &.is-bordered {
     border: 1px solid $gray-blue-border;
     transition: border-color .2s, color .2s, background-color .2s;
-  }
 
-  &.is-bordered:hover {
-    background-color: $blue;
-    background-image: linear-gradient(
-        180deg,
-        rgba(152, 210, 255, 0.3) 0%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    color: $white;
+    &:hover {
+      border-color: $gray-blue-border-hover;
+    }
   }
 
   &.is-red {
     background-color: $red2;
     color: $white;
+    background-image: none;
 
     &:hover {
       background-color: #eb5f4d;
@@ -187,7 +246,7 @@ export default {
     pointer-events: none;
   }
 
-  &.disabled:not(.is-inverse) {
+  &.disabled.is-white {
     border: 1px solid #fff;
   }
 
@@ -213,11 +272,6 @@ export default {
     justify-content: center;
     align-items: center;
   }
-}
-
-.au-icon {
-  margin-right: 8px;
-  background-color: $blue;
 }
 
 .is-loading {
