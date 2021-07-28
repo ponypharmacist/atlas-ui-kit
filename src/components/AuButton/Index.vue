@@ -70,7 +70,6 @@ export default {
 
     // Styling
     link: Boolean,
-    small: Boolean,
     large: Boolean,
     shadow: Boolean,
     red: Boolean,
@@ -227,6 +226,18 @@ export default {
 
     &:hover {
       border-color: $gray-blue-border-hover;
+    }
+
+    &.is-white {
+      &:hover {
+        color: $white;
+        background-color: $blue;
+        background-image: linear-gradient(
+          180deg,
+          rgba($blue, 0.3) 0%,
+          rgba($blue, 0) 100%
+        );
+      }
     }
   }
 

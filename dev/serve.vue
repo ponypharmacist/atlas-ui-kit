@@ -58,7 +58,6 @@
   link
   fullWidth
   bordered
-  small
   large
   shadow
   white

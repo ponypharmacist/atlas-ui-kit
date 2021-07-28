@@ -35,6 +35,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "sass:math";
+
 $target-scale: .55;
 $min-scale: .37;
 
@@ -59,11 +61,11 @@ $animationDuration: 1s;
 }
 
 .spinner-dots .bounce1 {
-  animation-delay: -($animationDuration / 3);
+  animation-delay: -(math.div($animationDuration, 3));
 }
 
 .spinner-dots .bounce2 {
-  animation-delay: -($animationDuration / 6);
+  animation-delay: -(math.div($animationDuration, 6));
 }
 
 @-webkit-keyframes sk-bouncedelay {

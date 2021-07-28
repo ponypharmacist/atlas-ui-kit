@@ -26,6 +26,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "sass:math";
 $circle-count: 8;
 $animation-duration: .1s * $circle-count;
 $spinkit-size: 36px;
@@ -54,16 +55,16 @@ $spinkit-size: 36px;
     height: $width;
     overflow: hidden;
     background-color: currentColor;
-    border-radius: ($width / 2);
+    border-radius: math.div($width, 2);
     animation: sk-circleFadeDelay $animation-duration infinite ease-in-out both;
   }
 
   @for $i from 1 through $circle-count {
     .sk-circle#{$i} {
-      transform: rotate(360deg / $circle-count * ($i - 1));
+      transform: rotate(math.div(360deg, $circle-count) * ($i - 1));
 
       &::before {
-        $a: -$animation-duration + ($i - 1) * $animation-duration / $circle-count;
+        $a: -$animation-duration + ($i - 1) * math.div($animation-duration, $circle-count);
         animation-delay: $a;
       }
     }
