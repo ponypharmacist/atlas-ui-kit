@@ -30,4 +30,6 @@ yarn run serve
 ## Список компонентов
 1. au-icon
 2. au-button
-3. au-spinner
+3. au-input
+4. au-spinner
+5. au-dropdown-content-button

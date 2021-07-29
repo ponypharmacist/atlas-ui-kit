@@ -63,6 +63,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../styles/partials/params";
+
 $default-size: 12px;
 
 .au-icon {
@@ -74,5 +76,9 @@ $default-size: 12px;
 
   background-color: #000;
   box-sizing: border-box;
+
+  &.au-icon-error {
+    background-color: $red!important;
+  }
 }
 </style>

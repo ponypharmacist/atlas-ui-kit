@@ -1,5 +1,5 @@
 <template>
-  <router-link v-if="!!to" :to="to" :tag="tag" :class="classObject">
+  <router-link v-if="!!to" :to="to" :class="classObject">
     <au-icon v-if="icon" :icon="icon" />
     <span v-if="label" class="label">{{ label }}</span>
     <slot v-else>Submit</slot>

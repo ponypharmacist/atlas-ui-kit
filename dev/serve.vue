@@ -43,7 +43,7 @@
       />
     </div>
 
-    <pre>.au-button
+    <pre>&lt;au-button
   to: [Object, String]
   href: String
   tag: 'a | router-link | button ...'
@@ -61,7 +61,67 @@
   large
   shadow
   white
-  red</pre>
+  red
+/&gt;</pre>
+  </div>
+
+  <h2>Инпут</h2>
+  <div class="demo-item">
+    <au-input
+      v-model="inputModel"
+      placeholder="placeholder"
+      icon="mdi-eye"
+    />
+
+    <au-input
+      value="full-width"
+      icon="mdi-eye"
+      full-width
+    />
+
+    <au-input
+      value="small"
+      icon="mdi-eye"
+      small
+    />
+
+    <au-input
+      value="inputErrors"
+      icon="mdi-eye"
+      :inputErrors="[1]"
+    />
+
+    <au-input
+      value="disabled"
+      icon="mdi-eye"
+      disabled
+    />
+
+    <au-input
+      value="readonly"
+      icon="mdi-eye"
+      full-width
+      readonly
+    />
+
+    <pre>&lt;au-input
+  value: [String, Number, Array] {{ inputModel }}
+  placeholder: String
+  icon: String
+  name: String
+  inputErrors: Array
+  type: String
+  mask: [String, Array, Function]
+
+  required
+  disabled
+  inputDisabled
+  autofocus
+
+  fullWidth
+  small
+  inverse
+/&gt;</pre>
   </div>
 
   <h2>Лоадер/спиннер</h2>
@@ -76,35 +136,43 @@
   size
 /&gt;</pre>
   </div>
+
+  <h2>au-dropdown-content-button</h2>
+  <au-dropdown-content-button
+    label="What, what!"
+    :open="false"
+    icon="mdi-eye"
+  >
+    <p>Hello World</p>
+  </au-dropdown-content-button>
+    <pre>&lt;au-spinner
+  label
+  icon - передает иконку в au-icon
+  large - для крупной au-button внутри компонента
+/&gt;</pre>
 </div>
 
 </template>
 
 <script>
 import Vue from 'vue';
-// Uncomment import and local "components" registration if library is not registered globally.';
 
 export default Vue.extend({
   name: 'ServeDev',
 
   data() {
     return {
-      inputValue: 'Input text',
       isLoading: true,
+      inputModel: null,
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.icons-list {
-  list-style-type: none;
-
-  li {
-    display: flex;
-    align-items: center;
-    font-family: monospace;
-    font-size: 16px;
+.demo-item {
+  .au-input {
+    margin-bottom: 8px;
   }
 }
 </style>
