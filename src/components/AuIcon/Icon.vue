@@ -74,7 +74,7 @@ $default-size: 12px;
   height: $default-size;
   min-width: $default-size;
 
-  background-color: #000;
+  background-color: #fff;
   box-sizing: border-box;
 
   &.au-icon-error {

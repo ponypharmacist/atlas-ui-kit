@@ -4,7 +4,7 @@
 //
 //
 //
-var script$6 = {
+var script$7 = {
   name: 'spinner-dots',
   inheritAttrs: false,
   props: {
@@ -167,10 +167,10 @@ function addStyle(id, css) {
 }
 
 /* script */
-const __vue_script__$6 = script$6;
+const __vue_script__$7 = script$7;
 /* template */
 
-var __vue_render__$6 = function () {
+var __vue_render__$7 = function () {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -189,10 +189,10 @@ var __vue_render__$6 = function () {
   }), 0);
 };
 
-var __vue_staticRenderFns__$6 = [];
+var __vue_staticRenderFns__$7 = [];
 /* style */
 
-const __vue_inject_styles__$6 = function (inject) {
+const __vue_inject_styles__$7 = function (inject) {
   if (!inject) return;
   inject("data-v-5b3d11e0_0", {
     source: ".spinner-dots[data-v-5b3d11e0]{font-size:0;text-align:center;white-space:nowrap;display:flex;align-items:center;color:inherit}.spinner-dots>div[data-v-5b3d11e0]{background-color:currentColor;border-radius:100%;display:inline-block;animation:sk-bouncedelay-data-v-5b3d11e0 1s infinite ease-in-out both}.spinner-dots .bounce1[data-v-5b3d11e0]{animation-delay:-.3333333333s}.spinner-dots .bounce2[data-v-5b3d11e0]{animation-delay:-.1666666667s}@-webkit-keyframes sk-bouncedelay-data-v-5b3d11e0{0%,100%,80%{transform:scale(.37)}40%{transform:scale(.55)}}@keyframes sk-bouncedelay-data-v-5b3d11e0{0%,100%,80%{transform:scale(.37)}40%{transform:scale(.55)}}",
@@ -203,21 +203,21 @@ const __vue_inject_styles__$6 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$6 = "data-v-5b3d11e0";
+const __vue_scope_id__$7 = "data-v-5b3d11e0";
 /* module identifier */
 
-const __vue_module_identifier__$6 = undefined;
+const __vue_module_identifier__$7 = undefined;
 /* functional template */
 
-const __vue_is_functional_template__$6 = false;
+const __vue_is_functional_template__$7 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-const __vue_component__$6 = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$6,
-  staticRenderFns: __vue_staticRenderFns__$6
-}, __vue_inject_styles__$6, __vue_script__$6, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, false, createInjector, undefined, undefined);
+const __vue_component__$7 = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$7,
+  staticRenderFns: __vue_staticRenderFns__$7
+}, __vue_inject_styles__$7, __vue_script__$7, __vue_scope_id__$7, __vue_is_functional_template__$7, __vue_module_identifier__$7, false, createInjector, undefined, undefined);
 
 //
 //
@@ -225,7 +225,7 @@ const __vue_component__$6 = /*#__PURE__*/normalizeComponent$2({
 //
 //
 //
-var script$5 = {
+var script$6 = {
   name: 'spinner-fading-circle',
   inheritAttrs: false,
   props: {
@@ -247,10 +247,10 @@ var script$5 = {
 };
 
 /* script */
-const __vue_script__$5 = script$5;
+const __vue_script__$6 = script$6;
 /* template */
 
-var __vue_render__$5 = function () {
+var __vue_render__$6 = function () {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -269,10 +269,10 @@ var __vue_render__$5 = function () {
   }), 0);
 };
 
-var __vue_staticRenderFns__$5 = [];
+var __vue_staticRenderFns__$6 = [];
 /* style */
 
-const __vue_inject_styles__$5 = function (inject) {
+const __vue_inject_styles__$6 = function (inject) {
   if (!inject) return;
   inject("data-v-56be54e2_0", {
     source: ".sk-fading-circle[data-v-56be54e2]{position:relative;width:36px;height:36px;color:currentColor}.sk-fading-circle .sk-circle[data-v-56be54e2]{width:100%;height:100%;position:absolute;left:0;top:0}.sk-fading-circle .sk-circle[data-v-56be54e2]::before{content:\"\";display:block;margin:0 auto;width:4px;height:4px;overflow:hidden;background-color:currentColor;border-radius:2px;animation:sk-circleFadeDelay-data-v-56be54e2 .8s infinite ease-in-out both}.sk-fading-circle .sk-circle1[data-v-56be54e2]{transform:rotate(0)}.sk-fading-circle .sk-circle1[data-v-56be54e2]::before{animation-delay:-.8s}.sk-fading-circle .sk-circle2[data-v-56be54e2]{transform:rotate(45deg)}.sk-fading-circle .sk-circle2[data-v-56be54e2]::before{animation-delay:-.7s}.sk-fading-circle .sk-circle3[data-v-56be54e2]{transform:rotate(90deg)}.sk-fading-circle .sk-circle3[data-v-56be54e2]::before{animation-delay:-.6s}.sk-fading-circle .sk-circle4[data-v-56be54e2]{transform:rotate(135deg)}.sk-fading-circle .sk-circle4[data-v-56be54e2]::before{animation-delay:-.5s}.sk-fading-circle .sk-circle5[data-v-56be54e2]{transform:rotate(180deg)}.sk-fading-circle .sk-circle5[data-v-56be54e2]::before{animation-delay:-.4s}.sk-fading-circle .sk-circle6[data-v-56be54e2]{transform:rotate(225deg)}.sk-fading-circle .sk-circle6[data-v-56be54e2]::before{animation-delay:-.3s}.sk-fading-circle .sk-circle7[data-v-56be54e2]{transform:rotate(270deg)}.sk-fading-circle .sk-circle7[data-v-56be54e2]::before{animation-delay:-.2s}.sk-fading-circle .sk-circle8[data-v-56be54e2]{transform:rotate(315deg)}.sk-fading-circle .sk-circle8[data-v-56be54e2]::before{animation-delay:-.1s}@keyframes sk-circleFadeDelay-data-v-56be54e2{0%,100%,39%{opacity:0}40%{opacity:1}}",
@@ -283,21 +283,21 @@ const __vue_inject_styles__$5 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$5 = "data-v-56be54e2";
+const __vue_scope_id__$6 = "data-v-56be54e2";
 /* module identifier */
 
-const __vue_module_identifier__$5 = undefined;
+const __vue_module_identifier__$6 = undefined;
 /* functional template */
 
-const __vue_is_functional_template__$5 = false;
+const __vue_is_functional_template__$6 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-const __vue_component__$5 = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$5,
-  staticRenderFns: __vue_staticRenderFns__$5
-}, __vue_inject_styles__$5, __vue_script__$5, __vue_scope_id__$5, __vue_is_functional_template__$5, __vue_module_identifier__$5, false, createInjector, undefined, undefined);
+const __vue_component__$6 = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$6,
+  staticRenderFns: __vue_staticRenderFns__$6
+}, __vue_inject_styles__$6, __vue_script__$6, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, false, createInjector, undefined, undefined);
 
 var AuSpinner = {
   name: 'au-spinner',
@@ -326,13 +326,13 @@ var AuSpinner = {
 
     switch (this.type) {
       case 'fading-circle':
-        return h(__vue_component__$5, {
+        return h(__vue_component__$6, {
           props
         });
 
       case 'dots':
       default:
-        return h(__vue_component__$6, {
+        return h(__vue_component__$7, {
           props
         });
     }
@@ -349,7 +349,7 @@ var AuSpinner = {
 //
 //
 //
-var script$4 = {
+var script$5 = {
   name: 'icon',
   inheritAttrs: false,
   props: {
@@ -397,10 +397,10 @@ var script$4 = {
 };
 
 /* script */
-const __vue_script__$4 = script$4;
+const __vue_script__$5 = script$5;
 /* template */
 
-var __vue_render__$4 = function () {
+var __vue_render__$5 = function () {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -416,13 +416,13 @@ var __vue_render__$4 = function () {
   });
 };
 
-var __vue_staticRenderFns__$4 = [];
+var __vue_staticRenderFns__$5 = [];
 /* style */
 
-const __vue_inject_styles__$4 = function (inject) {
+const __vue_inject_styles__$5 = function (inject) {
   if (!inject) return;
-  inject("data-v-1d10a681_0", {
-    source: ".au-icon[data-v-1d10a681]{display:inline-block;width:12px;height:12px;min-width:12px;background-color:#000;box-sizing:border-box}",
+  inject("data-v-6482fbaf_0", {
+    source: ".au-icon[data-v-6482fbaf]{display:inline-block;width:12px;height:12px;min-width:12px;background-color:#fff;box-sizing:border-box}.au-icon.au-icon-error[data-v-6482fbaf]{background-color:#ff2c2c!important}",
     map: undefined,
     media: undefined
   });
@@ -430,27 +430,27 @@ const __vue_inject_styles__$4 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$4 = "data-v-1d10a681";
+const __vue_scope_id__$5 = "data-v-6482fbaf";
 /* module identifier */
 
-const __vue_module_identifier__$4 = undefined;
+const __vue_module_identifier__$5 = undefined;
 /* functional template */
 
-const __vue_is_functional_template__$4 = false;
+const __vue_is_functional_template__$5 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-const __vue_component__$4 = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$4,
-  staticRenderFns: __vue_staticRenderFns__$4
-}, __vue_inject_styles__$4, __vue_script__$4, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, false, createInjector, undefined, undefined);
+const __vue_component__$5 = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$5,
+  staticRenderFns: __vue_staticRenderFns__$5
+}, __vue_inject_styles__$5, __vue_script__$5, __vue_scope_id__$5, __vue_is_functional_template__$5, __vue_module_identifier__$5, false, createInjector, undefined, undefined);
 
 //
-var script$3 = {
+var script$4 = {
   name: 'au-button',
   components: {
-    AuIcon: __vue_component__$4,
+    AuIcon: __vue_component__$5,
     AuSpinner
   },
   inheritAttrs: false,
@@ -511,10 +511,10 @@ var script$3 = {
 };
 
 /* script */
-const __vue_script__$3 = script$3;
+const __vue_script__$4 = script$4;
 /* template */
 
-var __vue_render__$3 = function () {
+var __vue_render__$4 = function () {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -575,10 +575,10 @@ var __vue_render__$3 = function () {
   })], 1) : _vm._e()], 2);
 };
 
-var __vue_staticRenderFns__$3 = [];
+var __vue_staticRenderFns__$4 = [];
 /* style */
 
-const __vue_inject_styles__$3 = function (inject) {
+const __vue_inject_styles__$4 = function (inject) {
   if (!inject) return;
   inject("data-v-9f1a620e_0", {
     source: ".au-button[data-v-9f1a620e]{position:relative;display:flex;justify-content:center;align-items:center;font-size:12px;font-weight:500;height:32px;border-radius:4px;border:none;outline:0;cursor:pointer;padding:0 16px;color:#fff;background-color:#3f6ada;transition:.3s;background-image:linear-gradient(180deg,rgba(152,210,255,.3) 0,rgba(255,255,255,0) 100%)}.au-button[data-v-9f1a620e]:hover{background-image:linear-gradient(180deg,rgba(63,106,218,.3) 0,rgba(63,106,218,0) 100%)}.au-button .au-icon[data-v-9f1a620e]{margin-right:8px;background-color:#fff}.au-button.is-full-width[data-v-9f1a620e]{width:100%}.au-button.is-shadow[data-v-9f1a620e]{box-shadow:0 2px 2px rgba(20,20,20,.15)}.au-button.is-white[data-v-9f1a620e]{color:#3f6ada;background-color:#fff;background-image:none}.au-button.is-white .au-icon[data-v-9f1a620e]{background-color:#3f6ada}.au-button.is-link[data-v-9f1a620e]{background-color:transparent!important;background-image:none;color:#3f6ada}.au-button.is-link .au-icon[data-v-9f1a620e]{background-color:#3f6ada}.au-button.is-link[data-v-9f1a620e]:hover{color:#2a3f64}.au-button.is-link:hover .au-icon[data-v-9f1a620e]{background-color:#2a3f64}.au-button.is-link.is-red[data-v-9f1a620e]{color:#ff6c59}.au-button.is-link.is-red .au-icon[data-v-9f1a620e]{background-color:#ff6c59}.au-button.is-link.is-red[data-v-9f1a620e]:hover{color:#eb5f4d}.au-button.is-link.is-red:hover .au-icon[data-v-9f1a620e]{background-color:#eb5f4d}.au-button.is-link.is-white[data-v-9f1a620e]{color:#fff}.au-button.is-link.is-white .au-icon[data-v-9f1a620e]{background-color:#fff}.au-button.is-link.is-white[data-v-9f1a620e]:hover{color:#fafafa}.au-button.is-link.is-white:hover .au-icon[data-v-9f1a620e]{background-color:#fafafa}.au-button.is-large[data-v-9f1a620e]{font-size:14px;height:40px}.au-button.is-bordered[data-v-9f1a620e]{border:1px solid #e0e8f0;transition:border-color .2s,color .2s,background-color .2s}.au-button.is-bordered[data-v-9f1a620e]:hover{border-color:#cfd9e3}.au-button.is-bordered.is-white[data-v-9f1a620e]:hover{color:#fff;background-color:#3f6ada;background-image:linear-gradient(180deg,rgba(63,106,218,.3) 0,rgba(63,106,218,0) 100%)}.au-button.is-red[data-v-9f1a620e]{background-color:#ff6c59;color:#fff;background-image:none}.au-button.is-red[data-v-9f1a620e]:hover{background-color:#eb5f4d}.au-button.disabled[data-v-9f1a620e]{opacity:.5;background-image:none;pointer-events:none}.au-button.disabled.is-white[data-v-9f1a620e]{border:1px solid #fff}.au-button.is-add[data-v-9f1a620e]{position:absolute;top:0;right:0;margin-right:0;min-width:207px}.au-button .label[data-v-9f1a620e]{white-space:nowrap}.au-button .button-loader[data-v-9f1a620e]{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center}.is-loading .au-icon[data-v-9f1a620e],.is-loading span[data-v-9f1a620e]{opacity:0}",
@@ -589,7 +589,1006 @@ const __vue_inject_styles__$3 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$3 = "data-v-9f1a620e";
+const __vue_scope_id__$4 = "data-v-9f1a620e";
+/* module identifier */
+
+const __vue_module_identifier__$4 = undefined;
+/* functional template */
+
+const __vue_is_functional_template__$4 = false;
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+const __vue_component__$4 = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$4,
+  staticRenderFns: __vue_staticRenderFns__$4
+}, __vue_inject_styles__$4, __vue_script__$4, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, false, createInjector, undefined, undefined);
+
+function _typeof$1(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof$1 = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof$1 = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof$1(obj);
+}
+
+function _defineProperty$2(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys$3(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys$3(Object(source), true).forEach(function (key) {
+        _defineProperty$2(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$3(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+var placeholderChar = '_';
+var strFunction = 'function';
+
+var emptyArray = [];
+function convertMaskToPlaceholder() {
+  var mask = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : emptyArray;
+  var placeholderChar$1 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : placeholderChar;
+
+  if (!isArray$1(mask)) {
+    throw new Error('Text-mask:convertMaskToPlaceholder; The mask property must be an array.');
+  }
+
+  if (mask.indexOf(placeholderChar$1) !== -1) {
+    throw new Error('Placeholder character must not be used as part of the mask. Please specify a character ' + 'that is not present in your mask as your placeholder character.\n\n' + "The placeholder character that was received is: ".concat(JSON.stringify(placeholderChar$1), "\n\n") + "The mask that was received is: ".concat(JSON.stringify(mask)));
+  }
+
+  return mask.map(function (char) {
+    return char instanceof RegExp ? placeholderChar$1 : char;
+  }).join('');
+}
+function isArray$1(value) {
+  return Array.isArray && Array.isArray(value) || value instanceof Array;
+}
+var strCaretTrap = '[]';
+function processCaretTraps(mask) {
+  var indexes = [];
+  var indexOfCaretTrap;
+
+  while (indexOfCaretTrap = mask.indexOf(strCaretTrap), indexOfCaretTrap !== -1) {
+    indexes.push(indexOfCaretTrap);
+    mask.splice(indexOfCaretTrap, 1);
+  }
+
+  return {
+    maskWithoutCaretTraps: mask,
+    indexes: indexes
+  };
+}
+
+var emptyArray$1 = [];
+var emptyString = '';
+function conformToMask() {
+  var rawValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : emptyString;
+  var mask = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : emptyArray$1;
+  var config = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  if (!isArray$1(mask)) {
+    if (_typeof$1(mask) === strFunction) {
+      mask = mask(rawValue, config);
+      mask = processCaretTraps(mask).maskWithoutCaretTraps;
+    } else {
+      throw new Error('Text-mask:conformToMask; The mask property must be an array.');
+    }
+  }
+
+  var _config$guide = config.guide,
+      guide = _config$guide === void 0 ? true : _config$guide,
+      _config$previousConfo = config.previousConformedValue,
+      previousConformedValue = _config$previousConfo === void 0 ? emptyString : _config$previousConfo,
+      _config$placeholderCh = config.placeholderChar,
+      placeholderChar$1 = _config$placeholderCh === void 0 ? placeholderChar : _config$placeholderCh,
+      _config$placeholder = config.placeholder,
+      placeholder = _config$placeholder === void 0 ? convertMaskToPlaceholder(mask, placeholderChar$1) : _config$placeholder,
+      currentCaretPosition = config.currentCaretPosition,
+      keepCharPositions = config.keepCharPositions;
+  var suppressGuide = guide === false && previousConformedValue !== undefined;
+  var rawValueLength = rawValue.length;
+  var previousConformedValueLength = previousConformedValue.length;
+  var placeholderLength = placeholder.length;
+  var maskLength = mask.length;
+  var editDistance = rawValueLength - previousConformedValueLength;
+  var isAddition = editDistance > 0;
+  var indexOfFirstChange = currentCaretPosition + (isAddition ? -editDistance : 0);
+  var indexOfLastChange = indexOfFirstChange + Math.abs(editDistance);
+
+  if (keepCharPositions === true && !isAddition) {
+    var compensatingPlaceholderChars = emptyString;
+
+    for (var i = indexOfFirstChange; i < indexOfLastChange; i++) {
+      if (placeholder[i] === placeholderChar$1) {
+        compensatingPlaceholderChars += placeholderChar$1;
+      }
+    }
+
+    rawValue = rawValue.slice(0, indexOfFirstChange) + compensatingPlaceholderChars + rawValue.slice(indexOfFirstChange, rawValueLength);
+  }
+
+  var rawValueArr = rawValue.split(emptyString).map(function (char, i) {
+    return {
+      char: char,
+      isNew: i >= indexOfFirstChange && i < indexOfLastChange
+    };
+  });
+
+  for (var _i = rawValueLength - 1; _i >= 0; _i--) {
+    var char = rawValueArr[_i].char;
+
+    if (char !== placeholderChar$1) {
+      var shouldOffset = _i >= indexOfFirstChange && previousConformedValueLength === maskLength;
+
+      if (char === placeholder[shouldOffset ? _i - editDistance : _i]) {
+        rawValueArr.splice(_i, 1);
+      }
+    }
+  }
+
+  var conformedValue = emptyString;
+  var someCharsRejected = false;
+
+  placeholderLoop: for (var _i2 = 0; _i2 < placeholderLength; _i2++) {
+    var charInPlaceholder = placeholder[_i2];
+
+    if (charInPlaceholder === placeholderChar$1) {
+      if (rawValueArr.length > 0) {
+        while (rawValueArr.length > 0) {
+          var _rawValueArr$shift = rawValueArr.shift(),
+              rawValueChar = _rawValueArr$shift.char,
+              isNew = _rawValueArr$shift.isNew;
+
+          if (rawValueChar === placeholderChar$1 && suppressGuide !== true) {
+            conformedValue += placeholderChar$1;
+            continue placeholderLoop;
+          } else if (mask[_i2].test(rawValueChar)) {
+            if (keepCharPositions !== true || isNew === false || previousConformedValue === emptyString || guide === false || !isAddition) {
+              conformedValue += rawValueChar;
+            } else {
+              var rawValueArrLength = rawValueArr.length;
+              var indexOfNextAvailablePlaceholderChar = null;
+
+              for (var _i3 = 0; _i3 < rawValueArrLength; _i3++) {
+                var charData = rawValueArr[_i3];
+
+                if (charData.char !== placeholderChar$1 && charData.isNew === false) {
+                  break;
+                }
+
+                if (charData.char === placeholderChar$1) {
+                  indexOfNextAvailablePlaceholderChar = _i3;
+                  break;
+                }
+              }
+
+              if (indexOfNextAvailablePlaceholderChar !== null) {
+                conformedValue += rawValueChar;
+                rawValueArr.splice(indexOfNextAvailablePlaceholderChar, 1);
+              } else {
+                _i2--;
+              }
+            }
+
+            continue placeholderLoop;
+          } else {
+            someCharsRejected = true;
+          }
+        }
+      }
+
+      if (suppressGuide === false) {
+        conformedValue += placeholder.substr(_i2, placeholderLength);
+      }
+
+      break;
+    } else {
+      conformedValue += charInPlaceholder;
+    }
+  }
+
+  if (suppressGuide && isAddition === false) {
+    var indexOfLastFilledPlaceholderChar = null;
+
+    for (var _i4 = 0; _i4 < conformedValue.length; _i4++) {
+      if (placeholder[_i4] === placeholderChar$1) {
+        indexOfLastFilledPlaceholderChar = _i4;
+      }
+    }
+
+    if (indexOfLastFilledPlaceholderChar !== null) {
+      conformedValue = conformedValue.substr(0, indexOfLastFilledPlaceholderChar + 1);
+    } else {
+      conformedValue = emptyString;
+    }
+  }
+
+  return {
+    conformedValue: conformedValue,
+    meta: {
+      someCharsRejected: someCharsRejected
+    }
+  };
+}
+
+var NEXT_CHAR_OPTIONAL = {
+  __nextCharOptional__: true
+};
+var defaultMaskReplacers = {
+  '#': /\d/,
+  A: /[a-z]/i,
+  N: /[a-z0-9]/i,
+  '?': NEXT_CHAR_OPTIONAL,
+  X: /./
+};
+
+var stringToRegexp = function stringToRegexp(str) {
+  var lastSlash = str.lastIndexOf('/');
+  return new RegExp(str.slice(1, lastSlash), str.slice(lastSlash + 1));
+};
+
+var makeRegexpOptional = function makeRegexpOptional(charRegexp) {
+  return stringToRegexp(charRegexp.toString().replace(/.(\/)[gmiyus]{0,6}$/, function (match) {
+    return match.replace('/', '?/');
+  }));
+};
+
+var escapeIfNeeded = function escapeIfNeeded(char) {
+  return '[\\^$.|?*+()'.indexOf(char) > -1 ? "\\".concat(char) : char;
+};
+
+var charRegexp = function charRegexp(char) {
+  return new RegExp("/[".concat(escapeIfNeeded(char), "]/"));
+};
+
+var isRegexp = function isRegexp(entity) {
+  return entity instanceof RegExp;
+};
+
+var castToRegexp = function castToRegexp(char) {
+  return isRegexp(char) ? char : charRegexp(char);
+};
+
+function maskToRegExpMask(mask) {
+  var maskReplacers = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultMaskReplacers;
+  return mask.map(function (char, index, array) {
+    var maskChar = maskReplacers[char] || char;
+    var previousChar = array[index - 1];
+    var previousMaskChar = maskReplacers[previousChar] || previousChar;
+
+    if (maskChar === NEXT_CHAR_OPTIONAL) {
+      return null;
+    }
+
+    if (previousMaskChar === NEXT_CHAR_OPTIONAL) {
+      return makeRegexpOptional(castToRegexp(maskChar));
+    }
+
+    return maskChar;
+  }).filter(Boolean);
+}
+
+function stringMaskToRegExpMask(stringMask) {
+  var maskReplacers = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultMaskReplacers;
+  return maskToRegExpMask(stringMask.split(''), maskReplacers);
+}
+function arrayMaskToRegExpMask(arrayMask) {
+  var maskReplacers = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultMaskReplacers;
+  var flattenedMask = arrayMask.map(function (part) {
+    if (part instanceof RegExp) {
+      return part;
+    }
+
+    if (typeof part === 'string') {
+      return part.split('');
+    }
+
+    return null;
+  }).filter(Boolean).reduce(function (mask, part) {
+    return mask.concat(part);
+  }, []);
+  return maskToRegExpMask(flattenedMask, maskReplacers);
+}
+
+var trigger = function trigger(el, type) {
+  var e = document.createEvent('HTMLEvents');
+  e.initEvent(type, true, true);
+  el.dispatchEvent(e);
+};
+var queryInputElementInside = function queryInputElementInside(el) {
+  return el instanceof HTMLInputElement ? el : el.querySelector('input') || el;
+};
+var isFunction$2 = function isFunction(val) {
+  return typeof val === 'function';
+};
+var isString = function isString(val) {
+  return typeof val === 'string';
+};
+var isRegexp$1 = function isRegexp(val) {
+  return val instanceof RegExp;
+};
+
+function createOptions() {
+  var elementOptions = new Map();
+  var defaultOptions = {
+    previousValue: '',
+    mask: []
+  };
+
+  function get(el) {
+    return elementOptions.get(el) || _objectSpread2({}, defaultOptions);
+  }
+
+  function partiallyUpdate(el, newOptions) {
+    elementOptions.set(el, _objectSpread2(_objectSpread2({}, get(el)), newOptions));
+  }
+
+  function remove(el) {
+    elementOptions.delete(el);
+  }
+
+  return {
+    partiallyUpdate: partiallyUpdate,
+    remove: remove,
+    get: get
+  };
+}
+
+var options = createOptions();
+
+function triggerInputUpdate(el) {
+  trigger(el, 'input');
+}
+
+function updateValue(el) {
+  var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var value = el.value;
+
+  var _options$get = options.get(el),
+      previousValue = _options$get.previousValue,
+      mask = _options$get.mask;
+
+  var isValueChanged = value !== previousValue;
+  var isLengthIncreased = value.length > previousValue.length;
+  var isUpdateNeeded = value && isValueChanged && isLengthIncreased;
+
+  if ((force || isUpdateNeeded) && mask) {
+    var _conformToMask = conformToMask(value, mask, {
+      guide: false
+    }),
+        conformedValue = _conformToMask.conformedValue;
+
+    el.value = conformedValue;
+    triggerInputUpdate(el);
+  }
+
+  options.partiallyUpdate(el, {
+    previousValue: value
+  });
+}
+
+function updateMask(el, inputMask, maskReplacers) {
+  var mask;
+
+  if (Array.isArray(inputMask)) {
+    mask = arrayMaskToRegExpMask(inputMask, maskReplacers);
+  } else if (isFunction$2(inputMask)) {
+    mask = inputMask;
+  } else if (isString(inputMask) && inputMask.length > 0) {
+    mask = stringMaskToRegExpMask(inputMask, maskReplacers);
+  } else {
+    mask = inputMask;
+  }
+
+  options.partiallyUpdate(el, {
+    mask: mask
+  });
+}
+
+function extendMaskReplacers(maskReplacers) {
+  var baseMaskReplacers = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultMaskReplacers;
+
+  if (maskReplacers === null || Array.isArray(maskReplacers) || _typeof$1(maskReplacers) !== 'object') {
+    return baseMaskReplacers;
+  }
+
+  return Object.keys(maskReplacers).reduce(function (extendedMaskReplacers, key) {
+    var value = maskReplacers[key];
+
+    if (value !== null && !(value instanceof RegExp)) {
+      return extendedMaskReplacers;
+    }
+
+    return _objectSpread2(_objectSpread2({}, extendedMaskReplacers), {}, _defineProperty$2({}, key, value));
+  }, baseMaskReplacers);
+}
+
+function maskToString(mask) {
+  var maskArray = Array.isArray(mask) ? mask : [mask];
+  var filteredMaskArray = maskArray.filter(function (part) {
+    return isString(part) || isRegexp$1(part);
+  });
+  return filteredMaskArray.toString();
+}
+
+function createDirective() {
+  var directiveOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var instanceMaskReplacers = extendMaskReplacers(directiveOptions && directiveOptions.placeholders);
+  return {
+    bind: function bind(el, _ref) {
+      var value = _ref.value;
+      el = queryInputElementInside(el);
+      updateMask(el, value, instanceMaskReplacers);
+      updateValue(el);
+    },
+    componentUpdated: function componentUpdated(el, _ref2) {
+      var value = _ref2.value,
+          oldValue = _ref2.oldValue;
+      el = queryInputElementInside(el);
+      var isMaskChanged = isFunction$2(value) || maskToString(oldValue) !== maskToString(value);
+
+      if (isMaskChanged) {
+        updateMask(el, value, instanceMaskReplacers);
+      }
+
+      updateValue(el, isMaskChanged);
+    },
+    unbind: function unbind(el) {
+      el = queryInputElementInside(el);
+      options.remove(el);
+    }
+  };
+}
+var directive$1 = createDirective();
+
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+function createCommonjsModule(fn) {
+  var module = { exports: {} };
+	return fn(module, module.exports), module.exports;
+}
+
+/** Detect free variable `global` from Node.js. */
+
+var freeGlobal = typeof commonjsGlobal == 'object' && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
+
+var _freeGlobal = freeGlobal;
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = _freeGlobal || freeSelf || Function('return this')();
+
+var _root = root;
+
+/** Built-in value references. */
+var Symbol$1 = _root.Symbol;
+
+var _Symbol = Symbol$1;
+
+/**
+ * A specialized version of `_.map` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the new mapped array.
+ */
+function arrayMap(array, iteratee) {
+  var index = -1,
+      length = array == null ? 0 : array.length,
+      result = Array(length);
+
+  while (++index < length) {
+    result[index] = iteratee(array[index], index, array);
+  }
+  return result;
+}
+
+var _arrayMap = arrayMap;
+
+/**
+ * Checks if `value` is classified as an `Array` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @example
+ *
+ * _.isArray([1, 2, 3]);
+ * // => true
+ *
+ * _.isArray(document.body.children);
+ * // => false
+ *
+ * _.isArray('abc');
+ * // => false
+ *
+ * _.isArray(_.noop);
+ * // => false
+ */
+var isArray = Array.isArray;
+
+var isArray_1 = isArray;
+
+/** Used for built-in method references. */
+var objectProto$e = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty$b = objectProto$e.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString$1 = objectProto$e.toString;
+
+/** Built-in value references. */
+var symToStringTag$1 = _Symbol ? _Symbol.toStringTag : undefined;
+
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+function getRawTag(value) {
+  var isOwn = hasOwnProperty$b.call(value, symToStringTag$1),
+      tag = value[symToStringTag$1];
+
+  try {
+    value[symToStringTag$1] = undefined;
+    var unmasked = true;
+  } catch (e) {}
+
+  var result = nativeObjectToString$1.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag$1] = tag;
+    } else {
+      delete value[symToStringTag$1];
+    }
+  }
+  return result;
+}
+
+var _getRawTag = getRawTag;
+
+/** Used for built-in method references. */
+var objectProto$d = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto$d.toString;
+
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+
+var _objectToString = objectToString;
+
+/** `Object#toString` result references. */
+var nullTag = '[object Null]',
+    undefinedTag = '[object Undefined]';
+
+/** Built-in value references. */
+var symToStringTag = _Symbol ? _Symbol.toStringTag : undefined;
+
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+function baseGetTag(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+  return (symToStringTag && symToStringTag in Object(value))
+    ? _getRawTag(value)
+    : _objectToString(value);
+}
+
+var _baseGetTag = baseGetTag;
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return value != null && typeof value == 'object';
+}
+
+var isObjectLike_1 = isObjectLike;
+
+/** `Object#toString` result references. */
+var symbolTag$1 = '[object Symbol]';
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' ||
+    (isObjectLike_1(value) && _baseGetTag(value) == symbolTag$1);
+}
+
+var isSymbol_1 = isSymbol;
+
+/** Used as references for various `Number` constants. */
+var INFINITY = 1 / 0;
+
+/** Used to convert symbols to primitives and strings. */
+var symbolProto$1 = _Symbol ? _Symbol.prototype : undefined,
+    symbolToString = symbolProto$1 ? symbolProto$1.toString : undefined;
+
+/**
+ * The base implementation of `_.toString` which doesn't convert nullish
+ * values to empty strings.
+ *
+ * @private
+ * @param {*} value The value to process.
+ * @returns {string} Returns the string.
+ */
+function baseToString(value) {
+  // Exit early for strings to avoid a performance hit in some environments.
+  if (typeof value == 'string') {
+    return value;
+  }
+  if (isArray_1(value)) {
+    // Recursively convert values (susceptible to call stack limits).
+    return _arrayMap(value, baseToString) + '';
+  }
+  if (isSymbol_1(value)) {
+    return symbolToString ? symbolToString.call(value) : '';
+  }
+  var result = (value + '');
+  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+}
+
+var _baseToString = baseToString;
+
+/**
+ * Converts `value` to a string. An empty string is returned for `null`
+ * and `undefined` values. The sign of `-0` is preserved.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ * @example
+ *
+ * _.toString(null);
+ * // => ''
+ *
+ * _.toString(-0);
+ * // => '-0'
+ *
+ * _.toString([1, 2, 3]);
+ * // => '1,2,3'
+ */
+function toString(value) {
+  return value == null ? '' : _baseToString(value);
+}
+
+var toString_1 = toString;
+
+/** Used to generate unique IDs. */
+var idCounter = 0;
+
+/**
+ * Generates a unique ID. If `prefix` is given, the ID is appended to it.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Util
+ * @param {string} [prefix=''] The value to prefix the ID with.
+ * @returns {string} Returns the unique ID.
+ * @example
+ *
+ * _.uniqueId('contact_');
+ * // => 'contact_104'
+ *
+ * _.uniqueId();
+ * // => '105'
+ */
+function uniqueId(prefix) {
+  var id = ++idCounter;
+  return toString_1(prefix) + id;
+}
+
+var uniqueId_1 = uniqueId;
+
+//
+
+var script$3 = {
+  name: 'au-input',
+  model: {
+    prop: 'value',
+    event: 'input'
+  },
+  directives: {
+    mask: directive$1
+  },
+  components: {// AuIcon,
+  },
+  inheritAttrs: false,
+  props: {
+    value: {
+      type: [String, Number, Array]
+    },
+    placeholder: {
+      type: String,
+      default: null
+    },
+    name: {
+      type: String,
+      default: uniqueId_1()
+    },
+    inputErrors: {
+      type: Array,
+      default: () => []
+    },
+    type: {
+      type: String,
+      default: 'text'
+    },
+    mask: {
+      type: [String, Array, Function]
+    },
+    icon: String,
+    required: Boolean,
+    disabled: Boolean,
+    readonly: Boolean,
+    autofocus: Boolean,
+    fullWidth: Boolean,
+    small: Boolean,
+    inverse: Boolean
+  },
+  data: () => ({
+    isFocused: false
+  }),
+  computed: {
+    componentClasses() {
+      return [this.$options.name, {
+        'is-focused': this.isFocused,
+        'is-full-width': this.fullWidth,
+        'is-small': this.small,
+        'is-inverse': this.inverse,
+        'is-disabled': this.disabled,
+        'is-error': this.hasErrors
+      }];
+    },
+
+    hasErrors() {
+      var _this$inputErrors;
+
+      return (_this$inputErrors = this.inputErrors) === null || _this$inputErrors === void 0 ? void 0 : _this$inputErrors.length;
+    }
+
+  },
+
+  mounted() {
+    if (this.autofocus) {
+      this.$nextTick(() => {
+        this.$refs.input.focus();
+      });
+    }
+  },
+
+  methods: {
+    onChange(event) {
+      this.$emit('change', event.target.value);
+    },
+
+    onInput(event) {
+      this.$emit('input', event.target.value);
+    },
+
+    onFocus(event) {
+      this.$emit('focus', event.target.value);
+    }
+
+  }
+};
+
+/* script */
+const __vue_script__$3 = script$3;
+/* template */
+
+var __vue_render__$3 = function () {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c('div', {
+    class: _vm.componentClasses,
+    on: {
+      "click": function ($event) {
+        return _vm.$emit('click', $event);
+      },
+      "mouseover": function ($event) {
+        return _vm.$emit('mouseover', $event);
+      },
+      "mouseenter": function ($event) {
+        return _vm.$emit('mouseenter', $event);
+      },
+      "mouseleave": function ($event) {
+        return _vm.$emit('mouseleave', $event);
+      },
+      "mousemove": function ($event) {
+        return _vm.$emit('mousemove', $event);
+      }
+    }
+  }, [_c('div', {
+    staticClass: "input-content",
+    class: {
+      'has-icon': !!this.icon || this.$slots.icon
+    }
+  }, [_vm._t("icon"), _vm._v(" "), _vm.icon ? _c('au-icon', {
+    class: {
+      'au-icon-error': _vm.hasErrors
+    },
+    attrs: {
+      "icon": _vm.icon,
+      "size": _vm.small ? 14 : 16,
+      "color": "#3F6ADA"
+    }
+  }) : _vm._e(), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "mask",
+      rawName: "v-mask",
+      value: _vm.mask,
+      expression: "mask"
+    }],
+    ref: "input",
+    class: [],
+    attrs: {
+      "type": _vm.type,
+      "placeholder": _vm.placeholder,
+      "name": _vm.name,
+      "required": _vm.required,
+      "disabled": _vm.disabled || _vm.readonly,
+      "autocomplete": "off"
+    },
+    domProps: {
+      "value": _vm.value
+    },
+    on: {
+      "change": _vm.onChange,
+      "input": _vm.onInput,
+      "focus": _vm.onFocus,
+      "focusin": function ($event) {
+        _vm.isFocused = true;
+      },
+      "focusout": function ($event) {
+        _vm.isFocused = false;
+      }
+    }
+  })], 2), _vm._v(" "), _vm._t("suffix")], 2);
+};
+
+var __vue_staticRenderFns__$3 = [];
+/* style */
+
+const __vue_inject_styles__$3 = function (inject) {
+  if (!inject) return;
+  inject("data-v-7f094dcb_0", {
+    source: ".au-input[data-v-7f094dcb]{position:relative;display:flex;flex-wrap:nowrap;height:40px;width:120px;border-radius:4px;border:1px solid #e0e8f0;background-color:#f0f4fb;transition:.3s}.au-input.is-disabled[data-v-7f094dcb]{opacity:.5;cursor:not-allowed}.au-input.is-inverse[data-v-7f094dcb]{background-color:#fff}.au-input.is-error[data-v-7f094dcb]{border:1px solid #ff2c2c;background-color:#fff1f0}.au-input .input-content[data-v-7f094dcb]{display:flex;align-items:center;padding:10px 12px;width:100%}.au-input .input-content.has-icon[data-v-7f094dcb]{padding:10px 12px 10px 44px}.au-input .input-content>.au-icon[data-v-7f094dcb]{position:absolute;left:16px}.au-input input[data-v-7f094dcb]{height:100%;width:100%;font-size:14px;font-weight:500;outline:0;background-color:transparent;border:none}.au-input input[data-v-7f094dcb]::placeholder{color:#9f9f9f}.au-input input[disabled][data-v-7f094dcb]{pointer-events:none}.au-input.wrong[data-v-7f094dcb]{border:1px solid #ff6c59;box-shadow:1px 0 0 2px rgba(220,53,69,.25)}.au-input.is-focused[data-v-7f094dcb]{border:1px solid #3f6ada;box-shadow:unset}.au-input.is-full-width[data-v-7f094dcb]{width:100%}.au-input.is-small[data-v-7f094dcb]{height:32px;border-radius:2px}.au-input.is-small .input-content[data-v-7f094dcb]{padding:0 10px}.au-input.is-small .input-content.has-icon[data-v-7f094dcb]{padding:0 10px 0 32px}.au-input.is-small .input-content>.au-icon[data-v-7f094dcb]{position:absolute;left:8px;top:50%;transform:translateY(-50%);width:10px;height:10px}.au-input.is-small input[data-v-7f094dcb]{font-size:12px;font-weight:400}",
+    map: undefined,
+    media: undefined
+  });
+};
+/* scoped */
+
+
+const __vue_scope_id__$3 = "data-v-7f094dcb";
 /* module identifier */
 
 const __vue_module_identifier__$3 = undefined;
@@ -3526,125 +4525,6 @@ function stackHas(key) {
 
 var _stackHas = stackHas;
 
-var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-function createCommonjsModule(fn) {
-  var module = { exports: {} };
-	return fn(module, module.exports), module.exports;
-}
-
-/** Detect free variable `global` from Node.js. */
-
-var freeGlobal = typeof commonjsGlobal == 'object' && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
-
-var _freeGlobal = freeGlobal;
-
-/** Detect free variable `self`. */
-var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
-
-/** Used as a reference to the global object. */
-var root = _freeGlobal || freeSelf || Function('return this')();
-
-var _root = root;
-
-/** Built-in value references. */
-var Symbol$1 = _root.Symbol;
-
-var _Symbol = Symbol$1;
-
-/** Used for built-in method references. */
-var objectProto$e = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty$b = objectProto$e.hasOwnProperty;
-
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */
-var nativeObjectToString$1 = objectProto$e.toString;
-
-/** Built-in value references. */
-var symToStringTag$1 = _Symbol ? _Symbol.toStringTag : undefined;
-
-/**
- * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
- *
- * @private
- * @param {*} value The value to query.
- * @returns {string} Returns the raw `toStringTag`.
- */
-function getRawTag(value) {
-  var isOwn = hasOwnProperty$b.call(value, symToStringTag$1),
-      tag = value[symToStringTag$1];
-
-  try {
-    value[symToStringTag$1] = undefined;
-    var unmasked = true;
-  } catch (e) {}
-
-  var result = nativeObjectToString$1.call(value);
-  if (unmasked) {
-    if (isOwn) {
-      value[symToStringTag$1] = tag;
-    } else {
-      delete value[symToStringTag$1];
-    }
-  }
-  return result;
-}
-
-var _getRawTag = getRawTag;
-
-/** Used for built-in method references. */
-var objectProto$d = Object.prototype;
-
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */
-var nativeObjectToString = objectProto$d.toString;
-
-/**
- * Converts `value` to a string using `Object.prototype.toString`.
- *
- * @private
- * @param {*} value The value to convert.
- * @returns {string} Returns the converted string.
- */
-function objectToString(value) {
-  return nativeObjectToString.call(value);
-}
-
-var _objectToString = objectToString;
-
-/** `Object#toString` result references. */
-var nullTag = '[object Null]',
-    undefinedTag = '[object Undefined]';
-
-/** Built-in value references. */
-var symToStringTag = _Symbol ? _Symbol.toStringTag : undefined;
-
-/**
- * The base implementation of `getTag` without fallbacks for buggy environments.
- *
- * @private
- * @param {*} value The value to query.
- * @returns {string} Returns the `toStringTag`.
- */
-function baseGetTag(value) {
-  if (value == null) {
-    return value === undefined ? undefinedTag : nullTag;
-  }
-  return (symToStringTag && symToStringTag in Object(value))
-    ? _getRawTag(value)
-    : _objectToString(value);
-}
-
-var _baseGetTag = baseGetTag;
-
 /**
  * Checks if `value` is the
  * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
@@ -3836,9 +4716,9 @@ function getNative(object, key) {
 var _getNative = getNative;
 
 /* Built-in method references that are verified to be native. */
-var Map = _getNative(_root, 'Map');
+var Map$1 = _getNative(_root, 'Map');
 
-var _Map = Map;
+var _Map = Map$1;
 
 /* Built-in method references that are verified to be native. */
 var nativeCreate = _getNative(Object, 'create');
@@ -4524,33 +5404,6 @@ function arrayPush(array, values) {
 var _arrayPush = arrayPush;
 
 /**
- * Checks if `value` is classified as an `Array` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an array, else `false`.
- * @example
- *
- * _.isArray([1, 2, 3]);
- * // => true
- *
- * _.isArray(document.body.children);
- * // => false
- *
- * _.isArray('abc');
- * // => false
- *
- * _.isArray(_.noop);
- * // => false
- */
-var isArray = Array.isArray;
-
-var isArray_1 = isArray;
-
-/**
  * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
  * `keysFunc` and `symbolsFunc` to get the enumerable property names and
  * symbols of `object`.
@@ -4666,36 +5519,6 @@ function baseTimes(n, iteratee) {
 }
 
 var _baseTimes = baseTimes;
-
-/**
- * Checks if `value` is object-like. A value is object-like if it's not `null`
- * and has a `typeof` result of "object".
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
- * @example
- *
- * _.isObjectLike({});
- * // => true
- *
- * _.isObjectLike([1, 2, 3]);
- * // => true
- *
- * _.isObjectLike(_.noop);
- * // => false
- *
- * _.isObjectLike(null);
- * // => false
- */
-function isObjectLike(value) {
-  return value != null && typeof value == 'object';
-}
-
-var isObjectLike_1 = isObjectLike;
 
 /** `Object#toString` result references. */
 var argsTag$2 = '[object Arguments]';
@@ -8793,8 +9616,9 @@ const __vue_component__ = /*#__PURE__*/normalizeComponent$2({
 
 var components = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  AuButton: __vue_component__$3,
-  AuIcon: __vue_component__$4,
+  AuButton: __vue_component__$4,
+  AuInput: __vue_component__$3,
+  AuIcon: __vue_component__$5,
   AuSpinner: AuSpinner,
   AuDropdownContentButton: __vue_component__
 });
@@ -8808,4 +9632,4 @@ const install = function installAtlasUiKit(Vue) {
 }; // Create module definition for Vue.use()
 
 export default install;
-export { __vue_component__$3 as AuButton, __vue_component__ as AuDropdownContentButton, __vue_component__$4 as AuIcon, AuSpinner };
+export { __vue_component__$4 as AuButton, __vue_component__ as AuDropdownContentButton, __vue_component__$5 as AuIcon, __vue_component__$3 as AuInput, AuSpinner };

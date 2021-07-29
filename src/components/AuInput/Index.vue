@@ -8,16 +8,16 @@
     @mousemove="$emit('mousemove', $event)"
   >
     <div :class="{ 'has-icon': !!this.icon || this.$slots.icon }" class="input-content">
-      <template v-if="icon || $slots.icon">
-        <slot name="icon">
-          <au-icon
-            :icon="icon"
-            :size="small ? 14 : 16"
-            :class="{ 'au-icon-error': hasErrors }"
-            color="#3F6ADA"
-          />
-        </slot>
-      </template>
+      <slot name="icon"></slot>
+
+      <au-icon
+        v-if="icon"
+        :icon="icon"
+        :size="small ? 14 : 16"
+        :class="{ 'au-icon-error': hasErrors }"
+        color="#3F6ADA"
+      />
+
       <input
         ref="input"
         :class="[]"
