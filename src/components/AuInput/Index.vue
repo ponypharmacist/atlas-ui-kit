@@ -11,7 +11,6 @@
       <slot name="icon"></slot>
 
       <au-icon
-        v-if="icon"
         :icon="icon"
         :size="small ? 14 : 16"
         :class="{ 'au-icon-error': hasErrors }"
@@ -43,7 +42,6 @@
 <script>
 import { VueMaskDirective } from 'v-mask';
 import uniqueId from 'lodash/uniqueId';
-// import AuIcon from '@/components/AuIcon';
 
 export default {
   name: 'au-input',
@@ -57,15 +55,12 @@ export default {
     mask: VueMaskDirective,
   },
 
-  components: {
-    // AuIcon,
-  },
-
   inheritAttrs: false,
 
   props: {
     value: {
       type: [String, Number, Array],
+      default: null,
     },
     placeholder: {
       type: String,
@@ -85,17 +80,42 @@ export default {
     },
     mask: {
       type: [String, Array, Function],
+      default: null,
     },
-    icon: String,
+    icon: {
+      type: String,
+      default: null,
+    },
 
-    required: Boolean,
-    disabled: Boolean,
-    readonly: Boolean,
-    autofocus: Boolean,
+    required: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
+    autofocus: {
+      type: Boolean,
+      default: false,
+    },
 
-    fullWidth: Boolean,
-    small: Boolean,
-    inverse: Boolean,
+    fullWidth: {
+      type: Boolean,
+      default: false,
+    },
+    small: {
+      type: Boolean,
+      default: false,
+    },
+    inverse: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data: () => ({
@@ -234,11 +254,9 @@ export default {
 
       > .au-icon {
         position: absolute;
-        left: 8px;
+        left: 12px;
         top: 50%;
         transform: translateY(-50%);
-        width: 10px;
-        height: 10px;
       }
     }
 

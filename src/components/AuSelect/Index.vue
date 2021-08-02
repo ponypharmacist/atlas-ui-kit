@@ -1,0 +1,507 @@
+<template>
+  <div
+    v-clickaway="onClickAway"
+    :class="classObject"
+    :id="`au-select--${selectId}`"
+  >
+    <div
+      :class="{ active: isActive }"
+      class="au-select-selected"
+      @click="showList()"
+    >
+      <template v-if="isValidValue">
+        <template v-if="!multiselect">{{ selectedText }}</template>
+
+        <template v-else>
+          <div class="chips">
+            <div
+              v-for="(item, index) in selectedText"
+              :key="index"
+              class="chips-item"
+              v-text="item"
+            />
+          </div>
+        </template>
+      </template>
+
+      <span
+        v-else-if="placeholder"
+        v-text="placeholder"
+        class="au-select-placeholder"
+      />
+    </div>
+
+    <ul
+      :class="[{
+        active: isActive,
+        top: top,
+        bottom: bottom,
+      }]"
+      class="au-select-list"
+      v-if="isActive"
+    >
+      <div
+        v-if="list.length > 15 || searchQuery"
+        class="au-select-list__search"
+      >
+        <au-input
+          v-model="searchQuery"
+          placeholder="Поиск по списку"
+          inverse
+          small
+          full-width
+        />
+      </div>
+
+      <li
+        v-if="!listData || !listData.length"
+        class="au-select-item disabled"
+      >
+        {{ noDataText }}
+      </li>
+
+      <li
+        v-for="(item, index) in listData"
+        :key="`select-item-${index}`"
+        :class="{ selected: isSelected(item) }"
+        class="au-select-item"
+        @click="onItemClick(item)"
+      >
+        {{ getValueField(item) }}
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+import { directive as clickaway } from 'vue-clickaway';
+import get from 'lodash/get';
+import uniqueId from 'lodash/uniqueId';
+
+const transitionContext = {
+  to_work: { title: 'В работу' },
+  take_in_work: { title: 'Взять в работу' },
+  to_approving: { title: 'Отправить на проверку' },
+  to_clarification: { title: 'Запросить уточнение', withComment: true },
+  to_back_from_clarification: { title: 'Уточнить и вернуть', withComment: true },
+  to_close: { title: 'Закрыть' },
+  to_correction: { title: 'Вернуть на доработку', withComment: true },
+};
+
+export default {
+  name: 'au-select',
+
+  directives: { clickaway },
+
+  model: {
+    event: 'change',
+    prop: 'value',
+  },
+
+  props: {
+    value: {
+      type: [Number, String, Object, Array],
+      default: null,
+    },
+    list: {
+      type: Array,
+      default: () => ([]),
+    },
+    placeholder: {
+      type: String,
+      default: 'Выберите из списка',
+    },
+    noDataText: {
+      type: String,
+      default: 'Список пуст',
+    },
+    idField: {
+      type: String,
+      default: null,
+    },
+    valueField: {
+      type: String,
+      default: null,
+    },
+
+    returnObject: {
+      type: Boolean,
+      default: false,
+    },
+    closeOnSelect: {
+      type: Boolean,
+      default: false,
+    },
+
+    multiselect: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    small: {
+      type: Boolean,
+      default: false,
+    },
+    inverse: {
+      type: Boolean,
+      default: false,
+    },
+    large: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  data: () => ({
+    selectId: uniqueId('select'),
+    isActive: false,
+    searchQuery: null,
+    top: false,
+    bottom: false,
+    resolverArray: [
+      'to_work',
+      'take_in_work',
+      'to_approving',
+      'to_clarification',
+      'to_back_from_clarification',
+      'to_close',
+      'to_correction',
+    ],
+  }),
+
+  computed: {
+    classObject() {
+      return {
+        [this.$options.name]: true,
+        'is-small': this.small,
+        'is-large': this.large,
+        'is-inverse': this.inverse,
+        'is-disabled': this.disabled,
+      };
+    },
+
+    listData() {
+      if (!this.searchQuery || this.searchQuery === '') return this.list;
+      return this.list
+        .filter(
+          (item) => this.getValueField(item)
+            .toLowerCase()
+            .indexOf(this.searchQuery.toLowerCase()) !== -1,
+        );
+    },
+    getValueField() {
+      return (item) => {
+        if (this.resolverArray.includes(item[this.valueField])) {
+          return get(transitionContext, item[this.valueField], { title: 'Unknown transition code' }).title;
+        }
+
+        return item[this.valueField] || item;
+      };
+    },
+
+    selectedText() {
+      if (this.resolverArray.includes(this.value)) {
+        return get(transitionContext, this.value, { title: 'Unknown transition code' }).title;
+      }
+
+      if (Array.isArray(this.value)) {
+        return this.value.map((_) => {
+          if (_[this.valueField]) return _[this.valueField];
+          if (_.value) return _.value;
+
+          const reference = this.list
+            .find((item) => item[this.idField] === _);
+          if (reference) return reference[this.valueField];
+
+          return 'Label not found';
+        });
+      }
+
+      if (typeof this.value === 'object' && this.value !== null) {
+        return this.value[this.valueField] || this.value.value;
+      }
+
+      const reference = this.list.find((_) => _[this.idField] === this.value);
+      if (reference) return reference[this.valueField];
+
+      return this.value;
+    },
+
+    isSelected() {
+      return (item) => {
+        if (this.multiselect) {
+          return (this.value || []).includes(item[this.idField] || item);
+        }
+
+        return this.value === (item[this.idField] || item);
+      };
+    },
+
+    isValidValue() {
+      if (this.multiselect) return Array.isArray(this.value) && this.value.length;
+      return this.value !== null;
+    },
+  },
+
+  methods: {
+    onItemClick(item) {
+      const readyValue = this.getSelectedValue(item);
+
+      if (!this.multiselect && this.value === readyValue) {
+        const newValue = null;
+        this.$emit('change', newValue);
+        return;
+      }
+
+      if (this.multiselect && (this.value || []).includes(readyValue)) {
+        const index = this.value.findIndex((_) => _ === readyValue);
+        let newValue = [...this.value];
+        newValue.splice(index, 1);
+        newValue = newValue.filter(Boolean);
+        this.$emit('change', newValue);
+        return;
+      }
+
+      this.$emit('change', this.multiselect ? [...(this.value || []), readyValue] : readyValue);
+
+      if (this.closeOnSelect) {
+        this.onClickAway();
+      }
+    },
+
+    getSelectedValue(item) {
+      if (this.returnObject && typeof item === 'object') return item;
+
+      if (typeof item === 'object') {
+        return item[this.idField] || item.id;
+      }
+
+      return item;
+    },
+
+    onClickAway() {
+      this.isActive = false;
+      this.searchQuery = null;
+    },
+
+    showList() {
+      this.isActive = !this.isActive;
+      if (this.isActive === true) {
+        this.getPosition();
+      }
+    },
+
+    getPosition() {
+      // eslint-disable-next-line consistent-return
+      this.$nextTick(() => {
+        const el = document.querySelector(`#au-select--${this.selectId}`);
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        if (windowHeight - rect.bottom < 290) {
+          this.bottom = false;
+          this.top = true;
+        } else {
+          this.top = false;
+          this.bottom = true;
+        }
+      });
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+@import "../../styles/partials/params";
+@import "../../styles/partials/mixins";
+
+.au-select {
+  position: relative;
+  width: auto;
+  min-height: 40px;
+  font-size: 14px;
+
+  &.is-small {
+    min-height: 32px;
+    font-size: 12px;
+
+    .au-select-item,
+    .au-select-selected {
+      min-height: 32px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
+
+  &-item,
+  &-selected {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 40px;
+    font-weight: 500;
+    background-color: $white;
+    padding: 0 8px;
+    cursor: pointer;
+  }
+
+  &-placeholder {
+    font-weight: 300;
+    color: #9F9F9F;
+  }
+
+  &-selected {
+    border-radius: 2px;
+    border: 1px solid $gray-blue-border;
+    background-color: $light-gray;
+    overflow: hidden;
+    color: $blue;
+    font-weight: 400;
+    font-size: 12px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      background-color: $gray-blue-border;
+      right: 28px;
+      top: 0;
+    }
+
+    &::after {
+      content: "";
+      background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIvPjwvc3ZnPg==") no-repeat center;
+      background-size: contain;
+      width: 6px;
+      height: 11px;
+      position: absolute;
+      transform: translate(-50%, -50%) rotate(90deg);
+      top: 50%;
+      right: 8px;
+      transition: 0.3s;
+    }
+
+    &.active {
+      border-radius: 2px 2px 0 0;
+      &::after {
+        transform: translate(-50%, -50%) rotate(270deg);
+        transition: 0.3s;
+      }
+    }
+  }
+
+  &.is-disabled {
+    opacity: .7;
+    pointer-events: none;
+  }
+
+  &.is-inverse {
+    .au-select-selected {
+      background-color: white;
+    }
+  }
+
+  &-item {
+    &:hover {
+      background-color: $gray-blue-border;
+    }
+
+    &.selected {
+      background-color: transparentize($gray, .9);
+      color: $blue;
+
+      &:hover {
+        background-color: transparentize($gray, .7);
+      }
+    }
+
+    &.disabled {
+      pointer-events: none;
+      color: #9F9F9F;
+    }
+  }
+
+  $max-list-height: 160;
+
+  &-list {
+    position: absolute;
+    width: 100%;
+    background-color: $white;
+    border: 1px solid $gray-blue-border;
+    box-shadow: 0 2px 2px rgba(100,100,100, 0.15);
+    max-height: #{$max-list-height}px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-radius: 0 0 0 2px;
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1;
+
+    &.top {
+      top: unset;
+      bottom: 100%;
+      box-shadow: 0 -1px 2px rgba(100,100,100, 0.15);
+    }
+
+    &.bottom {
+      top: 100%;
+      bottom: unset;
+    }
+
+    &.active {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      height: 4px;
+      width: 4px;
+      cursor: pointer;
+    }
+
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 4px #f7f7f7;
+      box-shadow: inset 0 0 4px #f7f7f7;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $gray-blue-border;
+      border-radius: 2px;
+      outline: none;
+      background-clip: border-box;
+      cursor: pointer;
+    }
+  }
+  /* todo add chips for all sizes */
+  .chips {
+    padding: 4px 20px 4px 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -4px;
+
+    &-item {
+      font-size: 11px;
+      border: 1px solid $gray-blue-border;
+      padding: 4px;
+      background-color: white;
+      border-radius: 3px;
+      margin-top: 4px;
+      margin-right: 4px;
+    }
+  }
+
+  &-list__search {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 8px;
+  }
+}
+</style>

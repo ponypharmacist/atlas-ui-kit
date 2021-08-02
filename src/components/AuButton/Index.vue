@@ -1,12 +1,12 @@
 <template>
   <router-link v-if="!!to" :to="to" :class="classObject">
-    <au-icon v-if="icon" :icon="icon" />
+    <au-icon :icon="icon" :size="iconSize" :class="iconClass" mask />
     <span v-if="label" class="label">{{ label }}</span>
     <slot v-else>Submit</slot>
   </router-link>
 
   <a v-else-if="!!href" :href="href" :class="classObject">
-    <au-icon v-if="icon" :icon="icon" />
+    <au-icon :icon="icon" :size="iconSize" :class="iconClass" mask />
     <span v-if="label" class="label">{{ label }}</span>
     <slot v-else>Submit</slot>
   </a>
@@ -17,7 +17,7 @@
     :type="type"
     @click.stop="$emit('click', $event)"
   >
-    <au-icon v-if="icon" :icon="icon" />
+    <au-icon :icon="icon" :size="iconSize" :class="iconClass" mask />
     <span v-if="label" class="label">{{ label }}</span>
     <slot v-else>Submit</slot>
 
@@ -61,21 +61,54 @@ export default {
     },
 
     // Content
-    icon: String,
-    label: String,
+    icon: {
+      type: String,
+      default: null,
+    },
+    label: {
+      type: String,
+      default: null,
+    },
 
     // State
-    isLoading: Boolean,
-    disabled: Boolean,
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
 
     // Styling
-    link: Boolean,
-    large: Boolean,
-    shadow: Boolean,
-    red: Boolean,
-    white: Boolean,
-    fullWidth: Boolean,
-    bordered: Boolean,
+    link: {
+      type: Boolean,
+      default: false,
+    },
+    large: {
+      type: Boolean,
+      default: false,
+    },
+    shadow: {
+      type: Boolean,
+      default: false,
+    },
+    red: {
+      type: Boolean,
+      default: false,
+    },
+    white: {
+      type: Boolean,
+      default: false,
+    },
+    fullWidth: {
+      type: Boolean,
+      default: false,
+    },
+    bordered: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
@@ -94,10 +127,21 @@ export default {
       };
     },
 
+    iconClass() {
+      if (this.red) return 'au-icon-white';
+      if (this.white) return 'au-icon-blue';
+
+      return 'au-icon-white';
+    },
+
     spinnerColor() {
       if (this.red || !this.white) return '#FFFFFF';
 
       return '#3F6ADA';
+    },
+
+    iconSize() {
+      return this.large ? 16 : 14;
     },
   },
 };
@@ -142,7 +186,6 @@ export default {
 
   .au-icon {
     margin-right: 8px;
-    background-color: $white;
   }
 
   &.is-full-width {
@@ -157,10 +200,6 @@ export default {
     color: $blue;
     background-color: $white;
     background-image: none;
-
-    .au-icon {
-      background-color: $blue;
-    }
   }
 
   &.is-link {
@@ -169,14 +208,14 @@ export default {
     color: $blue;
 
     .au-icon {
-      background-color: $blue;
+      background-color: $blue !important;
     }
 
     &:hover {
       color: $darkblue;
 
       .au-icon {
-        background-color: $darkblue;
+        background-color: $darkblue !important;
       }
     }
 
@@ -185,14 +224,14 @@ export default {
       color: $red2;
 
       .au-icon {
-        background-color: $red2;
+        background-color: $red2 !important;
       }
 
       &:hover {
         color: #eb5f4d;
 
         .au-icon {
-          background-color: #eb5f4d;
+          background-color: #eb5f4d !important;
         }
       }
     }
@@ -202,14 +241,14 @@ export default {
       color: $white;
 
       .au-icon {
-        background-color: $white;
+        background-color: $white !important;
       }
 
       &:hover {
         color: #fafafa;
 
         .au-icon {
-          background-color: #fafafa;
+          background-color: #fafafa !important;
         }
       }
     }

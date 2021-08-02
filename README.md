@@ -7,8 +7,6 @@
 yarn add @ponypharmacist/atlas-ui-kit
 ```
 
-Чтобы работали иконки набора mdi, в проекте должна быть подключена библиотека **@mdi/svg**
-
 ## Использование во Vue
 
 1. В файле main.js
@@ -28,8 +26,14 @@ yarn run serve
 Запускает страничку документации/превью, которая реагирует на изменения исходного кода.
 
 ## Список компонентов
-1. au-icon
-2. au-button
-3. au-input
-4. au-spinner
-5. au-dropdown-content-button
+* au-icon
+* au-button
+* au-input
+* au-spinner
+* au-dropdown-content-button
+* au-dropdown-button
+* au-tooltip
+* au-select
+* au-tabs / au-tab-item
+* au-table
+* au-pagination

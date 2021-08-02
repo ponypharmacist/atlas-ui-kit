@@ -1,6 +1,6 @@
 {
   "name": "@ponypharmacist/atlas-ui-kit",
-  "version": "0.1.17",
+  "version": "0.2.1",
   "description": "Atlas ui kit test run",
   "author": "ponypharmacist",
   "license": "MIT",
@@ -29,7 +29,9 @@
   "dependencies": {
     "lodash": "^4.17.20",
     "v-mask": "^2.2.4",
-    "v-tooltip": "^2.0.3"
+    "v-tooltip": "^2.0.3",
+    "verte": "^0.0.12",
+    "vue-clickaway": "^2.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

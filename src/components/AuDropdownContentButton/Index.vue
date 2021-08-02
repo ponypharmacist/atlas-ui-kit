@@ -33,9 +33,18 @@ export default {
   },
 
   props: {
-    label: String,
-    icon: String,
-    large: Boolean,
+    label: {
+      type: String,
+      default: null,
+    },
+    icon: {
+      type: String,
+      default: null,
+    },
+    large: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data: () => ({
@@ -70,7 +79,7 @@ export default {
   border-radius: 6px;
 
   .wrapper {
-    margin: 0;
+    margin: 0 0 0 -8px;
   }
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="icon"
     :class="`au-icon icon-${icon}`"
     :title="title"
     :style="styles"
@@ -17,7 +18,6 @@ export default {
     icon: {
       type: String,
       default: null,
-      required: true,
     },
     title: {
       type: String,
@@ -31,6 +31,11 @@ export default {
       type: String,
       default: null,
     },
+    // Принудительно делаем иконку маской
+    mask: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
@@ -41,8 +46,13 @@ export default {
 
       if (this.color) style += `background-color: ${this.color};`;
 
-      style += `-webkit-mask: url('${this.getIconUrl}') no-repeat 0 0 / 100% 100%;`;
-      style += `mask: url('${this.getIconUrl}') no-repeat 0 0 / 100% 100%;`;
+      // Оставляем исходные цвета иконки или красим ее в один цвет
+      if (!this.color && !this.mask) {
+        style += `background: transparent url('${this.getIconUrl}') no-repeat 0 0 / 100% 100%;`;
+      } else {
+        style += `-webkit-mask: url('${this.getIconUrl}') no-repeat 0 0 / 100% 100%;`;
+        style += `mask: url('${this.getIconUrl}') no-repeat 0 0 / 100% 100%;`;
+      }
 
       return style;
     },
@@ -74,8 +84,16 @@ $default-size: 12px;
   height: $default-size;
   min-width: $default-size;
 
-  background-color: #fff;
+  // background-color: #fff;
   box-sizing: border-box;
+
+  &.au-icon-white {
+    background-color: $white;
+  }
+
+  &.au-icon-blue {
+    background-color: $blue;
+  }
 
   &.au-icon-error {
     background-color: $red!important;

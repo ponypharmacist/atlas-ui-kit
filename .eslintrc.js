@@ -17,6 +17,15 @@ module.exports = {
     'no-param-reassign': ['error', {
       props: true, ignorePropertyModificationsFor: ['state'],
     }],
+    'max-len': [
+      'error',
+      {
+        ignoreStrings: true,
+        ignoreComments: true,
+        ignoreUrls: true,
+        code: 500,
+      },
+    ],
   },
   overrides: [
     {
