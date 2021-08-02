@@ -8,25 +8,31 @@
 
   <h2 id="au-icon">Иконки</h2>
   <div class="demo-item">
-    <p>По-умолчанию - иконка имеет родной цвет, если не указан color.</p>
-    <p>Параметр <b>mask</b> принудительно делает иконку маской (нужно при создании компонентов в этой библиотеке, в обычном применении в проекте врядли пригодится).</p>
-    <div class="d-flex align-center">
+    <div class="d-flex align-center" style="margin-bottom: 6px;">
       <au-icon icon="mdi-wizard-hat" :size="24"/>
       <div> <code>&lt;au-icon icon="<b>mdi-wizard-hat</b>" size="24"/&gt;</code>
        - берет иконку '<b>wizard-hat.svg</b>' из @mdi/svg/svg</div>
     </div>
 
-    <div class="d-flex align-center">
+    <div class="d-flex align-center" style="margin-bottom: 6px;">
       <au-icon icon="icon-avatar" :size="24"/>
       <div> <code>&lt;au-icon icon="<b>icon-avatar</b>" size="24"/&gt;</code>
        - берет иконку '<b>icon-avatar.svg</b>' из @/assets/icons/ текущего проекта</div>
     </div>
 
-    <div class="d-flex align-center">
-      <au-icon icon="mdi-eye" :color="'#FF6C59'" :size="24"/>
+    <div class="d-flex align-center" style="margin-bottom: 6px;">
+      <au-icon icon="mdi-eye" :color="'#FF6C59'" title="Eye Icon" :size="24"/>
       <div> <code>&lt;au-icon icon="mdi-eye" <b>color="#FF6C59"</b>/&gt;</code>
-       - цвет</div>
+       - цвет, если не указан: иконка имеет родной цвет</div>
     </div>
+
+    <pre>&lt;au-icon
+  icon: String
+  title: String
+  color: String - если цвет не указан, иконка будет background-image вместо mask
+  size: Number | 12 по-умолчанию
+  mask - принудительно делает иконку маской (вместо фона)
+/&gt;</pre>
   </div>
 
   <h2 id="au-button">Кнопка</h2>
@@ -180,7 +186,7 @@
   inverse
   small
   large - сейчас не поддерживается
-</pre>
+/&gt;</pre>
   </div>
 
   <h2 id="au-dropdown-button">Кнопка-dropdown</h2>
@@ -205,12 +211,12 @@
     <pre>&lt;au-dropdown-button
   list: Array - [{ title, ... }]
   icon: String
-
   large
 &gt;
   Название (default slot)
+
   &lt;template #list&gt; (list slot)
-/&gt;</pre>
+&lt;/au-dropdown-button&gt;</pre>
   </div>
 
   <h2 id="au-dropdown-content-button">Кнопка с выпадающим контентом</h2>
@@ -236,7 +242,8 @@
   <pre>&lt;au-color-picker
   v-model
   small
-  full-width</pre>
+  full-width
+/&gt;</pre>
   </div>
 
   <h2 id="au-spinner">Лоадер/спиннер</h2>
@@ -298,7 +305,7 @@
   no-data-text: String
   current-sort: Object - default {} | { field: 'name', dir: 'asc' }
   page-settings: Object
-
+&gt;
   &lt;template &#35;item.title="&lcub; item &rcub;"&gt; - slot - содержимое ячеек в столбце title
 &lt;/au-table&gt;</pre>
   </div>
@@ -315,14 +322,16 @@
   page
   per-page
   toptal
-  pages-count</pre>
+  pages-count
+/&gt;</pre>
   </div>
 
   <h2 id="au-user-popover">Поповеры</h2>
   <div class="demo-item">
     <au-user-popover :user="userObject" />
     <pre>&lt;au-user-popover
-  user: { firstName, lastName, isOnline }</pre>
+  user: { firstName, lastName, isOnline }
+/&gt;</pre>
   </div>
 
   <div class="demo-item">
@@ -332,7 +341,8 @@
     <pre>&lt;au-info-popover
   blockedTransitions: Array
   placement: 'bottom'
-  disabled</pre>
+  disabled
+/&gt;</pre>
   </div>
   </div>
 </div>
@@ -425,15 +435,21 @@ export default {
   border-left: thin solid #e1e1e1;
 }
 
+p {
+  margin: 16px 0;
+}
+
 h1 {
-  @include rudaExtraBold;
+  font-family: Ruda, Helvetica, Arial, sans-serif;
+  font-weight: 500;
   padding: 24px 0 22px;
   font-size: 32px;
   line-height: 32px;
 }
 
 h2 {
-  @include rudaExtraBold;
+  font-family: Ruda, Helvetica, Arial, sans-serif;
+  font-weight: 500;
   padding: 32px 0 16px 0;
   font-size: 24px;
   line-height: 28px;
