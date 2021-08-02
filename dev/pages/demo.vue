@@ -425,8 +425,18 @@ export default {
   border-left: thin solid #e1e1e1;
 }
 
+h1 {
+  @include rudaExtraBold;
+  padding: 24px 0 22px;
+  font-size: 32px;
+  line-height: 32px;
+}
+
 h2 {
-  padding-top: 32px;
+  @include rudaExtraBold;
+  padding: 32px 0 16px 0;
+  font-size: 24px;
+  line-height: 28px;
 }
 
 .demo-item {

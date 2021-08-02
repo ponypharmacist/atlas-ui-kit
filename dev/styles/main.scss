@@ -36,20 +36,6 @@ b {
   font-weight: 700;
 }
 
-h1 {
-  @include rudaExtraBold;
-  padding: 24px 0 22px;
-  font-size: 32px;
-  line-height: 32px;
-}
-
-h2 {
-  @include rudaExtraBold;
-  padding: 16px 0;
-  font-size: 24px;
-  line-height: 28px;
-}
-
 a {
   color: $color-link;
   text-decoration: none;
