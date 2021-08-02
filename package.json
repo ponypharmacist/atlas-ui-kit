@@ -1,6 +1,6 @@
 {
   "name": "@ponypharmacist/atlas-ui-kit",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "Atlas ui kit test run",
   "author": "ponypharmacist",
   "license": "MIT",
@@ -27,6 +27,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@mdi/svg": "^5.9.55",
     "lodash": "^4.17.20",
     "v-mask": "^2.2.4",
     "v-tooltip": "^2.0.3",
@@ -36,7 +37,6 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
-    "@mdi/svg": "^5.9.55",
     "@rollup/plugin-alias": "^3.1.1",
     "@rollup/plugin-babel": "^5.2.2",
     "@rollup/plugin-commonjs": "^17.0.0",
