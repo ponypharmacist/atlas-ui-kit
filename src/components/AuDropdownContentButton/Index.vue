@@ -14,7 +14,7 @@
       @click="isOpened = true"
     />
 
-    <template slot="popover">
+    <template #popover>
       <slot
         :hide="hideContent"
       />
@@ -77,9 +77,5 @@ export default {
   box-shadow: 0 11px 29px rgba(11, 66, 136, 0.2), 0 -1px 9px rgba(11, 66, 136, 0.07);
   background-color: #fff;
   border-radius: 6px;
-
-  .wrapper {
-    margin: 0 0 0 -8px;
-  }
 }
 </style>

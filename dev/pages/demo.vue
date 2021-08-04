@@ -3,7 +3,7 @@
 <div class="demo-page">
   <sidebar :sidebar-items="sidebarItems"/>
 
-  <div class="demo-content">
+  <div id="content">
 
   <h1>Библиотека Vue-компонентов</h1>
   <p>Установка:</p>
@@ -12,198 +12,17 @@
   <pre>import atlasUiKit from '@atlas/ui-kit';
 Vue.use(atlasUiKit);</pre>
 
-  <h2 id="au-icon">Иконки</h2>
-  <div class="demo-item">
-    <div class="d-flex align-center" style="margin-bottom: 6px;">
-      <au-icon icon="mdi-wizard-hat" :size="24"/>
-      <div> <code>&lt;au-icon icon="<b>mdi-wizard-hat</b>" size="24"/&gt;</code>
-       - берет иконку '<b>wizard-hat.svg</b>' из @mdi/svg/svg</div>
-    </div>
+  <demo-icons/>
 
-    <div class="d-flex align-center" style="margin-bottom: 6px;">
-      <au-icon icon="icon-avatar" :size="24"/>
-      <div> <code>&lt;au-icon icon="<b>icon-avatar</b>" size="24"/&gt;</code>
-       - берет иконку '<b>icon-avatar.svg</b>' из @/assets/icons/ текущего проекта</div>
-    </div>
-
-    <div class="d-flex align-center" style="margin-bottom: 6px;">
-      <au-icon icon="mdi-eye" :color="'#FF6C59'" title="Eye Icon" :size="24"/>
-      <div> <code>&lt;au-icon icon="mdi-eye" <b>color="#FF6C59"</b>/&gt;</code>
-       - цвет, если не указан: иконка имеет родной цвет</div>
-    </div>
-
-    <pre>&lt;au-icon
-  icon: String
-  title: String
-  color: String - если цвет не указан, иконка будет background-image вместо mask
-  size: Number | 12 по-умолчанию
-  mask - принудительно делает иконку маской (вместо фона)
-/&gt;</pre>
-  </div>
-
-  <h2 id="au-button">Кнопка</h2>
-  <div class="demo-item">
-    <div class="d-flex darker-background">
-      <au-button icon="mdi-eye" bordered label="bordered"/>
-      <au-button icon="mdi-eye" white label="white"/>
-      <au-button icon="mdi-eye" white transparent label="white transparent"/>
-      <au-button icon="mdi-eye" link white label="is-link white icon"/>
-    </div>
-
-    <div class="d-flex" style="padding: 16px 0;">
-      <au-button label="default"/>
-      <au-button shadow label="shadow"/>
-      <au-button white bordered label="white bordered"/>
-      <au-button icon="mdi-eye" label="icon='mdi-eye'"/>
-      <au-button icon="mdi-eye" link label="is link"/>
-      <au-button icon="mdi-eye" link red label="is-link red icon"/>
-      <au-button
-        red
-        :is-loading="isLoading"
-        label="red is-loading"
-        icon="mdi-eye"
-        @click="isLoading = !isLoading"
-      />
-    </div>
-
-    <div class="d-flex coloured-background">
-      <au-button transparent label="transparent"/>
-      <au-button transparent icon="mdi-eye" label="icon"/>
-      <au-button transparent round icon="mdi-eye"/>
-    </div>
-
-    <pre>&lt;au-button
-  tag: 'button | a | router-link'
-  type: 'button | submit | reset'
-  to: [Object, String]
-  href: String
-
-  icon: String - 'mdi-eye | icon-eye'
-  label: String - текст кнопки
-
-  is-loading
-  disabled
-
-  link
-  full-width
-  bordered
-  large
-  shadow
-  white
-  red
-  transparent
-  round
-&gt;
-  default slot - слот для кастомного содержимого кнопки
-  #icon - слот в левой части для кастомных иконок
-&lt;/au-button&gt;</pre>
-  </div>
+  <demo-buttons/>
 
   <demo-inputs/>
 
-  <h2 id="au-select">Выпадающий список</h2>
-  <div class="demo-item">
-    <au-select
-      v-model="selectModel"
-      :list="selectListDemo"
-      value-field="title"
-      id-field="id"
-    />
-    <au-select
-      v-model="selectModel"
-      :list="selectListDemo"
-      value-field="title"
-      id-field="id"
-      multiselect
-    />
-    <au-select
-      value="inverse"
-      inverse
-    />
-    <au-select
-      value="disabled"
-      disabled
-    />
-    <au-select
-      value="small"
-      small
-    />
-    <au-select :placeholder="null" noDataText="`:placeholder='null' - если нужен пустой плейсхолдер`" />
+  <demo-select/>
 
-    <pre>&lt;au-select
-  value: [Number, String, Object, Array]
-  list: Array
-  placeholder: String | default: 'Выберите из списка' - null если хотим без
-  no-data-text: String | default: 'Список пуст'
-  id-field: String
-  value-field: String
+  <demo-dropdown-buttons/>
 
-  return-object
-  close-on-select
-
-  multiselect
-  disabled
-  inverse
-  small
-  large - сейчас не поддерживается
-/&gt;</pre>
-  </div>
-
-  <h2 id="au-dropdown-button">Кнопка-dropdown</h2>
-  <div class="demo-item">
-    <div class="d-flex">
-      <au-dropdown-button
-        :list="[{ title: 'Элемент списка' }]"
-        icon="mdi-eye"
-      >
-        Название
-      </au-dropdown-button>
-
-      <au-dropdown-button
-        :list="[{ title: 'Элемент списка' }]"
-        large
-        icon="mdi-eye"
-      >
-        Название
-      </au-dropdown-button>
-
-      <au-dropdown-button
-        :list="[{ title: 'Элемент списка' }]"
-        large
-        white
-        icon="mdi-eye"
-      >
-        Название
-      </au-dropdown-button>
-    </div>
-
-    <pre>&lt;au-dropdown-button
-  list: Array - [{ title, ... }]
-  icon: String
-  large
-  white
-&gt;
-  Название (default slot)
-
-  &lt;template #list&gt; (list slot)
-&lt;/au-dropdown-button&gt;</pre>
-  </div>
-
-  <h2 id="au-dropdown-content-button">Кнопка с выпадающим контентом</h2>
-  <div class="demo-item">
-    <au-dropdown-content-button
-      label="What, what!"
-      :open="false"
-      icon="mdi-eye"
-    >
-      <p style="padding: 16px;">Hello World</p>
-    </au-dropdown-content-button>
-    <pre>&lt;au-spinner
-  label
-  icon - передает иконку в au-icon
-  large - для крупной au-button внутри компонента
-/&gt;</pre>
-  </div>
+  <demo-filters/>
 
   <h2 id="au-color-picker">Пипетка</h2>
   <div class="demo-item">
@@ -216,7 +35,6 @@ Vue.use(atlasUiKit);</pre>
 /&gt;</pre>
   </div>
 
-  <h2 id="au-breadcrumbs">Хлебные крошки</h2>
   <demo-breadcrumbs/>
 
   <h2 id="au-spinner">Лоадер/спиннер</h2>
@@ -272,6 +90,8 @@ Vue.use(atlasUiKit);</pre>
 /&gt;</pre>
   </div>
 
+  <demo-popups/>
+
   <h2 id="au-user-popover">Поповеры</h2>
   <div class="demo-item">
     <au-user-popover :user="userObject" />
@@ -297,18 +117,30 @@ Vue.use(atlasUiKit);</pre>
 
 <script>
 import Sidebar from './elements/sidebar.vue';
-import DemoTables from './elements/tables.vue';
+import DemoIcons from './elements/icons.vue';
+import DemoButtons from './elements/buttons.vue';
 import DemoInputs from './elements/inputs.vue';
+import DemoSelect from './elements/select.vue';
+import DemoDropdownButtons from './elements/dropdownButtons.vue';
 import DemoBreadcrumbs from './elements/breadcrumbs.vue';
+import DemoTables from './elements/tables.vue';
+import DemoFilters from './elements/filters.vue';
+import DemoPopups from './elements/popups.vue';
 
 export default {
   name: 'demo-page',
 
   components: {
     Sidebar,
-    DemoTables,
+    DemoIcons,
+    DemoButtons,
     DemoInputs,
+    DemoSelect,
+    DemoDropdownButtons,
     DemoBreadcrumbs,
+    DemoTables,
+    DemoFilters,
+    DemoPopups,
   },
 
   data() {
@@ -323,24 +155,19 @@ export default {
         { title: 'Кнопка-dropdown', alias: 'au-dropdown-button' },
         { title: 'Кнопка с выпадающим контентом', alias: 'au-dropdown-content-button' },
         { title: 'Пипетка', alias: 'au-color-picker' },
+        { title: 'Быстрые фильтры', alias: 'au-filters-resizable' },
 
         { title: 'Вывод информации' },
+        { title: 'Хлебные крошки', alias: 'au-breadcrumbs' },
         { title: 'Лоадер/спиннер', alias: 'au-spinner' },
         { title: 'Вкладки, табы', alias: 'au-tabs' },
         { title: 'Таблицы', alias: 'au-table' },
         { title: 'Пагинация', alias: 'au-pagination' },
         { title: 'Поповеры', alias: 'au-user-popover' },
+        { title: 'Поп-ап справа', alias: 'au-side-popup' },
       ],
 
       // Demo-values
-      isLoading: true,
-      selectModel: null,
-      selectListDemo: [
-        { id: 1, title: 'Option One' },
-        { id: 2, title: 'Option Two' },
-        { id: 3, title: 'Option Three' },
-        { id: 4, title: 'Option Four' },
-      ],
       colorPicked: '#fa4444',
       userObject: {
         firstName: 'Ivan',
@@ -358,7 +185,7 @@ export default {
   display: flex;
   width: 100%;
 
-  .demo-content {
+  #content {
     height: 100vh;
     width: 100%;
     padding: 24px;

@@ -95,7 +95,6 @@ $icon-backarrow: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53
     height: 18px;
     line-height: 18px;
     text-decoration: none;
-    color: $blue;
   }
 
   &::after {

@@ -1,32 +1,34 @@
 <template>
 
-<div class="demo-item">
-  <div class="au-breadcrumbs">
-    <div
-      class="breadcrumb-item"
-      v-for="(route, index) in routes"
-      :key="`breadcrumb-${index}`"
-      :class="{ 'last': index === routes.length - 1 }"
-    >
-      <a href="#">
-        {{ route.title || 'Страница' }}
+<div class="demo-breadcrumbs">
+  <h2 id="au-breadcrumbs">Хлебные крошки</h2>
+  <div class="demo-item">
+    <div class="au-breadcrumbs">
+      <div
+        class="breadcrumb-item"
+        v-for="(route, index) in routes"
+        :key="`breadcrumb-${index}`"
+        :class="{ 'last': index === routes.length - 1 }"
+      >
+        <a href="#">
+          {{ route.title || 'Страница' }}
+        </a>
+      </div>
+
+      <a
+        v-if="routes.length > 1"
+        class="link-back"
+        href="#"
+      >
+        Вернуться назад
       </a>
     </div>
 
-    <a
-      v-if="routes.length > 1"
-      class="link-back"
-      href="#"
-    >
-      Вернуться назад
-    </a>
-  </div>
+    <pre>&lt;au-breadcrumbs/&gt;</pre>
 
-  <pre>&lt;au-breadcrumbs/&gt;</pre>
+    <p>Компонент использует настройки vue-router для определения пути. Для этого в <b>meta</b> роута должен быть прописан параметр <b>breadcrumb</b>.</p>
 
-  <p>Компонент использует настройки vue-router для определения пути. Для этого в <b>meta</b> роута должен быть прописан параметр <b>breadcrumb</b>.</p>
-
-  <pre>{
+    <pre>{
   path: '/',
   name: 'Home',
   component: () => import('../pages/Home.vue'),
@@ -34,6 +36,7 @@
     breadcrumb: 'Главная'
   },
 }</pre>
+  </div>
 </div>
 
 </template>
