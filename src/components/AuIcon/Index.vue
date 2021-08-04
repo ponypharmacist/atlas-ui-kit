@@ -48,10 +48,10 @@ export default {
 
       // Оставляем исходные цвета иконки или красим ее в один цвет
       if (!this.color && !this.mask) {
-        style += `background: transparent url('${this.getIconUrl}') no-repeat 0 0 / 100% 100%;`;
+        style += `background: transparent url('${this.getIconUrl}') no-repeat 50% 50% / contain;`;
       } else {
-        style += `-webkit-mask: url('${this.getIconUrl}') no-repeat 0 0 / 100% 100%;`;
-        style += `mask: url('${this.getIconUrl}') no-repeat 0 0 / 100% 100%;`;
+        style += `-webkit-mask: url('${this.getIconUrl}') no-repeat 50% 50% / contain;`;
+        style += `mask: url('${this.getIconUrl}') no-repeat 50% 50% / contain;`;
       }
 
       return style;

@@ -5,7 +5,7 @@
     @mouseleave="hideDropList"
   >
     <div class="au-dropdown-button-main">
-      <au-icon :icon="icon" :size="large ? 16 : 14" color="#ffffff"/>
+      <au-icon :icon="icon" :size="iconSize" :class="iconClass" mask/>
       <slot></slot>
     </div>
 
@@ -45,6 +45,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    white: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data: () => ({
@@ -59,10 +63,21 @@ export default {
         this.$options.name,
         {
           'is-large': this.large,
+          'is-white': this.white,
           'au-dropdown-button--top': this.top,
           'au-dropdown-button--bottom': this.bottom,
         },
       ];
+    },
+
+    iconSize() {
+      return this.large ? 16 : 14;
+    },
+
+    iconClass() {
+      if (this.white) return 'au-icon-blue';
+
+      return 'au-icon-white';
     },
   },
 
@@ -99,14 +114,16 @@ export default {
 @import "../../styles/partials/params";
 @import "../../styles/partials/mixins";
 
+$icon-arrow: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==") no-repeat 0 0 / 100% 100%;
+
 .au-dropdown-button {
   display: inline-block;
   position: relative;
   height: 32px;
 
-  &:hover{
-    & .au-dropdown-button-main{
-      &:after{
+  &:hover {
+    .au-dropdown-button-main {
+      &:after {
         transform: translate(-50%, -50%) rotate(270deg);
         transition: 0.3s;
       }
@@ -146,9 +163,9 @@ export default {
 
     &:after{
       content: "";
-      background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==") no-repeat;
-      background-position: center;
-      background-size: contain;
+      -webkit-mask: $icon-arrow;
+      mask: $icon-arrow;
+      background-color: #fff;
       width: 6px;
       height: 11px;
       position: absolute;
@@ -238,6 +255,31 @@ export default {
   .au-dropdown-button--top.is-large & {
     bottom: 40px;
     top: unset;
+  }
+}
+
+.is-white {
+  .au-dropdown-button-main {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+    width: 100%;
+    height: 32px;
+    color: $blue;
+    border-radius: 4px;
+    background-color: $white;
+    background-image: none;
+
+    &:before {
+      border-left: thin solid rgba(63, 107, 218, 0.25);
+    }
+
+    &:after {
+      background-color: $blue;
+    }
   }
 }
 </style>

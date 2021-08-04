@@ -23,7 +23,7 @@ module.exports = {
         ignoreStrings: true,
         ignoreComments: true,
         ignoreUrls: true,
-        code: 500,
+        code: 1500,
       },
     ],
   },

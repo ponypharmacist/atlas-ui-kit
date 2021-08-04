@@ -33,9 +33,8 @@ export default {
 
 <style lang="scss" scoped>
 .demo-sidebar {
+  flex: 0 0 auto;
   width: 260px;
-  position: fixed;
-  top: 0;
   overflow-y: auto;
 
   ul {

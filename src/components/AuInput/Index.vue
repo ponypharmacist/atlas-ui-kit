@@ -35,6 +35,7 @@
         @focusout="isFocused = false"
       >
     </div>
+
     <slot name="suffix" />
   </div>
 </template>
@@ -171,6 +172,7 @@ export default {
 .au-input {
   position: relative;
   display: flex;
+  align-items: center;
   flex-wrap: nowrap;
   height: 40px;
   width: 120px;

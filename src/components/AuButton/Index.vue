@@ -1,14 +1,14 @@
 <template>
-  <router-link v-if="!!to" :to="to" :class="classObject">
+  <!-- <router-link v-if="!!to" :to="to" :class="classObject">
     <au-icon :icon="icon" :size="iconSize" :class="iconClass" mask />
     <span v-if="label" class="label">{{ label }}</span>
-    <slot v-else>Submit</slot>
+    <slot v-else></slot>
   </router-link>
 
   <a v-else-if="!!href" :href="href" :class="classObject">
     <au-icon :icon="icon" :size="iconSize" :class="iconClass" mask />
     <span v-if="label" class="label">{{ label }}</span>
-    <slot v-else>Submit</slot>
+    <slot v-else></slot>
   </a>
 
   <button
@@ -19,12 +19,31 @@
   >
     <au-icon :icon="icon" :size="iconSize" :class="iconClass" mask />
     <span v-if="label" class="label">{{ label }}</span>
-    <slot v-else>Submit</slot>
+    <slot v-else></slot>
 
     <div v-if="isLoading" class="button-loader">
       <au-spinner :color="spinnerColor" />
     </div>
-  </button>
+  </button> -->
+
+  <component
+    :is="tag"
+    :to="to"
+    :href="href"
+    :type="type"
+    :class="classObject"
+    @click.stop="$emit('click', $event)"
+  >
+    <slot name="icon"/>
+    <au-icon :icon="icon" :size="iconSize" :class="iconClass" mask />
+
+    <span v-if="label" class="label">{{ label }}</span>
+    <slot v-else/>
+
+    <div v-if="isLoading" class="button-loader">
+      <au-spinner :color="spinnerColor" />
+    </div>
+  </component>
 
 </template>
 
@@ -53,7 +72,7 @@ export default {
     },
     tag: {
       type: String,
-      default: 'a',
+      default: 'button',
     },
     type: {
       type: String,
@@ -109,6 +128,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    transparent: {
+      type: Boolean,
+      default: false,
+    },
+    round: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
@@ -117,10 +144,12 @@ export default {
         [this.$options.name]: true,
         'is-red': this.red,
         'is-white': this.white,
+        'is-bordered': this.bordered,
         'is-shadow': this.shadow,
+        'is-transparent': this.transparent,
+        'is-round': this.round,
         'is-full-width': this.fullWidth,
         'is-large': this.large,
-        'is-bordered': this.bordered,
         'is-link': this.link,
         'is-loading': this.isLoading,
         disabled: this.disabled,
@@ -128,7 +157,6 @@ export default {
     },
 
     iconClass() {
-      if (this.red) return 'au-icon-white';
       if (this.white) return 'au-icon-blue';
 
       return 'au-icon-white';
@@ -156,6 +184,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: inherit;
   font-size: 12px;
   font-weight: 500;
   height: 32px;
@@ -184,7 +213,7 @@ export default {
     );
   }
 
-  .au-icon {
+  ::v-deep .au-icon {
     margin-right: 8px;
   }
 
@@ -202,6 +231,7 @@ export default {
     background-image: none;
   }
 
+  // Link
   &.is-link {
     background-color: transparent!important;
     background-image: none;
@@ -300,19 +330,11 @@ export default {
     border: 1px solid #fff;
   }
 
-  &.is-add {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-right: 0;
-    min-width: 207px;
-  }
-
-  & .label{
+  .label{
     white-space: nowrap;
   }
 
-  & .button-loader {
+  .button-loader {
     position: absolute;
     top: 0;
     left: 0;
@@ -321,6 +343,38 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  &.is-transparent {
+    background-color: rgba(0, 0, 0, 0.20);
+    background-image: none;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+
+    &.is-white {
+      background-color: rgba(255, 255, 255, 0.75);
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.85);
+      }
+    }
+  }
+
+  &.is-round {
+    width: 32px;
+    border-radius: 50%;
+    padding: 0;
+    text-align: center;
+
+    &.is-large {
+      width: 40px;
+    }
+
+    .au-icon {
+      margin-right: 0;
+    }
   }
 }
 

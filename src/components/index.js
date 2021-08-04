@@ -6,6 +6,7 @@ export { default as AuSelect } from './AuSelect';
 export { default as AuDropdownButton } from './AuDropdownButton';
 export { default as AuDropdownContentButton } from './AuDropdownContentButton';
 // Вывод информации (в первую очередь)
+export { default as AuBreadcrumbs } from './AuBreadcrumbs';
 export { default as AuSpinner } from './AuSpinner';
 export { default as AuTooltip } from './AuTooltip';
 export { AuTabs, AuTabItem } from './AuTabs/index';

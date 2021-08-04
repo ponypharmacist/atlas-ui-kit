@@ -4,7 +4,13 @@
   <sidebar :sidebar-items="sidebarItems"/>
 
   <div class="demo-content">
+
   <h1>Библиотека Vue-компонентов</h1>
+  <p>Установка:</p>
+  <pre>yarn add @atlas/ui-kit</pre>
+  <p>Подключение в файле main.js:</p>
+  <pre>import atlasUiKit from '@atlas/ui-kit';
+Vue.use(atlasUiKit);</pre>
 
   <h2 id="au-icon">Иконки</h2>
   <div class="demo-item">
@@ -38,13 +44,18 @@
   <h2 id="au-button">Кнопка</h2>
   <div class="demo-item">
     <div class="d-flex darker-background">
-      <au-button icon="mdi-eye" label="icon='mdi-eye'"/>
+      <au-button icon="mdi-eye" bordered label="bordered"/>
       <au-button icon="mdi-eye" white label="white"/>
-      <au-button icon="mdi-eye" bordered large label="large"/>
-      <au-button white bordered label="white bordered"/>
-      <au-button shadow label="shadow"/>
-      <au-button icon="mdi-eye" link label="is link"/>
+      <au-button icon="mdi-eye" white transparent label="white transparent"/>
       <au-button icon="mdi-eye" link white label="is-link white icon"/>
+    </div>
+
+    <div class="d-flex" style="padding: 16px 0;">
+      <au-button label="default"/>
+      <au-button shadow label="shadow"/>
+      <au-button white bordered label="white bordered"/>
+      <au-button icon="mdi-eye" label="icon='mdi-eye'"/>
+      <au-button icon="mdi-eye" link label="is link"/>
       <au-button icon="mdi-eye" link red label="is-link red icon"/>
       <au-button
         red
@@ -55,11 +66,17 @@
       />
     </div>
 
+    <div class="d-flex coloured-background">
+      <au-button transparent label="transparent"/>
+      <au-button transparent icon="mdi-eye" label="icon"/>
+      <au-button transparent round icon="mdi-eye"/>
+    </div>
+
     <pre>&lt;au-button
+  tag: 'button | a | router-link'
+  type: 'button | submit | reset'
   to: [Object, String]
   href: String
-  tag: 'a | router-link | button ...'
-  type="button | submit | reset"
 
   icon: String - 'mdi-eye | icon-eye'
   label: String - текст кнопки
@@ -74,72 +91,15 @@
   shadow
   white
   red
-/&gt;</pre>
+  transparent
+  round
+&gt;
+  default slot - слот для кастомного содержимого кнопки
+  #icon - слот в левой части для кастомных иконок
+&lt;/au-button&gt;</pre>
   </div>
 
-  <h2 id="au-input">Поле ввода</h2>
-  <div class="demo-item">
-    <au-input
-      v-model="inputModel"
-      placeholder="placeholder"
-    />
-    <au-input
-      value="icon"
-      icon="mdi-eye"
-    />
-
-    <au-input
-      value="full-width"
-      icon="mdi-eye"
-      full-width
-    />
-
-    <au-input
-      value="small"
-      icon="mdi-eye"
-      small
-    />
-
-    <au-input
-      value="inputErrors"
-      icon="mdi-eye"
-      :inputErrors="[1]"
-    />
-
-    <au-input
-      value="disabled"
-      icon="mdi-eye"
-      disabled
-    />
-
-    <au-input
-      value="readonly"
-      icon="mdi-eye"
-      full-width
-      readonly
-    />
-
-    <pre>&lt;au-input
-  value: [String, Number, Array] {{ inputModel }}
-  placeholder: String
-  icon: String
-  name: String
-  input-errors: Array
-  type: String
-  mask: [String, Array, Function]
-
-  required
-  disabled
-  readonly
-  autofocus
-
-  full-width
-  small
-  inverse
-/&gt;
-
-#icon - slot для кастомного элемента в области иконки</pre>
-  </div>
+  <demo-inputs/>
 
   <h2 id="au-select">Выпадающий список</h2>
   <div class="demo-item">
@@ -206,12 +166,22 @@
       >
         Название
       </au-dropdown-button>
+
+      <au-dropdown-button
+        :list="[{ title: 'Элемент списка' }]"
+        large
+        white
+        icon="mdi-eye"
+      >
+        Название
+      </au-dropdown-button>
     </div>
 
     <pre>&lt;au-dropdown-button
   list: Array - [{ title, ... }]
   icon: String
   large
+  white
 &gt;
   Название (default slot)
 
@@ -245,6 +215,9 @@
   full-width
 /&gt;</pre>
   </div>
+
+  <h2 id="au-breadcrumbs">Хлебные крошки</h2>
+  <demo-breadcrumbs/>
 
   <h2 id="au-spinner">Лоадер/спиннер</h2>
   <div class="demo-item">
@@ -281,34 +254,7 @@
 &lt;/au-tabs&gt;</pre>
   </div>
 
-  <h2 id="au-table">Таблицы</h2>
-  <div class="demo-item">
-    <au-table
-      :list="tableData"
-      :columns="tableColumns"
-      :current-sort="currentSort"
-      no-data-text="По вашему запросу ничего не найдено"
-      selectable
-      @sort="sort"
-    >
-    </au-table>
-
-  <pre>&lt;au-table
-  list: Array - основные данные
-  columns: Array - список столбцоы
-  children-columns
-  children-property
-  selectable
-  is-reset-checkbox
-  is-loading
-  active-route-tracker: Array
-  no-data-text: String
-  current-sort: Object - default {} | { field: 'name', dir: 'asc' }
-  page-settings: Object
-&gt;
-  &lt;template &#35;item.title="&lcub; item &rcub;"&gt; - slot - содержимое ячеек в столбце title
-&lt;/au-table&gt;</pre>
-  </div>
+  <demo-tables/>
 
   <h2 id="au-pagination">Пагинация</h2>
   <div class="demo-item">
@@ -351,11 +297,19 @@
 
 <script>
 import Sidebar from './elements/sidebar.vue';
+import DemoTables from './elements/tables.vue';
+import DemoInputs from './elements/inputs.vue';
+import DemoBreadcrumbs from './elements/breadcrumbs.vue';
 
 export default {
   name: 'demo-page',
 
-  components: { Sidebar },
+  components: {
+    Sidebar,
+    DemoTables,
+    DemoInputs,
+    DemoBreadcrumbs,
+  },
 
   data() {
     return {
@@ -380,7 +334,6 @@ export default {
 
       // Demo-values
       isLoading: true,
-      inputModel: null,
       selectModel: null,
       selectListDemo: [
         { id: 1, title: 'Option One' },
@@ -394,117 +347,101 @@ export default {
         lastName: 'Ivanoff',
         isOnline: true,
       },
-
-      // Table
-      tableData: [
-        { name: 'Дмитрий' },
-        { name: 'Not-Дмитрий' },
-      ],
-      tableColumns: [
-        {
-          value: 'name',
-          name: 'Пользователь',
-          sortable: true,
-          iconName: 'icon-avatar',
-          width: 150,
-        },
-      ],
-      currentSort: { field: 'name', dir: 'desc' },
     };
-  },
-
-  methods: {
-    sort(sorting) {
-      this.currentSort = sorting;
-    },
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .demo-page {
   position: relative;
   display: flex;
-}
-
-.demo-content {
-  min-height: 100vh;
   width: 100%;
-  padding: 24px;
-  margin-left: 260px;
-  border-left: thin solid #e1e1e1;
-}
 
-p {
-  margin: 16px 0;
-}
-
-h1 {
-  font-family: Ruda, Helvetica, Arial, sans-serif;
-  font-weight: 500;
-  padding: 24px 0 22px;
-  font-size: 32px;
-  line-height: 32px;
-}
-
-h2 {
-  font-family: Ruda, Helvetica, Arial, sans-serif;
-  font-weight: 500;
-  padding: 32px 0 16px 0;
-  font-size: 24px;
-  line-height: 28px;
-}
-
-.demo-item {
-  .au-input,
-  .au-select {
-    margin-bottom: 8px;
+  .demo-content {
+    height: 100vh;
+    width: 100%;
+    padding: 24px;
+    border-left: thin solid #e1e1e1;
+    overflow-y: scroll;
   }
-}
 
-pre {
-  display: inline-block;
-  min-width: 240px;
-  max-height: 400px;
-  overflow-y: auto;
-  margin: 6px 12px 6px 0;
-  padding: 8px 48px 8px 12px;
-  border-radius: 10px;
-  background-color: #282C34;
-  color: #e9e9e9;
-  font-family: monospace;
-  font-size: 16px;
-
-  &::selection {
-    background-color: purple;
+  p {
+    margin: 12px 0;
   }
-}
 
-code {
-  padding: 4px 8px;
-  font-family: monospace;
-  font-size: 16px;
-  background-color: #282C34;
-  color: #e9e9e9;
-  border-radius: 5px;
-}
-
-.d-flex {
-  display: flex;
-  flex-wrap: wrap;
-
-  & > * {
-    margin-right: 16px;
+  h1 {
+    font-family: Ruda, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    padding: 24px 0 22px;
+    font-size: 32px;
+    line-height: 32px;
   }
-}
 
-.align-center {
-  align-items: center;
-}
+  h2 {
+    font-family: Ruda, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    padding: 32px 0 16px 0;
+    font-size: 24px;
+    line-height: 28px;
+  }
 
-.darker-background {
-  padding: 12px;
-  background-color: #f1f1f1;
-  border: thin solid #e1e1e1;
+  .demo-item {
+    .au-input,
+    .au-select {
+      margin-bottom: 8px;
+    }
+  }
+
+  pre {
+    display: inline-block;
+    min-width: 240px;
+    max-height: 400px;
+    overflow-y: auto;
+    margin: 6px 12px 6px 0;
+    padding: 8px 48px 8px 12px;
+    border-radius: 10px;
+    background-color: #282C34;
+    color: #e9e9e9;
+    font-family: monospace;
+    font-size: 16px;
+
+    &::selection {
+      background-color: purple;
+    }
+  }
+
+  code {
+    padding: 4px 8px;
+    font-family: monospace;
+    font-size: 16px;
+    background-color: #282C34;
+    color: #e9e9e9;
+    border-radius: 5px;
+  }
+
+  .d-flex {
+    display: flex;
+    flex-wrap: wrap;
+
+    & > * {
+      margin-right: 16px;
+    }
+  }
+
+  .align-center {
+    align-items: center;
+  }
+
+  .darker-background {
+    padding: 12px;
+    background-color: #999;
+    border-radius: 10px;
+  }
+  .coloured-background {
+    padding: 12px;
+    background-color: #3f6ada;
+    border-radius: 10px;
+  }
 }
 </style>
