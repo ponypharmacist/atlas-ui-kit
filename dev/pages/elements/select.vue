@@ -17,23 +17,26 @@
       id-field="id"
       multiselect
     />
+    <au-select :placeholder="null" noDataText="`:placeholder='null' - если нужен пустой плейсхолдер`" />
     <au-select
       value="inverse"
       inverse
     />
     <au-select
       value="disabled"
+      label="Label"
       disabled
     />
     <au-select
       value="small"
+      label="Label + small"
       small
     />
-    <au-select :placeholder="null" noDataText="`:placeholder='null' - если нужен пустой плейсхолдер`" />
 
     <pre>&lt;au-select
   value: [Number, String, Object, Array]
   list: Array
+  label: String
   placeholder: String | default: 'Выберите из списка' - null если хотим без
   no-data-text: String | default: 'Список пуст'
   id-field: String

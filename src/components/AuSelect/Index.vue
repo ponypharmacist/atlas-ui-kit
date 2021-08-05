@@ -4,6 +4,8 @@
     :class="classObject"
     :id="`au-select--${selectId}`"
   >
+    <label v-if="label">{{ label }}</label>
+
     <div
       :class="{ active: isActive }"
       class="au-select-selected"
@@ -107,6 +109,10 @@ export default {
       type: Array,
       default: () => ([]),
     },
+    label: {
+      type: String,
+      default: null,
+    },
     placeholder: {
       type: String,
       default: 'Выберите из списка',
@@ -156,7 +162,7 @@ export default {
   },
 
   data: () => ({
-    selectId: uniqueId('select'),
+    selectId: null,
     isActive: false,
     searchQuery: null,
     top: false,
@@ -171,6 +177,10 @@ export default {
       'to_correction',
     ],
   }),
+
+  created() {
+    this.selectId = uniqueId('select');
+  },
 
   computed: {
     classObject() {
@@ -324,15 +334,29 @@ export default {
   min-height: 40px;
   font-size: 14px;
 
+  label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 13px;
+    line-height: 16px;
+    font-family: inherit;
+    font-weight: 500;
+  }
+
   &.is-small {
     min-height: 32px;
     font-size: 12px;
 
+    label {
+      font-size: 12px;
+      line-height: 14px;
+    }
+
     .au-select-item,
     .au-select-selected {
       min-height: 32px;
-      margin-top: 5px;
-      margin-bottom: 5px;
+      // margin-top: 5px;
+      // margin-bottom: 5px;
     }
   }
 

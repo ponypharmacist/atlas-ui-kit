@@ -185,7 +185,7 @@ export default {
   justify-content: center;
   align-items: center;
   font-family: inherit;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   height: 32px;
   border-radius: 4px;

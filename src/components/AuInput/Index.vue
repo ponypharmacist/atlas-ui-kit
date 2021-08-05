@@ -7,10 +7,13 @@
     @mouseleave="$emit('mouseleave', $event)"
     @mousemove="$emit('mousemove', $event)"
   >
-    <div :class="{ 'has-icon': !!this.icon || this.$slots.icon }" class="input-content">
+    <label v-if="label" :for="name">{{ label }}</label>
+
+    <div :class="{ 'has-icon': !!this.icon || this.$slots.icon }" class="au-input-content">
       <slot name="icon"></slot>
 
       <au-icon
+        class="au-select-icon"
         :icon="icon"
         :size="small ? 14 : 16"
         :class="{ 'au-icon-error': hasErrors }"
@@ -34,9 +37,10 @@
         @focusin="isFocused = true"
         @focusout="isFocused = false"
       >
+
+      <slot name="suffix" />
     </div>
 
-    <slot name="suffix" />
   </div>
 </template>
 
@@ -61,6 +65,10 @@ export default {
   props: {
     value: {
       type: [String, Number, Array],
+      default: null,
+    },
+    label: {
+      type: String,
       default: null,
     },
     placeholder: {
@@ -172,40 +180,33 @@ export default {
 .au-input {
   position: relative;
   display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  height: 40px;
+  flex-direction: column;
   width: 120px;
-  border-radius: 4px;
-  border: 1px solid $gray-blue-border;
-  background-color: $light-gray;
-  transition: 0.3s;
 
-  &.is-disabled {
-    opacity: .5;
-    cursor: not-allowed;
+  label {
+    margin-bottom: 5px;
+    font-size: 13px;
+    line-height: 16px;
+    font-family: inherit;
+    font-weight: 500;
   }
 
-  &.is-inverse {
-    background-color: $white;
-  }
-
-  &.is-error {
-    border: 1px solid $red;
-    background-color: $red-background;
-  }
-
-  & .input-content {
+  .au-input-content {
     display: flex;
     align-items: center;
     padding: 10px 12px;
     width: 100%;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid $gray-blue-border;
+    background-color: $light-gray;
+    transition: 0.3s;
 
     &.has-icon {
       padding: 10px 12px 10px 44px;
     }
 
-    > .au-icon {
+    .au-select-icon {
       position: absolute;
       left: 16px;
     }
@@ -229,14 +230,36 @@ export default {
     }
   }
 
+  &.is-disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+
+  &.is-inverse {
+    .au-input-content {
+      background-color: $white;
+    }
+  }
+
+  &.is-error {
+    .au-input-content {
+      border: 1px solid $red;
+      background-color: $red-background;
+    }
+  }
+
   &.wrong {
-    border: 1px solid $red2;
-    box-shadow: 1px 0 0 2px rgba(220, 53, 69, 0.25);
+    .au-input-content {
+      border: 1px solid $red2;
+      box-shadow: 1px 0 0 2px rgba(220, 53, 69, 0.25);
+    }
   }
 
   &.is-focused {
-    border: 1px solid $blue;
-    box-shadow: unset;
+    .au-input-content {
+      border: 1px solid $blue;
+      box-shadow: unset;
+    }
   }
 
   &.is-full-width {
@@ -244,22 +267,26 @@ export default {
   }
 
   &.is-small {
-    height: 32px;
-    border-radius: 2px;
-
-    .input-content {
+    .au-input-content {
+      height: 32px;
       padding: 0 10px;
+      border-radius: 2px;
 
       &.has-icon {
         padding: 0 10px 0 32px;
       }
 
-      > .au-icon {
+      .au-select-icon {
         position: absolute;
         left: 12px;
         top: 50%;
         transform: translateY(-50%);
       }
+    }
+
+    label {
+      font-size: 12px;
+      line-height: 14px;
     }
 
     input {

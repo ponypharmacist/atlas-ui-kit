@@ -6,6 +6,18 @@
     <au-input
       v-model="inputModel"
       placeholder="placeholder"
+      label="Label"
+    />
+
+    <au-input
+      value="small"
+      icon="mdi-eye"
+      small
+    />
+    <au-input
+      v-model="inputModel"
+      label="Label small"
+      small
     />
     <au-input
       value="icon"
@@ -16,12 +28,6 @@
       value="full-width"
       icon="mdi-eye"
       full-width
-    />
-
-    <au-input
-      value="small"
-      icon="mdi-eye"
-      small
     />
 
     <au-input
@@ -49,12 +55,13 @@
       full-width
     >
       <template #suffix>
-        <au-icon icon="icon-avatar" :size="18" style="margin-right: 8px;"/>
+        <au-icon icon="icon-avatar" :size="18"/>
       </template>
     </au-input>
 
     <pre>&lt;au-input
   value: [String, Number, Array] {{ inputModel }}
+  label: String
   placeholder: String
   icon: String
   name: String

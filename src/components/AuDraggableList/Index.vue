@@ -63,6 +63,7 @@ export default {
   margin: 0 0 4px;
   color: #dcddde;
   background-color: #fbfcfd;
+  transition: color 0.15s linear;
   user-select: none;
   cursor: pointer;
 

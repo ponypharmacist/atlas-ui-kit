@@ -86,6 +86,7 @@ $default-size: 12px;
 
   // background-color: #fff;
   box-sizing: border-box;
+  transition: background-color 0.15s linear;
 
   &.au-icon-white {
     background-color: $white;
