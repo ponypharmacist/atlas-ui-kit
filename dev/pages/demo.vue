@@ -54,27 +54,7 @@ Vue.use(atlasUiKit);</pre>
 /&gt;</pre>
   </div>
 
-  <h2 id="au-tabs">Вкладки, табы</h2>
-  <div class="demo-item">
-    <au-tabs>
-      <au-tab-item :id="1" name="Непрочитанные">
-        Содержимое первой вкладки
-      </au-tab-item>
-      <au-tab-item :id="2" name="Все уведомления">
-        Содержимое вкладки номер два
-      </au-tab-item>
-    </au-tabs>
-
-  <pre>&lt;au-tabs&gt;
-  &lt;au-tab-item
-    id: Number | required
-    name: String | required
-    count: Number
-  &gt;
-    Содержимое первой вкладки
-  &lt;/au-tab-item&gt;
-&lt;/au-tabs&gt;</pre>
-  </div>
+  <demo-tabs/>
 
   <demo-tables/>
 
@@ -129,6 +109,7 @@ import DemoSelect from './elements/select.vue';
 import DemoDropdownButtons from './elements/dropdownButtons.vue';
 import DemoBreadcrumbs from './elements/breadcrumbs.vue';
 import DemoTables from './elements/tables.vue';
+import DemoTabs from './elements/tabs.vue';
 import DemoFilters from './elements/filters.vue';
 import DemoDraggableList from './elements/draggableList.vue';
 import DemoPopups from './elements/popups.vue';
@@ -146,6 +127,7 @@ export default {
     DemoDropdownButtons,
     DemoBreadcrumbs,
     DemoTables,
+    DemoTabs,
     DemoFilters,
     DemoDraggableList,
     DemoPopups,
