@@ -16,6 +16,8 @@ Vue.use(atlasUiKit);</pre>
 
   <demo-buttons/>
 
+  <demo-checkbox/>
+
   <demo-inputs/>
 
   <demo-select/>
@@ -23,6 +25,8 @@ Vue.use(atlasUiKit);</pre>
   <demo-dropdown-buttons/>
 
   <demo-filters/>
+
+  <demo-draggable-list/>
 
   <h2 id="au-color-picker">Пипетка</h2>
   <div class="demo-item">
@@ -119,12 +123,14 @@ Vue.use(atlasUiKit);</pre>
 import Sidebar from './elements/sidebar.vue';
 import DemoIcons from './elements/icons.vue';
 import DemoButtons from './elements/buttons.vue';
+import DemoCheckbox from './elements/checkbox.vue';
 import DemoInputs from './elements/inputs.vue';
 import DemoSelect from './elements/select.vue';
 import DemoDropdownButtons from './elements/dropdownButtons.vue';
 import DemoBreadcrumbs from './elements/breadcrumbs.vue';
 import DemoTables from './elements/tables.vue';
 import DemoFilters from './elements/filters.vue';
+import DemoDraggableList from './elements/draggableList.vue';
 import DemoPopups from './elements/popups.vue';
 
 export default {
@@ -134,12 +140,14 @@ export default {
     Sidebar,
     DemoIcons,
     DemoButtons,
+    DemoCheckbox,
     DemoInputs,
     DemoSelect,
     DemoDropdownButtons,
     DemoBreadcrumbs,
     DemoTables,
     DemoFilters,
+    DemoDraggableList,
     DemoPopups,
   },
 
@@ -150,12 +158,14 @@ export default {
         { title: 'Формы' },
         { title: 'Иконки', alias: 'au-icon' },
         { title: 'Кнопка', alias: 'au-button' },
+        { title: 'Чекбокс', alias: 'au-checkbox' },
         { title: 'Поле ввода', alias: 'au-input' },
         { title: 'Выпадающий список', alias: 'au-select' },
         { title: 'Кнопка-dropdown', alias: 'au-dropdown-button' },
         { title: 'Кнопка с выпадающим контентом', alias: 'au-dropdown-content-button' },
-        { title: 'Пипетка', alias: 'au-color-picker' },
         { title: 'Быстрые фильтры', alias: 'au-filters-resizable' },
+        { title: 'Список с ручной сортировкой', alias: 'au-draggable-list' },
+        { title: 'Пипетка', alias: 'au-color-picker' },
 
         { title: 'Вывод информации' },
         { title: 'Хлебные крошки', alias: 'au-breadcrumbs' },
@@ -163,8 +173,8 @@ export default {
         { title: 'Вкладки, табы', alias: 'au-tabs' },
         { title: 'Таблицы', alias: 'au-table' },
         { title: 'Пагинация', alias: 'au-pagination' },
-        { title: 'Поповеры', alias: 'au-user-popover' },
         { title: 'Поп-ап справа', alias: 'au-side-popup' },
+        { title: 'Поповеры', alias: 'au-user-popover' },
       ],
 
       // Demo-values

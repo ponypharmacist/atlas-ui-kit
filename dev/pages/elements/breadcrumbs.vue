@@ -65,8 +65,6 @@ export default {
 <style lang="scss" scoped>
 @import "../../../src/styles/partials/params";
 
-$icon-backarrow: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBkPSJNNDkyIDIzNkg2OC40NDJsNzAuMTY0LTY5LjgyNGM3LjgyOS03Ljc5MiA3Ljg1OS0yMC40NTUuMDY3LTI4LjI4NC03Ljc5Mi03LjgzLTIwLjQ1Ni03Ljg1OS0yOC4yODUtLjA2OGwtMTA0LjUwNCAxMDQtLjAxOC4wMTljLTcuODA5IDcuNzkyLTcuODM0IDIwLjQ5Ni0uMDAyIDI4LjMxNGwuMDE4LjAxOSAxMDQuNTA0IDEwNGM3LjgyOCA3Ljc5IDIwLjQ5MiA3Ljc2MyAyOC4yODUtLjA2OCA3Ljc5Mi03LjgyOSA3Ljc2Mi0yMC40OTItLjA2Ny0yOC4yODRMNjguNDQyIDI3Nkg0OTJjMTEuMDQ2IDAgMjAtOC45NTQgMjAtMjBzLTguOTU0LTIwLTIwLTIweiIvPjwvc3ZnPg==") no-repeat 50% 50% / contain;
-
 .au-breadcrumbs {
   display: flex;
   align-items: center;

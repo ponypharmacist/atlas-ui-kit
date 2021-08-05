@@ -35,6 +35,7 @@ export default {
 .demo-sidebar {
   flex: 0 0 auto;
   width: 260px;
+  max-height: 100vh;
   overflow-y: auto;
 
   ul {

@@ -17,7 +17,7 @@
       class="close"
       @click="onClose"
     >
-      <au-icon :size="18" icon="icon-close" />
+      <au-icon :size="24" icon="mdi-close" color="#888" />
     </div>
 
     <slot/>
@@ -123,7 +123,7 @@ export default {
     transition: transform 0.5s;
   }
 
-  &.close {
+  .close {
     position: absolute;
     top: 20px;
     right: 20px;

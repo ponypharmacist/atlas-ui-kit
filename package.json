@@ -32,7 +32,8 @@
     "v-mask": "^2.2.4",
     "v-tooltip": "^2.0.3",
     "verte": "^0.0.12",
-    "vue-clickaway": "^2.2.2"
+    "vue-clickaway": "^2.2.2",
+    "vuedraggable": "^2.24.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
