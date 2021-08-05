@@ -337,6 +337,7 @@ export default {
   label {
     display: inline-block;
     margin-bottom: 5px;
+    padding-left: 1px;
     font-size: 13px;
     line-height: 16px;
     font-family: inherit;

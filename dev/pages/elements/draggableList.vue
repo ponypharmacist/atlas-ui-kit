@@ -8,12 +8,17 @@
     @updateList="updateList"
   />
 
-  <!-- <pre>&lt;au-side-popup
-  open
-  @close
-&gt;
-  slot
-&lt;/au-side-popup&gt;</pre> -->
+  <pre>&lt;au-draggable-list
+  v-model: Array
+  @updateList
+/&gt;</pre>
+
+  <pre>items: [
+  {
+    active: true,
+    title: 'Название',
+  },
+]</pre>
 </div>
 
 </template>
@@ -25,11 +30,11 @@ export default {
   data() {
     return {
       items: [
-        { value: true, title: 'Люди' },
-        { value: true, title: 'События' },
-        { value: true, title: 'Организации' },
-        { value: false, title: 'Регионы' },
-        { value: false, title: 'Страны' },
+        { active: true, title: 'Люди' },
+        { active: true, title: 'События' },
+        { active: true, title: 'Организации' },
+        { active: false, title: 'Регионы' },
+        { active: false, title: 'Страны' },
       ],
     };
   },

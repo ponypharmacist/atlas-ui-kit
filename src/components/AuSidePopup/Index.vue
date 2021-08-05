@@ -11,16 +11,20 @@
     @mousedown.prevent="onResize"
   />
 
-  <div class="au-side-popup__content">
-    <div
-      v-if="!isLoading"
-      class="close"
-      @click="onClose"
-    >
-      <au-icon :size="24" icon="mdi-close" color="#888" />
-    </div>
+  <div
+    v-if="!isLoading"
+    class="close"
+    @click="onClose"
+  >
+    <au-icon :size="24" icon="mdi-close" color="#888" />
+  </div>
 
+  <div class="au-side-popup__content">
     <slot/>
+  </div>
+
+  <div v-show="$slots.footer" class="au-side-popup-footer">
+    <slot name="footer"/>
   </div>
 </div>
 
@@ -139,8 +143,9 @@ export default {
 
 .au-side-popup__content {
   position: relative;
-  height: 100vh;
-  padding: ($mm-value * 15) + px ($mm-value * 8) + px ($mm-value * 15) + px;
+  height: calc(100vh - 122px);
+  padding: 0 32px;
+  margin: 50px 0 72px;
   overflow-x: hidden;
   overflow-y: scroll;
 
@@ -178,5 +183,16 @@ export default {
   &:hover {
     border-left: 1px solid $blue !important;
   }
+}
+
+.au-side-popup-footer {
+  position: absolute;
+  width: 100%;
+  min-height: 72px;
+  bottom: 0;
+  left: 0;
+  padding: 20px 32px;
+  border-top: thin solid #ebeff6;
+  background-color: #fff;
 }
 </style>

@@ -270,6 +270,10 @@ export default {
     align-items: center;
   }
 
+  .self-right {
+    margin-left: auto;
+  }
+
   .darker-background {
     padding: 12px;
     background-color: #999;

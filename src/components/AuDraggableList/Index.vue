@@ -6,11 +6,11 @@
       v-for="(item, index) in itemsList"
       :key="`draggable-${index}`"
       class="au-draggable-list-item"
-      :class="{ active: itemsList[index].value }"
+      :class="{ active: itemsList[index].active }"
     >
       <au-icon class="icon-drag" icon="mdi-drag-vertical" :size="24" color="#d8d8d8"/>
       <span class="au-draggable-item-title">{{ item.title }}</span>
-      <au-checkbox v-model="itemsList[index].value"/>
+      <au-checkbox v-model="itemsList[index].active"/>
     </div>
   </draggable>
 </div>
@@ -74,12 +74,18 @@ export default {
 
   .icon-drag {
     position: absolute;
-    cursor: move;
     left: -20px;
+    cursor: move;
+    opacity: 0;
+    transition: opacity 0.15s linear;
   }
 
   &:hover {
     color: $blue;
+
+    .icon-drag {
+      opacity: 1;
+    }
 
     &:before {
       opacity: 1;
