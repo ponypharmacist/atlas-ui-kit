@@ -11,6 +11,7 @@ yarn add @ponypharmacist/atlas-ui-kit
 
 1. В файле main.js
 ```
+import '@fortawesome/fontawesome-free/css/all.css'; - для иконок fontawesome
 import atlasUiKit from '@ponypharmacist/atlas-ui-kit';
 
 Vue.use(atlasUiKit);

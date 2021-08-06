@@ -21,6 +21,12 @@
        - цвет, если не указан: иконка имеет родной цвет</div>
     </div>
 
+    <div class="d-flex align-center" style="margin-bottom: 6px;">
+      <au-icon icon="fa-camera-retro" :color="'#6c59ff'" :size="24"/>
+      <div> <code>&lt;au-icon <b>icon="fa-camera-retro"</b> color="#6c59ff"/&gt;</code>
+       - иконки из набора FontAwesome (подключить css в main.js не забудьте)</div>
+    </div>
+
     <pre>&lt;au-icon
   icon: String
   title: String

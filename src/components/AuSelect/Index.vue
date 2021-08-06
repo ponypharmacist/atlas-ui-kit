@@ -69,7 +69,7 @@
         class="au-select-item"
         @click="onItemClick(item)"
       >
-        {{ getValueField(item) }}
+        <slot name="item" :item="item">{{ getValueField(item) }}</slot>
       </li>
     </ul>
   </div>

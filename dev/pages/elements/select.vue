@@ -56,7 +56,9 @@
   tiny
 
   @change
-/&gt;</pre>
+/&gt;
+
+#item={ item } - slot, кастомный шаблон для элемента списка</pre>
   </div>
 </div>
 

@@ -117,7 +117,7 @@ export default {
           job: 'Маркетолог широкого профиля',
           region: 'г. Москва',
           views: 'Нейтральный',
-          version: 'от 09.08.2021',
+          version: 'Версия 3 от 09.08.2021',
         },
         {
           selected: false,
@@ -127,7 +127,7 @@ export default {
           job: 'Методолог',
           region: 'г. Москва',
           views: 'Нейтральный',
-          version: 'от 09.08.2021',
+          version: 'Версия 3 от 09.08.2021',
         },
         {
           selected: false,
@@ -137,7 +137,7 @@ export default {
           job: 'Методолог',
           region: 'г. Москва',
           views: 'Нейтральный',
-          version: 'от 09.08.2021',
+          version: 'Версия 3 от 09.08.2021',
         },
         {
           selected: false,
@@ -147,7 +147,7 @@ export default {
           job: 'Методолог',
           region: 'г. Москва',
           views: 'Нейтральный',
-          version: 'от 09.08.2021',
+          version: 'Версия 3 от 09.08.2021',
         },
         {
           selected: false,
@@ -157,7 +157,7 @@ export default {
           job: 'Методолог',
           region: 'г. Москва',
           views: 'Нейтральный',
-          version: 'от 09.08.2021',
+          version: 'Версия 3 от 09.08.2021',
         },
         {
           selected: false,
@@ -167,7 +167,7 @@ export default {
           job: 'Методолог',
           region: 'г. Москва',
           views: 'Нейтральный',
-          version: 'от 09.08.2021',
+          version: 'Версия 3 от 09.08.2021',
         },
         {
           selected: false,
@@ -177,7 +177,7 @@ export default {
           job: 'Методолог',
           region: 'г. Москва',
           views: 'Нейтральный',
-          version: 'от 09.08.2021',
+          version: 'Версия 3 от 09.08.2021',
         },
         {
           selected: false,
@@ -187,7 +187,7 @@ export default {
           job: 'Методолог',
           region: 'г. Москва',
           views: 'Нейтральный',
-          version: 'от 09.08.2021',
+          version: 'Версия 3 от 09.08.2021',
         },
         {
           selected: false,
@@ -197,7 +197,7 @@ export default {
           job: 'Методолог',
           region: 'г. Москва',
           views: 'Нейтральный',
-          version: 'от 09.08.2021',
+          version: 'Версия 3 от 09.08.2021',
         },
         {
           selected: false,
@@ -207,7 +207,7 @@ export default {
           job: 'Методолог',
           region: 'г. Москва',
           views: 'Нейтральный',
-          version: 'от 09.08.2021',
+          version: 'Версия 3 от 09.08.2021',
         },
       ],
 
