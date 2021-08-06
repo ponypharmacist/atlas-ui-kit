@@ -28,9 +28,13 @@
       disabled
     />
     <au-select
-      value="small"
+      value="small: 32px"
       label="Label + small"
       small
+    />
+    <au-select
+      value="tiny: 24px"
+      tiny
     />
 
     <pre>&lt;au-select
@@ -49,7 +53,7 @@
   disabled
   inverse
   small
-  large - сейчас не поддерживается
+  tiny
 
   @change
 /&gt;</pre>

@@ -147,15 +147,15 @@ export default {
       type: Boolean,
       default: false,
     },
-    small: {
-      type: Boolean,
-      default: false,
-    },
     inverse: {
       type: Boolean,
       default: false,
     },
-    large: {
+    small: {
+      type: Boolean,
+      default: false,
+    },
+    tiny: {
       type: Boolean,
       default: false,
     },
@@ -187,7 +187,7 @@ export default {
       return {
         [this.$options.name]: true,
         'is-small': this.small,
-        'is-large': this.large,
+        'is-tiny': this.tiny,
         'is-inverse': this.inverse,
         'is-disabled': this.disabled,
       };
@@ -359,6 +359,21 @@ export default {
       min-height: 32px;
       // margin-top: 5px;
       // margin-bottom: 5px;
+    }
+  }
+
+  &.is-tiny {
+    min-height: 24px;
+    font-size: 12px;
+
+    label {
+      font-size: 12px;
+      line-height: 14px;
+    }
+
+    .au-select-item,
+    .au-select-selected {
+      min-height: 24px;
     }
   }
 

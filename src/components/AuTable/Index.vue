@@ -74,6 +74,25 @@
         </td>
       </tr>
 
+      <!-- Если разрешены массовые действия -->
+      <tr class="mass-actions">
+        <td v-if="selectable && pageContent.length" class="checkbox-cell">
+          <div class="cell-content">
+            <au-checkbox
+              :value="selectionSummary"
+              :partial="selectionSummaryPartial"
+              @click.native="$emit('selectAll')"
+            />
+          </div>
+        </td>
+
+        <td :colspan="columns.length">
+          <div class="cell-content">
+            <slot name="massactions"/>
+          </div>
+        </td>
+      </tr>
+
       <!-- Если ничего не нашли/не нафильтровали -->
       <tr>
         <td
@@ -277,6 +296,20 @@ export default {
   th, td {
     padding: 0;
     vertical-align: middle;
+  }
+
+  .mass-actions {
+    td {
+      border: 1px solid #ebeff6;
+      background-color: #f0f4fb;
+      transition: background-color 0.15s linear;
+      cursor: pointer;
+    }
+    td:not(:last-child) {
+      border-right: 0;
+    }
+    td:first-child { border-radius: 4px 0 0 4px; }
+    td:last-child {  border-radius: 0 4px 4px 0; }
   }
 
   .checkbox-cell {

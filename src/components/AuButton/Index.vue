@@ -108,6 +108,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    tiny: {
+      type: Boolean,
+      default: false,
+    },
     shadow: {
       type: Boolean,
       default: false,
@@ -150,6 +154,7 @@ export default {
         'is-round': this.round,
         'is-full-width': this.fullWidth,
         'is-large': this.large,
+        'is-tiny': this.tiny,
         'is-link': this.link,
         'is-loading': this.isLoading,
         disabled: this.disabled,
@@ -289,6 +294,11 @@ export default {
     height: 40px;
   }
 
+  &.is-tiny {
+    font-size: 12px;
+    height: 24px;
+  }
+
   &.is-bordered {
     border: 1px solid $gray-blue-border;
     transition: border-color .2s, color .2s, background-color .2s;
@@ -370,6 +380,10 @@ export default {
 
     &.is-large {
       width: 40px;
+    }
+
+    &.is-tiny {
+      width: 24px;
     }
 
     .au-icon {

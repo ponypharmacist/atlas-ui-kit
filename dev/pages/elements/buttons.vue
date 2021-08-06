@@ -26,6 +26,12 @@
       />
     </div>
 
+    <div class="d-flex" style="padding: 16px 0;">
+      <au-button tiny label="tiny, 24px"/>
+      <au-button label="default"/>
+      <au-button large label="large, 40px"/>
+    </div>
+
     <div class="d-flex coloured-background">
       <au-button transparent label="transparent"/>
       <au-button transparent icon="mdi-eye" label="icon"/>
@@ -48,6 +54,7 @@
   full-width
   bordered
   large
+  tiny
   shadow
   white
   red

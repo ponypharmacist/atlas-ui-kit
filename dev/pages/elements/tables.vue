@@ -21,6 +21,10 @@
       <!-- <template #item.name="{ item }">
         {{ item.key }}
       </template> -->
+      <!-- <template #massactions></template> -->
+      <template #massactions>
+       [ Инструменты для массовых действий ]
+      </template>
     </au-table>
 
   <pre>&lt;au-table
@@ -41,8 +45,9 @@
   is-loading - ToDo: старое свойство
   page-settings: Object - ToDo: старое свойство
 &gt;
-  &lt;template &#35;header.title="&lcub; item &rcub;"&gt; - slot - содержимое TH в столбце title
-  &lt;template &#35;item.title="&lcub; item &rcub;"&gt; - slot - содержимое ячеек в столбце title
+  &lt;template &#35;header.title="&lcub; item &rcub;"&gt; - slot, содержимое шапки столбца title
+  &lt;template &#35;item.title="&lcub; item &rcub;"&gt;   - slot, содержимое ячеек в столбце title
+  &lt;template &#35;massactions&gt; - slot, для массовых действий и кнопок с ними связанных
 &lt;/au-table&gt;</pre>
 
   <p>Столбцы:</p>
