@@ -17,33 +17,6 @@
         class="block-rights-tip__popover"
       >
         <span>Недоступные действия</span>
-        <div
-          v-for="(data, key) in blockedTransitions"
-          class="block-rights-tip__item"
-          :key="key"
-          @mouseenter="showPopover(key)"
-          @mouseleave="closePopover(null)"
-        >
-          {{data.transition.title}}
-          <au-icon
-            icon="icon-lock"
-            class="block-rights-lock icon"
-            :size="14"
-          />
-          <div
-            v-if="data.messages"
-            :class="['block-rights-tip__item__message', {
-              active: showInnerPopover === key
-            }]"
-          >
-            <p
-              v-for="(message, key) in data.messages"
-              :key="key"
-            >
-              {{message}}
-            </p>
-          </div>
-        </div>
       </div>
     </v-popover>
   </div>

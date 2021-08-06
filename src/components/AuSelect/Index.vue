@@ -332,6 +332,7 @@ export default {
   position: relative;
   width: auto;
   min-height: 40px;
+  min-width: 60px;
   font-size: 14px;
 
   label {

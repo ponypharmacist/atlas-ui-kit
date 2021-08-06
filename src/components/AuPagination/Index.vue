@@ -1,48 +1,58 @@
 <template>
   <nav :class="$options.name">
-    <a
-      v-if="false"
-      :class="{ disabled: page === 1 }"
-      class="au-pagination__item start"
-      @click.prevent="$emit('change', 1)"
-    >
-      <au-icon :size="10" icon="icon-arrow-double" />
-    </a>
+    <div class="au-pagination-left">
+      <a
+        v-if="pagesCount > 5"
+        :class="{ disabled: page === 1 }"
+        class="au-pagination-item start"
+        @click.prevent="$emit('changePage', 1)"
+      />
 
-    <a
-      v-if="false"
-      :class="{ disabled: page === 1 }"
-      class="au-pagination__item prev"
-      @click.prevent="$emit('change', page - 1)"
-    >
-      <au-icon :size="10" icon="icon-arrow" />
-    </a>
+      <a
+        v-if="pagesCount > 5"
+        :class="{ disabled: page === 1 }"
+        class="au-pagination-item prev"
+        @click.prevent="$emit('changePage', page - 1)"
+      />
 
-    <a
-      v-for="pageItem in paginationItems"
-      :key="pageItem"
-      :class="{ active: pageItem === page, disabled: pageItem === '...' }"
-      class="au-pagination__item"
-      href="#"
-      v-text="pageItem"
-      @click="$emit('change', pageItem)"
-    />
+      <a
+        v-for="pageItem in paginationItems"
+        :key="pageItem"
+        :class="{ active: pageItem === page, disabled: pageItem === '...' }"
+        class="au-pagination-item"
+        href="#"
+        v-text="pageItem"
+        @click="$emit('changePage', pageItem)"
+      />
 
-    <a
-      :class="{ disabled: page + 1 > pagesCount }"
-      class="au-pagination__item next"
-      @click.prevent="$emit('change', page + 1)"
-    >
-      <au-icon :size="10" icon="icon-arrow" />
-    </a>
+      <a
+        :class="{ disabled: page + 1 > pagesCount }"
+        class="au-pagination-item next"
+        @click.prevent="$emit('changePage', page + 1)"
+      />
 
-    <a
-      :class="{ disabled: page === pagesCount }"
-      class="au-pagination__item end"
-      @click.prevent="$emit('change', pagesCount)"
-    >
-      <au-icon :size="10" icon="icon-arrow-double" />
-    </a>
+      <a
+        :class="{ disabled: page === pagesCount }"
+        class="au-pagination-item end"
+        @click.prevent="$emit('changePage', pagesCount)"
+      />
+    </div>
+
+    <div class="au-pagination-center">
+      Показаны записи с {{ (page - 1) * perPage + 1 }}
+       по {{ page * perPage }}
+       из {{ total }}
+    </div>
+
+    <div class="au-pagination-right">
+      <au-select
+        v-model="perPageSelection"
+        :list="perPageOptions.filter((o) => o <= total)"
+        small
+        close-on-select
+        @change="perPageChange"
+      />
+    </div>
   </nav>
 </template>
 
@@ -67,6 +77,13 @@ export default {
       type: Number,
       default: null,
     },
+  },
+
+  data() {
+    return {
+      perPageSelection: 5,
+      perPageOptions: [5, 10, 25, 50],
+    };
   },
 
   computed: {
@@ -97,18 +114,29 @@ export default {
       return result;
     },
   },
+
+  methods: {
+    perPageChange(num) {
+      this.$emit('changePerPage', num);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../../styles/partials/params";
-@import "../../styles/partials/mixins";
 
 .au-pagination {
   display: flex;
   align-items: center;
 }
-.au-pagination__item {
+
+.au-pagination-left {
+  display: flex;
+  align-items: center;
+}
+
+.au-pagination-item {
   position: relative;
   display: flex;
   justify-content: center;
@@ -121,6 +149,7 @@ export default {
   width: 32px;
   height: 32px;
   transition: background-color 0.3s;
+  cursor: pointer;
 
   &:first-child {
     border-left: 1px solid $gray-blue-border;
@@ -129,6 +158,7 @@ export default {
   &.active {
     background-color: $light-gray;
     pointer-events: none;
+    cursor: default;
   }
 
   &.disabled {
@@ -141,11 +171,62 @@ export default {
     color: $blue;
   }
 
+  &.next,
+  &.end,
+  &.prev,
+  &.start {
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      background-color: #000;
+    }
+
+    &:hover::before {
+      background-color: $blue;
+    }
+
+    &.disabled::before {
+      background-color: #aaa;
+    }
+  }
+
+  &.next,
+  &.prev {
+    &:before {
+      width: 6px;
+      height: 10px;
+      -webkit-mask: $icon-arrow;
+      mask: $icon-arrow;
+    }
+  }
+
+  &.end,
+  &.start {
+    &:before {
+      width: 12px;
+      height: 10px;
+      -webkit-mask: $icon-arrow-double;
+      mask: $icon-arrow-double;
+    }
+  }
+
   &.start,
   &.prev {
-    ::v-deep .icon {
+    &:before {
       transform: rotate(180deg);
     }
   }
 }
+
+.au-pagination-center {
+  margin: 0 auto;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+}
+// .au-pagination-right {
+//   margin: 0 0 0 auto;
+// }
 </style>

@@ -71,6 +71,8 @@ Vue.use(atlasUiKit);</pre>
   per-page
   toptal
   pages-count
+  @changePage - возвращает новое значение страницы
+  @changePerPage - новый размер страницы
 /&gt;</pre>
   </div>
 

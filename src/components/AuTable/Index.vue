@@ -4,6 +4,7 @@
   <table>
     <thead>
       <tr>
+        <!-- Selectable - добавляем чекбокс -->
         <th v-if="selectable && pageContent.length" class="checkbox-cell">
           <div class="cell-content">
             <au-checkbox/>
@@ -13,10 +14,13 @@
         <th
           v-for="column in columns"
           :key="`column-${column.key}`"
+          :style="{ width: column.width ? column.width + 'px' : null }"
           @click="onColumnClick(column)"
         >
           <div class="cell-content">
-            <span>{{ column.title }}</span>
+            <slot :name="`header.${column.key}`" :item="column">
+              <span>{{ column.title }}</span>
+            </slot>
 
             <!-- Сортировка -->
             <div
@@ -46,7 +50,7 @@
           v-for="column in columns"
           :key="`table-cell-${index}-${column.key}`"
         >
-          <div class="cell-content">
+          <div class="cell-content" :class="`align-${column.align || 'unset'}`">
             <slot
               :name="`item.${column.key}`"
               :item="row"
@@ -72,10 +76,12 @@
 
   <!-- Пагинация -->
   <au-pagination
-    :page="1"
-    :per-page="5"
-    :total="45"
-    :pages-count="9"
+    :page="pageCurrent"
+    :per-page="itemsPerPage"
+    :total="items.length"
+    :pages-count="pagesCount"
+    @changePage="changePage"
+    @changePerPage="changePerPage"
   />
 </div>
 </template>
@@ -105,14 +111,14 @@ export default {
       type: Object,
       default: () => {},
     },
-    pageCurrent: {
-      type: Number,
-      default: 1,
-    },
-    itemsPerPage: {
-      type: Number,
-      default: 5,
-    },
+    // pageCurrent: {
+    //   type: Number,
+    //   default: 1,
+    // },
+    // itemsPerPage: {
+    //   type: Number,
+    //   default: 5,
+    // },
     // Оформление
     noDataText: {
       type: String,
@@ -120,9 +126,26 @@ export default {
     },
   },
 
+  data() {
+    return {
+      pageCurrent: 1,
+      itemsPerPage: 5,
+    };
+  },
+
   computed: {
     sortableColumns() {
       return this.columns.filter((c) => c.sortable);
+    },
+
+    iconSort() {
+      return (column) => {
+        const sameKey = this.sort.key === (column.sortKey || column.key);
+
+        if (sameKey && this.sort.direction === 'asc') return 'icon-sort-asc';
+        if (sameKey && this.sort.direction === 'desc') return 'icon-sort-desc';
+        return 'icon-sort';
+      };
     },
 
     // Выделяем содержимое текущей страницы из списка элементов
@@ -131,6 +154,10 @@ export default {
       const endAt = (this.pageCurrent) * this.itemsPerPage;
 
       return this.items.slice(startAt, endAt);
+    },
+
+    pagesCount() {
+      return Math.ceil(this.items.length / this.itemsPerPage, 10);
     },
   },
 
@@ -163,13 +190,14 @@ export default {
       this.$emit('runSort', { ...sort });
     },
 
-    iconSort(column) {
-      const sameKey = this.sort.key === (column.sortKey || column.key);
+    // Пагинация
+    changePage(page) {
+      this.pageCurrent = page;
+    },
 
-      if (sameKey && this.sort.direction === 'asc') return 'icon-sort-asc';
-      if (sameKey && this.sort.direction === 'desc') return 'icon-sort-desc';
-
-      return 'icon-sort';
+    changePerPage(perPage) {
+      this.pageCurrent = 1;
+      this.itemsPerPage = perPage;
     },
   },
 };
@@ -232,6 +260,10 @@ export default {
     padding: 8px 11px;
     font-size: 12px;
     line-height: 16px;
+
+    &.align-left { justify-content: flex-start; }
+    &.align-right { justify-content: flex-end; }
+    &.align-center { justify-content: center; }
   }
 
   .not-found {

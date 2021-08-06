@@ -11,31 +11,39 @@
       selectable
       @runSort="sort"
     >
+      <!-- <template #header.name="{ item }">
+        {{ item.key }}
+      </template> -->
+      <!-- <template #item.name="{ item }">
+        {{ item.key }}
+      </template> -->
     </au-table>
 
   <pre>&lt;au-table
-  list: Array - основные данные
-  columns: Array - список столбцоы
-  children-columns
-  children-property
+  items: Array - данные
+  columns: Array - список столбцов
+  sort: Object - default {} | { key: 'name', direction: 'asc' }
   selectable
+
+  no-data-text: String
+
+  @runSort - срабатывает при изменении сортировки столбцов
+
   is-reset-checkbox
   is-loading
-  active-route-tracker: Array
-  no-data-text: String
-  current-sort: Object - default {} | { field: 'name', dir: 'asc' }
   page-settings: Object
 &gt;
+  &lt;template &#35;header.title="&lcub; item &rcub;"&gt; - slot - содержимое TH в столбце title
   &lt;template &#35;item.title="&lcub; item &rcub;"&gt; - slot - содержимое ячеек в столбце title
 &lt;/au-table&gt;</pre>
 
   <p>Столбцы:</p>
   <pre>tableColumns: [{
-  value: 'name',
-  name: 'Пользователь',
+  key: 'name',
+  title: 'Пользователь',
   sortable: true,
   iconName: 'icon-avatar',  - иконка вместо имени столбца
-  width: 10,                - в процентах % от ширины таблицы
+  width: 10,                - в px
   align: 'center'
 }]</pre>
   </div>
@@ -72,16 +80,16 @@ export default {
       tableData: [
         {
           id: 1,
-          name: 'Абаджян Артур Грайрович',
+          name: 'Иванович Иван Иванов',
           birthDate: '12.08.1978',
-          job: 'Методолог',
+          job: 'Маркетолог широкого профиля',
           region: 'г. Москва',
           views: 'Нейтральный',
           version: 'от 09.08.2021',
         },
         {
           id: 2,
-          name: 'Абазов Хадис Владимирович',
+          name: 'Петров Петр Петрович',
           birthDate: '12.08.1978',
           job: 'Методолог',
           region: 'г. Москва',
@@ -90,7 +98,7 @@ export default {
         },
         {
           id: 3,
-          name: 'Абакаров Абакар Рабаданович',
+          name: 'Сидорович Семен Сидоров',
           birthDate: '12.08.1978',
           job: 'Методолог',
           region: 'г. Москва',
@@ -99,7 +107,7 @@ export default {
         },
         {
           id: 4,
-          name: 'Абакаров Ибрагим Лулуевич',
+          name: 'Пупкин Василий Иванович',
           birthDate: '12.08.1978',
           job: 'Методолог',
           region: 'г. Москва',
@@ -108,7 +116,7 @@ export default {
         },
         {
           id: 5,
-          name: 'Абасмирзоев Заур Шидибегович',
+          name: 'Иванова Елена Ивановна',
           birthDate: '12.08.1978',
           job: 'Методолог',
           region: 'г. Москва',
@@ -117,7 +125,7 @@ export default {
         },
         {
           id: 6,
-          name: 'Абасов Магомедмирза Сераджунович',
+          name: 'Петрова Зинаида Петровна',
           birthDate: '12.08.1978',
           job: 'Методолог',
           region: 'г. Москва',
@@ -126,7 +134,7 @@ export default {
         },
         {
           id: 7,
-          name: 'Абашев Альмир Рашидович',
+          name: 'Сидорова Сайра Семеновна',
           birthDate: '12.08.1978',
           job: 'Методолог',
           region: 'г. Москва',
@@ -135,7 +143,7 @@ export default {
         },
         {
           id: 8,
-          name: 'Абдуллаев Абдул Рамазанович',
+          name: 'Собакевич Игорь Владимирович',
           birthDate: '12.08.1978',
           job: 'Методолог',
           region: 'г. Москва',
@@ -144,7 +152,7 @@ export default {
         },
         {
           id: 9,
-          name: 'Абракова Фатима Расуловна',
+          name: 'Груздев Полезай Вкузович',
           birthDate: '12.08.1978',
           job: 'Методолог',
           region: 'г. Москва',
@@ -153,7 +161,7 @@ export default {
         },
         {
           id: 10,
-          name: 'Абрамович Александра Михайловна',
+          name: 'Серый Гэндальф Сауронович',
           birthDate: '12.08.1978',
           job: 'Методолог',
           region: 'г. Москва',
@@ -168,11 +176,11 @@ export default {
         { key: 'job', title: 'Должность', filterable: true },
         { key: 'region', title: 'Регион' },
         { key: 'views', title: 'Позиция' },
-        { key: 'version', title: 'Версия страницы' },
-        { key: 'actions', title: 'Действия' },
+        { key: 'version', title: 'Версия страницы', align: 'right' },
+        { key: 'actions', title: 'Действия', iconName: 'icon-avatar' },
       ],
 
-      currentSort: { field: 'name', dir: 'desc' },
+      currentSort: { key: 'name', direction: 'desc' },
     };
   },
 

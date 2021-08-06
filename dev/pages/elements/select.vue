@@ -50,6 +50,8 @@
   inverse
   small
   large - сейчас не поддерживается
+
+  @change
 /&gt;</pre>
   </div>
 </div>
