@@ -134,6 +134,7 @@ export default {
 .au-pagination-left {
   display: flex;
   align-items: center;
+  margin-right: auto;
 }
 
 .au-pagination-item {
@@ -226,7 +227,7 @@ export default {
   line-height: 16px;
   font-weight: 500;
 }
-// .au-pagination-right {
-//   margin: 0 0 0 auto;
-// }
+.au-pagination-right {
+  margin-left: auto;
+}
 </style>

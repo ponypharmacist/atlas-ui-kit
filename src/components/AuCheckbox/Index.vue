@@ -20,6 +20,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    partial: {
+      type: Boolean,
+      default: false,
+    },
     disabled: {
       type: Boolean,
       default: false,
@@ -42,9 +46,10 @@ export default {
     classObject() {
       return {
         [this.$options.name]: true,
+        partial: this.partial,
+        disabled: this.disabled,
         'label-left': this.labelLeft,
         'full-width': this.fullWidth,
-        disabled: this.disabled,
       };
     },
 
@@ -136,6 +141,24 @@ export default {
     &.label-left {
       label {
         margin: 0 auto 0 0;
+      }
+    }
+  }
+
+  &.partial {
+    .checkbox {
+      border-color: #d4dce6;
+      background-color: #ebf2f7;
+      background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+
+      &:before {
+        -webkit-mask: $icon-check;
+        mask: $icon-check;
+        background-color: #bdc6d6;
+      }
+
+      &:hover {
+        border-color: $blue;
       }
     }
   }

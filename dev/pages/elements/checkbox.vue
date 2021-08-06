@@ -19,6 +19,13 @@
     </div>
     <div class="checkbox-wrap">
       <au-checkbox
+        :value="checkboxTrue"
+        label="partial"
+        partial
+      />
+    </div>
+    <div class="checkbox-wrap">
+      <au-checkbox
         v-model="checkboxTrue"
         label="full-width"
         full-width
@@ -42,6 +49,7 @@
 
     <pre>&lt;au-checkbox
   v-model: Boolean
+  partial
   label: String
   label-left
   full-width

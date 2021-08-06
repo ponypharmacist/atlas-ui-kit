@@ -1,13 +1,26 @@
 <template>
 
 <div class="au-table">
+  <au-icon
+    v-if="settingsIcon"
+    class="au-table-settings"
+    icon="mdi-cog"
+    :size="16"
+    color="#628ec0"
+    @click.native="$emit('settings')"
+  />
+
   <table>
     <thead>
       <tr>
         <!-- Selectable - добавляем чекбокс -->
         <th v-if="selectable && pageContent.length" class="checkbox-cell">
           <div class="cell-content">
-            <au-checkbox/>
+            <au-checkbox
+              :value="selectionSummary"
+              :partial="selectionSummaryPartial"
+              @click.native="$emit('selectAll')"
+            />
           </div>
         </th>
 
@@ -42,7 +55,7 @@
       >
         <td v-if="selectable" class="checkbox-cell">
           <div class="cell-content">
-            <au-checkbox/>
+            <au-checkbox :value="row.selected" @input="$emit('selectOne', row.id)"/>
           </div>
         </td>
 
@@ -106,6 +119,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    settingsIcon: {
+      type: Boolean,
+      default: false,
+    },
     // Внешние настройки пагинации и сортировки
     sort: {
       type: Object,
@@ -134,6 +151,19 @@ export default {
   },
 
   computed: {
+    selectionSummary() {
+      const selectedCount = this.items.filter((item) => item.selected).length;
+
+      if (selectedCount === this.items.length) return true;
+      return false;
+    },
+
+    selectionSummaryPartial() {
+      const selectedCount = this.items.filter((item) => item.selected).length;
+      return !!selectedCount && selectedCount < this.items.length;
+    },
+
+    // Сортировка
     sortableColumns() {
       return this.columns.filter((c) => c.sortable);
     },
@@ -208,6 +238,7 @@ export default {
 
 // Таблица
 .au-table {
+  position: relative;
 
   table {
     width: 100%;
@@ -245,12 +276,11 @@ export default {
 
   th, td {
     padding: 0;
-    vertical-align: top;
+    vertical-align: middle;
   }
 
   .checkbox-cell {
     width: 38px;
-    text-align: center;
   }
 
   .cell-content {
@@ -272,6 +302,17 @@ export default {
 
   .column-sorting {
     margin-left: auto;
+  }
+}
+
+.au-table-settings {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $blue!important;
   }
 }
 </style>
