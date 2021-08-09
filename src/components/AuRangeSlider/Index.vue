@@ -29,8 +29,6 @@
 
 <script>
 import VueSlider from 'vue-slider-component/dist-css/vue-slider-component.umd.min';
-import 'vue-slider-component/dist-css/vue-slider-component.css';
-import 'vue-slider-component/theme/default.css';
 
 export default {
   name: 'au-range-slider',
@@ -109,6 +107,7 @@ export default {
 
 <style lang="scss">
 @import "../../styles/partials/params";
+@import "./slider";
 
 .au-range-slider {
   display: flex;
