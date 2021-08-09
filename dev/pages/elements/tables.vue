@@ -23,7 +23,7 @@
       </template> -->
       <!-- <template #massactions></template> -->
       <template #massactions>
-       [ Инструменты для массовых действий ]
+       [ Слот #massactions - Инструменты для массовых действий ]
       </template>
     </au-table>
 
