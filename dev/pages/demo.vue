@@ -20,6 +20,10 @@ Vue.use(atlasUiKit);</pre>
 
   <demo-inputs/>
 
+  <demo-slider/>
+
+  <demo-date/>
+
   <demo-select/>
 
   <demo-dropdown-buttons/>
@@ -78,24 +82,8 @@ Vue.use(atlasUiKit);</pre>
 
   <demo-popups/>
 
-  <h2 id="au-user-popover">Поповеры</h2>
-  <div class="demo-item">
-    <au-user-popover :user="userObject" />
-    <pre>&lt;au-user-popover
-  user: { firstName, lastName, isOnline }
-/&gt;</pre>
-  </div>
+  <demo-popover/>
 
-  <div class="demo-item">
-    <au-info-popover
-     :blockedTransitions="[]"
-    />
-    <pre>&lt;au-info-popover
-  blockedTransitions: Array
-  placement: 'bottom'
-  disabled
-/&gt;</pre>
-  </div>
   </div>
 </div>
 
@@ -107,6 +95,8 @@ import DemoIcons from './elements/icons.vue';
 import DemoButtons from './elements/buttons.vue';
 import DemoCheckbox from './elements/checkbox.vue';
 import DemoInputs from './elements/inputs.vue';
+import DemoSlider from './elements/slider.vue';
+import DemoDate from './elements/date.vue';
 import DemoSelect from './elements/select.vue';
 import DemoDropdownButtons from './elements/dropdownButtons.vue';
 import DemoBreadcrumbs from './elements/breadcrumbs.vue';
@@ -115,6 +105,7 @@ import DemoTabs from './elements/tabs.vue';
 import DemoFilters from './elements/filters.vue';
 import DemoDraggableList from './elements/draggableList.vue';
 import DemoPopups from './elements/popups.vue';
+import DemoPopover from './elements/popover.vue';
 
 export default {
   name: 'demo-page',
@@ -125,6 +116,8 @@ export default {
     DemoButtons,
     DemoCheckbox,
     DemoInputs,
+    DemoSlider,
+    DemoDate,
     DemoSelect,
     DemoDropdownButtons,
     DemoBreadcrumbs,
@@ -133,6 +126,7 @@ export default {
     DemoFilters,
     DemoDraggableList,
     DemoPopups,
+    DemoPopover,
   },
 
   data() {
@@ -144,6 +138,8 @@ export default {
         { title: 'Кнопка', alias: 'au-button' },
         { title: 'Чекбокс', alias: 'au-checkbox' },
         { title: 'Поле ввода', alias: 'au-input' },
+        { title: 'Слайдер / диапазон', alias: 'au-range-slider' },
+        { title: 'Дата и время', alias: 'au-date' },
         { title: 'Выпадающий список', alias: 'au-select' },
         { title: 'Кнопка-dropdown', alias: 'au-dropdown-button' },
         { title: 'Кнопка с выпадающим контентом', alias: 'au-dropdown-content-button' },
@@ -158,7 +154,7 @@ export default {
         { title: 'Таблицы', alias: 'au-table' },
         { title: 'Пагинация', alias: 'au-pagination' },
         { title: 'Поп-ап справа', alias: 'au-side-popup' },
-        { title: 'Поповеры', alias: 'au-user-popover' },
+        { title: 'Поповеры', alias: 'au-popover' },
       ],
 
       // Demo-values

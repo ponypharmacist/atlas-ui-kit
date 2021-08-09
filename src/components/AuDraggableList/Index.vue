@@ -21,7 +21,7 @@
 import draggable from 'vuedraggable';
 
 export default {
-  name: 'au-breadcrumbs',
+  name: 'au-draggable-list',
 
   components: { draggable },
 

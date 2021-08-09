@@ -3,6 +3,8 @@ export { default as AuIcon } from './AuIcon';
 export { default as AuButton } from './AuButton';
 export { default as AuCheckbox } from './AuCheckbox';
 export { default as AuInput } from './AuInput';
+export { default as AuRangeSlider } from './AuRangeSlider';
+export { default as AuDate } from './AuDate';
 export { default as AuSelect } from './AuSelect';
 export { default as AuDropdownButton } from './AuDropdownButton';
 export { default as AuDropdownContentButton } from './AuDropdownContentButton';
@@ -17,7 +19,7 @@ export { AuTabs, AuTabItem } from './AuTabs/index';
 export { default as AuTable } from './AuTable';
 export { default as AuPagination } from './AuPagination';
 export { default as AuUserPopover } from './popovers/AuUserPopover.vue';
-export { default as AuInfoPopover } from './popovers/AuInfoPopover.vue';
+export { default as AuPopover } from './popovers/AuPopover.vue';
 export { default as AuSidePopup } from './AuSidePopup';
 
 // Экзотика
