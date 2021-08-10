@@ -364,7 +364,12 @@ export default {
 
   &.is-tiny {
     min-height: 24px;
-    font-size: 12px;
+    font-size: 11px;
+
+    .au-select-placeholder,
+    .au-select-selected {
+      font-size: 11px;
+    }
 
     label {
       font-size: 12px;

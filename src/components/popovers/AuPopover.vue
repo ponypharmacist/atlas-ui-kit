@@ -45,6 +45,7 @@ export default {
   display: block !important;
   z-index: 10000;
   box-shadow: 0 0 29px rgba(11, 66, 136, 0.3), 0 0 9px rgba(11, 66, 136, 0.12);
+  font-family: inherit;
 
   .tooltip-inner {
     background: black;
@@ -58,36 +59,36 @@ export default {
     height: 0;
     border-style: solid;
     position: absolute;
-    margin: 12px;
+    margin: 10px;
     border-color: black;
     z-index: 1;
   }
 
   &[x-placement^="top"] {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 
     .tooltip-arrow {
-      border-width: 12px 12px 0 12px;
+      border-width: 10px 10px 0 10px;
       border-left-color: transparent !important;
       border-right-color: transparent !important;
       border-bottom-color: transparent !important;
-      bottom: -12px;
-      left: calc(50% - 12px);
+      bottom: -10px;
+      left: calc(50% - 10px);
       margin-top: 0;
       margin-bottom: 0;
     }
   }
 
   &[x-placement^="bottom"] {
-    margin-top: 12px;
+    margin-top: 10px;
 
     .tooltip-arrow {
-      border-width: 0 12px 12px 12px;
+      border-width: 0 10px 10px 10px;
       border-left-color: transparent !important;
       border-right-color: transparent !important;
       border-top-color: transparent !important;
-      top: -12px;
-      left: calc(50% - 12px);
+      top: -10px;
+      left: calc(50% - 10px);
       margin-top: 0;
       margin-bottom: 0;
     }
@@ -124,13 +125,13 @@ export default {
   }
 
   &.popover {
+    border-radius: 5px;
     $color: #f9f9f9;
 
     .popover-inner {
       background: $color;
       color: black;
       padding: 0;
-      border-radius: 5px;
       box-shadow: 0 5px 30px rgba(black, .1);
     }
 

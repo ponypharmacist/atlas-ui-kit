@@ -64,6 +64,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    small: {
+      type: Boolean,
+      default: false,
+    },
     tiny: {
       type: Boolean,
       default: false,
@@ -80,6 +84,7 @@ export default {
     classObject() {
       return {
         [this.$options.name]: true,
+        'is-small': this.small,
         'is-tiny': this.tiny,
         'is-inverse': this.inverse,
         'is-disabled': this.disabled,
@@ -147,14 +152,10 @@ export default {
     width: 100%;
     height: 32px;
     padding: 0 12px;
+    font-size: 13px;
     border-radius: 2px;
     border: 1px solid #ebeff6;
     background-color: #f9fafd;
-  }
-
-  .range-slider-min,
-  .range-slider-max {
-    font-size: 13px;
   }
 
   .range-slider-min {
@@ -185,9 +186,22 @@ export default {
     }
   }
 
+  &.is-small {
+    .range-slider-box {
+      height: 32px;
+      font-size: 12px;
+    }
+
+    .range-slider-label {
+      font-size: 12px;
+      line-height: 14px;
+    }
+  }
+
   &.is-tiny {
     .range-slider-box {
       height: 24px;
+      font-size: 12px;
     }
 
     .range-slider-label {

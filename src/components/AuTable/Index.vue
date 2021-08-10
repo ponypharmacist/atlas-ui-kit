@@ -1,20 +1,11 @@
 <template>
 
 <div class="au-table">
-  <au-icon
-    v-if="settingsIcon"
-    class="au-table-settings"
-    icon="mdi-cog"
-    :size="16"
-    color="#628ec0"
-    @click.native="$emit('settings')"
-  />
-
   <table>
     <thead>
       <tr>
         <!-- Selectable - добавляем чекбокс -->
-        <th v-if="selectable && pageContent.length" class="checkbox-cell">
+        <th v-if="selectable" class="checkbox-cell">
           <div class="cell-content">
             <au-checkbox
               :value="selectionSummary"
@@ -44,14 +35,31 @@
             </div>
           </div>
         </th>
+
+        <!-- Кнопка настроек таблицы -->
+        <th
+          v-if="settingsIcon"
+          class="settings-cell"
+        >
+          <div class="cell-content">
+            <au-icon
+              v-if="settingsIcon"
+              class="au-table-settings"
+              icon="mdi-cog"
+              :size="16"
+              color="#628ec0"
+              @click.native="$emit('settings')"
+            />
+          </div>
+        </th>
       </tr>
     </thead>
 
     <!-- Ячейки в строках -->
     <tbody>
       <tr
-        v-for="(row, index) in pageContent"
-        :key="`table-row-${index}`"
+        v-for="(row, rowIndex) in pageContent"
+        :key="`table-row-${rowIndex}`"
       >
         <td v-if="selectable" class="checkbox-cell">
           <div class="cell-content">
@@ -60,8 +68,9 @@
         </td>
 
         <td
-          v-for="column in columns"
-          :key="`table-cell-${index}-${column.key}`"
+          v-for="(column, colIndex) in columns"
+          :key="`table-cell-${rowIndex}-${column.key}`"
+          :colspan="(settingsIcon && colIndex === columns.length - 1) ? 2 : 1"
         >
           <div class="cell-content" :class="`align-${column.align || 'unset'}`">
             <slot
@@ -75,8 +84,11 @@
       </tr>
 
       <!-- Если разрешены массовые действия -->
-      <tr class="mass-actions">
-        <td v-if="selectable && pageContent.length" class="checkbox-cell">
+      <tr
+        v-if="selectable && pageContent.length"
+        class="mass-actions"
+      >
+        <td class="checkbox-cell">
           <div class="cell-content">
             <au-checkbox
               :value="selectionSummary"
@@ -86,7 +98,7 @@
           </div>
         </td>
 
-        <td :colspan="columns.length">
+        <td :colspan="colspanMassActions">
           <div class="cell-content">
             <slot name="massactions"/>
           </div>
@@ -98,9 +110,9 @@
         <td
           class="not-found"
           v-if="!pageContent.length"
-          :colspan="columns.length"
+          :colspan="colspanNotFound"
         >
-          Ничего не найдено
+          <div class="cell-content">Ничего не найдено</div>
         </td>
       </tr>
     </tbody>
@@ -170,6 +182,22 @@ export default {
   },
 
   computed: {
+    // Считаем colspan
+    colspanMassActions() {
+      if (this.settingsIcon) return this.columns.length + 1;
+
+      return this.columns.length;
+    },
+
+    colspanNotFound() {
+      if (this.selectable && this.settingsIcon) return this.columns.length + 2;
+      if (this.selectable) return this.columns.length + 1;
+      if (this.settingsIcon) return this.columns.length + 1;
+
+      return this.columns.length;
+    },
+
+    // Для чекбоксов от свойства selectable
     selectionSummary() {
       const selectedCount = this.items.filter((item) => item.selected).length;
 
@@ -258,6 +286,7 @@ export default {
 // Таблица
 .au-table {
   position: relative;
+  overflow-x: auto;
 
   table {
     width: 100%;
@@ -283,8 +312,12 @@ export default {
     th:not(:last-child) {
       border-right: 0;
     }
-    th:first-child { border-radius: 4px 0 0 4px; }
-    th:last-child {  border-radius: 0 4px 4px 0; }
+    th:first-child {
+      border-radius: 4px 0 0 4px;
+    }
+    th:last-child {
+      border-radius: 0 4px 4px 0;
+    }
   }
 
   tbody {
@@ -303,7 +336,6 @@ export default {
       border: 1px solid #ebeff6;
       background-color: #f0f4fb;
       transition: background-color 0.15s linear;
-      cursor: pointer;
     }
     td:not(:last-child) {
       border-right: 0;
@@ -314,6 +346,10 @@ export default {
 
   .checkbox-cell {
     width: 38px;
+  }
+
+  .settings-cell {
+    width: 32px;
   }
 
   .cell-content {
@@ -330,7 +366,15 @@ export default {
   }
 
   .not-found {
+    font-size: 12px;
+    line-height: 16px;
     text-align: center;
+
+    background-color: #f3f6f9;
+
+    .cell-content {
+      justify-content: center;
+    }
   }
 
   .column-sorting {
@@ -339,9 +383,6 @@ export default {
 }
 
 .au-table-settings {
-  position: absolute;
-  right: 10px;
-  top: 10px;
   cursor: pointer;
 
   &:hover {
