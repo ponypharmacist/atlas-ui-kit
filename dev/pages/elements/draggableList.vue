@@ -10,6 +10,7 @@
 
   <pre>&lt;au-draggable-list
   v-model: Array
+  search: String - ограничить список по вхождению search в title
   @updateList
 /&gt;</pre>
 

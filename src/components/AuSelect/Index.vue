@@ -202,6 +202,7 @@ export default {
             .indexOf(this.searchQuery.toLowerCase()) !== -1,
         );
     },
+
     getValueField() {
       return (item) => {
         if (this.resolverArray.includes(item[this.valueField])) {

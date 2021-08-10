@@ -311,6 +311,10 @@ export default {
     }
     th:not(:last-child) {
       border-right: 0;
+
+      .cell-content {
+        padding-right: 10px;
+      }
     }
     th:first-child {
       border-radius: 4px 0 0 4px;

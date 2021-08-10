@@ -50,7 +50,7 @@ export default {
   .tooltip-inner {
     background: black;
     color: white;
-    border-radius: 16px;
+    border-radius: 5px;
     padding: 5px 10px 4px;
   }
 

@@ -3,7 +3,7 @@
 <div class="au-draggable-list">
   <draggable v-model="itemsList">
     <div
-      v-for="(item, index) in itemsList"
+      v-for="(item, index) in visibleItems"
       :key="`draggable-${index}`"
       class="au-draggable-list-item"
       :class="{ active: itemsList[index].active }"
@@ -30,6 +30,10 @@ export default {
       type: Array,
       default: null,
     },
+    search: {
+      type: String,
+      default: null,
+    },
   },
 
   computed: {
@@ -40,6 +44,15 @@ export default {
       set(value) {
         this.$emit('updateList', value);
       },
+    },
+
+    visibleItems() {
+      if (this.search) {
+        return this.itemsList
+          .filter((item) => item.title.toLowerCase().includes(this.search.toLowerCase()));
+      }
+
+      return this.itemsList;
     },
   },
 };
