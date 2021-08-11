@@ -286,7 +286,6 @@ export default {
 // Таблица
 .au-table {
   position: relative;
-  overflow-x: auto;
 
   table {
     width: 100%;

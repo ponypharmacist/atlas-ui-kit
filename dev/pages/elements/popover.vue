@@ -1,7 +1,7 @@
 <template>
 
 <div class="demo-popover">
-  <h2 id="au-popover">Поповеры</h2>
+  <h2 id="au-popover">Поповер</h2>
   <div class="demo-item">
 
     <div class="d-flex align-center">
@@ -49,14 +49,23 @@
   slot - default slot
   #popover - слот для содержимого поповера
 &lt;au-popover/&gt;</pre>
-
-  <!-- ToDo: rework -->
   </div>
+
+  <h2 id="au-tooltip">Тултип</h2>
   <div class="demo-item">
-    <au-user-popover :user="userObject" />
-    <pre>&lt;au-user-popover
-  user: { firstName, lastName, isOnline }
-/&gt;</pre>
+    <div class="d-flex">
+      <au-tooltip content="Hello, world!">
+        <au-button label="Hover me!"/>
+      </au-tooltip>
+    </div>
+
+    <pre>&lt;au-tooltip
+  placement: String
+  content: String
+  offset: Number
+&gt;
+  slot
+&lt;/au-tooltip&gt;</pre>
   </div>
 </div>
 
@@ -65,19 +74,5 @@
 <script>
 export default {
   name: 'demo-popover',
-
-  data() {
-    return {
-      userObject: {
-        firstName: 'Ivan',
-        lastName: 'Ivanoff',
-        isOnline: true,
-      },
-    };
-  },
 };
 </script>
-
-<style lang="scss" scoped>
-
-</style>

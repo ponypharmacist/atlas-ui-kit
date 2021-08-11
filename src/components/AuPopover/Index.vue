@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style lang="scss">
-.au-popover {
+.tooltip {
   display: block !important;
   z-index: 10000;
   box-shadow: 0 0 29px rgba(11, 66, 136, 0.3), 0 0 9px rgba(11, 66, 136, 0.12);
@@ -124,7 +124,7 @@ export default {
     }
   }
 
-  &.popover {
+  &.au-popover {
     border-radius: 5px;
     $color: #f9f9f9;
 

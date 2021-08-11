@@ -5,6 +5,15 @@
   <div class="demo-item">
     <div style="max-width: 320px;">
       <au-date
+        v-model="dateRangeSelected"
+        type="date"
+        label="type: date, is-range"
+        is-range
+      />
+    </div>
+
+    <div style="max-width: 320px;">
+      <au-date
         v-model="dateSelected"
         type="date"
         label="type: date"
@@ -31,6 +40,7 @@
   v-model {{ dateSelected }}
   type: String - 'date | time | datetime'
   label: String
+  is-range
   input-errors: Array
 
   required
@@ -52,7 +62,7 @@ export default {
   data() {
     return {
       dateSelected: null,
-      dateRangeSelected: { start: null, end: null },
+      dateRangeSelected: { start: 1627889781, end: 1627889781 },
       datetimeSelected: null,
       timeSelected: null,
     };

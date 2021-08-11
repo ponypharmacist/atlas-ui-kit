@@ -15,7 +15,7 @@
       <au-icon
         class="au-select-icon"
         :icon="icon"
-        :size="small ? 14 : 16"
+        :size="iconSize"
         :class="{ 'au-icon-error': hasErrors }"
         color="#3F6ADA"
       />
@@ -121,6 +121,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    tiny: {
+      type: Boolean,
+      default: false,
+    },
     inverse: {
       type: Boolean,
       default: false,
@@ -139,11 +143,19 @@ export default {
           'is-focused': this.isFocused,
           'is-full-width': this.fullWidth,
           'is-small': this.small,
+          'is-tiny': this.tiny,
           'is-inverse': this.inverse,
           'is-disabled': this.disabled,
           'is-error': this.hasErrors,
         },
       ];
+    },
+
+    iconSize() {
+      if (this.tiny) return 12;
+      if (this.small) return 14;
+
+      return 16;
     },
 
     hasErrors() {
@@ -287,6 +299,34 @@ export default {
     label {
       font-size: 12px;
       line-height: 14px;
+    }
+
+    input {
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+
+  &.is-tiny {
+    .au-input-content {
+      height: 24px;
+      padding: 0 6px;
+      border-radius: 2px;
+
+      &.has-icon {
+        padding: 0 10px 0 28px;
+      }
+
+      .au-select-icon {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    label {
+      display: none;
     }
 
     input {

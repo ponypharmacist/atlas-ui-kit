@@ -154,7 +154,8 @@ export default {
         { title: 'Таблицы', alias: 'au-table' },
         { title: 'Пагинация', alias: 'au-pagination' },
         { title: 'Поп-ап справа', alias: 'au-side-popup' },
-        { title: 'Поповеры', alias: 'au-popover' },
+        { title: 'Поповер', alias: 'au-popover' },
+        { title: 'Тултип', alias: 'au-tooltip' },
       ],
 
       // Demo-values

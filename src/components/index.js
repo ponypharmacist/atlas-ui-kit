@@ -5,6 +5,7 @@ export { default as AuCheckbox } from './AuCheckbox';
 export { default as AuInput } from './AuInput';
 export { default as AuRangeSlider } from './AuRangeSlider';
 export { default as AuDate } from './AuDate';
+export { default as AuDateRange } from './AuDate/dateRange.vue';
 export { default as AuSelect } from './AuSelect';
 export { default as AuDropdownButton } from './AuDropdownButton';
 export { default as AuDropdownContentButton } from './AuDropdownContentButton';
@@ -14,12 +15,11 @@ export { default as AuDraggableList } from './AuDraggableList';
 // Вывод информации (в первую очередь)
 export { default as AuBreadcrumbs } from './AuBreadcrumbs';
 export { default as AuSpinner } from './AuSpinner';
-export { default as AuTooltip } from './AuTooltip';
 export { AuTabs, AuTabItem } from './AuTabs/index';
 export { default as AuTable } from './AuTable';
 export { default as AuPagination } from './AuPagination';
-export { default as AuUserPopover } from './popovers/AuUserPopover.vue';
-export { default as AuPopover } from './popovers/AuPopover.vue';
+export { default as AuPopover } from './AuPopover';
+export { default as AuTooltip } from './AuTooltip';
 export { default as AuSidePopup } from './AuSidePopup';
 
 // Экзотика
