@@ -92,7 +92,7 @@ import { VueMaskDirective } from 'v-mask';
 import moment from 'moment';
 
 export default {
-  name: 'au-date',
+  name: 'au-date-picker',
 
   components: {
     VDatePicker,
@@ -251,7 +251,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.au-date {
+.au-date-picker {
   position: relative;
 }
 

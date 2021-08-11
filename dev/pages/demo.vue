@@ -139,7 +139,7 @@ export default {
         { title: 'Чекбокс', alias: 'au-checkbox' },
         { title: 'Поле ввода', alias: 'au-input' },
         { title: 'Слайдер / диапазон', alias: 'au-range-slider' },
-        { title: 'Дата и время', alias: 'au-date' },
+        { title: 'Дата и время', alias: 'au-date-picker' },
         { title: 'Выпадающий список', alias: 'au-select' },
         { title: 'Кнопка-dropdown', alias: 'au-dropdown-button' },
         { title: 'Кнопка с выпадающим контентом', alias: 'au-dropdown-content-button' },
