@@ -76,6 +76,7 @@
 
   full-width
   small
+  tiny
   inverse
 /&gt;
 

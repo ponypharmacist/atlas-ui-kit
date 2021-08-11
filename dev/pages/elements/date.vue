@@ -45,8 +45,9 @@
 
   required
   disabled
-  size: String - 'small | tiny'
   inverse
+  small
+  tiny
 
   @input
 /&gt;</pre>
@@ -72,7 +73,7 @@ export default {
   data() {
     return {
       dateSelected: null,
-      dateRangeSelected: { start: 1627889781, end: 1627889781 },
+      dateRangeSelected: { start: null, end: null },
       datetimeSelected: null,
       timeSelected: null,
     };

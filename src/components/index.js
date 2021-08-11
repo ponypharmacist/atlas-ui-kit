@@ -4,7 +4,7 @@ export { default as AuButton } from './AuButton';
 export { default as AuCheckbox } from './AuCheckbox';
 export { default as AuInput } from './AuInput';
 export { default as AuRangeSlider } from './AuRangeSlider';
-export { default as AuDatePicker } from './AuDatePicker';
+export { default as AuDatePicker } from './AuDatePicker/AuDatePicker.vue';
 export { default as AuDate } from './AuDatePicker/AuDate.vue';
 export { default as AuSelect } from './AuSelect';
 export { default as AuDropdownButton } from './AuDropdownButton';

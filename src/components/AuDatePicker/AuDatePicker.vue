@@ -20,8 +20,8 @@
       :label="label"
       :input-errors="inputErrors"
       :required="required"
-      :small="size === 'small'"
-      :tiny="size === 'tiny'"
+      :small="small"
+      :tiny="tiny"
       :inverse="inverse"
       full-width
       readonly
@@ -52,8 +52,8 @@
         :events="inputEvents.start"
         :placeholder="placeholder"
         :required="required"
-        :small="size === 'small'"
-        :tiny="size === 'tiny'"
+        :small="small"
+        :tiny="tiny"
         :inverse="inverse"
         readonly
         v-on="inputEvents.start"
@@ -70,8 +70,8 @@
         :events="inputEvents.end"
         :placeholder="placeholder"
         :required="required"
-        :small="size === 'small'"
-        :tiny="size === 'tiny'"
+        :small="small"
+        :tiny="tiny"
         :inverse="inverse"
         readonly
         v-on="inputEvents.end"
@@ -137,9 +137,13 @@ export default {
       type: Boolean,
       default: false,
     },
-    size: {
-      type: String,
-      default: null,
+    small: {
+      type: Boolean,
+      default: false,
+    },
+    tiny: {
+      type: Boolean,
+      default: false,
     },
     inverse: {
       type: Boolean,
@@ -158,8 +162,8 @@ export default {
       get() {
         if (this.isRange) {
           return {
-            start: moment.unix(this.value.start).toISOString(),
-            end: moment.unix(this.value.end).toISOString(),
+            start: this.value.start ? moment.unix(this.value.start).toISOString() : null,
+            end: this.value.start ? moment.unix(this.value.end).toISOString() : null,
           };
         }
 
@@ -189,16 +193,16 @@ export default {
     },
 
     iconSize() {
-      if (this.size === 'tiny') return 16;
-      if (this.size === 'small') return 22;
+      if (this.tiny) return 16;
+      if (this.small) return 22;
 
       return 24;
     },
 
     wrapClass() {
       return {
-        'is-small': this.size === 'small',
-        'is-tiny': this.size === 'tiny',
+        'is-small': this.small,
+        'is-tiny': this.tiny,
       };
     },
 

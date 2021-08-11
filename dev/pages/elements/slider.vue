@@ -48,6 +48,8 @@
   interval: Number | 1
   label: String
   disabled
+
+  @input
 /&gt;</pre>
   </div>
 </div>

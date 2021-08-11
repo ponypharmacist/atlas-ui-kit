@@ -74,11 +74,11 @@ export default {
     },
   },
 
-  data() {
-    return {
-      scopeModel: this.value,
-    };
-  },
+  // data() {
+  //   return {
+  //     scopeModel: this.value,
+  //   };
+  // },
 
   computed: {
     classObject() {
@@ -94,12 +94,12 @@ export default {
 
     model: {
       get() {
-        return this.scopeModel;
+        return this.value;
       },
 
-      set(val) {
-        this.scopeModel = val;
-        this.$emit('input', val);
+      set(newValue) {
+        // this.scopeModel = newValue;
+        this.$emit('input', newValue);
       },
     },
 
