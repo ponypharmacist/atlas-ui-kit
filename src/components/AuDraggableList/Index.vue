@@ -3,10 +3,10 @@
 <div class="au-draggable-list">
   <draggable v-model="itemsList">
     <div
-      v-for="(item, index) in visibleItems"
+      v-for="(item, index) in itemsList"
       :key="`draggable-${index}`"
       class="au-draggable-list-item"
-      :class="{ active: itemsList[index].active }"
+      :class="{ active: itemsList[index].active, invisible: !visibleItems.includes(item.title) }"
     >
       <au-icon class="icon-drag" icon="mdi-drag-vertical" :size="24" color="#d8d8d8"/>
       <span class="au-draggable-item-title">{{ item.title }}</span>
@@ -49,10 +49,11 @@ export default {
     visibleItems() {
       if (this.search) {
         return this.itemsList
-          .filter((item) => item.title.toLowerCase().includes(this.search.toLowerCase()));
+          .filter((item) => item.title.toLowerCase().includes(this.search.toLowerCase()))
+          .map((item) => item.title);
       }
 
-      return this.itemsList;
+      return this.itemsList.map((item) => item.title);
     },
   },
 };
@@ -61,9 +62,13 @@ export default {
 <style lang="scss" scoped>
 @import "../../styles/partials/params";
 
+$bg-inactive: #fbfcfd;
+$bg-active: #f8f9fb;
+
 .au-draggable-list {
   width: 100%;
 }
+
 .au-draggable-list-item {
   position: relative;
   display: flex;
@@ -75,14 +80,27 @@ export default {
   font-weight: 500;
   margin: 0 0 4px;
   color: #dcddde;
-  background-color: #fbfcfd;
+  background-color: $bg-inactive;
   transition: color 0.15s linear;
   user-select: none;
   cursor: pointer;
 
   &.active {
     color: inherit;
-    background-color: #f8f9fb;
+    background-color: $bg-active;
+  }
+
+  &.invisible {
+    // visibility: hidden;
+    overflow: hidden;
+    height: 0;
+    padding: 0;
+    margin: 4px 0;
+    border: 4px solid $bg-inactive;
+
+    &.active {
+      border-color: $bg-active;
+    }
   }
 
   .icon-drag {

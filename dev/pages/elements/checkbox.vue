@@ -54,6 +54,8 @@
   label-left
   full-width
   disabled
+
+  @input
 /&gt;</pre>
   </div>
 </div>

@@ -383,8 +383,8 @@ export default {
     }
   }
 
-  &-item,
-  &-selected {
+  .au-select-item,
+  .au-select-selected {
     position: relative;
     display: flex;
     align-items: center;
@@ -396,17 +396,17 @@ export default {
     cursor: pointer;
   }
 
-  &-placeholder {
+  .au-select-placeholder {
     font-weight: 300;
     color: #9F9F9F;
   }
 
-  &-selected {
+  .au-select-selected {
     border-radius: 2px;
     border: 1px solid $gray-blue-border;
     background-color: $light-gray;
     overflow: hidden;
-    color: $blue;
+    // color: $blue;
     font-weight: 400;
     font-size: 12px;
 
@@ -454,7 +454,7 @@ export default {
     }
   }
 
-  &-item {
+  .au-select-item {
     &:hover {
       background-color: $gray-blue-border;
     }
@@ -476,7 +476,7 @@ export default {
 
   $max-list-height: 160;
 
-  &-list {
+  .au-select-list {
     position: absolute;
     width: 100%;
     background-color: $white;
@@ -528,6 +528,7 @@ export default {
       cursor: pointer;
     }
   }
+
   /* todo add chips for all sizes */
   .chips {
     padding: 4px 20px 4px 0;
@@ -535,7 +536,7 @@ export default {
     flex-wrap: wrap;
     margin-top: -4px;
 
-    &-item {
+    .chips-item {
       font-size: 11px;
       border: 1px solid $gray-blue-border;
       padding: 4px;
@@ -546,7 +547,7 @@ export default {
     }
   }
 
-  &-list__search {
+  .au-select-list__search {
     display: flex;
     flex-wrap: nowrap;
     padding: 8px;

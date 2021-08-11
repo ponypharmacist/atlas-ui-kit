@@ -233,10 +233,10 @@ export default {
         case 'time':
           return 'HH:mm:ss';
         case 'datetime':
-          return 'YYYY-MM-DD HH:mm:ss';
+          return 'DD.MM.YYYY HH:mm:ss';
         case 'date':
         default:
-          return 'YYYY-MM-DD';
+          return 'DD.MM.YYYY';
       }
     },
     inputMask() {
@@ -244,10 +244,10 @@ export default {
         case 'time':
           return { input: 'HH:mm:ss' };
         case 'datetime':
-          return { input: 'YYYY-MM-DD', inputDateTime24hr: 'YYYY-MM-DD HH:mm:ss' };
+          return { input: 'DD.MM.YYYY', inputDateTime24hr: 'DD.MM.YYYY HH:mm:ss' };
         case 'date':
         default:
-          return { input: 'YYYY-MM-DD' };
+          return { input: 'DD.MM.YYYY' };
       }
     },
   },
