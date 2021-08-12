@@ -137,7 +137,7 @@ export default {
     font-weight: 500;
     width: 100%;
     height: 32px;
-    color: $white;
+    color: white;
     border-radius: 4px;
     background-color: $blue;
     background-image: linear-gradient(
@@ -180,7 +180,7 @@ export default {
     svg{
       width: 12px;
       height: 12px;
-      fill: $white;
+      fill: white;
     }
   }
 
@@ -190,7 +190,7 @@ export default {
     width: 100%;
     max-height: 235px;
     list-style: none;
-    background-color: $white;
+    background-color: white;
     border-radius: 4px;
     overflow-x: hidden;
     z-index: 1000;
@@ -268,7 +268,7 @@ export default {
     height: 32px;
     color: $blue;
     border-radius: 4px;
-    background-color: $white;
+    background-color: white;
     background-image: none;
 
     &:before {

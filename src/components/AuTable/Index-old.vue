@@ -709,7 +709,7 @@ export default {
 
   &:nth-child(odd) {
     & > .au-table__item-box {
-      background-color: $white;
+      background-color: white;
       // border: 1px solid transparent;
     }
   }
@@ -980,7 +980,7 @@ export default {
     width: 26px;
     height: 26px;
     border-radius: 50%;
-    border: 2px solid $white;
+    border: 2px solid white;
 
     &.none{
       display: none;
@@ -1034,7 +1034,7 @@ export default {
     align-items: center;
     font-size: 11px;
     font-weight: 500;
-    background-color: $white;
+    background-color: white;
     color: $black;
     height: 24px;
     width: 71px;
@@ -1066,11 +1066,11 @@ export default {
       border-top: 12px solid transparent;
       border-right: 8px solid transparent;
       border-bottom: 12px solid transparent;
-      border-left: 8px solid $white;
+      border-left: 8px solid white;
     }
     &.red{
       background-color: $red;
-      color: $white;
+      color: white;
 
       &::before{
         background: url("../../assets/icons/icon-time-white.svg") no-repeat;
@@ -1094,7 +1094,7 @@ export default {
 
     .au-table__item-box {
       min-height: 50px;
-      background-color: $white;
+      background-color: white;
       border-top: 1px solid $gray-blue-border;
       overflow: hidden;
       opacity: 0;

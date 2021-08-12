@@ -200,7 +200,7 @@ export default {
   padding: 0 ($mm-value * 4) + px;
 
   // Default blue button
-  color: $white;
+  color: white;
   background-color: $blue;
   transition: .3s;
 
@@ -232,7 +232,7 @@ export default {
 
   &.is-white {
     color: $blue;
-    background-color: $white;
+    background-color: white;
     background-image: none;
   }
 
@@ -273,10 +273,10 @@ export default {
 
     // white link
     &.is-white {
-      color: $white;
+      color: white;
 
       .au-icon {
-        background-color: $white !important;
+        background-color: white !important;
       }
 
       &:hover {
@@ -309,7 +309,7 @@ export default {
 
     &.is-white {
       &:hover {
-        color: $white;
+        color: white;
         background-color: $blue;
         background-image: linear-gradient(
           180deg,
@@ -322,7 +322,7 @@ export default {
 
   &.is-red {
     background-color: $red2;
-    color: $white;
+    color: white;
     background-image: none;
 
     &:hover {

@@ -249,7 +249,7 @@ export default {
 
   &.is-inverse {
     .au-input-content {
-      background-color: $white;
+      background-color: white;
     }
   }
 

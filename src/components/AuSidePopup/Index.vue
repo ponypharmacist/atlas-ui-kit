@@ -85,7 +85,7 @@ export default {
 
 .au-side-popup {
   position: fixed;
-  background-color: $white;
+  background-color: white;
   top: 0;
   right: 0;
   width: 600px;

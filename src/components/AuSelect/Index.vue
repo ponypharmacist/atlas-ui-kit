@@ -19,8 +19,9 @@
             <div
               v-for="(item, index) in selectedText"
               :key="index"
-              class="chips-item"
               v-text="item"
+              class="chips-item"
+              @click.stop="value.slice(index, 1)"
             />
           </div>
         </template>
@@ -69,7 +70,7 @@
         class="au-select-item"
         @click="onItemClick(item)"
       >
-        <slot name="item" :item="item">{{ getValueField(item) }}</slot>
+        <slot name="item" :item="item">{{ item[valueField] || item }}</slot>
       </li>
     </ul>
   </div>
@@ -77,18 +78,7 @@
 
 <script>
 import { directive as clickaway } from 'vue-clickaway';
-import get from 'lodash/get';
 import uniqueId from 'lodash/uniqueId';
-
-const transitionContext = {
-  to_work: { title: 'В работу' },
-  take_in_work: { title: 'Взять в работу' },
-  to_approving: { title: 'Отправить на проверку' },
-  to_clarification: { title: 'Запросить уточнение', withComment: true },
-  to_back_from_clarification: { title: 'Уточнить и вернуть', withComment: true },
-  to_close: { title: 'Закрыть' },
-  to_correction: { title: 'Вернуть на доработку', withComment: true },
-};
 
 export default {
   name: 'au-select',
@@ -162,20 +152,12 @@ export default {
   },
 
   data: () => ({
+    // selectedText: null,
     selectId: null,
     isActive: false,
     searchQuery: null,
     top: false,
     bottom: false,
-    resolverArray: [
-      'to_work',
-      'take_in_work',
-      'to_approving',
-      'to_clarification',
-      'to_back_from_clarification',
-      'to_close',
-      'to_correction',
-    ],
   }),
 
   created() {
@@ -195,29 +177,16 @@ export default {
 
     listData() {
       if (!this.searchQuery || this.searchQuery === '') return this.list;
+
       return this.list
         .filter(
-          (item) => this.getValueField(item)
+          (item) => (item[this.valueField] || item)
             .toLowerCase()
             .indexOf(this.searchQuery.toLowerCase()) !== -1,
         );
     },
 
-    getValueField() {
-      return (item) => {
-        if (this.resolverArray.includes(item[this.valueField])) {
-          return get(transitionContext, item[this.valueField], { title: 'Unknown transition code' }).title;
-        }
-
-        return item[this.valueField] || item;
-      };
-    },
-
     selectedText() {
-      if (this.resolverArray.includes(this.value)) {
-        return get(transitionContext, this.value, { title: 'Unknown transition code' }).title;
-      }
-
       if (Array.isArray(this.value)) {
         return this.value.map((_) => {
           if (_[this.valueField]) return _[this.valueField];
@@ -239,16 +208,6 @@ export default {
       if (reference) return reference[this.valueField];
 
       return this.value;
-    },
-
-    isSelected() {
-      return (item) => {
-        if (this.multiselect) {
-          return (this.value || []).includes(item[this.idField] || item);
-        }
-
-        return this.value === (item[this.idField] || item);
-      };
     },
 
     isValidValue() {
@@ -281,6 +240,14 @@ export default {
       if (this.closeOnSelect) {
         this.onClickAway();
       }
+    },
+
+    isSelected(item) {
+      if (this.multiselect) {
+        return (this.value || []).includes(item[this.idField] || item);
+      }
+
+      return this.value === (item[this.idField] || item);
     },
 
     getSelectedValue(item) {
@@ -391,7 +358,7 @@ export default {
     width: 100%;
     min-height: 40px;
     font-weight: 500;
-    background-color: $white;
+    background-color: white;
     padding: 0 8px;
     cursor: pointer;
   }
@@ -399,6 +366,7 @@ export default {
   .au-select-placeholder {
     font-weight: 300;
     color: #9F9F9F;
+    white-space: nowrap;
   }
 
   .au-select-selected {
@@ -409,14 +377,16 @@ export default {
     // color: $blue;
     font-weight: 400;
     font-size: 12px;
+    white-space: nowrap;
 
     &::before {
       content: "";
       position: absolute;
-      width: 1px;
+      width: 27px;
       height: 100%;
-      background-color: $gray-blue-border;
-      right: 28px;
+      background-color: $light-gray;
+      border-left: 1px solid $gray-blue-border;
+      right: 0;
       top: 0;
     }
 
@@ -451,6 +421,10 @@ export default {
   &.is-inverse {
     .au-select-selected {
       background-color: white;
+
+      &::before {
+        background-color: white;
+      }
     }
   }
 
@@ -479,7 +453,7 @@ export default {
   .au-select-list {
     position: absolute;
     width: 100%;
-    background-color: $white;
+    background-color: white;
     border: 1px solid $gray-blue-border;
     box-shadow: 0 2px 2px rgba(100,100,100, 0.15);
     max-height: #{$max-list-height}px;

@@ -4,12 +4,15 @@
 
   <h2 id="au-select">Выпадающий список</h2>
   <div class="demo-item">
+    <div style="width: 300px;">
     <au-select
       v-model="selectModel"
       :list="selectListDemo"
       value-field="title"
       id-field="id"
+      placeholder="Bla bla bla bla bla bla bla"
     />
+    </div>
     <au-select
       v-model="selectModel"
       :list="selectListDemo"

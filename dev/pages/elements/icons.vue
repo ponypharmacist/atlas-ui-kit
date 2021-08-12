@@ -24,7 +24,7 @@
     <div class="d-flex align-center" style="margin-bottom: 6px;">
       <au-icon icon="fa-camera-retro" :color="'#6c59ff'" :size="24"/>
       <div> <code>&lt;au-icon <b>icon="fa-camera-retro"</b> color="#6c59ff"/&gt;</code>
-       - иконки из набора FontAwesome (подключить css в main.js не забудьте)</div>
+       - из набора FontAwesome</div>
     </div>
 
     <pre>&lt;au-icon
@@ -34,6 +34,9 @@
   size: Number | 12 по-умолчанию
   mask - принудительно делает иконку маской (вместо фона)
 /&gt;</pre>
+
+    <p>Набор иконок FontAwesome следует подключить в main.js проекта, чтобы он работал как следует.</p>
+    <pre>import '@fortawesome/fontawesome-free/css/all.css';</pre>
   </div>
 </div>
 

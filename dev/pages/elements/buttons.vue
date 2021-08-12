@@ -28,7 +28,7 @@
 
     <div class="d-flex" style="padding: 16px 0;">
       <au-button tiny label="tiny, 24px"/>
-      <au-button label="default"/>
+      <au-button label="default, 32px"/>
       <au-button large label="large, 40px"/>
     </div>
 

@@ -144,7 +144,7 @@ export default {
   align-items: center;
   font-size: 12px;
   font-weight: 500;
-  background-color: $white;
+  background-color: white;
   border: 1px solid $gray-blue-border;
   border-left: none;
   width: 32px;
@@ -164,7 +164,7 @@ export default {
 
   &.disabled {
     pointer-events: none;
-    color: darken($white, 10);
+    color: darken(white, 10);
   }
 
   &:hover {

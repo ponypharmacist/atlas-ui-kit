@@ -103,7 +103,7 @@ $default-size: 12px;
   transition: background-color 0.15s linear;
 
   &.au-icon-white {
-    background-color: $white;
+    background-color: white;
   }
 
   &.au-icon-blue {
