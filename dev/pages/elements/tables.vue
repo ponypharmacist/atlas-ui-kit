@@ -33,17 +33,15 @@
   sort: Object - default {} | { key: 'name', direction: 'asc' }
   selectable
 
-  settings-icon
+  settings-icon - включает отображение иконки настроек
   no-data-text: String
+  hide-pagination
+  is-loading
 
   @runSort - срабатывает при изменении сортировки столбцов
   @settings - срабатывате по клику на settings-icon
   @selectOne - возвращает id выбранного объекта для внешней обработки
   @selectAll - при клике на верховный чекбокс для общего (раз-)выделения
-
-  is-reset-checkbox - ToDo: старое свойство
-  is-loading - ToDo: старое свойство
-  page-settings: Object - ToDo: старое свойство
 &gt;
   &lt;template &#35;header.title="&lcub; item &rcub;"&gt; - slot, содержимое шапки столбца title
   &lt;template &#35;item.title="&lcub; item &rcub;"&gt;   - slot, содержимое ячеек в столбце title

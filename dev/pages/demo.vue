@@ -205,8 +205,8 @@ export default {
   }
 
   .demo-item {
-    .au-input,
-    .au-select {
+    & > .au-input,
+    & > .au-select {
       margin-bottom: 8px;
     }
   }

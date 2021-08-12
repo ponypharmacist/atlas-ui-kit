@@ -5,7 +5,7 @@
   <h2 id="au-select">Выпадающий список</h2>
   <div class="demo-item">
     <div style="width: 300px;">
-    <au-select
+    <au-select style="margin-bottom: 8px;"
       v-model="selectModel"
       :list="selectListDemo"
       value-field="title"
@@ -53,6 +53,7 @@
   close-on-select
 
   multiselect
+  clearable
   disabled
   inverse
   small

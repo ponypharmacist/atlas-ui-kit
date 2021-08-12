@@ -8,6 +8,7 @@
         <th v-if="selectable" class="checkbox-cell">
           <div class="cell-content">
             <au-checkbox
+              v-show="!isLoading"
               :value="selectionSummary"
               :partial="selectionSummaryPartial"
               @click.native="$emit('selectAll')"
@@ -85,7 +86,7 @@
 
       <!-- Если разрешены массовые действия -->
       <tr
-        v-if="selectable && pageContent.length"
+        v-if="selectable && pageContent.length && !isLoading"
         class="mass-actions"
       >
         <td class="checkbox-cell">
@@ -106,13 +107,23 @@
       </tr>
 
       <!-- Если ничего не нашли/не нафильтровали -->
-      <tr>
+      <tr v-if="!pageContent.length && !isLoading">
         <td
           class="not-found"
-          v-if="!pageContent.length"
           :colspan="colspanNotFound"
         >
           <div class="cell-content">Ничего не найдено</div>
+        </td>
+      </tr>
+
+      <tr v-if="isLoading">
+        <td
+          class="not-found"
+          :colspan="colspanNotFound"
+        >
+          <div class="cell-content">
+            <au-spinner color="teal"/>
+          </div>
         </td>
       </tr>
     </tbody>
@@ -120,6 +131,7 @@
 
   <!-- Пагинация -->
   <au-pagination
+    v-if="!hidePagination && !isLoading"
     :page="pageCurrent"
     :per-page="itemsPerPage"
     :total="items.length"
@@ -127,6 +139,8 @@
     @changePage="changePage"
     @changePerPage="changePerPage"
   />
+
+  <div v-if="isLoading && !hidePagination" class="pagination-placeholder"/>
 </div>
 </template>
 
@@ -159,18 +173,18 @@ export default {
       type: Object,
       default: () => {},
     },
-    // pageCurrent: {
-    //   type: Number,
-    //   default: 1,
-    // },
-    // itemsPerPage: {
-    //   type: Number,
-    //   default: 5,
-    // },
     // Оформление
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
     noDataText: {
       type: String,
       default: 'По вашему запросу ничего не подошло',
+    },
+    hidePagination: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -227,6 +241,9 @@ export default {
 
     // Выделяем содержимое текущей страницы из списка элементов
     pageContent() {
+      // Возможно, не лучший подход
+      if (this.isLoading) return [];
+
       const startAt = (this.pageCurrent - 1) * this.itemsPerPage;
       const endAt = (this.pageCurrent) * this.itemsPerPage;
 
@@ -391,5 +408,11 @@ export default {
   &:hover {
     background-color: $blue!important;
   }
+}
+
+.pagination-placeholder {
+  height: 32px;
+  background-color: #fafafa;
+  border-radius: 5px;
 }
 </style>

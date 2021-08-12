@@ -4,6 +4,7 @@
     :class="classObject"
     :id="`au-select--${selectId}`"
   >
+
     <label v-if="label">{{ label }}</label>
 
     <div
@@ -11,20 +12,32 @@
       class="au-select-selected"
       @click="showList()"
     >
-      <template v-if="isValidValue">
-        <template v-if="!multiselect">{{ selectedText }}</template>
+      <au-icon
+        v-if="clearable && isValidValue"
+        class="au-select-clear"
+        icon="mdi-close"
+        :size="20"
+        color="#aaa"
+        @click.native.stop="model = null"
+      />
 
-        <template v-else>
-          <div class="chips">
-            <div
-              v-for="(item, index) in selectedText"
-              :key="index"
-              v-text="item"
-              class="chips-item"
-              @click.stop="value.slice(index, 1)"
-            />
-          </div>
-        </template>
+      <template v-if="isValidValue">
+        <span
+          v-if="!multiselect"
+          class="au-select-text"
+        >
+          {{ selectedText }}
+        </span>
+
+        <div v-else class="chips">
+          <div
+            v-for="(item, index) in selectedText"
+            :key="index"
+            v-text="item"
+            class="chips-item"
+            @click.stop="model.splice(index, 1)"
+          />
+        </div>
       </template>
 
       <span
@@ -34,6 +47,7 @@
       />
     </div>
 
+    <!-- List -->
     <ul
       :class="[{
         active: isActive,
@@ -133,6 +147,11 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    clearable: {
+      type: Boolean,
+      default: true,
+    },
     disabled: {
       type: Boolean,
       default: false,
@@ -175,6 +194,16 @@ export default {
       };
     },
 
+    model: {
+      get() {
+        return this.value;
+      },
+
+      set(newValue) {
+        this.$emit('change', newValue);
+      },
+    },
+
     listData() {
       if (!this.searchQuery || this.searchQuery === '') return this.list;
 
@@ -188,12 +217,12 @@ export default {
 
     selectedText() {
       if (Array.isArray(this.value)) {
-        return this.value.map((_) => {
-          if (_[this.valueField]) return _[this.valueField];
-          if (_.value) return _.value;
+        return this.value.map((chip) => {
+          if (chip[this.valueField]) return chip[this.valueField];
+          if (chip.value) return chip.value;
 
           const reference = this.list
-            .find((item) => item[this.idField] === _);
+            .find((item) => item[this.idField] === chip);
           if (reference) return reference[this.valueField];
 
           return 'Label not found';
@@ -204,7 +233,7 @@ export default {
         return this.value[this.valueField] || this.value.value;
       }
 
-      const reference = this.list.find((_) => _[this.idField] === this.value);
+      const reference = this.list.find((item) => item[this.idField] === this.value);
       if (reference) return reference[this.valueField];
 
       return this.value;
@@ -212,6 +241,7 @@ export default {
 
     isValidValue() {
       if (this.multiselect) return Array.isArray(this.value) && this.value.length;
+
       return this.value !== null;
     },
   },
@@ -221,21 +251,21 @@ export default {
       const readyValue = this.getSelectedValue(item);
 
       if (!this.multiselect && this.value === readyValue) {
-        const newValue = null;
-        this.$emit('change', newValue);
+        this.model = null;
         return;
       }
 
-      if (this.multiselect && (this.value || []).includes(readyValue)) {
-        const index = this.value.findIndex((_) => _ === readyValue);
-        let newValue = [...this.value];
+      if (this.multiselect && this.value?.includes(readyValue)) {
+        const index = this.value.findIndex((i) => i === readyValue);
+        const newValue = [...this.value];
+
         newValue.splice(index, 1);
-        newValue = newValue.filter(Boolean);
-        this.$emit('change', newValue);
+
+        this.model = newValue.filter(Boolean);
         return;
       }
 
-      this.$emit('change', this.multiselect ? [...(this.value || []), readyValue] : readyValue);
+      this.model = this.multiselect ? [...(this.value || []), readyValue] : readyValue;
 
       if (this.closeOnSelect) {
         this.onClickAway();
@@ -428,6 +458,16 @@ export default {
     }
   }
 
+  .au-select-clear {
+    position: absolute;
+    right: 34px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
   .au-select-item {
     &:hover {
       background-color: $gray-blue-border;
@@ -448,6 +488,7 @@ export default {
     }
   }
 
+  // List
   $max-list-height: 160;
 
   .au-select-list {
@@ -501,6 +542,13 @@ export default {
       background-clip: border-box;
       cursor: pointer;
     }
+  }
+
+  .au-select-text {
+    display: block;
+    max-width: calc(100% - 48px);
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /* todo add chips for all sizes */
