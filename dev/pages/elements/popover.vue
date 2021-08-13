@@ -8,35 +8,35 @@
       <au-popover placement="bottom">
         <au-button icon="mdi-arrow-down" label="bottom"/>
         <template #popover>
-          <div>Недоступные действия</div>
+          <div style="padding: 12px;">Содержимое <br/> поповера</div>
         </template>
       </au-popover>
 
       <au-popover placement="right">
         <au-button icon="mdi-arrow-right" label="right"/>
         <template #popover>
-          <div>Недоступные <br/> действия</div>
+          <div style="padding: 12px;">Содержимое <br/> поповера</div>
         </template>
       </au-popover>
 
       <au-popover placement="top">
         <au-button icon="mdi-arrow-up" label="top"/>
         <template #popover>
-          <div>Недоступные <br/> действия</div>
+          <div style="padding: 12px;">Содержимое <br/> поповера</div>
         </template>
       </au-popover>
 
       <au-popover placement="left">
         <au-button icon="mdi-arrow-left" label="left"/>
         <template #popover>
-          <div>Недоступные <br/> действия</div>
+          <div style="padding: 12px;">Содержимое <br/> поповера</div>
         </template>
       </au-popover>
 
       <au-popover placement="top" trigger="click">
         <au-icon icon="mdi-cursor-default-click" :size="24" color="salmon"/>
         <template #popover>
-          <div>Недоступные <br/> действия</div>
+          <div style="padding: 12px;" v-close-popover>Содержимое <br/> поповера</div>
         </template>
       </au-popover>
     </div>
@@ -56,6 +56,15 @@
     <div class="d-flex">
       <au-tooltip content="Hello, world!">
         <au-button label="Hover me!"/>
+      </au-tooltip>
+      <au-tooltip content="Right placement" placement="right">
+        <au-button label="Right"/>
+      </au-tooltip>
+      <au-tooltip content="Bottom placement" placement="bottom">
+        <au-button label="Bottom"/>
+      </au-tooltip>
+      <au-tooltip content="Left placement" placement="left">
+        <au-button label="Left"/>
       </au-tooltip>
     </div>
 

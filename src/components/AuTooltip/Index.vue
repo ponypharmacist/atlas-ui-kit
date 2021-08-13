@@ -38,8 +38,8 @@ export default {
         // targetClasses: ['it-has-a-tooltip'],
         offset: this.offset,
         delay: {
-          show: 200,
-          hide: 200,
+          show: 500,
+          hide: 400,
         },
       };
     },

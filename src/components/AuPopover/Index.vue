@@ -16,7 +16,10 @@
 </template>
 
 <script>
-import { VPopover } from 'v-tooltip';
+import Vue from 'vue';
+import { VPopover, VClosePopover } from 'v-tooltip';
+
+Vue.directive('close-popover', VClosePopover);
 
 export default {
   name: 'au-popover',
@@ -41,11 +44,20 @@ export default {
 </script>
 
 <style lang="scss">
+$arrow-small: 5px;
+$arrow-big: 10px;
+
 .tooltip {
   display: block !important;
   z-index: 10000;
   box-shadow: 0 0 29px rgba(11, 66, 136, 0.3), 0 0 9px rgba(11, 66, 136, 0.12);
   font-family: inherit;
+
+  &:not(.au-popover) {
+    font-size: 11px;
+    line-height: 14px;
+    font-weight: 500;
+  }
 
   .tooltip-inner {
     background: black;
@@ -54,73 +66,102 @@ export default {
     padding: 5px 10px 4px;
   }
 
-  .tooltip-arrow {
+  .tooltip-arrow,
+  .popover-arrow {
     width: 0;
     height: 0;
     border-style: solid;
     position: absolute;
-    margin: 10px;
+    margin: $arrow-small;
     border-color: black;
     z-index: 1;
   }
 
+  .popover-arrow {
+    margin: 10px;
+  }
+
   &[x-placement^="top"] {
-    margin-bottom: 10px;
+    margin-bottom: $arrow-small;
 
     .tooltip-arrow {
-      border-width: 10px 10px 0 10px;
+      border-width: $arrow-small $arrow-small 0 $arrow-small;
       border-left-color: transparent !important;
       border-right-color: transparent !important;
       border-bottom-color: transparent !important;
-      bottom: -10px;
-      left: calc(50% - 10px);
+      bottom: -$arrow-small;
+      left: calc(50% - #{$arrow-small});
       margin-top: 0;
       margin-bottom: 0;
+    }
+
+    .popover-arrow {
+      border-width: 10px 10px 0 10px;
+      bottom: -10px;
+      left: calc(50% - 10px);
     }
   }
 
   &[x-placement^="bottom"] {
-    margin-top: 10px;
+    margin-top: $arrow-small;
 
     .tooltip-arrow {
-      border-width: 0 10px 10px 10px;
+      border-width: 0 $arrow-small $arrow-small $arrow-small;
       border-left-color: transparent !important;
       border-right-color: transparent !important;
       border-top-color: transparent !important;
-      top: -10px;
-      left: calc(50% - 10px);
+      top: -$arrow-small;
+      left: calc(50% - #{$arrow-small});
       margin-top: 0;
       margin-bottom: 0;
+    }
+
+    .popover-arrow {
+      border-width: 0 10px 10px 10px;
+      top: -10px;
+      left: calc(50% - 10px);
     }
   }
 
   &[x-placement^="right"] {
-    margin-left: 8px;
+    margin-left: $arrow-small;
 
     .tooltip-arrow {
-      border-width: 8px 8px 8px 0;
+      border-width: $arrow-small $arrow-small $arrow-small 0;
       border-left-color: transparent !important;
       border-top-color: transparent !important;
       border-bottom-color: transparent !important;
-      left: -8px;
-      top: calc(50% - 8px);
+      left: -$arrow-small;
+      top: calc(50% - #{$arrow-small});
       margin-left: 0;
       margin-right: 0;
+    }
+
+    .popover-arrow {
+      border-width: 8px 8px 8px 0;
+      left: -8px;
+      top: calc(50% - 8px);
     }
   }
 
   &[x-placement^="left"] {
-    margin-right: 8px;
+    margin-right: $arrow-small;
 
     .tooltip-arrow {
-      border-width: 8px 0 8px 8px;
+      border-width: $arrow-small 0 $arrow-small $arrow-small;
       border-top-color: transparent !important;
       border-right-color: transparent !important;
       border-bottom-color: transparent !important;
-      right: -8px;
-      top: calc(50% - 8px);
+      right: -$arrow-small;
+      top: calc(50% - #{$arrow-small});
       margin-left: 0;
       margin-right: 0;
+    }
+
+    .popover-arrow {
+      border-width: 8px 0 8px 8px;
+      right: -8px;
+      top: calc(50% - 8px);
     }
   }
 
@@ -138,6 +179,11 @@ export default {
     .popover-arrow {
       border-color: $color;
     }
+
+    &[x-placement^="top"]    { margin-bottom: 10px; }
+    &[x-placement^="bottom"] { margin-top: 10px; }
+    &[x-placement^="right"]  { margin-left: 8px; }
+    &[x-placement^="left"]   { margin-right: 8px; }
   }
 
   &[aria-hidden='true'] {

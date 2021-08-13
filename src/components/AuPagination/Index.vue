@@ -48,9 +48,10 @@
       <au-select
         v-model="perPageSelection"
         :list="perPageOptions.filter((o) => o <= total)"
+        :clearable="false"
         small
         close-on-select
-        @change="perPageChange"
+        @change="changePerPage"
       />
     </div>
   </nav>
@@ -116,7 +117,7 @@ export default {
   },
 
   methods: {
-    perPageChange(num) {
+    changePerPage(num) {
       this.$emit('changePerPage', num);
     },
   },

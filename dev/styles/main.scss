@@ -18,10 +18,10 @@ header, menu, nav, footer, article, aside {
 
 html {
   min-height: 100%;
+  @include rubikRegular;
 }
 
 #app {
-  @include rubikRegular;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;

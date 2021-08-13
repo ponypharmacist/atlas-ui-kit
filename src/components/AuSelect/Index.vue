@@ -191,6 +191,7 @@ export default {
         'is-tiny': this.tiny,
         'is-inverse': this.inverse,
         'is-disabled': this.disabled,
+        'is-clearable': this.clearable,
       };
     },
 
@@ -332,6 +333,7 @@ export default {
   min-height: 40px;
   min-width: 60px;
   font-size: 14px;
+  user-select: none;
 
   label {
     display: inline-block;
@@ -546,9 +548,15 @@ export default {
 
   .au-select-text {
     display: block;
-    max-width: calc(100% - 48px);
+    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  &.is-clearable {
+    .au-select-text {
+      max-width: calc(100% - 48px);
+    }
   }
 
   /* todo add chips for all sizes */

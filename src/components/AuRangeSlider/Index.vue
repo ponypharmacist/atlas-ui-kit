@@ -209,6 +209,23 @@ export default {
       line-height: 14px;
     }
   }
+
+  &.is-disabled {
+    user-select: none;
+    pointer-events: none;
+
+    .vue-slider-dot {
+      border-color: #888;
+    }
+
+    .vue-slider-process {
+      background-color: #888;
+    }
+
+    .vue-slider-rail {
+      background-color: #888;
+    }
+  }
 }
 
 </style>
