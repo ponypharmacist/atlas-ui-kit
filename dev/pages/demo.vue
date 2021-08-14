@@ -66,15 +66,17 @@ Vue.use(atlasUiKit);</pre>
   <div class="demo-item">
     <au-pagination
       :page="1"
-      :per-page="5"
       :total="45"
       :pages-count="9"
+      :per-page="paginationPerPage"
+      @changePerPage="changePerPage"
     />
   <pre>&lt;au-pagination
-  page
-  per-page
-  toptal
-  pages-count
+  page: Number | 1
+  total: Number
+  pages-count: Number
+  per-page: Number | 10
+  per-page-options: Array | [10, 25, 50, 100]
   @changePage - возвращает новое значение страницы
   @changePerPage - новый размер страницы
 /&gt;</pre>
@@ -160,12 +162,14 @@ export default {
 
       // Demo-values
       colorPicked: '#fa4444',
-      userObject: {
-        firstName: 'Ivan',
-        lastName: 'Ivanoff',
-        isOnline: true,
-      },
+      paginationPerPage: 10,
     };
+  },
+
+  methods: {
+    changePerPage(num) {
+      this.paginationPerPage = num;
+    },
   },
 };
 </script>

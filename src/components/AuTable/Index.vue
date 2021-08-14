@@ -132,10 +132,9 @@
   <!-- Пагинация -->
   <au-pagination
     v-if="!hidePagination && !isLoading"
-    :page="pageCurrent"
-    :per-page="itemsPerPage"
+    :page="tableSettings.page"
+    :per-page="tableSettings.perPage"
     :total="items.length"
-    :pages-count="pagesCount"
     @changePage="changePage"
     @changePerPage="changePerPage"
   />
@@ -145,8 +144,6 @@
 </template>
 
 <script>
-import get from 'lodash/get';
-
 export default {
   name: 'au-table',
 
@@ -169,9 +166,14 @@ export default {
       default: false,
     },
     // Внешние настройки пагинации и сортировки
-    sort: {
+    tableSettings: {
       type: Object,
-      default: () => {},
+      default: () => ({
+        sortKey: 'name',
+        sortDirection: 'asc',
+        page: 1,
+        perPage: 10,
+      }),
     },
     // Оформление
     isLoading: {
@@ -186,13 +188,6 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-
-  data() {
-    return {
-      pageCurrent: 1,
-      itemsPerPage: 5,
-    };
   },
 
   computed: {
@@ -230,11 +225,14 @@ export default {
     },
 
     iconSort() {
-      return (column) => {
-        const sameKey = this.sort.key === (column.sortKey || column.key);
+      const key = this.tableSettings.sortKey;
+      const direction = this.tableSettings.sortDirection;
 
-        if (sameKey && this.sort.direction === 'asc') return 'icon-sort-asc';
-        if (sameKey && this.sort.direction === 'desc') return 'icon-sort-desc';
+      return (column) => {
+        const sameKey = key === (column.sortKey || column.key);
+
+        if (sameKey && direction === 'asc') return 'icon-sort-asc';
+        if (sameKey && direction === 'desc') return 'icon-sort-desc';
         return 'icon-sort';
       };
     },
@@ -244,14 +242,10 @@ export default {
       // Возможно, не лучший подход
       if (this.isLoading) return [];
 
-      const startAt = (this.pageCurrent - 1) * this.itemsPerPage;
-      const endAt = (this.pageCurrent) * this.itemsPerPage;
+      const startAt = (this.tableSettings.page - 1) * this.tableSettings.perPage;
+      const endAt = (this.tableSettings.page) * this.tableSettings.perPage;
 
       return this.items.slice(startAt, endAt);
-    },
-
-    pagesCount() {
-      return Math.ceil(this.items.length / this.itemsPerPage, 10);
     },
   },
 
@@ -260,38 +254,44 @@ export default {
     onColumnClick(column) {
       if (!column.sortable) return;
 
-      const sort = { ...this.sort };
-      const sortKey = get(column, 'sortKey', column.key);
+      const tableSettings = { ...this.tableSettings };
+      const sortKey = column.sortKey || column.key;
 
-      if (sort.key !== sortKey) sort.direction = null;
+      if (tableSettings.sortKey !== sortKey) tableSettings.sortDirection = null;
 
-      sort.key = sortKey;
+      tableSettings.sortKey = sortKey;
 
-      switch (sort.direction) {
+      switch (tableSettings.sortDirection) {
         case null:
-          sort.direction = 'asc';
+          tableSettings.sortDirection = 'asc';
           break;
         case 'asc':
-          sort.direction = 'desc';
+          tableSettings.sortDirection = 'desc';
           break;
         case 'desc':
         default:
-          sort.key = null;
-          sort.direction = null;
+          tableSettings.sortKey = null;
+          tableSettings.sortDirection = null;
           break;
       }
 
-      this.$emit('runSort', { ...sort });
+      this.$emit('changeSettings', { ...tableSettings });
     },
 
     // Пагинация
     changePage(page) {
-      this.pageCurrent = page;
+      this.$emit('changeSettings', {
+        ...this.tableSettings,
+        page,
+      });
     },
 
     changePerPage(perPage) {
-      this.pageCurrent = 1;
-      this.itemsPerPage = perPage;
+      this.$emit('changeSettings', {
+        ...this.tableSettings,
+        page: 1,
+        perPage,
+      });
     },
   },
 };

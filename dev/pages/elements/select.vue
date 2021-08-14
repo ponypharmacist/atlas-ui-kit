@@ -14,7 +14,7 @@
     />
     </div>
     <au-select
-      v-model="selectModel"
+      v-model="selectModelMulti"
       :list="selectListDemo"
       value-field="title"
       id-field="id"
@@ -75,6 +75,7 @@ export default {
   data() {
     return {
       selectModel: null,
+      selectModelMulti: null,
       selectListDemo: [
         { id: 1, title: 'Option One' },
         { id: 2, title: 'Option Two' },

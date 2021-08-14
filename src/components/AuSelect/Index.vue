@@ -140,7 +140,7 @@ export default {
     },
     closeOnSelect: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     multiselect: {
@@ -252,7 +252,7 @@ export default {
       const readyValue = this.getSelectedValue(item);
 
       if (!this.multiselect && this.value === readyValue) {
-        this.model = null;
+        // this.model = null;
         return;
       }
 
@@ -268,7 +268,7 @@ export default {
 
       this.model = this.multiselect ? [...(this.value || []), readyValue] : readyValue;
 
-      if (this.closeOnSelect) {
+      if (this.closeOnSelect && !this.multiselect) {
         this.onClickAway();
       }
     },

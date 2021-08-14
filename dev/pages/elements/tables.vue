@@ -6,12 +6,12 @@
     <au-table
       :items="tableData"
       :columns="tableColumns"
-      :sort="currentSort"
+      :table-settings="tableSettings"
       selectable
       settings-icon
       no-data-text="По вашему запросу ничего не найдено"
-      @runSort="sort"
-      @settings="showPopup = !showPopup"
+      @changeSettings="changeSettings"
+      @settingsIcon="showPopup = !showPopup"
       @selectOne="selectOne"
       @selectAll="selectAll"
     >
@@ -30,7 +30,9 @@
   <pre>&lt;au-table
   items: Array - данные
   columns: Array - список столбцов
-  sort: Object - default {} | { key: 'name', direction: 'asc' }
+  table-settings: Object - default {
+    sortKey: 'name', sortDirection: 'asc', page: 1, perPage: 10,
+  }
   selectable
 
   settings-icon - включает отображение иконки настроек
@@ -38,8 +40,8 @@
   hide-pagination
   is-loading
 
-  @runSort - срабатывает при изменении сортировки столбцов
-  @settings - срабатывате по клику на settings-icon
+  @changeSettings - при изменении сортировки или пагинации (обновление tableSettings)
+  @settingsIcon - срабатывате по клику на settings-icon
   @selectOne - возвращает id выбранного объекта для внешней обработки
   @selectAll - при клике на верховный чекбокс для общего (раз-)выделения
 &gt;
@@ -85,26 +87,6 @@ export default {
   data() {
     return {
       showPopup: false,
-
-      // Table
-
-      // tableData: [
-      //   { name: 'Дмитрий Шугарович', role: 'Аналитик' },
-      //   { name: 'Владислав Никсин', role: 'Редактор' },
-      // ],
-      // tableColumns: [
-      //   {
-      //     value: 'name',
-      //     name: 'Пользователь',
-      //     sortable: true,
-      //     iconName: 'icon-avatar',
-      //     width: 15,
-      //   },
-      //   {
-      //     value: 'role',
-      //     name: 'Роль',
-      //   },
-      // ],
 
       tableData: [
         {
@@ -207,6 +189,26 @@ export default {
           views: 'Нейтральный',
           version: 'Версия 3 от 09.08.2021',
         },
+        {
+          selected: false,
+          id: 11,
+          name: 'Серый Гэндальф Сауронович',
+          birthDate: '12.08.1978',
+          job: 'Методолог',
+          region: 'г. Москва',
+          views: 'Нейтральный',
+          version: 'Версия 3 от 09.08.2021',
+        },
+        {
+          selected: false,
+          id: 12,
+          name: 'Серый Гэндальф Сауронович',
+          birthDate: '12.08.1978',
+          job: 'Методолог',
+          region: 'г. Москва',
+          views: 'Нейтральный',
+          version: 'Версия 3 от 09.08.2021',
+        },
       ],
 
       tableColumns: [
@@ -251,13 +253,18 @@ export default {
         },
       ],
 
-      currentSort: { key: 'name', direction: 'desc' },
+      tableSettings: {
+        sortKey: 'name',
+        sortDirection: 'asc',
+        page: 1,
+        perPage: 10,
+      },
     };
   },
 
   methods: {
-    sort(sorting) {
-      this.currentSort = sorting;
+    changeSettings(sorting) {
+      this.tableSettings = sorting;
     },
 
     selectOne(id) {

@@ -1533,7 +1533,7 @@ function isSymbol(value) {
 var isSymbol_1 = isSymbol;
 
 /** Used as references for various `Number` constants. */
-var INFINITY$1 = 1 / 0;
+var INFINITY = 1 / 0;
 
 /** Used to convert symbols to primitives and strings. */
 var symbolProto$1 = _Symbol ? _Symbol.prototype : undefined,
@@ -1560,7 +1560,7 @@ function baseToString(value) {
     return symbolToString ? symbolToString.call(value) : '';
   }
   var result = (value + '');
-  return (result == '0' && (1 / value) == -INFINITY$1) ? '-0' : result;
+  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
 }
 
 var _baseToString = baseToString;
@@ -44435,247 +44435,150 @@ const __vue_component__$c = /*#__PURE__*/normalizeComponent$2({
 
 var __vue_component__$d = __vue_component__$c;
 
-/** Used to match property names within property paths. */
-var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
-    reIsPlainProp = /^\w*$/;
-
-/**
- * Checks if `value` is a property name and not a property path.
- *
- * @private
- * @param {*} value The value to check.
- * @param {Object} [object] The object to query keys on.
- * @returns {boolean} Returns `true` if `value` is a property name, else `false`.
- */
-function isKey(value, object) {
-  if (isArray_1(value)) {
-    return false;
-  }
-  var type = typeof value;
-  if (type == 'number' || type == 'symbol' || type == 'boolean' ||
-      value == null || isSymbol_1(value)) {
-    return true;
-  }
-  return reIsPlainProp.test(value) || !reIsDeepProp.test(value) ||
-    (object != null && value in Object(object));
-}
-
-var _isKey = isKey;
-
-/** Error message constants. */
-var FUNC_ERROR_TEXT = 'Expected a function';
-
-/**
- * Creates a function that memoizes the result of `func`. If `resolver` is
- * provided, it determines the cache key for storing the result based on the
- * arguments provided to the memoized function. By default, the first argument
- * provided to the memoized function is used as the map cache key. The `func`
- * is invoked with the `this` binding of the memoized function.
- *
- * **Note:** The cache is exposed as the `cache` property on the memoized
- * function. Its creation may be customized by replacing the `_.memoize.Cache`
- * constructor with one whose instances implement the
- * [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
- * method interface of `clear`, `delete`, `get`, `has`, and `set`.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Function
- * @param {Function} func The function to have its output memoized.
- * @param {Function} [resolver] The function to resolve the cache key.
- * @returns {Function} Returns the new memoized function.
- * @example
- *
- * var object = { 'a': 1, 'b': 2 };
- * var other = { 'c': 3, 'd': 4 };
- *
- * var values = _.memoize(_.values);
- * values(object);
- * // => [1, 2]
- *
- * values(other);
- * // => [3, 4]
- *
- * object.a = 2;
- * values(object);
- * // => [1, 2]
- *
- * // Modify the result cache.
- * values.cache.set(object, ['a', 'b']);
- * values(object);
- * // => ['a', 'b']
- *
- * // Replace `_.memoize.Cache`.
- * _.memoize.Cache = WeakMap;
- */
-function memoize(func, resolver) {
-  if (typeof func != 'function' || (resolver != null && typeof resolver != 'function')) {
-    throw new TypeError(FUNC_ERROR_TEXT);
-  }
-  var memoized = function() {
-    var args = arguments,
-        key = resolver ? resolver.apply(this, args) : args[0],
-        cache = memoized.cache;
-
-    if (cache.has(key)) {
-      return cache.get(key);
-    }
-    var result = func.apply(this, args);
-    memoized.cache = cache.set(key, result) || cache;
-    return result;
-  };
-  memoized.cache = new (memoize.Cache || _MapCache);
-  return memoized;
-}
-
-// Expose `MapCache`.
-memoize.Cache = _MapCache;
-
-var memoize_1 = memoize;
-
-/** Used as the maximum memoize cache size. */
-var MAX_MEMOIZE_SIZE = 500;
-
-/**
- * A specialized version of `_.memoize` which clears the memoized function's
- * cache when it exceeds `MAX_MEMOIZE_SIZE`.
- *
- * @private
- * @param {Function} func The function to have its output memoized.
- * @returns {Function} Returns the new memoized function.
- */
-function memoizeCapped(func) {
-  var result = memoize_1(func, function(key) {
-    if (cache.size === MAX_MEMOIZE_SIZE) {
-      cache.clear();
-    }
-    return key;
-  });
-
-  var cache = result.cache;
-  return result;
-}
-
-var _memoizeCapped = memoizeCapped;
-
-/** Used to match property names within property paths. */
-var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
-
-/** Used to match backslashes in property paths. */
-var reEscapeChar = /\\(\\)?/g;
-
-/**
- * Converts `string` to a property path array.
- *
- * @private
- * @param {string} string The string to convert.
- * @returns {Array} Returns the property path array.
- */
-var stringToPath = _memoizeCapped(function(string) {
-  var result = [];
-  if (string.charCodeAt(0) === 46 /* . */) {
-    result.push('');
-  }
-  string.replace(rePropName, function(match, number, quote, subString) {
-    result.push(quote ? subString.replace(reEscapeChar, '$1') : (number || match));
-  });
-  return result;
-});
-
-var _stringToPath = stringToPath;
-
-/**
- * Casts `value` to a path array if it's not one.
- *
- * @private
- * @param {*} value The value to inspect.
- * @param {Object} [object] The object to query keys on.
- * @returns {Array} Returns the cast property path array.
- */
-function castPath(value, object) {
-  if (isArray_1(value)) {
-    return value;
-  }
-  return _isKey(value, object) ? [value] : _stringToPath(toString_1(value));
-}
-
-var _castPath = castPath;
-
-/** Used as references for various `Number` constants. */
-var INFINITY = 1 / 0;
-
-/**
- * Converts `value` to a string key if it's not a string or symbol.
- *
- * @private
- * @param {*} value The value to inspect.
- * @returns {string|symbol} Returns the key.
- */
-function toKey(value) {
-  if (typeof value == 'string' || isSymbol_1(value)) {
-    return value;
-  }
-  var result = (value + '');
-  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
-}
-
-var _toKey = toKey;
-
-/**
- * The base implementation of `_.get` without support for default values.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {Array|string} path The path of the property to get.
- * @returns {*} Returns the resolved value.
- */
-function baseGet(object, path) {
-  path = _castPath(path, object);
-
-  var index = 0,
-      length = path.length;
-
-  while (object != null && index < length) {
-    object = object[_toKey(path[index++])];
-  }
-  return (index && index == length) ? object : undefined;
-}
-
-var _baseGet = baseGet;
-
-/**
- * Gets the value at `path` of `object`. If the resolved value is
- * `undefined`, the `defaultValue` is returned in its place.
- *
- * @static
- * @memberOf _
- * @since 3.7.0
- * @category Object
- * @param {Object} object The object to query.
- * @param {Array|string} path The path of the property to get.
- * @param {*} [defaultValue] The value returned for `undefined` resolved values.
- * @returns {*} Returns the resolved value.
- * @example
- *
- * var object = { 'a': [{ 'b': { 'c': 3 } }] };
- *
- * _.get(object, 'a[0].b.c');
- * // => 3
- *
- * _.get(object, ['a', '0', 'b', 'c']);
- * // => 3
- *
- * _.get(object, 'a.b.c', 'default');
- * // => 'default'
- */
-function get(object, path, defaultValue) {
-  var result = object == null ? undefined : _baseGet(object, path);
-  return result === undefined ? defaultValue : result;
-}
-
-var get_1 = get;
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 var script$7 = {
   name: 'au-table',
@@ -44698,9 +44601,14 @@ var script$7 = {
       default: false
     },
     // Внешние настройки пагинации и сортировки
-    sort: {
+    tableSettings: {
       type: Object,
-      default: () => {}
+      default: () => ({
+        sortKey: 'name',
+        sortDirection: 'asc',
+        page: 1,
+        perPage: 10
+      })
     },
     // Оформление
     isLoading: {
@@ -44716,14 +44624,6 @@ var script$7 = {
       default: false
     }
   },
-
-  data() {
-    return {
-      pageCurrent: 1,
-      itemsPerPage: 5
-    };
-  },
-
   computed: {
     // Считаем colspan
     colspanMassActions() {
@@ -44756,10 +44656,12 @@ var script$7 = {
     },
 
     iconSort() {
+      const key = this.tableSettings.sortKey;
+      const direction = this.tableSettings.sortDirection;
       return column => {
-        const sameKey = this.sort.key === (column.sortKey || column.key);
-        if (sameKey && this.sort.direction === 'asc') return 'icon-sort-asc';
-        if (sameKey && this.sort.direction === 'desc') return 'icon-sort-desc';
+        const sameKey = key === (column.sortKey || column.key);
+        if (sameKey && direction === 'asc') return 'icon-sort-asc';
+        if (sameKey && direction === 'desc') return 'icon-sort-desc';
         return 'icon-sort';
       };
     },
@@ -44768,13 +44670,9 @@ var script$7 = {
     pageContent() {
       // Возможно, не лучший подход
       if (this.isLoading) return [];
-      const startAt = (this.pageCurrent - 1) * this.itemsPerPage;
-      const endAt = this.pageCurrent * this.itemsPerPage;
+      const startAt = (this.tableSettings.page - 1) * this.tableSettings.perPage;
+      const endAt = this.tableSettings.page * this.tableSettings.perPage;
       return this.items.slice(startAt, endAt);
-    },
-
-    pagesCount() {
-      return Math.ceil(this.items.length / this.itemsPerPage, 10);
     }
 
   },
@@ -44782,40 +44680,44 @@ var script$7 = {
     // Эмитим данные о сортировке при клике по заголовку столбца
     onColumnClick(column) {
       if (!column.sortable) return;
-      const sort = { ...this.sort
+      const tableSettings = { ...this.tableSettings
       };
-      const sortKey = get_1(column, 'sortKey', column.key);
-      if (sort.key !== sortKey) sort.direction = null;
-      sort.key = sortKey;
+      const sortKey = column.sortKey || column.key;
+      if (tableSettings.sortKey !== sortKey) tableSettings.sortDirection = null;
+      tableSettings.sortKey = sortKey;
 
-      switch (sort.direction) {
+      switch (tableSettings.sortDirection) {
         case null:
-          sort.direction = 'asc';
+          tableSettings.sortDirection = 'asc';
           break;
 
         case 'asc':
-          sort.direction = 'desc';
+          tableSettings.sortDirection = 'desc';
           break;
 
         case 'desc':
         default:
-          sort.key = null;
-          sort.direction = null;
+          tableSettings.sortKey = null;
+          tableSettings.sortDirection = null;
           break;
       }
 
-      this.$emit('runSort', { ...sort
+      this.$emit('changeSettings', { ...tableSettings
       });
     },
 
     // Пагинация
     changePage(page) {
-      this.pageCurrent = page;
+      this.$emit('changeSettings', { ...this.tableSettings,
+        page
+      });
     },
 
     changePerPage(perPage) {
-      this.pageCurrent = 1;
-      this.itemsPerPage = perPage;
+      this.$emit('changeSettings', { ...this.tableSettings,
+        page: 1,
+        perPage
+      });
     }
 
   }
@@ -44968,10 +44870,9 @@ var __vue_render__$7 = function () {
     }
   })], 1)])]) : _vm._e()], 2)]), _vm._v(" "), !_vm.hidePagination && !_vm.isLoading ? _c('au-pagination', {
     attrs: {
-      "page": _vm.pageCurrent,
-      "per-page": _vm.itemsPerPage,
-      "total": _vm.items.length,
-      "pages-count": _vm.pagesCount
+      "page": _vm.tableSettings.page,
+      "per-page": _vm.tableSettings.perPage,
+      "total": _vm.items.length
     },
     on: {
       "changePage": _vm.changePage,
@@ -44987,8 +44888,8 @@ var __vue_staticRenderFns__$7 = [];
 
 const __vue_inject_styles__$7 = function (inject) {
   if (!inject) return;
-  inject("data-v-353a1ebf_0", {
-    source: ".au-table[data-v-353a1ebf]{position:relative}.au-table table[data-v-353a1ebf]{width:100%;margin-bottom:16px;text-align:left;border-spacing:0;border-collapse:separate}.au-table thead th[data-v-353a1ebf]{font-weight:500;border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear;cursor:pointer}.au-table thead th[data-v-353a1ebf]:hover{border-color:#e1e9f7;background-color:#e1e8f5}.au-table thead th[data-v-353a1ebf]:not(:last-child){border-right:0}.au-table thead th:not(:last-child) .cell-content[data-v-353a1ebf]{padding-right:10px}.au-table thead th[data-v-353a1ebf]:first-child{border-radius:4px 0 0 4px}.au-table thead th[data-v-353a1ebf]:last-child{border-radius:0 4px 4px 0}.au-table tbody tr[data-v-353a1ebf]:nth-child(2n){background-color:#f3f6f9}.au-table td[data-v-353a1ebf],.au-table th[data-v-353a1ebf]{padding:0;vertical-align:middle}.au-table .mass-actions td[data-v-353a1ebf]{border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear}.au-table .mass-actions td[data-v-353a1ebf]:not(:last-child){border-right:0}.au-table .mass-actions td[data-v-353a1ebf]:first-child{border-radius:4px 0 0 4px}.au-table .mass-actions td[data-v-353a1ebf]:last-child{border-radius:0 4px 4px 0}.au-table .checkbox-cell[data-v-353a1ebf]{width:38px}.au-table .settings-cell[data-v-353a1ebf]{width:32px}.au-table .cell-content[data-v-353a1ebf]{display:flex;align-items:center;min-height:32px;padding:8px 11px;font-size:12px;line-height:16px}.au-table .cell-content.align-left[data-v-353a1ebf]{justify-content:flex-start}.au-table .cell-content.align-right[data-v-353a1ebf]{justify-content:flex-end}.au-table .cell-content.align-center[data-v-353a1ebf]{justify-content:center}.au-table .not-found[data-v-353a1ebf]{font-size:12px;line-height:16px;text-align:center;background-color:#f3f6f9}.au-table .not-found .cell-content[data-v-353a1ebf]{justify-content:center}.au-table .column-sorting[data-v-353a1ebf]{margin-left:auto}.au-table-settings[data-v-353a1ebf]{cursor:pointer}.au-table-settings[data-v-353a1ebf]:hover{background-color:#3f6ada!important}.pagination-placeholder[data-v-353a1ebf]{height:32px;background-color:#fafafa;border-radius:5px}",
+  inject("data-v-d270a9f6_0", {
+    source: ".au-table[data-v-d270a9f6]{position:relative}.au-table table[data-v-d270a9f6]{width:100%;margin-bottom:16px;text-align:left;border-spacing:0;border-collapse:separate}.au-table thead th[data-v-d270a9f6]{font-weight:500;border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear;cursor:pointer}.au-table thead th[data-v-d270a9f6]:hover{border-color:#e1e9f7;background-color:#e1e8f5}.au-table thead th[data-v-d270a9f6]:not(:last-child){border-right:0}.au-table thead th:not(:last-child) .cell-content[data-v-d270a9f6]{padding-right:10px}.au-table thead th[data-v-d270a9f6]:first-child{border-radius:4px 0 0 4px}.au-table thead th[data-v-d270a9f6]:last-child{border-radius:0 4px 4px 0}.au-table tbody tr[data-v-d270a9f6]:nth-child(2n){background-color:#f3f6f9}.au-table td[data-v-d270a9f6],.au-table th[data-v-d270a9f6]{padding:0;vertical-align:middle}.au-table .mass-actions td[data-v-d270a9f6]{border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear}.au-table .mass-actions td[data-v-d270a9f6]:not(:last-child){border-right:0}.au-table .mass-actions td[data-v-d270a9f6]:first-child{border-radius:4px 0 0 4px}.au-table .mass-actions td[data-v-d270a9f6]:last-child{border-radius:0 4px 4px 0}.au-table .checkbox-cell[data-v-d270a9f6]{width:38px}.au-table .settings-cell[data-v-d270a9f6]{width:32px}.au-table .cell-content[data-v-d270a9f6]{display:flex;align-items:center;min-height:32px;padding:8px 11px;font-size:12px;line-height:16px}.au-table .cell-content.align-left[data-v-d270a9f6]{justify-content:flex-start}.au-table .cell-content.align-right[data-v-d270a9f6]{justify-content:flex-end}.au-table .cell-content.align-center[data-v-d270a9f6]{justify-content:center}.au-table .not-found[data-v-d270a9f6]{font-size:12px;line-height:16px;text-align:center;background-color:#f3f6f9}.au-table .not-found .cell-content[data-v-d270a9f6]{justify-content:center}.au-table .column-sorting[data-v-d270a9f6]{margin-left:auto}.au-table-settings[data-v-d270a9f6]{cursor:pointer}.au-table-settings[data-v-d270a9f6]:hover{background-color:#3f6ada!important}.pagination-placeholder[data-v-d270a9f6]{height:32px;background-color:#fafafa;border-radius:5px}",
     map: undefined,
     media: undefined
   });
@@ -44996,7 +44897,7 @@ const __vue_inject_styles__$7 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$7 = "data-v-353a1ebf";
+const __vue_scope_id__$7 = "data-v-d270a9f6";
 /* module identifier */
 
 const __vue_module_identifier__$5 = undefined;
@@ -45073,6 +44974,7 @@ var __vue_component__$b = __vue_component__$a;
 //
 //
 //
+//
 var script$6 = {
   name: 'au-pagination',
   props: {
@@ -45080,28 +44982,28 @@ var script$6 = {
       type: Number,
       default: 1
     },
-    perPage: {
-      type: Number,
-      default: null
-    },
     total: {
       type: Number,
       default: null
     },
-    pagesCount: {
+    perPage: {
       type: Number,
-      default: null
+      default: 10
+    },
+    perPageOptions: {
+      type: Array,
+      default: () => [10, 25, 50, 100]
     }
   },
-
-  data() {
-    return {
-      perPageSelection: 5,
-      perPageOptions: [5, 10, 25, 50]
-    };
-  },
-
+  // data() {
+  //   return {
+  //   };
+  // },
   computed: {
+    pagesCount() {
+      return Math.ceil(this.total / this.perPage, 10);
+    },
+
     paginationItems() {
       const delta = 3;
       const left = this.page - delta;
@@ -45223,24 +45125,16 @@ var __vue_render__$6 = function () {
     staticClass: "au-pagination-center"
   }, [_vm._v("\n    Показаны записи с " + _vm._s((_vm.page - 1) * _vm.perPage + 1) + "\n     по " + _vm._s(_vm.page * _vm.perPage) + "\n     из " + _vm._s(_vm.total) + "\n  ")]), _vm._v(" "), _c('div', {
     staticClass: "au-pagination-right"
-  }, [_c('au-select', {
+  }, [_c('span', [_vm._v("Показывать по: ")]), _vm._v(" "), _c('au-select', {
     attrs: {
-      "list": _vm.perPageOptions.filter(function (o) {
-        return o <= _vm.total;
-      }),
+      "value": _vm.perPage,
+      "list": _vm.perPageOptions,
       "clearable": false,
       "small": "",
       "close-on-select": ""
     },
     on: {
       "change": _vm.changePerPage
-    },
-    model: {
-      value: _vm.perPageSelection,
-      callback: function ($$v) {
-        _vm.perPageSelection = $$v;
-      },
-      expression: "perPageSelection"
     }
   })], 1)]);
 };
@@ -45250,8 +45144,8 @@ var __vue_staticRenderFns__$6 = [];
 
 const __vue_inject_styles__$6 = function (inject) {
   if (!inject) return;
-  inject("data-v-7c579a3f_0", {
-    source: ".au-pagination[data-v-7c579a3f]{display:flex;align-items:center}.au-pagination-left[data-v-7c579a3f]{display:flex;align-items:center;margin-right:auto}.au-pagination-item[data-v-7c579a3f]{position:relative;display:flex;justify-content:center;align-items:center;font-size:12px;font-weight:500;background-color:#fff;border:1px solid #e0e8f0;border-left:none;width:32px;height:32px;transition:background-color .3s;cursor:pointer}.au-pagination-item[data-v-7c579a3f]:first-child{border-left:1px solid #e0e8f0}.au-pagination-item.active[data-v-7c579a3f]{background-color:#f0f4fb;pointer-events:none;cursor:default}.au-pagination-item.disabled[data-v-7c579a3f]{pointer-events:none;color:#e6e6e6}.au-pagination-item[data-v-7c579a3f]:hover{background-color:#f8fafb;color:#3f6ada}.au-pagination-item.end[data-v-7c579a3f],.au-pagination-item.next[data-v-7c579a3f],.au-pagination-item.prev[data-v-7c579a3f],.au-pagination-item.start[data-v-7c579a3f]{position:relative}.au-pagination-item.end[data-v-7c579a3f]:before,.au-pagination-item.next[data-v-7c579a3f]:before,.au-pagination-item.prev[data-v-7c579a3f]:before,.au-pagination-item.start[data-v-7c579a3f]:before{content:\"\";position:absolute;background-color:#000}.au-pagination-item.end[data-v-7c579a3f]:hover::before,.au-pagination-item.next[data-v-7c579a3f]:hover::before,.au-pagination-item.prev[data-v-7c579a3f]:hover::before,.au-pagination-item.start[data-v-7c579a3f]:hover::before{background-color:#3f6ada}.au-pagination-item.end.disabled[data-v-7c579a3f]::before,.au-pagination-item.next.disabled[data-v-7c579a3f]::before,.au-pagination-item.prev.disabled[data-v-7c579a3f]::before,.au-pagination-item.start.disabled[data-v-7c579a3f]::before{background-color:#aaa}.au-pagination-item.next[data-v-7c579a3f]:before,.au-pagination-item.prev[data-v-7c579a3f]:before{width:6px;height:10px;-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%}.au-pagination-item.end[data-v-7c579a3f]:before,.au-pagination-item.start[data-v-7c579a3f]:before{width:12px;height:10px;-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOS4xMSAyOCI+PHBhdGggZD0iTTE2LjM3IDE0Ljc0bC0xMi44NCAxM2ExLjA2IDEuMDYgMCAwMS0xLjQ5IDBIMkwuMzEgMjZhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTAuNjggMTQgLjMxIDMuNTNBMS4wNiAxLjA2IDAgMDEuMzEgMkwyIC4zMWExLjA2IDEuMDYgMCAwMTEuNDkgMGwxMi44NCAxM2ExIDEgMCAwMTAgMS40OHoiLz48cGF0aCBkYXRhLW5hbWU9ImFuZ2xlLWxlZnQiIGQ9Ik0yOC44IDE0Ljc0TDE2IDI3LjY5YTEgMSAwIDAxLTEuNDggMEwxMi43NCAyNmExIDEgMCAwMTAtMS40OUwyMy4xIDE0IDEyLjczIDMuNTNhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTQuNDcuMzFhMSAxIDAgMDExLjUzIDBsMTIuODUgMTNhMSAxIDAgMDEwIDEuNDh6Ii8+PC9zdmc+) no-repeat 0 0/100% 100%;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOS4xMSAyOCI+PHBhdGggZD0iTTE2LjM3IDE0Ljc0bC0xMi44NCAxM2ExLjA2IDEuMDYgMCAwMS0xLjQ5IDBIMkwuMzEgMjZhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTAuNjggMTQgLjMxIDMuNTNBMS4wNiAxLjA2IDAgMDEuMzEgMkwyIC4zMWExLjA2IDEuMDYgMCAwMTEuNDkgMGwxMi44NCAxM2ExIDEgMCAwMTAgMS40OHoiLz48cGF0aCBkYXRhLW5hbWU9ImFuZ2xlLWxlZnQiIGQ9Ik0yOC44IDE0Ljc0TDE2IDI3LjY5YTEgMSAwIDAxLTEuNDggMEwxMi43NCAyNmExIDEgMCAwMTAtMS40OUwyMy4xIDE0IDEyLjczIDMuNTNhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTQuNDcuMzFhMSAxIDAgMDExLjUzIDBsMTIuODUgMTNhMSAxIDAgMDEwIDEuNDh6Ii8+PC9zdmc+) no-repeat 0 0/100% 100%}.au-pagination-item.prev[data-v-7c579a3f]:before,.au-pagination-item.start[data-v-7c579a3f]:before{transform:rotate(180deg)}.au-pagination-center[data-v-7c579a3f]{margin:0 auto;font-size:12px;line-height:16px;font-weight:500}.au-pagination-right[data-v-7c579a3f]{margin-left:auto}",
+  inject("data-v-da61d842_0", {
+    source: ".au-pagination[data-v-da61d842]{display:flex;align-items:center}.au-pagination-left[data-v-da61d842]{display:flex;align-items:center;margin-right:auto}.au-pagination-item[data-v-da61d842]{position:relative;display:flex;justify-content:center;align-items:center;font-size:12px;font-weight:500;background-color:#fff;border:1px solid #e0e8f0;border-left:none;width:32px;height:32px;transition:background-color .3s;cursor:pointer}.au-pagination-item[data-v-da61d842]:first-child{border-left:1px solid #e0e8f0}.au-pagination-item.active[data-v-da61d842]{background-color:#f0f4fb;pointer-events:none;cursor:default}.au-pagination-item.disabled[data-v-da61d842]{pointer-events:none;color:#e6e6e6}.au-pagination-item[data-v-da61d842]:hover{background-color:#f8fafb;color:#3f6ada}.au-pagination-item.end[data-v-da61d842],.au-pagination-item.next[data-v-da61d842],.au-pagination-item.prev[data-v-da61d842],.au-pagination-item.start[data-v-da61d842]{position:relative}.au-pagination-item.end[data-v-da61d842]:before,.au-pagination-item.next[data-v-da61d842]:before,.au-pagination-item.prev[data-v-da61d842]:before,.au-pagination-item.start[data-v-da61d842]:before{content:\"\";position:absolute;background-color:#000}.au-pagination-item.end[data-v-da61d842]:hover::before,.au-pagination-item.next[data-v-da61d842]:hover::before,.au-pagination-item.prev[data-v-da61d842]:hover::before,.au-pagination-item.start[data-v-da61d842]:hover::before{background-color:#3f6ada}.au-pagination-item.end.disabled[data-v-da61d842]::before,.au-pagination-item.next.disabled[data-v-da61d842]::before,.au-pagination-item.prev.disabled[data-v-da61d842]::before,.au-pagination-item.start.disabled[data-v-da61d842]::before{background-color:#aaa}.au-pagination-item.next[data-v-da61d842]:before,.au-pagination-item.prev[data-v-da61d842]:before{width:6px;height:10px;-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%}.au-pagination-item.end[data-v-da61d842]:before,.au-pagination-item.start[data-v-da61d842]:before{width:12px;height:10px;-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOS4xMSAyOCI+PHBhdGggZD0iTTE2LjM3IDE0Ljc0bC0xMi44NCAxM2ExLjA2IDEuMDYgMCAwMS0xLjQ5IDBIMkwuMzEgMjZhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTAuNjggMTQgLjMxIDMuNTNBMS4wNiAxLjA2IDAgMDEuMzEgMkwyIC4zMWExLjA2IDEuMDYgMCAwMTEuNDkgMGwxMi44NCAxM2ExIDEgMCAwMTAgMS40OHoiLz48cGF0aCBkYXRhLW5hbWU9ImFuZ2xlLWxlZnQiIGQ9Ik0yOC44IDE0Ljc0TDE2IDI3LjY5YTEgMSAwIDAxLTEuNDggMEwxMi43NCAyNmExIDEgMCAwMTAtMS40OUwyMy4xIDE0IDEyLjczIDMuNTNhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTQuNDcuMzFhMSAxIDAgMDExLjUzIDBsMTIuODUgMTNhMSAxIDAgMDEwIDEuNDh6Ii8+PC9zdmc+) no-repeat 0 0/100% 100%;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOS4xMSAyOCI+PHBhdGggZD0iTTE2LjM3IDE0Ljc0bC0xMi44NCAxM2ExLjA2IDEuMDYgMCAwMS0xLjQ5IDBIMkwuMzEgMjZhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTAuNjggMTQgLjMxIDMuNTNBMS4wNiAxLjA2IDAgMDEuMzEgMkwyIC4zMWExLjA2IDEuMDYgMCAwMTEuNDkgMGwxMi44NCAxM2ExIDEgMCAwMTAgMS40OHoiLz48cGF0aCBkYXRhLW5hbWU9ImFuZ2xlLWxlZnQiIGQ9Ik0yOC44IDE0Ljc0TDE2IDI3LjY5YTEgMSAwIDAxLTEuNDggMEwxMi43NCAyNmExIDEgMCAwMTAtMS40OUwyMy4xIDE0IDEyLjczIDMuNTNhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTQuNDcuMzFhMSAxIDAgMDExLjUzIDBsMTIuODUgMTNhMSAxIDAgMDEwIDEuNDh6Ii8+PC9zdmc+) no-repeat 0 0/100% 100%}.au-pagination-item.prev[data-v-da61d842]:before,.au-pagination-item.start[data-v-da61d842]:before{transform:rotate(180deg)}.au-pagination-center[data-v-da61d842]{margin:0 auto;font-size:12px;line-height:16px;font-weight:500}.au-pagination-right[data-v-da61d842]{display:inline-flex;align-items:center;margin-left:auto}.au-pagination-right span[data-v-da61d842]{margin-right:10px;font-size:12px;line-height:16px;font-weight:500}",
     map: undefined,
     media: undefined
   });
@@ -45259,7 +45153,7 @@ const __vue_inject_styles__$6 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$6 = "data-v-7c579a3f";
+const __vue_scope_id__$6 = "data-v-da61d842";
 /* module identifier */
 
 const __vue_module_identifier__$4 = undefined;

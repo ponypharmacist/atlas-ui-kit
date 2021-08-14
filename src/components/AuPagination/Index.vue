@@ -45,12 +45,12 @@
     </div>
 
     <div class="au-pagination-right">
+      <span>Показывать по: </span>
       <au-select
-        v-model="perPageSelection"
-        :list="perPageOptions.filter((o) => o <= total)"
+        :value="perPage"
+        :list="perPageOptions"
         :clearable="false"
         small
-        close-on-select
         @change="changePerPage"
       />
     </div>
@@ -66,28 +66,30 @@ export default {
       type: Number,
       default: 1,
     },
-    perPage: {
-      type: Number,
-      default: null,
-    },
     total: {
       type: Number,
       default: null,
     },
-    pagesCount: {
+    perPage: {
       type: Number,
-      default: null,
+      default: 10,
+    },
+    perPageOptions: {
+      type: Array,
+      default: () => [10, 25, 50, 100],
     },
   },
 
-  data() {
-    return {
-      perPageSelection: 5,
-      perPageOptions: [5, 10, 25, 50],
-    };
-  },
+  // data() {
+  //   return {
+  //   };
+  // },
 
   computed: {
+    pagesCount() {
+      return Math.ceil(this.total / this.perPage, 10);
+    },
+
     paginationItems() {
       const delta = 3;
       const left = this.page - delta;
@@ -118,6 +120,7 @@ export default {
 
   methods: {
     changePerPage(num) {
+      console.log(typeof num, num);
       this.$emit('changePerPage', num);
     },
   },
@@ -228,7 +231,17 @@ export default {
   line-height: 16px;
   font-weight: 500;
 }
+
 .au-pagination-right {
+  display: inline-flex;
+  align-items: center;
   margin-left: auto;
+
+  span {
+    margin-right: 10px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+  }
 }
 </style>
