@@ -42,14 +42,14 @@ export default {
   },
 
   methods: {
-    onTabClick(itemId, item) {
+    onTabClick(itemId) {
       this.tabs.forEach((component) => {
         // eslint-disable-next-line no-param-reassign
         component.isActive = (component.id === itemId);
       });
 
       this.activeItem = itemId;
-      this.$emit('tab-change', item.tabName);
+      this.$emit('tab-change');
     },
   },
 };
@@ -79,8 +79,16 @@ export default {
   cursor: pointer;
 
   h5 {
-    color: inherit;
+    font-size: 14px;
     margin-bottom: 0;
+    color: inherit;
+    font-weight: 500;
+  }
+
+  sup {
+    font-size: 10px;
+    font-weight: 400;
+    color: #9db9d1;
   }
 
   &:hover {

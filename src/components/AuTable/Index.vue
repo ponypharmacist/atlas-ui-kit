@@ -2,7 +2,7 @@
 
 <div class="au-table">
   <table>
-    <thead>
+    <thead v-if="!hideThead">
       <tr>
         <!-- Selectable - добавляем чекбокс -->
         <th v-if="selectable" class="checkbox-cell">
@@ -49,7 +49,7 @@
               icon="mdi-cog"
               :size="16"
               color="#628ec0"
-              @click.native="$emit('settings')"
+              @click.native="$emit('settingsIcon')"
             />
           </div>
         </th>
@@ -185,6 +185,10 @@ export default {
       default: 'По вашему запросу ничего не подошло',
     },
     hidePagination: {
+      type: Boolean,
+      default: false,
+    },
+    hideThead: {
       type: Boolean,
       default: false,
     },

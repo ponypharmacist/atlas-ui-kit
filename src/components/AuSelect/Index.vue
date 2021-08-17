@@ -16,8 +16,8 @@
         v-if="clearable && isValidValue"
         class="au-select-clear"
         icon="mdi-close"
-        :size="20"
-        color="#aaa"
+        :size="iconSize"
+        color="#bbb"
         @click.native.stop="model = null"
       />
 
@@ -244,6 +244,13 @@ export default {
       if (this.multiselect) return Array.isArray(this.value) && this.value.length;
 
       return this.value !== null;
+    },
+
+    iconSize() {
+      if (this.small) return 18;
+      if (this.tiny) return 16;
+
+      return 20;
     },
   },
 

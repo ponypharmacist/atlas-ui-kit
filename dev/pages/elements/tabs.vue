@@ -10,6 +10,9 @@
       <au-tab-item :id="2" name="Все уведомления" :count="540">
         Содержимое вкладки номер два
       </au-tab-item>
+      <au-tab-item :id="3" name="Спам" :count="5">
+        Содержимое вкладки 3
+      </au-tab-item>
     </au-tabs>
 
   <pre>&lt;au-tabs&gt;

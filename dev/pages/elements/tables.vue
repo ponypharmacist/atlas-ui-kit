@@ -34,11 +34,12 @@
     sortKey: 'name', sortDirection: 'asc', page: 1, perPage: 10,
   }
   selectable
+  is-loading
 
   settings-icon - включает отображение иконки настроек
   no-data-text: String
   hide-pagination
-  is-loading
+  hide-thead
 
   @changeSettings - при изменении сортировки или пагинации (обновление tableSettings)
   @settingsIcon - срабатывате по клику на settings-icon
