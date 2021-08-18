@@ -13,7 +13,8 @@
     </div>
   </div>
 
-  <div v-show="showFiltersMenu" class="quick-filter-button">...
+  <div v-show="showFiltersMenu" class="quick-filter-button">
+    <span>···</span>
     <div id="quick-filters-hidden"></div>
   </div>
 </div>
@@ -119,6 +120,18 @@ export default {
   background-color: #f0f4fb;
   white-space: nowrap;
   cursor: pointer;
+}
+
+.quick-filter-button {
+  span {
+    writing-mode: vertical-rl;
+    font-size: 11px;
+    letter-spacing: 1px;
+    line-height: 8px;
+    text-align: center;
+    height: 100%;
+    display: inline-block;
+  }
 }
 
 .quick-filter-item {

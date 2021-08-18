@@ -135,6 +135,7 @@
     :page="tableSettings.page"
     :per-page="tableSettings.perPage"
     :total="items.length"
+    :hide-per-page="hidePerPage"
     @changePage="changePage"
     @changePerPage="changePerPage"
   />
@@ -174,6 +175,10 @@ export default {
         page: 1,
         perPage: 10,
       }),
+    },
+    hidePerPage: {
+      type: Boolean,
+      default: false,
     },
     // Оформление
     isLoading: {

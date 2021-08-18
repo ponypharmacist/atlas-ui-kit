@@ -69,6 +69,7 @@ Vue.use(atlasUiKit);</pre>
       :total="45"
       :pages-count="9"
       :per-page="paginationPerPage"
+      hide-per-page
       @changePerPage="changePerPage"
     />
   <pre>&lt;au-pagination
@@ -77,6 +78,7 @@ Vue.use(atlasUiKit);</pre>
   pages-count: Number
   per-page: Number | 10
   per-page-options: Array | [10, 25, 50, 100]
+  hide-per-page
   @changePage - возвращает новое значение страницы
   @changePerPage - новый размер страницы
 /&gt;</pre>

@@ -39,6 +39,7 @@
   settings-icon - включает отображение иконки настроек
   no-data-text: String
   hide-pagination
+  hide-per-page
   hide-thead
 
   @changeSettings - при изменении сортировки или пагинации (обновление tableSettings)

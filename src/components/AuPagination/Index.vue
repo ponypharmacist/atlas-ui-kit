@@ -1,37 +1,36 @@
 <template>
   <nav :class="$options.name">
     <div class="au-pagination-left">
-      <a
+      <div
         v-if="pagesCount > 5"
         :class="{ disabled: page === 1 }"
         class="au-pagination-item start"
         @click.prevent="$emit('changePage', 1)"
       />
 
-      <a
+      <div
         v-if="pagesCount > 5"
         :class="{ disabled: page === 1 }"
         class="au-pagination-item prev"
         @click.prevent="$emit('changePage', page - 1)"
       />
 
-      <a
+      <div
         v-for="pageItem in paginationItems"
         :key="pageItem"
         :class="{ active: pageItem === page, disabled: pageItem === '...' }"
         class="au-pagination-item"
-        href="#"
         v-text="pageItem"
         @click="$emit('changePage', pageItem)"
       />
 
-      <a
+      <div
         :class="{ disabled: page + 1 > pagesCount }"
         class="au-pagination-item next"
         @click.prevent="$emit('changePage', page + 1)"
       />
 
-      <a
+      <div
         :class="{ disabled: page === pagesCount }"
         class="au-pagination-item end"
         @click.prevent="$emit('changePage', pagesCount)"
@@ -40,11 +39,11 @@
 
     <div class="au-pagination-center">
       Показаны записи с {{ (page - 1) * perPage + 1 }}
-       по {{ page * perPage }}
+       по {{ itemsShownTo }}
        из {{ total }}
     </div>
 
-    <div class="au-pagination-right">
+    <div v-if="!hidePerPage" class="au-pagination-right">
       <span>Показывать по: </span>
       <au-select
         :value="perPage"
@@ -78,12 +77,11 @@ export default {
       type: Array,
       default: () => [10, 25, 50, 100],
     },
+    hidePerPage: {
+      type: Boolean,
+      default: false,
+    },
   },
-
-  // data() {
-  //   return {
-  //   };
-  // },
 
   computed: {
     pagesCount() {
@@ -116,11 +114,17 @@ export default {
 
       return result;
     },
+
+    itemsShownTo() {
+      if (this.total < this.perPage) return this.total;
+      if (this.total < this.page * this.perPage) return this.total;
+
+      return this.page * this.perPage;
+    },
   },
 
   methods: {
     changePerPage(num) {
-      console.log(typeof num, num);
       this.$emit('changePerPage', num);
     },
   },
@@ -226,7 +230,7 @@ export default {
 }
 
 .au-pagination-center {
-  margin: 0 auto;
+  // margin: 0 auto;
   font-size: 12px;
   line-height: 16px;
   font-weight: 500;
