@@ -90,7 +90,7 @@ export default {
   right: 0;
   width: 600px;
   box-shadow: -2px 0 14px rgba(218, 229, 247, 0.33);
-  z-index: 50;
+  z-index: 8;
   transform: translateX(100%);
   transition: transform 0.5s;
   border-left: 1px solid $gray-blue-border;

@@ -84,6 +84,16 @@
         </td>
       </tr>
 
+      <tr
+        v-for="(placeholder, index) in tableSettings.perPage - pageContent.length"
+        :key="`placeholder-tr-${index}`"
+        class="placeholder-tr"
+      >
+        <td :colspan="colspanMassActions + 1">
+          <div class="cell-content"></div>
+        </td>
+      </tr>
+
       <!-- Если разрешены массовые действия -->
       <tr
         v-if="selectable && pageContent.length && !isLoading"
@@ -352,6 +362,10 @@ export default {
   tbody {
     tr:nth-child(2n) {
       background-color: #f3f6f9;
+    }
+
+    tr.placeholder-tr {
+      background-color: #fff;
     }
   }
 

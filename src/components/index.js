@@ -21,6 +21,7 @@ export { default as AuPagination } from './AuPagination';
 export { default as AuPopover } from './AuPopover';
 export { default as AuTooltip } from './AuTooltip';
 export { default as AuSidePopup } from './AuSidePopup';
+export { default as AuModal } from './AuModal';
 
 // Экзотика
 export { default as AuColorPicker } from './AuColorPicker';

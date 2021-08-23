@@ -88,6 +88,8 @@ Vue.use(atlasUiKit);</pre>
 
   <demo-popover/>
 
+  <demo-modals/>
+
   </div>
 </div>
 
@@ -110,6 +112,7 @@ import DemoFilters from './elements/filters.vue';
 import DemoDraggableList from './elements/draggableList.vue';
 import DemoPopups from './elements/popups.vue';
 import DemoPopover from './elements/popover.vue';
+import DemoModals from './elements/modals.vue';
 
 export default {
   name: 'demo-page',
@@ -131,6 +134,7 @@ export default {
     DemoDraggableList,
     DemoPopups,
     DemoPopover,
+    DemoModals,
   },
 
   data() {
@@ -160,6 +164,7 @@ export default {
         { title: 'Поп-ап справа', alias: 'au-side-popup' },
         { title: 'Поповер', alias: 'au-popover' },
         { title: 'Тултип', alias: 'au-tooltip' },
+        { title: 'Модальное окно', alias: 'au-modal' },
       ],
 
       // Demo-values

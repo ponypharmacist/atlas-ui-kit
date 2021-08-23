@@ -93,10 +93,10 @@ $default-size: 12px;
 
 .au-icon {
   display: inline-block;
+  flex: 0 0 auto;
 
   width: $default-size;
   height: $default-size;
-  min-width: $default-size;
 
   // background-color: #fff;
   box-sizing: border-box;
