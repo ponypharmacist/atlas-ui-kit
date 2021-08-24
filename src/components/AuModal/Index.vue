@@ -5,13 +5,14 @@
 
   <div v-if="opened" class="au-modal-wrap" @click="opened = false">
     <div class="au-modal" @click.stop>
-      <au-icon
-        class="au-modal-close"
-        icon="mdi-close"
-        :size="24"
-        color="#bbb"
-        @click.native="opened = false"
-      />
+      <div class="au-modal-close">
+        <au-icon
+          icon="mdi-close"
+          :size="24"
+          color="#bbb"
+          @click.native="opened = false"
+        />
+      </div>
 
       <slot/>
     </div>

@@ -90,6 +90,8 @@ Vue.use(atlasUiKit);</pre>
 
   <demo-modals/>
 
+  <demo-chart/>
+
   </div>
 </div>
 
@@ -113,6 +115,7 @@ import DemoDraggableList from './elements/draggableList.vue';
 import DemoPopups from './elements/popups.vue';
 import DemoPopover from './elements/popover.vue';
 import DemoModals from './elements/modals.vue';
+import DemoChart from './elements/chart.vue';
 
 export default {
   name: 'demo-page',
@@ -135,6 +138,7 @@ export default {
     DemoPopups,
     DemoPopover,
     DemoModals,
+    DemoChart,
   },
 
   data() {
