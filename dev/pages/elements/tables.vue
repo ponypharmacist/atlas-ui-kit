@@ -4,9 +4,11 @@
   <h2 id="au-table">Таблицы</h2>
   <div class="demo-item">
     <au-table
+      ref="myTable"
       :items="tableData"
       :columns="tableColumns"
       :table-settings="tableSettings"
+      :expanded.sync="expanded"
       selectable
       settings-icon
       no-data-text="По вашему запросу ничего не найдено"
@@ -22,6 +24,14 @@
         {{ item.key }}
       </template> -->
       <!-- <template #massactions></template> -->
+      <template #item.name="{ item, expand }">
+        <span @click="expand(item)" style="cursor: pointer;">{{ item.name }}</span>
+      </template>
+
+      <template #item.expanded="{ item, isExpanded }">
+        {{ item.name }}, IsExpanded: {{ isExpanded }}
+      </template>
+
       <template #massactions>
        [ Слот #massactions - Инструменты для массовых действий ]
       </template>
@@ -48,7 +58,8 @@
   @selectAll - при клике на верховный чекбокс для общего (раз-)выделения
 &gt;
   &lt;template &#35;header.title="&lcub; item &rcub;"&gt; - slot, содержимое шапки столбца title
-  &lt;template &#35;item.title="&lcub; item &rcub;"&gt;   - slot, содержимое ячеек в столбце title
+  &lt;template &#35;item.title="&lcub; item, expand &rcub;"&gt;   - slot, содержимое ячеек в столбце title
+  &lt;template &#35;item.expanded="&lcub; item, isExpanded, expand &rcub;"&gt;   - slot, разворачивающееся содержимое под строкой
   &lt;template &#35;massactions&gt; - slot, для массовых действий и кнопок с ними связанных
 &lt;/au-table&gt;</pre>
 
@@ -89,6 +100,8 @@ export default {
   data() {
     return {
       showPopup: false,
+
+      expanded: [],
 
       tableData: [
         {

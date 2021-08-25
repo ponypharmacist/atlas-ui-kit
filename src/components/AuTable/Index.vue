@@ -58,31 +58,46 @@
 
     <!-- Ячейки в строках -->
     <tbody>
-      <tr
-        v-for="(row, rowIndex) in pageContent"
-        :key="`table-row-${rowIndex}`"
-      >
-        <td v-if="selectable" class="checkbox-cell">
-          <div class="cell-content">
-            <au-checkbox :value="row.selected" @input="$emit('selectOne', row.id)"/>
-          </div>
-        </td>
+      <template v-for="(row, rowIndex) in pageContent">
+        <tr :key="`table-row-${rowIndex}`">
+          <td v-if="selectable" class="checkbox-cell">
+            <div class="cell-content">
+              <au-checkbox :value="row.selected" @input="$emit('selectOne', row.id)"/>
+            </div>
+          </td>
 
-        <td
-          v-for="(column, colIndex) in columns"
-          :key="`table-cell-${rowIndex}-${column.key}`"
-          :colspan="(settingsIcon && colIndex === columns.length - 1) ? 2 : 1"
-        >
-          <div class="cell-content" :class="`align-${column.align || 'unset'}`">
-            <slot
-              :name="`item.${column.key}`"
-              :item="row"
+          <td
+            v-for="(column, colIndex) in columns"
+            :key="`table-cell-${rowIndex}-${column.key}`"
+            :colspan="(settingsIcon && colIndex === columns.length - 1) ? 2 : 1"
+          >
+            <div class="cell-content" :class="`align-${column.align || 'unset'}`">
+              <slot
+                :name="`item.${column.key}`"
+                :item="row"
+                :expand="expandRow"
+              >
+                {{ row[column.key] || '-' }}
+              </slot>
+            </div>
+          </td>
+        </tr>
+
+        <tr :key="`table-row-expanded-${rowIndex}`">
+          <td :colspan="colspanMassActions + 1">
+            <table-expand
+              ref="table-expand"
+              :is-expanded="isExpanded(row.id)"
             >
-              {{ row[column.key] || '-' }}
-            </slot>
-          </div>
-        </td>
-      </tr>
+              <slot
+                name="item.expanded"
+                :item="row"
+                :is-expanded="isExpanded(row.id)"
+              />
+            </table-expand>
+          </td>
+        </tr>
+      </template>
 
       <tr
         v-for="(placeholder, index) in tableSettings.perPage - pageContent.length"
@@ -155,8 +170,14 @@
 </template>
 
 <script>
+import TableExpand from './TableExpand.vue';
+
 export default {
   name: 'au-table',
+
+  components: {
+    TableExpand,
+  },
 
   props: {
     items: {
@@ -175,6 +196,11 @@ export default {
     settingsIcon: {
       type: Boolean,
       default: false,
+    },
+    // Expanded
+    expanded: {
+      type: Array,
+      default: () => [],
     },
     // Внешние настройки пагинации и сортировки
     tableSettings: {
@@ -311,6 +337,21 @@ export default {
         page: 1,
         perPage,
       });
+    },
+
+    // Expanded
+    expandRow({ id }) {
+      if (this.expanded.includes(id)) {
+        const index = this.expanded.findIndex((i) => i === id);
+
+        this.expanded.splice(index, 1);
+      } else {
+        this.expanded.push(id);
+      }
+    },
+
+    isExpanded(id) {
+      return this.expanded.includes(id);
     },
   },
 };
