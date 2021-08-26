@@ -76,25 +76,38 @@
                 :name="`item.${column.key}`"
                 :item="row"
                 :expand="expandRow"
+                :is-expanded="isExpanded(row.id)"
               >
                 {{ row[column.key] || '-' }}
               </slot>
+
+              <!-- Стрелка для expandable блока -->
+              <au-icon
+                v-if="colIndex + 1 === columns.length"
+                class="expand-arrow"
+                :class="{ expanded: isExpanded(row.id) }"
+                icon="mdi-chevron-down"
+                :size="20"
+                color="#666"
+                @click.native="expandRow(row)"
+              />
             </div>
           </td>
         </tr>
 
-        <tr :key="`table-row-expanded-${rowIndex}`">
+        <!-- Раскрывающееся дочернее содержимое строки -->
+        <tr
+          v-if="isExpanded(row.id)"
+          :key="`table-row-expanded-${rowIndex}`"
+          class="au-table-expanded"
+        >
           <td :colspan="colspanMassActions + 1">
-            <table-expand
-              ref="table-expand"
-              :is-expanded="isExpanded(row.id)"
-            >
+            <div class="cell-content">
               <slot
                 name="item.expanded"
                 :item="row"
-                :is-expanded="isExpanded(row.id)"
               />
-            </table-expand>
+            </div>
           </td>
         </tr>
       </template>
@@ -170,14 +183,8 @@
 </template>
 
 <script>
-import TableExpand from './TableExpand.vue';
-
 export default {
   name: 'au-table',
-
-  components: {
-    TableExpand,
-  },
 
   props: {
     items: {
@@ -200,7 +207,7 @@ export default {
     // Expanded
     expanded: {
       type: Array,
-      default: () => [],
+      default: null,
     },
     // Внешние настройки пагинации и сортировки
     tableSettings: {
@@ -341,7 +348,7 @@ export default {
 
     // Expanded
     expandRow({ id }) {
-      if (this.expanded.includes(id)) {
+      if (this.expanded?.includes(id)) {
         const index = this.expanded.findIndex((i) => i === id);
 
         this.expanded.splice(index, 1);
@@ -351,7 +358,7 @@ export default {
     },
 
     isExpanded(id) {
-      return this.expanded.includes(id);
+      return this.expanded?.includes(id) || false;
     },
   },
 };
@@ -463,6 +470,22 @@ export default {
 
   .column-sorting {
     margin-left: auto;
+  }
+}
+
+.expand-arrow {
+  margin-left: auto;
+  margin-top: -2px;
+  margin-bottom: -2px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &.expanded {
+    transform: rotate(180deg);
+    background-color: $blue!important;
   }
 }
 
