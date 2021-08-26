@@ -27,6 +27,14 @@ export default {
       type: Number,
       default: 0,
     },
+    delayShow: {
+      type: Number,
+      default: 300,
+    },
+    delayHide: {
+      type: Number,
+      default: 300,
+    },
   },
 
   computed: {
@@ -38,8 +46,8 @@ export default {
         // targetClasses: ['it-has-a-tooltip'],
         offset: this.offset,
         delay: {
-          show: 500,
-          hide: 400,
+          show: this.delayShow,
+          hide: this.delayHide,
         },
       };
     },

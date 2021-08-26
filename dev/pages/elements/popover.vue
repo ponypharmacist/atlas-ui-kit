@@ -69,9 +69,11 @@
     </div>
 
     <pre>&lt;au-tooltip
-  placement: String
+  placement: String | top
   content: String
-  offset: Number
+  offset: Number | 0
+  delayShow: Number | 300
+  delayHide: Number | 300
 &gt;
   slot
 &lt;/au-tooltip&gt;</pre>

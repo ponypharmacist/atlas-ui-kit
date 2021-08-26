@@ -8,13 +8,22 @@
     >
       <div
         :key="`point-${pointIndex}`"
-        class="chart-point-line"
+        class="chart-point-wrap"
       >
         <div class="chart-point" :style="pointStyle(point)">
-          <au-tooltip content="Hello, world!">
-            <div class="chart-point-dot" :style="pointStyle(point)"></div>
-          </au-tooltip>
+          <slot name="point" :point="point">
+            <au-tooltip content="Hello, world!">
+              <div
+                class="chart-point-dot"
+                :style="{ ...pointStyle(point), ...dotStyle }"
+              />
+            </au-tooltip>
+          </slot>
         </div>
+
+        <slot name="pointline" :point="point">
+          <div class="chart-point-line"/>
+        </slot>
       </div>
 
       <svg
@@ -27,7 +36,7 @@
       >
         <path
           :d="bezierFormula(pointIndex)"
-          stroke="dodgerblue"
+          :stroke="settings.line.color"
           :stroke-width="settings.line.width"
           stroke-linecap="round"
           fill="transparent"
@@ -62,15 +71,6 @@ export default {
 
   data() {
     return {
-      settings: {
-        point: {
-          size: 8,
-        },
-        line: {
-          width: this.options?.line?.width || 2,
-        },
-      },
-
       boxHeight: null,
       boxWidth: null,
       curveWidth: null,
@@ -88,6 +88,26 @@ export default {
   },
 
   computed: {
+    settings() {
+      const point = this.options?.point;
+      const line = this.options?.line;
+
+      return {
+        point: {
+          size: point?.size || 8,
+          backgroundColor: point?.backgroundColor || 'dodgerblue',
+          borderColor: point?.borderColor || 'white',
+          borderWidth: point?.borderWidth || 1,
+          borderStyle: point?.borderStyle || 'solid',
+        },
+        line: {
+          width: line?.width || 2,
+          color: line?.color || 'dodgerblue',
+          tension: line?.tension || 1,
+        },
+      };
+    },
+
     dataMin() {
       return Math.min(...this.dataset.map((i) => i.y));
     },
@@ -98,6 +118,15 @@ export default {
 
     dataRange() {
       return this.dataMax - this.dataMin;
+    },
+
+    dotStyle() {
+      const p = this.settings.point;
+
+      return {
+        backgroundColor: p.backgroundColor,
+        border: `${p.borderWidth}px ${p.borderStyle} ${p.borderColor}`,
+      };
     },
   },
 
@@ -143,15 +172,16 @@ export default {
       const height = `${(Math.abs(point.y - pointNext.y) / this.dataRange) * this.boxHeight}`;
       const width = this.curveWidth;
       const ascending = point.y < pointNext.y;
+      const tenseWidth = width * 0.5 * this.settings.line.tension;
 
-      const c1 = ascending ? `${width / 2},${height}` : `${width / 2},0`;
-      const c2 = ascending ? `${width / 2},0` : `${width / 2},${height}`;
+      const c1 = ascending ? `${tenseWidth},${height}` : `${tenseWidth},0`;
+      const c2 = ascending ? `${width - tenseWidth},0` : `${width - tenseWidth},${height}`;
 
       if (ascending) {
         return `M0,${height} C ${c1} ${c2} ${width},0`;
       }
 
-      return `M${width} ${height} C ${c2} ${c1} 0,0`;
+      return `M0,0 C ${c1} ${c2} ${width} ${height}`;
     },
   },
 };
@@ -164,14 +194,12 @@ export default {
 }
 
 .chart-box {
-  width: 500px;
-
   display: flex;
   align-items: stretch;
   height: 100%;
 }
 
-.chart-point-line {
+.chart-point-wrap {
   position: relative;
   height: 100%;
   width: 0;
@@ -186,14 +214,19 @@ export default {
 .chart-point-dot {
   content: '';
   border-radius: 50%;
-  background-color: dodgerblue;
-  border: 1px solid #fff;
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
     transform: scale(1.5);
   }
+}
+
+.chart-point-line {
+  width: 0;
+  height: 100%;
+  margin-left: -1px;
+  border-left: 1px dotted #ccc;
 }
 
 .chart-curve {
