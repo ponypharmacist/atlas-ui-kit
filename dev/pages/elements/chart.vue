@@ -15,30 +15,42 @@
       label="options.point.size"
       small
       class="chart-input"
+      type="number"
     />
-    <au-input
+
+    <au-select
       v-model="options.point.backgroundColor"
+      :list="colors"
       label="options.point.backgroundColor"
       small
       class="chart-input"
+      :clearable="false"
     />
-    <au-input
+
+    <au-select
       v-model="options.point.borderColor"
+      :list="colors"
       label="options.point.borderColor"
       small
       class="chart-input"
+      :clearable="false"
     />
+
     <au-input
       v-model="options.point.borderWidth"
       label="options.point.borderWidth"
       small
       class="chart-input"
+      type="number"
     />
-    <au-input
+
+    <au-select
       v-model="options.point.borderStyle"
+      :list="borderStyles"
       label="options.point.borderStyle"
       small
       class="chart-input"
+      :clearable="false"
     />
   </div>
 
@@ -48,13 +60,16 @@
       label="options.line.width"
       small
       class="chart-input"
+      type="number"
     />
 
-    <au-input
+    <au-select
       v-model="options.line.color"
+      :list="colors"
       label="options.line.color"
       small
       class="chart-input"
+      :clearable="false"
     />
 
     <au-input
@@ -134,6 +149,24 @@ export default {
           tension: 0.5,
         },
       },
+      colors: [
+        'white',
+        'black',
+        'gray',
+        'dodgerblue',
+        'salmon',
+        'olive',
+        'purple',
+        'yellow',
+        'cyan',
+      ],
+      borderStyles: [
+        'none',
+        'solid',
+        'double',
+        'inset',
+        'dotted',
+      ],
     };
   },
 };

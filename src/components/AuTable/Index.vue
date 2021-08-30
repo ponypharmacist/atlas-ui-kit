@@ -478,6 +478,7 @@ export default {
   margin-top: -2px;
   margin-bottom: -2px;
   cursor: pointer;
+  transition: all 0.25s ease;
 
   &:hover {
     opacity: 0.9;

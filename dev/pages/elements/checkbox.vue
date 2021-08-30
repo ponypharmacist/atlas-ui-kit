@@ -47,6 +47,22 @@
       />
     </div>
 
+    <div class="checkbox-wrap">
+      <au-checkbox
+        v-model="checkboxTrue"
+        label="color: salmon"
+        color="salmon"
+      />
+    </div>
+
+    <div class="checkbox-wrap">
+      <au-checkbox
+        v-model="checkboxTrue"
+        label="rounded"
+        rounded
+      />
+    </div>
+
     <pre>&lt;au-checkbox
   v-model: Boolean
   partial
@@ -54,6 +70,8 @@
   label-left
   full-width
   disabled
+  color
+  rounded
 
   @input
 /&gt;</pre>

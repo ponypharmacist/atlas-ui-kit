@@ -688,6 +688,10 @@ var __vue_component__$I = __vue_component__$H;
 //
 //
 //
+//
+//
+//
+//
 var script$o = {
   name: 'au-checkbox',
   props: {
@@ -714,6 +718,14 @@ var script$o = {
     fullWidth: {
       type: Boolean,
       default: false
+    },
+    rounded: {
+      type: Boolean,
+      default: false
+    },
+    color: {
+      type: String,
+      default: '#3F6ADA'
     }
   },
   computed: {
@@ -723,7 +735,22 @@ var script$o = {
         partial: this.partial,
         disabled: this.disabled,
         'label-left': this.labelLeft,
-        'full-width': this.fullWidth
+        'full-width': this.fullWidth,
+        rounded: this.rounded
+      };
+    },
+
+    checkboxStyle() {
+      if (this.checked) {
+        return {
+          backgroundColor: this.color,
+          borderColor: this.color,
+          borderRadius: this.rounded ? '50%' : '2px'
+        };
+      }
+
+      return {
+        borderRadius: this.rounded ? '50%' : '2px'
       };
     },
 
@@ -762,7 +789,8 @@ var __vue_render__$o = function () {
     staticClass: "checkbox",
     class: {
       'checked': _vm.checked
-    }
+    },
+    style: _vm.checkboxStyle
   }), _vm._v(" "), _vm.label ? _c('label', [_vm._v(_vm._s(_vm.label))]) : _vm._e()]);
 };
 
@@ -771,8 +799,8 @@ var __vue_staticRenderFns__$o = [];
 
 const __vue_inject_styles__$o = function (inject) {
   if (!inject) return;
-  inject("data-v-7cf4196a_0", {
-    source: ".au-checkbox[data-v-7cf4196a]{position:relative;display:inline-flex;align-items:center;height:16px;min-width:16px;font-size:12px;line-height:16px;font-weight:500;font-family:inherit;cursor:pointer;user-select:none}.au-checkbox label[data-v-7cf4196a]{line-height:16px;margin-left:6px;cursor:pointer;transition:color .2s linear}.au-checkbox .checkbox[data-v-7cf4196a]{width:14px;height:14px;outline:0;background-color:#ebf2f7;background-image:linear-gradient(to top,rgba(255,255,255,0) 0,#fff 100%);border:1px solid #d4dce6;border-radius:2px;box-sizing:border-box;transition:border-color .2s linear}.au-checkbox .checkbox[data-v-7cf4196a]::before{position:absolute;content:\"\";height:12px;width:12px}.au-checkbox .checkbox.checked[data-v-7cf4196a]{background-color:#3f6ada;border-color:#3f6ada;background-image:linear-gradient(to top,rgba(255,255,255,0) 0,rgba(255,255,255,.12) 100%)}.au-checkbox .checkbox.checked[data-v-7cf4196a]::before{-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjYiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMjAiIHN0cm9rZS13aWR0aD0iMS44IiBkPSJNMSAyLjEyNnYwTDIuOTg1IDQuMjR2MEw2LjI3MyAxdjAiLz48L3N2Zz4=) no-repeat 50% 60%/8px 6px;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjYiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMjAiIHN0cm9rZS13aWR0aD0iMS44IiBkPSJNMSAyLjEyNnYwTDIuOTg1IDQuMjR2MEw2LjI3MyAxdjAiLz48L3N2Zz4=) no-repeat 50% 60%/8px 6px;background-color:#fff}.au-checkbox:hover .checkbox[data-v-7cf4196a]{border-color:#3f6ada}.au-checkbox.label-left label[data-v-7cf4196a]{order:1;margin:0 6px 0 0}.au-checkbox.label-left .checkbox[data-v-7cf4196a]{order:2}.au-checkbox.full-width[data-v-7cf4196a]{width:100%}.au-checkbox.full-width label[data-v-7cf4196a]{margin-left:auto}.au-checkbox.full-width.label-left label[data-v-7cf4196a]{margin:0 auto 0 0}.au-checkbox.partial .checkbox[data-v-7cf4196a]{border-color:#d4dce6;background-color:#ebf2f7;background-image:linear-gradient(to top,rgba(255,255,255,0) 0,#fff 100%)}.au-checkbox.partial .checkbox[data-v-7cf4196a]:before{-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjYiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMjAiIHN0cm9rZS13aWR0aD0iMS44IiBkPSJNMSAyLjEyNnYwTDIuOTg1IDQuMjR2MEw2LjI3MyAxdjAiLz48L3N2Zz4=) no-repeat 50% 60%/8px 6px;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjYiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMjAiIHN0cm9rZS13aWR0aD0iMS44IiBkPSJNMSAyLjEyNnYwTDIuOTg1IDQuMjR2MEw2LjI3MyAxdjAiLz48L3N2Zz4=) no-repeat 50% 60%/8px 6px;background-color:#bdc6d6}.au-checkbox.partial .checkbox[data-v-7cf4196a]:hover{border-color:#3f6ada}.au-checkbox.disabled[data-v-7cf4196a]{color:#999;cursor:default;cursor:default}.au-checkbox.disabled .checkbox[data-v-7cf4196a]{background-image:none;border-color:#d4dce6}.au-checkbox.disabled .checkbox.checked[data-v-7cf4196a]{background-color:#b1bbcb}.au-checkbox.disabled label[data-v-7cf4196a]{cursor:default}.au-checkbox.disabled:hover .checkbox[data-v-7cf4196a]::before{border-color:#ccc}",
+  inject("data-v-4cdcc920_0", {
+    source: ".au-checkbox[data-v-4cdcc920]{position:relative;display:inline-flex;align-items:center;height:16px;min-width:16px;font-size:12px;line-height:16px;font-weight:500;font-family:inherit;cursor:pointer;user-select:none}.au-checkbox label[data-v-4cdcc920]{line-height:16px;margin-left:6px;cursor:pointer;transition:color .2s linear}.au-checkbox .checkbox[data-v-4cdcc920]{width:14px;height:14px;outline:0;background-color:#ebf2f7;background-image:linear-gradient(to top,rgba(255,255,255,0) 0,#fff 100%);border:1px solid #d4dce6;border-radius:2px;box-sizing:border-box;transition:border-color .2s linear}.au-checkbox .checkbox[data-v-4cdcc920]::before{position:absolute;content:\"\";height:12px;width:12px}.au-checkbox .checkbox.checked[data-v-4cdcc920]{background-image:linear-gradient(to top,rgba(255,255,255,0) 0,rgba(255,255,255,.12) 100%)}.au-checkbox .checkbox.checked[data-v-4cdcc920]::before{-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjYiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMjAiIHN0cm9rZS13aWR0aD0iMS44IiBkPSJNMSAyLjEyNnYwTDIuOTg1IDQuMjR2MEw2LjI3MyAxdjAiLz48L3N2Zz4=) no-repeat 50% 60%/8px 6px;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjYiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMjAiIHN0cm9rZS13aWR0aD0iMS44IiBkPSJNMSAyLjEyNnYwTDIuOTg1IDQuMjR2MEw2LjI3MyAxdjAiLz48L3N2Zz4=) no-repeat 50% 60%/8px 6px;background-color:#fff}.au-checkbox:hover .checkbox[data-v-4cdcc920]{border-color:#3f6ada}.au-checkbox.label-left label[data-v-4cdcc920]{order:1;margin:0 6px 0 0}.au-checkbox.label-left .checkbox[data-v-4cdcc920]{order:2}.au-checkbox.full-width[data-v-4cdcc920]{width:100%}.au-checkbox.full-width label[data-v-4cdcc920]{margin-left:auto}.au-checkbox.full-width.label-left label[data-v-4cdcc920]{margin:0 auto 0 0}.au-checkbox.partial .checkbox[data-v-4cdcc920]{border-color:#d4dce6;background-color:#ebf2f7;background-image:linear-gradient(to top,rgba(255,255,255,0) 0,#fff 100%)}.au-checkbox.partial .checkbox[data-v-4cdcc920]:before{-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjYiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMjAiIHN0cm9rZS13aWR0aD0iMS44IiBkPSJNMSAyLjEyNnYwTDIuOTg1IDQuMjR2MEw2LjI3MyAxdjAiLz48L3N2Zz4=) no-repeat 50% 60%/8px 6px;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjYiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMjAiIHN0cm9rZS13aWR0aD0iMS44IiBkPSJNMSAyLjEyNnYwTDIuOTg1IDQuMjR2MEw2LjI3MyAxdjAiLz48L3N2Zz4=) no-repeat 50% 60%/8px 6px;background-color:#bdc6d6}.au-checkbox.partial .checkbox[data-v-4cdcc920]:hover{border-color:#3f6ada}.au-checkbox.disabled[data-v-4cdcc920]{color:#999;cursor:default;cursor:default}.au-checkbox.disabled .checkbox[data-v-4cdcc920]{background-image:none;border-color:#d4dce6}.au-checkbox.disabled .checkbox.checked[data-v-4cdcc920]{background-color:#b1bbcb}.au-checkbox.disabled label[data-v-4cdcc920]{cursor:default}.au-checkbox.disabled:hover .checkbox[data-v-4cdcc920]::before{border-color:#ccc}",
     map: undefined,
     media: undefined
   });
@@ -780,7 +808,7 @@ const __vue_inject_styles__$o = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$o = "data-v-7cf4196a";
+const __vue_scope_id__$o = "data-v-4cdcc920";
 /* module identifier */
 
 const __vue_module_identifier__$m = undefined;
@@ -45007,8 +45035,8 @@ var __vue_staticRenderFns__$9 = [];
 
 const __vue_inject_styles__$9 = function (inject) {
   if (!inject) return;
-  inject("data-v-638b4620_0", {
-    source: ".au-table[data-v-638b4620]{position:relative}.au-table table[data-v-638b4620]{width:100%;margin-bottom:16px;text-align:left;border-spacing:0;border-collapse:separate}.au-table thead th[data-v-638b4620]{font-weight:500;border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear;cursor:pointer}.au-table thead th[data-v-638b4620]:hover{border-color:#e1e9f7;background-color:#e1e8f5}.au-table thead th[data-v-638b4620]:not(:last-child){border-right:0}.au-table thead th:not(:last-child) .cell-content[data-v-638b4620]{padding-right:10px}.au-table thead th[data-v-638b4620]:first-child{border-radius:4px 0 0 4px}.au-table thead th[data-v-638b4620]:last-child{border-radius:0 4px 4px 0}.au-table tbody tr[data-v-638b4620]:nth-child(2n){background-color:#f3f6f9}.au-table tbody tr.placeholder-tr[data-v-638b4620]{background-color:#fff}.au-table td[data-v-638b4620],.au-table th[data-v-638b4620]{padding:0;vertical-align:middle}.au-table .mass-actions td[data-v-638b4620]{border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear}.au-table .mass-actions td[data-v-638b4620]:not(:last-child){border-right:0}.au-table .mass-actions td[data-v-638b4620]:first-child{border-radius:4px 0 0 4px}.au-table .mass-actions td[data-v-638b4620]:last-child{border-radius:0 4px 4px 0}.au-table .checkbox-cell[data-v-638b4620]{width:38px}.au-table .settings-cell[data-v-638b4620]{width:32px}.au-table .cell-content[data-v-638b4620]{display:flex;align-items:center;min-height:32px;padding:8px 11px;font-size:12px;line-height:16px}.au-table .cell-content.align-left[data-v-638b4620]{justify-content:flex-start}.au-table .cell-content.align-right[data-v-638b4620]{justify-content:flex-end}.au-table .cell-content.align-center[data-v-638b4620]{justify-content:center}.au-table .not-found[data-v-638b4620]{font-size:12px;line-height:16px;text-align:center;background-color:#f3f6f9}.au-table .not-found .cell-content[data-v-638b4620]{justify-content:center}.au-table .column-sorting[data-v-638b4620]{margin-left:auto}.expand-arrow[data-v-638b4620]{margin-left:auto;margin-top:-2px;margin-bottom:-2px;cursor:pointer}.expand-arrow[data-v-638b4620]:hover{opacity:.9}.expand-arrow.expanded[data-v-638b4620]{transform:rotate(180deg);background-color:#3f6ada!important}.au-table-settings[data-v-638b4620]{cursor:pointer}.au-table-settings[data-v-638b4620]:hover{background-color:#3f6ada!important}.pagination-placeholder[data-v-638b4620]{height:32px;background-color:#fafafa;border-radius:5px}",
+  inject("data-v-4ac2db3b_0", {
+    source: ".au-table[data-v-4ac2db3b]{position:relative}.au-table table[data-v-4ac2db3b]{width:100%;margin-bottom:16px;text-align:left;border-spacing:0;border-collapse:separate}.au-table thead th[data-v-4ac2db3b]{font-weight:500;border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear;cursor:pointer}.au-table thead th[data-v-4ac2db3b]:hover{border-color:#e1e9f7;background-color:#e1e8f5}.au-table thead th[data-v-4ac2db3b]:not(:last-child){border-right:0}.au-table thead th:not(:last-child) .cell-content[data-v-4ac2db3b]{padding-right:10px}.au-table thead th[data-v-4ac2db3b]:first-child{border-radius:4px 0 0 4px}.au-table thead th[data-v-4ac2db3b]:last-child{border-radius:0 4px 4px 0}.au-table tbody tr[data-v-4ac2db3b]:nth-child(2n){background-color:#f3f6f9}.au-table tbody tr.placeholder-tr[data-v-4ac2db3b]{background-color:#fff}.au-table td[data-v-4ac2db3b],.au-table th[data-v-4ac2db3b]{padding:0;vertical-align:middle}.au-table .mass-actions td[data-v-4ac2db3b]{border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear}.au-table .mass-actions td[data-v-4ac2db3b]:not(:last-child){border-right:0}.au-table .mass-actions td[data-v-4ac2db3b]:first-child{border-radius:4px 0 0 4px}.au-table .mass-actions td[data-v-4ac2db3b]:last-child{border-radius:0 4px 4px 0}.au-table .checkbox-cell[data-v-4ac2db3b]{width:38px}.au-table .settings-cell[data-v-4ac2db3b]{width:32px}.au-table .cell-content[data-v-4ac2db3b]{display:flex;align-items:center;min-height:32px;padding:8px 11px;font-size:12px;line-height:16px}.au-table .cell-content.align-left[data-v-4ac2db3b]{justify-content:flex-start}.au-table .cell-content.align-right[data-v-4ac2db3b]{justify-content:flex-end}.au-table .cell-content.align-center[data-v-4ac2db3b]{justify-content:center}.au-table .not-found[data-v-4ac2db3b]{font-size:12px;line-height:16px;text-align:center;background-color:#f3f6f9}.au-table .not-found .cell-content[data-v-4ac2db3b]{justify-content:center}.au-table .column-sorting[data-v-4ac2db3b]{margin-left:auto}.expand-arrow[data-v-4ac2db3b]{margin-left:auto;margin-top:-2px;margin-bottom:-2px;cursor:pointer;transition:all .25s ease}.expand-arrow[data-v-4ac2db3b]:hover{opacity:.9}.expand-arrow.expanded[data-v-4ac2db3b]{transform:rotate(180deg);background-color:#3f6ada!important}.au-table-settings[data-v-4ac2db3b]{cursor:pointer}.au-table-settings[data-v-4ac2db3b]:hover{background-color:#3f6ada!important}.pagination-placeholder[data-v-4ac2db3b]{height:32px;background-color:#fafafa;border-radius:5px}",
     map: undefined,
     media: undefined
   });
@@ -45016,7 +45044,7 @@ const __vue_inject_styles__$9 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$9 = "data-v-638b4620";
+const __vue_scope_id__$9 = "data-v-4ac2db3b";
 /* module identifier */
 
 const __vue_module_identifier__$7 = undefined;
@@ -45391,6 +45419,14 @@ var script$6 = {
     offset: {
       type: Number,
       default: 0
+    },
+    delayShow: {
+      type: Number,
+      default: 300
+    },
+    delayHide: {
+      type: Number,
+      default: 300
     }
   },
   computed: {
@@ -45402,8 +45438,8 @@ var script$6 = {
         // targetClasses: ['it-has-a-tooltip'],
         offset: this.offset,
         delay: {
-          show: 500,
-          hide: 400
+          show: this.delayShow,
+          hide: this.delayHide
         }
       };
     }
@@ -45438,8 +45474,8 @@ var __vue_staticRenderFns__$6 = [];
 
 const __vue_inject_styles__$6 = function (inject) {
   if (!inject) return;
-  inject("data-v-4da0e8e8_0", {
-    source: ".au-tooltip[data-v-4da0e8e8]{display:inline-block}",
+  inject("data-v-0b2d2431_0", {
+    source: ".au-tooltip[data-v-0b2d2431]{display:inline-block}",
     map: undefined,
     media: undefined
   });
@@ -45447,7 +45483,7 @@ const __vue_inject_styles__$6 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$6 = "data-v-4da0e8e8";
+const __vue_scope_id__$6 = "data-v-0b2d2431";
 /* module identifier */
 
 const __vue_module_identifier__$4 = undefined;
@@ -45811,6 +45847,15 @@ var __vue_component__$5 = __vue_component__$4;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var script$3 = {
   name: 'au-chart',
   props: {
@@ -45829,17 +45874,7 @@ var script$3 = {
   },
 
   data() {
-    var _this$options, _this$options$line;
-
     return {
-      settings: {
-        point: {
-          size: 8
-        },
-        line: {
-          width: ((_this$options = this.options) === null || _this$options === void 0 ? void 0 : (_this$options$line = _this$options.line) === null || _this$options$line === void 0 ? void 0 : _this$options$line.width) || 2
-        }
-      },
       boxHeight: null,
       boxWidth: null,
       curveWidth: null,
@@ -45856,6 +45891,27 @@ var script$3 = {
   },
 
   computed: {
+    settings() {
+      var _this$options, _this$options2;
+
+      const point = (_this$options = this.options) === null || _this$options === void 0 ? void 0 : _this$options.point;
+      const line = (_this$options2 = this.options) === null || _this$options2 === void 0 ? void 0 : _this$options2.line;
+      return {
+        point: {
+          size: (point === null || point === void 0 ? void 0 : point.size) || 8,
+          backgroundColor: (point === null || point === void 0 ? void 0 : point.backgroundColor) || 'dodgerblue',
+          borderColor: (point === null || point === void 0 ? void 0 : point.borderColor) || 'white',
+          borderWidth: (point === null || point === void 0 ? void 0 : point.borderWidth) || 1,
+          borderStyle: (point === null || point === void 0 ? void 0 : point.borderStyle) || 'solid'
+        },
+        line: {
+          width: (line === null || line === void 0 ? void 0 : line.width) || 2,
+          color: (line === null || line === void 0 ? void 0 : line.color) || 'dodgerblue',
+          tension: (line === null || line === void 0 ? void 0 : line.tension) || 1
+        }
+      };
+    },
+
     dataMin() {
       return Math.min(...this.dataset.map(i => i.y));
     },
@@ -45866,6 +45922,14 @@ var script$3 = {
 
     dataRange() {
       return this.dataMax - this.dataMin;
+    },
+
+    dotStyle() {
+      const p = this.settings.point;
+      return {
+        backgroundColor: p.backgroundColor,
+        border: `${p.borderWidth}px ${p.borderStyle} ${p.borderColor}`
+      };
     }
 
   },
@@ -45910,14 +45974,15 @@ var script$3 = {
       const height = `${Math.abs(point.y - pointNext.y) / this.dataRange * this.boxHeight}`;
       const width = this.curveWidth;
       const ascending = point.y < pointNext.y;
-      const c1 = ascending ? `${width / 2},${height}` : `${width / 2},0`;
-      const c2 = ascending ? `${width / 2},0` : `${width / 2},${height}`;
+      const tenseWidth = width * 0.5 * this.settings.line.tension;
+      const c1 = ascending ? `${tenseWidth},${height}` : `${tenseWidth},0`;
+      const c2 = ascending ? `${width - tenseWidth},0` : `${width - tenseWidth},${height}`;
 
       if (ascending) {
         return `M0,${height} C ${c1} ${c2} ${width},0`;
       }
 
-      return `M${width} ${height} C ${c2} ${c1} 0,0`;
+      return `M0,0 C ${c1} ${c2} ${width} ${height}`;
     }
 
   }
@@ -45947,18 +46012,28 @@ var __vue_render__$3 = function () {
   }, [_vm._l(_vm.dataset, function (point, pointIndex) {
     return [_c('div', {
       key: "point-" + pointIndex,
-      staticClass: "chart-point-line"
+      staticClass: "chart-point-wrap"
     }, [_c('div', {
       staticClass: "chart-point",
       style: _vm.pointStyle(point)
-    }, [_c('au-tooltip', {
-      attrs: {
-        "content": "Hello, world!"
-      }
-    }, [_c('div', {
-      staticClass: "chart-point-dot",
-      style: _vm.pointStyle(point)
-    })])], 1)]), _vm._v(" "), _vm.curveWidth && pointIndex + 1 < _vm.dataset.length ? _c('svg', {
+    }, [_vm._t("point", function () {
+      return [_c('au-tooltip', {
+        attrs: {
+          "content": "Hello, world!"
+        }
+      }, [_c('div', {
+        staticClass: "chart-point-dot",
+        style: Object.assign({}, _vm.pointStyle(point), _vm.dotStyle)
+      })])];
+    }, {
+      "point": point
+    })], 2), _vm._v(" "), _vm._t("pointline", function () {
+      return [_c('div', {
+        staticClass: "chart-point-line"
+      })];
+    }, {
+      "point": point
+    })], 2), _vm._v(" "), _vm.curveWidth && pointIndex + 1 < _vm.dataset.length ? _c('svg', {
       key: "svg-" + pointIndex,
       staticClass: "chart-curve",
       style: _vm.curveStyle(pointIndex),
@@ -45969,7 +46044,7 @@ var __vue_render__$3 = function () {
     }, [_c('path', {
       attrs: {
         "d": _vm.bezierFormula(pointIndex),
-        "stroke": "dodgerblue",
+        "stroke": _vm.settings.line.color,
         "stroke-width": _vm.settings.line.width,
         "stroke-linecap": "round",
         "fill": "transparent",
@@ -45984,8 +46059,8 @@ var __vue_staticRenderFns__$3 = [];
 
 const __vue_inject_styles__$3 = function (inject) {
   if (!inject) return;
-  inject("data-v-2f53b347_0", {
-    source: ".au-chart{width:100%;height:200px}.chart-box{width:500px;display:flex;align-items:stretch;height:100%}.chart-point-line{position:relative;height:100%;width:0}.chart-point{position:absolute;display:flex}.chart-point-dot{content:\"\";border-radius:50%;background-color:#1e90ff;border:1px solid #fff;cursor:pointer;transition:all .2s ease}.chart-point-dot:hover{transform:scale(1.5)}.chart-curve{overflow:visible}",
+  inject("data-v-3ab7af6f_0", {
+    source: ".au-chart{width:100%;height:200px}.chart-box{display:flex;align-items:stretch;height:100%}.chart-point-wrap{position:relative;height:100%;width:0}.chart-point{position:absolute;display:flex}.chart-point-dot{content:\"\";border-radius:50%;cursor:pointer;transition:all .2s ease}.chart-point-dot:hover{transform:scale(1.5)}.chart-point-line{width:0;height:100%;margin-left:-1px;border-left:1px dotted #ccc}.chart-curve{overflow:visible}",
     map: undefined,
     media: undefined
   });

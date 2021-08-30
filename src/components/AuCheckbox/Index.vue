@@ -4,7 +4,11 @@
   :class="classObject"
   @click="() => !disabled && (checked = !checked)"
 >
-  <div class="checkbox" :class="{ 'checked': checked }"></div>
+  <div
+    class="checkbox"
+    :class="{ 'checked': checked }"
+    :style="checkboxStyle"
+  />
 
   <label v-if="label">{{ label }}</label>
 </div>
@@ -40,6 +44,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    rounded: {
+      type: Boolean,
+      default: false,
+    },
+    color: {
+      type: String,
+      default: '#3F6ADA',
+    },
   },
 
   computed: {
@@ -50,6 +62,21 @@ export default {
         disabled: this.disabled,
         'label-left': this.labelLeft,
         'full-width': this.fullWidth,
+        rounded: this.rounded,
+      };
+    },
+
+    checkboxStyle() {
+      if (this.checked) {
+        return {
+          backgroundColor: this.color,
+          borderColor: this.color,
+          borderRadius: this.rounded ? '50%' : '2px',
+        };
+      }
+
+      return {
+        borderRadius: this.rounded ? '50%' : '2px',
       };
     },
 
@@ -107,8 +134,8 @@ export default {
     }
 
     &.checked {
-      background-color: $blue;
-      border-color: $blue;
+      // background-color: $blue;
+      // border-color: $blue;
       background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.12) 100%);
 
       &::before {
