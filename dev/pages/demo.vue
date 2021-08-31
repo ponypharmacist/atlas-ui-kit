@@ -32,57 +32,17 @@ Vue.use(atlasUiKit);</pre>
 
   <demo-draggable-list/>
 
-  <h2 id="au-color-picker">Пипетка</h2>
-  <div class="demo-item">
-    <au-color-picker v-model="colorPicked"/>
-
-  <pre>&lt;au-color-picker
-  v-model
-  small
-  full-width
-/&gt;</pre>
-  </div>
+  <demo-color-picker/>
 
   <demo-breadcrumbs/>
 
-  <h2 id="au-spinner">Лоадер/спиннер</h2>
-  <div class="demo-item">
-    <div class="d-flex">
-      <au-spinner color="red"/>
-      <au-spinner color="red" type="fading-circle"/>
-    </div>
-    <pre>&lt;au-spinner
-  color="red" - для "dots"
-  type="dots | fading-circle"
-  size
-/&gt;</pre>
-  </div>
+  <demo-loader/>
 
   <demo-tabs/>
 
   <demo-tables/>
 
-  <h2 id="au-pagination">Пагинация</h2>
-  <div class="demo-item">
-    <au-pagination
-      :page="1"
-      :total="45"
-      :pages-count="9"
-      :per-page="paginationPerPage"
-      hide-per-page
-      @changePerPage="changePerPage"
-    />
-  <pre>&lt;au-pagination
-  page: Number | 1
-  total: Number
-  pages-count: Number
-  per-page: Number | 10
-  per-page-options: Array | [10, 25, 50, 100]
-  hide-per-page
-  @changePage - возвращает новое значение страницы
-  @changePerPage - новый размер страницы
-/&gt;</pre>
-  </div>
+  <demo-pagination/>
 
   <demo-popups/>
 
@@ -91,6 +51,10 @@ Vue.use(atlasUiKit);</pre>
   <demo-modals/>
 
   <demo-chart/>
+
+  <demo-tree/>
+
+  <demo-alerts/>
 
   </div>
 </div>
@@ -108,14 +72,19 @@ import DemoDate from './elements/date.vue';
 import DemoSelect from './elements/select.vue';
 import DemoDropdownButtons from './elements/dropdownButtons.vue';
 import DemoBreadcrumbs from './elements/breadcrumbs.vue';
+import DemoLoader from './elements/loader.vue';
 import DemoTables from './elements/tables.vue';
+import DemoPagination from './elements/pagination.vue';
 import DemoTabs from './elements/tabs.vue';
 import DemoFilters from './elements/filters.vue';
 import DemoDraggableList from './elements/draggableList.vue';
+import DemoColorPicker from './elements/colorPicker.vue';
 import DemoPopups from './elements/popups.vue';
 import DemoPopover from './elements/popover.vue';
 import DemoModals from './elements/modals.vue';
 import DemoChart from './elements/chart.vue';
+import DemoTree from './elements/tree.vue';
+import DemoAlerts from './elements/alerts.vue';
 
 export default {
   name: 'demo-page',
@@ -131,14 +100,19 @@ export default {
     DemoSelect,
     DemoDropdownButtons,
     DemoBreadcrumbs,
+    DemoLoader,
     DemoTables,
+    DemoPagination,
     DemoTabs,
     DemoFilters,
     DemoDraggableList,
+    DemoColorPicker,
     DemoPopups,
     DemoPopover,
     DemoModals,
     DemoChart,
+    DemoTree,
+    DemoAlerts,
   },
 
   data() {
@@ -169,18 +143,11 @@ export default {
         { title: 'Поповер', alias: 'au-popover' },
         { title: 'Тултип', alias: 'au-tooltip' },
         { title: 'Модальное окно', alias: 'au-modal' },
+        { title: 'График', alias: 'au-chart' },
+        { title: 'Дерево элементов', alias: 'au-tree' },
+        { title: 'Уведомления', alias: 'au-alerts' },
       ],
-
-      // Demo-values
-      colorPicked: '#fa4444',
-      paginationPerPage: 10,
     };
-  },
-
-  methods: {
-    changePerPage(num) {
-      this.paginationPerPage = num;
-    },
   },
 };
 </script>

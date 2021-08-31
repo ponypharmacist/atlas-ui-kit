@@ -59,7 +59,10 @@
     <!-- Ячейки в строках -->
     <tbody>
       <template v-for="(row, rowIndex) in pageContent">
-        <tr :key="`table-row-${rowIndex}`">
+        <tr
+          :key="`table-row-${rowIndex}`"
+          :class="{ even: rowIndex % 2 != 0, odd: rowIndex % 2 === 0 }"
+        >
           <td v-if="selectable" class="checkbox-cell">
             <div class="cell-content">
               <au-checkbox :value="row.selected" @input="$emit('selectOne', row.id)"/>
@@ -83,7 +86,7 @@
 
               <!-- Стрелка для expandable блока -->
               <au-icon
-                v-if="colIndex + 1 === columns.length"
+                v-if="colIndex + 1 === columns.length && expanded"
                 class="expand-arrow"
                 :class="{ expanded: isExpanded(row.id) }"
                 icon="mdi-chevron-down"
@@ -100,6 +103,7 @@
           v-if="isExpanded(row.id)"
           :key="`table-row-expanded-${rowIndex}`"
           class="au-table-expanded"
+          :class="{ even: rowIndex % 2 != 0, odd: rowIndex % 2 === 0 }"
         >
           <td :colspan="colspanMassActions + 1">
             <div class="cell-content">
@@ -408,11 +412,11 @@ export default {
   }
 
   tbody {
-    tr:nth-child(2n) {
+    .even {
       background-color: #f3f6f9;
     }
 
-    tr.placeholder-tr {
+    .odd {
       background-color: #fff;
     }
   }

@@ -23,6 +23,8 @@ export { default as AuTooltip } from './AuTooltip';
 export { default as AuSidePopup } from './AuSidePopup';
 export { default as AuModal } from './AuModal';
 export { default as AuChart } from './AuChart';
+export { default as AuTree } from './AuTree';
+export { default as AuAlerts } from './AuAlerts';
 
 // Экзотика
 export { default as AuColorPicker } from './AuColorPicker';
