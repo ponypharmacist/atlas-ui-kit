@@ -128,21 +128,34 @@ export default {
       }
     }
 
-    &:first-child .node-link:after {
+    &:first-child > .node-link:after {
       height: 19px;
       top: -3px;
     }
 
-    &:not(:last-child) .node-children:before {
+    .node-children:before {
       position: absolute;
       content: '';
       width: 6px;
-      height: 28px;
+      height: 100%;
       left: -31px;
       top: -11px;
       border-left: thin solid #98bce1;
     }
+
+    &:last-child:first-child,
+    &:last-child {
+      .node-children:before {
+        display: none;
+      }
+    }
   }
+
+  // .au-tree-node .au-tree-node {
+  //   &:not(:last-child) .node-children:before {
+  //     left: -50px;
+  //   }
+  // }
 }
 
 .node-children {
