@@ -2,10 +2,10 @@
 
 <div class="demo-tree">
   <h2 id="au-tree">Дерево элементов</h2>
-  <div class="demo-item" style="width: 400px;">
+  <div class="demo-item" style="width: 400px; min-height: 200px;">
     <au-tree v-model="items">
       <!--
-        <template #link>
+        <template #link1>
         </template>
        -->
     </au-tree>
@@ -13,10 +13,21 @@
 
   <pre>&lt;au-tree
     v-model: Array
+    show-search - показывать строку поиска или нет
 
     #link1 - цифра, это уровень вложенности, для более точного контроля за слотами
              по умолчанию в слоте #link лежит node.title
 /&gt;</pre>
+
+  <br/>
+
+  <pre>items: [
+  {
+    id: 1,
+    title: 'Элемент',
+    children: [],
+  },
+],</pre>
 </div>
 
 </template>
@@ -40,10 +51,10 @@ export default {
                   id: 111,
                   title: 'Внучатый',
                   children: [
-                    { id: 1111, title: 'Правнучатый' },
-                    { id: 1111, title: 'Правнучатый' },
-                    { id: 1111, title: 'Правнучатый' },
-                    { id: 1111, title: 'Правнучатый' },
+                    { id: 1111, title: 'Правнучатый раз' },
+                    { id: 1112, title: 'Правнучатый дуо' },
+                    { id: 1113, title: 'Правнучатый тер' },
+                    { id: 1114, title: 'Правнучатый четр' },
                   ],
                 },
               ],
@@ -52,7 +63,7 @@ export default {
               id: 12,
               title: 'Дочерний',
               children: [
-                { id: 121, title: 'Внучатый' },
+                { id: 121, title: 'ХитроВнучатый' },
               ],
             },
             {
@@ -66,7 +77,7 @@ export default {
         },
         {
           id: 2,
-          title: 'Элемент',
+          title: 'Двалемент',
           children: [
             {
               id: 12,
@@ -79,7 +90,7 @@ export default {
         },
         {
           id: 3,
-          title: 'Элемент',
+          title: 'Трилемент',
           children: [
             {
               id: 13,
@@ -92,7 +103,7 @@ export default {
         },
         {
           id: 4,
-          title: 'Элемент',
+          title: 'Четырелемент',
           children: [
             {
               id: 14,
@@ -102,7 +113,7 @@ export default {
         },
         {
           id: 5,
-          title: 'Элемент',
+          title: 'Пятый э лемент',
         },
       ],
     };

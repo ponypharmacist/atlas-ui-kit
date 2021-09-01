@@ -1,20 +1,28 @@
 <template>
 
 <div
+  v-show="!searchLength || (searchLength && isFoundBySearch)"
   class="au-tree-node"
   :class="{ open, parent: hasChildren }"
 >
   <div
     class="node-link"
+    :class="{ active: isActive }"
     @click="openTree"
   >
     <slot :name="`link${level}`">
       {{ node.title }}
+
+      <au-tooltip content="Создать страницу в категории">
+        <div class="node-button">
+          <au-icon icon="mdi-plus" :size="16" color="#b1b9c9"/>
+        </div>
+      </au-tooltip>
     </slot>
   </div>
 
   <div
-    v-if="hasChildren && open"
+    v-if="hasChildren && (open || (searchLength && isFoundBySearch))"
     class="node-children"
   >
     <au-tree-node
@@ -22,6 +30,7 @@
       :key="`n${level + 1}-${item.id}`"
       :node="item"
       :level="level + 1"
+      :search="search"
     />
   </div>
 </div>
@@ -41,6 +50,10 @@ export default {
       type: Number,
       default: 1,
     },
+    search: {
+      type: String,
+      default: null,
+    },
   },
 
   data() {
@@ -52,6 +65,34 @@ export default {
   computed: {
     hasChildren() {
       return this.node?.children?.length || false;
+    },
+
+    searchLength() {
+      return this.search?.length > 2 || false;
+    },
+
+    isActive() {
+      if (!this.searchLength) return false;
+
+      const s = this.search?.toUpperCase();
+
+      return this.node.title?.toUpperCase().includes(s);
+    },
+
+    isFoundBySearch() {
+      if (!this.searchLength) return false;
+
+      const s = this.search?.toUpperCase();
+      const t1 = this.node.title?.toUpperCase();
+      const c1 = this.node?.children;
+      const t2 = c1?.filter((n) => n.title.toUpperCase().includes(s)).length;
+      const c2 = c1?.map((n) => n.children).flat();
+      const t3 = c2?.filter((n) => n?.title.toUpperCase().includes(s)).length;
+
+      // Пока что поддерживается глубина в 3 уровня
+      // Если у кого есть желание сделать рекурсивным и при этом не сломать
+      // Я не против, делайте
+      return t1.includes(s) || t2 || t3;
     },
   },
 
@@ -73,6 +114,8 @@ export default {
 
   .node-link {
     position: relative;
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     height: 28px;
     padding: 5px;
@@ -93,7 +136,8 @@ export default {
       transition: opacity 0.25s ease;
     }
 
-    &:hover {
+    &:hover,
+    &.active {
       color: $blue;
       background-color: #f0f4fb;
       border-radius: 3px;
@@ -101,6 +145,31 @@ export default {
       &:before {
         opacity: 1;
       }
+    }
+
+    .node-button {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      margin-left: auto;
+      border-radius: 50%;
+      box-shadow: 0 0 2px rgba(39, 63, 104, 0.07);
+      border: 1px solid #b1b9c9;
+
+      &:hover {
+        border-color: $blue;
+        background-color: $blue;
+
+        & .au-icon {
+          background-color: white!important;
+        }
+      }
+    }
+
+    &:hover .node-button {
+      display: flex;
     }
   }
 
@@ -150,12 +219,6 @@ export default {
       }
     }
   }
-
-  // .au-tree-node .au-tree-node {
-  //   &:not(:last-child) .node-children:before {
-  //     left: -50px;
-  //   }
-  // }
 }
 
 .node-children {
