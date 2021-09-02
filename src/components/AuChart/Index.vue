@@ -12,7 +12,7 @@
       >
         <div class="chart-point" :style="pointStyle(point)">
           <slot name="point" :point="point">
-            <au-tooltip content="Hello, world!">
+            <au-tooltip :content="`${point.y} ${settings.tooltip.text}`">
               <div
                 class="chart-point-dot"
                 :style="{ ...pointStyle(point), ...dotStyle }"
@@ -45,6 +45,17 @@
       </svg>
     </template>
 
+  </div>
+
+  <div class="x-axis">
+    <span
+      v-for="(point, pointIndex) in dataset"
+      :key="`x-label-${pointIndex}`"
+      :style="xLabelStyle"
+      class="label"
+    >
+      {{ point.x }} день
+    </span>
   </div>
 </div>
 
@@ -91,6 +102,7 @@ export default {
     settings() {
       const point = this.options?.point;
       const line = this.options?.line;
+      const tooltip = this.options?.tooltip;
 
       return {
         point: {
@@ -104,6 +116,9 @@ export default {
           width: line?.width || 2,
           color: line?.color || 'dodgerblue',
           tension: line?.tension || 1,
+        },
+        tooltip: {
+          text: tooltip?.text || 'штук',
         },
       };
     },
@@ -126,6 +141,12 @@ export default {
       return {
         backgroundColor: p.backgroundColor,
         border: `${p.borderWidth}px ${p.borderStyle} ${p.borderColor}`,
+      };
+    },
+
+    xLabelStyle() {
+      return {
+        width: 0,
       };
     },
   },
@@ -191,6 +212,7 @@ export default {
 .au-chart {
   width: 100%;
   height: 200px;
+  margin-bottom: 32px;
 }
 
 .chart-box {
@@ -203,7 +225,6 @@ export default {
   position: relative;
   height: 100%;
   width: 0;
-  // border-right: 1px dashed salmon;
 }
 
 .chart-point {
@@ -231,5 +252,22 @@ export default {
 
 .chart-curve {
   overflow: visible;
+}
+
+// X-axis
+.x-axis {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  padding: 8px 0 4px;
+
+  .label {
+    display: inline-flex;
+    justify-content: center;
+    white-space: nowrap;
+  }
 }
 </style>

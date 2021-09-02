@@ -38,6 +38,15 @@
         @focusout="isFocused = false"
       >
 
+      <au-icon
+        v-if="clearable && value"
+        class="au-input-clear"
+        icon="mdi-close"
+        :size="iconSize"
+        color="#bbb"
+        @click.native.stop="$emit('input', null)"
+      />
+
       <slot name="suffix" />
     </div>
 
@@ -109,6 +118,10 @@ export default {
       default: false,
     },
     autofocus: {
+      type: Boolean,
+      default: false,
+    },
+    clearable: {
       type: Boolean,
       default: false,
     },
@@ -332,6 +345,16 @@ export default {
     input {
       font-size: 12px;
       font-weight: 400;
+    }
+  }
+
+  .au-input-clear {
+    position: absolute;
+    right: 8px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
     }
   }
 }

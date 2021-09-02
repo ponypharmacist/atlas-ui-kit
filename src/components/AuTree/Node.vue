@@ -1,7 +1,7 @@
 <template>
 
 <div
-  v-show="!searchLength || (searchLength && isFoundBySearch)"
+  v-show="forceOpen || !searchLength || isListed"
   class="au-tree-node"
   :class="{ open, parent: hasChildren }"
 >
@@ -22,7 +22,7 @@
   </div>
 
   <div
-    v-if="hasChildren && (open || (searchLength && isFoundBySearch))"
+    v-if="hasChildren && (open || isListed)"
     class="node-children"
   >
     <au-tree-node
@@ -31,6 +31,7 @@
       :node="item"
       :level="level + 1"
       :search="search"
+      :force-open="searchLength && open"
     />
   </div>
 </div>
@@ -54,12 +55,22 @@ export default {
       type: String,
       default: null,
     },
+    forceOpen: {
+      type: Boolean,
+      default: null,
+    },
   },
 
   data() {
     return {
       open: false,
     };
+  },
+
+  watch: {
+    search(newVal) {
+      if (newVal?.length > 2) this.open = false;
+    },
   },
 
   computed: {
@@ -84,15 +95,24 @@ export default {
 
       const s = this.search?.toUpperCase();
       const t1 = this.node.title?.toUpperCase();
+
       const c1 = this.node?.children;
       const t2 = c1?.filter((n) => n.title.toUpperCase().includes(s)).length;
-      const c2 = c1?.map((n) => n.children).flat();
+
+      const c2 = c1?.map((n) => n.children).flat().filter(Boolean);
       const t3 = c2?.filter((n) => n?.title.toUpperCase().includes(s)).length;
+
+      const c3 = c2?.map((n) => n.children).flat() || null;
+      const t4 = c3?.filter((n) => n?.title.toUpperCase().includes(s)).length;
 
       // Пока что поддерживается глубина в 3 уровня
       // Если у кого есть желание сделать рекурсивным и при этом не сломать
       // Я не против, делайте
-      return t1.includes(s) || t2 || t3;
+      return t1.includes(s) || t2 || t3 || t4;
+    },
+
+    isListed() {
+      return this.searchLength && this.isFoundBySearch;
     },
   },
 

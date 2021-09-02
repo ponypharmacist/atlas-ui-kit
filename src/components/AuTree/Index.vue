@@ -11,6 +11,7 @@
       full-width
       small
       inverse
+      clearable
     />
   </div>
 

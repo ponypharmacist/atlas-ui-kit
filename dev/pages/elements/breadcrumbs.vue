@@ -26,7 +26,8 @@
 
     <pre>&lt;au-breadcrumbs/&gt;</pre>
 
-    <p>Компонент использует настройки vue-router для определения пути. Для этого в <b>meta</b> роута должен быть прописан параметр <b>breadcrumb</b>.</p>
+    <p>Компонент использует настройки vue-router для определения пути.
+      Для этого в <b>meta</b> роута должен быть прописан параметр <b>breadcrumb</b>.</p>
 
     <pre>{
   path: '/',
@@ -63,7 +64,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../src/styles/partials/params";
+// au-breadcrumbs
+$icon-backarrow: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBkPSJNNDkyIDIzNkg2OC40NDJsNzAuMTY0LTY5LjgyNGM3LjgyOS03Ljc5MiA3Ljg1OS0yMC40NTUuMDY3LTI4LjI4NC03Ljc5Mi03LjgzLTIwLjQ1Ni03Ljg1OS0yOC4yODUtLjA2OGwtMTA0LjUwNCAxMDQtLjAxOC4wMTljLTcuODA5IDcuNzkyLTcuODM0IDIwLjQ5Ni0uMDAyIDI4LjMxNGwuMDE4LjAxOSAxMDQuNTA0IDEwNGM3LjgyOCA3Ljc5IDIwLjQ5MiA3Ljc2MyAyOC4yODUtLjA2OCA3Ljc5Mi03LjgyOSA3Ljc2Mi0yMC40OTItLjA2Ny0yOC4yODRMNjguNDQyIDI3Nkg0OTJjMTEuMDQ2IDAgMjAtOC45NTQgMjAtMjBzLTguOTU0LTIwLTIwLTIweiIvPjwvc3ZnPg==") no-repeat 50% 50% / contain;
 
 .au-breadcrumbs {
   display: flex;
@@ -93,7 +95,7 @@ export default {
     height: 18px;
     -webkit-mask: $icon-backarrow;
     mask: $icon-backarrow;
-    background-color: $blue;
+    background-color: #3F6ADA;
   }
 }
 
@@ -117,7 +119,7 @@ export default {
     height: 18px;
     line-height: 18px;
     text-decoration: none;
-    color: $blue;
+    color: #3F6ADA;
   }
 
   &::after {

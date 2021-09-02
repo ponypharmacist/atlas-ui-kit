@@ -1,7 +1,7 @@
 <template>
 
 <div class="demo-chart">
-  <h2 id="au-chart">График (сильно сырой, не использовать)</h2>
+  <h2 id="au-chart">График</h2>
   <div class="demo-item">
     <au-chart
       :dataset="dataset"
@@ -9,7 +9,7 @@
     />
   </div>
 
-  <div style="margin: 16px 0 0; display: flex;">
+  <div style="padding: 16px 0 0; display: flex;">
     <au-input
       v-model="options.point.size"
       label="options.point.size"
@@ -104,6 +104,10 @@
     color: 'dodgerblue',
     tension: 1, | 0 to 1, но после 2 выглядит странно
   },
+
+  tooltip: {
+    text: 'штук',
+  },
 },</pre>
   </div>
 
@@ -148,7 +152,11 @@ export default {
           color: 'dodgerblue',
           tension: 0.5,
         },
+        tooltip: {
+          text: 'штук',
+        },
       },
+
       colors: [
         'white',
         'black',

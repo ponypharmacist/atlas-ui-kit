@@ -20,8 +20,9 @@
       small
     />
     <au-input
-      value="icon"
+      v-model="valueIcon"
       icon="mdi-eye"
+      clearable
     />
 
     <au-input
@@ -94,6 +95,7 @@ export default {
   data() {
     return {
       inputModel: null,
+      valueIcon: 'icon',
     };
   },
 };
