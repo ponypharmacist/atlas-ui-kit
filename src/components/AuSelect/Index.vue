@@ -226,7 +226,7 @@ export default {
             .find((item) => item[this.idField] === chip);
           if (reference) return reference[this.valueField];
 
-          return 'Label not found';
+          return chip || 'Label not found';
         });
       }
 

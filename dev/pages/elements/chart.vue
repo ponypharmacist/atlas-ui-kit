@@ -80,6 +80,35 @@
     />
   </div>
 
+  <div style="margin: 16px 0 0; display: flex;">
+    <au-input
+      v-model="options.tooltip.text"
+      label="options.tooltip.text"
+      small
+      class="chart-input"
+    />
+  </div>
+
+  <div style="margin: 16px 0 0; display: flex;">
+    <au-input
+      v-model="options.xAxis.text"
+      label="options.xAxis.text"
+      small
+      class="chart-input"
+    />
+
+    <au-select
+      v-model="options.xAxis.hideLabels"
+      :list="labelsIndicesList"
+      label="options.xAxis.hideLabels"
+      small
+      multiselect
+      class="chart-input"
+      :clearable="false"
+      style="width: 386px;"
+    />
+  </div>
+
   <div style="display: flex; flex-direction: column; align-items: flex-start;">
   <pre style="margin-top: 16px;">&lt;au-chart
   chart-id: String, Number
@@ -89,6 +118,7 @@
 
 #point - slot для точек на графике
 #pointline - slot для линий, проходящих сквозь точки</pre>
+#xAxisLabel - подписи для точек на оси Х
 
   <pre style="margin-top: 16px;">options: {
   point: {
@@ -107,6 +137,11 @@
 
   tooltip: {
     text: 'штук',
+  },
+
+  xAxis: {
+    text: 'день',
+    hideLabels: [1, 3, 5, 7, 9, 11, 13, 15],
   },
 },</pre>
   </div>
@@ -155,6 +190,10 @@ export default {
         tooltip: {
           text: 'штук',
         },
+        xAxis: {
+          text: 'день',
+          hideLabels: [1, 3, 5, 7, 9, 11, 13, 15],
+        },
       },
 
       colors: [
@@ -176,6 +215,12 @@ export default {
         'dotted',
       ],
     };
+  },
+
+  computed: {
+    labelsIndicesList() {
+      return this.dataset.map((point, index) => index + 1);
+    },
   },
 };
 </script>

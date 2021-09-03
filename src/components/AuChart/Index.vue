@@ -54,7 +54,13 @@
       :style="xLabelStyle"
       class="label"
     >
-      {{ point.x }} день
+      <slot
+        v-if="!settings.xAxis.hideLabels.includes(pointIndex + 1)"
+        name="xAxisLabel"
+        :point="point"
+      >
+        {{ point.x }} {{ settings.xAxis.text }}
+      </slot>
     </span>
   </div>
 </div>
@@ -103,6 +109,7 @@ export default {
       const point = this.options?.point;
       const line = this.options?.line;
       const tooltip = this.options?.tooltip;
+      const xAxis = this.options?.xAxis;
 
       return {
         point: {
@@ -118,7 +125,11 @@ export default {
           tension: line?.tension || 1,
         },
         tooltip: {
-          text: tooltip?.text || 'штук',
+          text: tooltip?.text || '',
+        },
+        xAxis: {
+          text: xAxis?.text || '',
+          hideLabels: xAxis?.hideLabels || [],
         },
       };
     },

@@ -117,7 +117,7 @@
       </template>
 
       <tr
-        v-for="(placeholder, index) in tableSettings.perPage - pageContent.length"
+        v-for="(placeholder, index) in placeholderCount"
         :key="`placeholder-tr-${index}`"
         class="placeholder-tr"
       >
@@ -128,12 +128,13 @@
 
       <!-- Если разрешены массовые действия -->
       <tr
-        v-if="selectable && pageContent.length && !isLoading"
+        v-if="selectable && pageContent.length"
         class="mass-actions"
       >
         <td class="checkbox-cell">
           <div class="cell-content">
             <au-checkbox
+              v-if="!isLoading"
               :value="selectionSummary"
               :partial="selectionSummaryPartial"
               @click.native="$emit('selectAll')"
@@ -142,7 +143,7 @@
         </td>
 
         <td :colspan="colspanMassActions">
-          <div class="cell-content">
+          <div v-if="!isLoading" class="cell-content">
             <slot name="massactions"/>
           </div>
         </td>
@@ -158,7 +159,7 @@
         </td>
       </tr>
 
-      <tr v-if="isLoading">
+      <!-- <tr v-if="isLoading">
         <td
           class="not-found"
           :colspan="colspanNotFound"
@@ -167,16 +168,23 @@
             <au-spinner color="teal"/>
           </div>
         </td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
+
+  <div
+    v-if="isLoading"
+    class="is-loading-overlay"
+  >
+    <au-spinner color="dodgerblue" :size="80"/>
+  </div>
 
   <!-- Пагинация -->
   <au-pagination
     v-if="!hidePagination && !isLoading"
     :page="tableSettings.page"
     :per-page="tableSettings.perPage"
-    :total="items.length"
+    :total="tableSettings.total || items.length"
     :hide-per-page="hidePerPage"
     @changePage="changePage"
     @changePerPage="changePerPage"
@@ -221,6 +229,7 @@ export default {
         sortDirection: 'asc',
         page: 1,
         perPage: 10,
+        total: null,
       }),
     },
     hidePerPage: {
@@ -241,6 +250,10 @@ export default {
       default: false,
     },
     hideThead: {
+      type: Boolean,
+      default: false,
+    },
+    showPlaceholders: {
       type: Boolean,
       default: false,
     },
@@ -296,12 +309,22 @@ export default {
     // Выделяем содержимое текущей страницы из списка элементов
     pageContent() {
       // Возможно, не лучший подход
-      if (this.isLoading) return [];
+      // if (this.isLoading) return [];
 
       const startAt = (this.tableSettings.page - 1) * this.tableSettings.perPage;
       const endAt = (this.tableSettings.page) * this.tableSettings.perPage;
 
+      if (this.tableSettings.total) return this.items;
       return this.items.slice(startAt, endAt);
+    },
+
+    // Количество плейсхолдеров пустых строк
+    placeholderCount() {
+      if (!this.isLoading && this.showPlaceholders) {
+        return this.tableSettings?.perPage - this.pageContent?.length;
+      }
+
+      return 0;
     },
   },
 
@@ -506,5 +529,18 @@ export default {
   height: 32px;
   background-color: #fafafa;
   border-radius: 5px;
+}
+
+.is-loading-overlay {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: calc(100% - 48px);
+  left: 0;
+  top: 0;
+  background-color: rgba(64, 58, 116, 0.10);
+  border-radius: 3px;
 }
 </style>

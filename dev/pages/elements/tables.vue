@@ -52,6 +52,7 @@
   hide-pagination
   hide-per-page
   hide-thead
+  show-placeholders - показывать пустые строки вместо недостающего до perPage контента
 
   @changeSettings - при изменении сортировки или пагинации (обновление tableSettings)
   @settingsIcon - срабатывате по клику на settings-icon
