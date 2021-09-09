@@ -44,6 +44,7 @@
     sortKey: 'name', sortDirection: 'asc', page: 1, perPage: 10,
   }
   selectable
+  selectable-radio - скругляет чекбоксы, убирает selectAll чекбоксы
   is-loading
   expanded: Array
 

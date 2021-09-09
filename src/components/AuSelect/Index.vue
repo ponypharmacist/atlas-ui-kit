@@ -305,9 +305,12 @@ export default {
 
     showList() {
       this.isActive = !this.isActive;
+
       if (this.isActive === true) {
         this.getPosition();
       }
+
+      this.$emit('showList');
     },
 
     getPosition() {

@@ -8,11 +8,15 @@
   />
 
   <div class="demo-item">
-    <au-alerts v-model="alerts"/>
+    <au-alerts
+      v-model="alerts"
+      @removeMessage="removeMessage"
+    />
   </div>
 
   <pre>&lt;au-alerts
     v-model: Array
+    @removeMessage - возвращает index сообщения
 /&gt;</pre>
 </div>
 
@@ -47,6 +51,10 @@ export default {
         this.alerts.push(this.alertsList[this.order]);
         this.order = 0;
       }
+    },
+
+    removeMessage(index) {
+      this.alerts.splice(index, 1);
     },
   },
 };

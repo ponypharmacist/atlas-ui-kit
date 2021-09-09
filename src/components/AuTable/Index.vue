@@ -8,7 +8,7 @@
         <th v-if="selectable" class="checkbox-cell">
           <div class="cell-content">
             <au-checkbox
-              v-show="!isLoading"
+              v-show="!isLoading && !selectableRadio"
               :value="selectionSummary"
               :partial="selectionSummaryPartial"
               @click.native="$emit('selectAll')"
@@ -65,7 +65,11 @@
         >
           <td v-if="selectable" class="checkbox-cell">
             <div class="cell-content">
-              <au-checkbox :value="row.selected" @input="$emit('selectOne', row.id)"/>
+              <au-checkbox
+                :value="row.selected"
+                :rounded="selectableRadio"
+                @input="$emit('selectOne', row.id)"
+              />
             </div>
           </td>
 
@@ -128,7 +132,7 @@
 
       <!-- Если разрешены массовые действия -->
       <tr
-        v-if="selectable && pageContent.length"
+        v-if="selectable && pageContent.length && !selectableRadio"
         class="mass-actions"
       >
         <td class="checkbox-cell">
@@ -209,6 +213,10 @@ export default {
     },
     // Опции
     selectable: {
+      type: Boolean,
+      default: false,
+    },
+    selectableRadio: {
       type: Boolean,
       default: false,
     },
@@ -497,6 +505,7 @@ export default {
 
   .column-sorting {
     margin-left: auto;
+    height: 12px;
   }
 }
 

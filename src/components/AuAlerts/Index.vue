@@ -8,7 +8,7 @@
     :key="`message-${index}`"
     class="message"
     :class="message.type"
-    @click="removeMessage(index)"
+    @click="$emit('removeMessage', index)"
   >
     {{ message.text }}
   </div>
@@ -41,12 +41,6 @@ export default {
         },
       },
     };
-  },
-
-  methods: {
-    removeMessage(index) {
-      this.value.splice(index, 1);
-    },
   },
 };
 </script>

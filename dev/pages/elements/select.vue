@@ -60,6 +60,7 @@
   tiny
 
   @change
+  @showList
 /&gt;
 
 #item={ item } - slot, кастомный шаблон для элемента списка</pre>

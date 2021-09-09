@@ -29334,6 +29334,8 @@ var directive_1 = directive$1;var script$m = {
       if (this.isActive === true) {
         this.getPosition();
       }
+
+      this.$emit('showList');
     },
     getPosition: function getPosition() {
       var _this3 = this;
@@ -29376,9 +29378,9 @@ var __vue_render__$m = function __vue_render__() {
     attrs: {
       "id": "au-select--" + _vm.selectId
     }
-  }, [_vm._ssrNode((_vm.label ? "<label data-v-7d5e74ef>" + _vm._ssrEscape(_vm._s(_vm.label)) + "</label>" : "<!---->") + " "), _vm._ssrNode("<div" + _vm._ssrClass("au-select-selected", {
+  }, [_vm._ssrNode((_vm.label ? "<label data-v-35f44766>" + _vm._ssrEscape(_vm._s(_vm.label)) + "</label>" : "<!---->") + " "), _vm._ssrNode("<div" + _vm._ssrClass("au-select-selected", {
     active: _vm.isActive
-  }) + " data-v-7d5e74ef>", "</div>", [_vm.clearable && _vm.isValidValue ? _c('au-icon', {
+  }) + " data-v-35f44766>", "</div>", [_vm.clearable && _vm.isValidValue ? _c('au-icon', {
     staticClass: "au-select-clear",
     attrs: {
       "icon": "mdi-close",
@@ -29391,13 +29393,13 @@ var __vue_render__$m = function __vue_render__() {
         _vm.model = null;
       }
     }
-  }) : _vm._e(), _vm._ssrNode(" " + (_vm.isValidValue ? !_vm.multiselect ? "<span class=\"au-select-text\" data-v-7d5e74ef>" + _vm._ssrEscape("\n        " + _vm._s(_vm.selectedText) + "\n      ") + "</span>" : "<div class=\"chips\" data-v-7d5e74ef>" + _vm._ssrList(_vm.selectedText, function (item, index) {
-    return "<div class=\"chips-item\" data-v-7d5e74ef>" + _vm._ssrEscape(_vm._s(item)) + "</div>";
-  }) + "</div>" : _vm.placeholder ? "<span class=\"au-select-placeholder\" data-v-7d5e74ef>" + _vm._ssrEscape(_vm._s(_vm.placeholder)) + "</span>" : "<!---->"))], 2), _vm._ssrNode(" "), _vm.isActive ? _vm._ssrNode("<ul" + _vm._ssrClass("au-select-list", [{
+  }) : _vm._e(), _vm._ssrNode(" " + (_vm.isValidValue ? !_vm.multiselect ? "<span class=\"au-select-text\" data-v-35f44766>" + _vm._ssrEscape("\n        " + _vm._s(_vm.selectedText) + "\n      ") + "</span>" : "<div class=\"chips\" data-v-35f44766>" + _vm._ssrList(_vm.selectedText, function (item, index) {
+    return "<div class=\"chips-item\" data-v-35f44766>" + _vm._ssrEscape(_vm._s(item)) + "</div>";
+  }) + "</div>" : _vm.placeholder ? "<span class=\"au-select-placeholder\" data-v-35f44766>" + _vm._ssrEscape(_vm._s(_vm.placeholder)) + "</span>" : "<!---->"))], 2), _vm._ssrNode(" "), _vm.isActive ? _vm._ssrNode("<ul" + _vm._ssrClass("au-select-list", [{
     active: _vm.isActive,
     top: _vm.top,
     bottom: _vm.bottom
-  }]) + " data-v-7d5e74ef>", "</ul>", [_vm.list.length > 15 || _vm.searchQuery ? _vm._ssrNode("<div class=\"au-select-list__search\" data-v-7d5e74ef>", "</div>", [_c('au-input', {
+  }]) + " data-v-35f44766>", "</ul>", [_vm.list.length > 15 || _vm.searchQuery ? _vm._ssrNode("<div class=\"au-select-list__search\" data-v-35f44766>", "</div>", [_c('au-input', {
     attrs: {
       "placeholder": "Поиск по списку",
       "inverse": "",
@@ -29411,10 +29413,10 @@ var __vue_render__$m = function __vue_render__() {
       },
       expression: "searchQuery"
     }
-  })], 1) : _vm._e(), _vm._ssrNode(" " + (!_vm.listData || !_vm.listData.length ? "<li class=\"au-select-item disabled\" data-v-7d5e74ef>" + _vm._ssrEscape("\n      " + _vm._s(_vm.noDataText) + "\n    ") + "</li>" : "<!---->") + " "), _vm._l(_vm.listData, function (item, index) {
+  })], 1) : _vm._e(), _vm._ssrNode(" " + (!_vm.listData || !_vm.listData.length ? "<li class=\"au-select-item disabled\" data-v-35f44766>" + _vm._ssrEscape("\n      " + _vm._s(_vm.noDataText) + "\n    ") + "</li>" : "<!---->") + " "), _vm._l(_vm.listData, function (item, index) {
     return _vm._ssrNode("<li" + _vm._ssrClass("au-select-item", {
       selected: _vm.isSelected(item)
-    }) + " data-v-7d5e74ef>", "</li>", [_vm._t("item", function () {
+    }) + " data-v-35f44766>", "</li>", [_vm._t("item", function () {
       return [_vm._v(_vm._s(item[_vm.valueField] || item))];
     }, {
       "item": item
@@ -29427,8 +29429,8 @@ var __vue_staticRenderFns__$m = [];
 
 var __vue_inject_styles__$m = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-7d5e74ef_0", {
-    source: ".au-select[data-v-7d5e74ef]{position:relative;width:auto;min-height:40px;min-width:60px;font-size:14px;user-select:none}.au-select label[data-v-7d5e74ef]{display:inline-block;margin-bottom:5px;padding-left:1px;font-size:13px;line-height:16px;font-family:inherit;font-weight:500}.au-select.is-small[data-v-7d5e74ef]{min-height:32px;font-size:12px}.au-select.is-small label[data-v-7d5e74ef]{font-size:12px;line-height:14px}.au-select.is-small .au-select-item[data-v-7d5e74ef],.au-select.is-small .au-select-selected[data-v-7d5e74ef]{min-height:32px}.au-select.is-tiny[data-v-7d5e74ef]{min-height:24px;font-size:11px}.au-select.is-tiny .au-select-placeholder[data-v-7d5e74ef],.au-select.is-tiny .au-select-selected[data-v-7d5e74ef]{font-size:11px}.au-select.is-tiny label[data-v-7d5e74ef]{font-size:12px;line-height:14px}.au-select.is-tiny .au-select-item[data-v-7d5e74ef],.au-select.is-tiny .au-select-selected[data-v-7d5e74ef]{min-height:24px}.au-select .au-select-item[data-v-7d5e74ef],.au-select .au-select-selected[data-v-7d5e74ef]{position:relative;display:flex;align-items:center;width:100%;min-height:40px;font-weight:500;background-color:#fff;padding:0 8px;cursor:pointer}.au-select .au-select-placeholder[data-v-7d5e74ef]{font-weight:300;color:#9f9f9f;white-space:nowrap}.au-select .au-select-selected[data-v-7d5e74ef]{border-radius:2px;border:1px solid #e0e8f0;background-color:#f0f4fb;overflow:hidden;font-weight:400;font-size:12px;white-space:nowrap}.au-select .au-select-selected[data-v-7d5e74ef]::before{content:\"\";position:absolute;width:27px;height:100%;background-color:#f0f4fb;border-left:1px solid #e0e8f0;right:0;top:0}.au-select .au-select-selected[data-v-7d5e74ef]::after{content:\"\";-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%;background-color:#333;width:6px;height:11px;position:absolute;transform:translate(-50%,-50%) rotate(90deg);top:50%;right:8px;transition:.3s}.au-select .au-select-selected.active[data-v-7d5e74ef]{border-radius:2px 2px 0 0}.au-select .au-select-selected.active[data-v-7d5e74ef]::after{transform:translate(-50%,-50%) rotate(270deg);transition:.3s}.au-select.is-disabled[data-v-7d5e74ef]{opacity:.7;pointer-events:none}.au-select.is-inverse .au-select-selected[data-v-7d5e74ef]{background-color:#fff}.au-select.is-inverse .au-select-selected[data-v-7d5e74ef]::before{background-color:#fff}.au-select .au-select-clear[data-v-7d5e74ef]{position:absolute;right:34px;cursor:pointer}.au-select .au-select-clear[data-v-7d5e74ef]:hover{opacity:.7}.au-select .au-select-item[data-v-7d5e74ef]:hover{background-color:#e0e8f0}.au-select .au-select-item.selected[data-v-7d5e74ef]{background-color:rgba(178,184,196,.1);color:#3f6ada}.au-select .au-select-item.selected[data-v-7d5e74ef]:hover{background-color:rgba(178,184,196,.3)}.au-select .au-select-item.disabled[data-v-7d5e74ef]{pointer-events:none;color:#9f9f9f}.au-select .au-select-list[data-v-7d5e74ef]{position:absolute;width:100%;background-color:#fff;border:1px solid #e0e8f0;box-shadow:0 2px 2px rgba(100,100,100,.15);max-height:160px;overflow-x:hidden;overflow-y:scroll;border-radius:0 0 0 2px;pointer-events:none;visibility:hidden;opacity:0;z-index:1}.au-select .au-select-list.top[data-v-7d5e74ef]{top:unset;bottom:100%;box-shadow:0 -1px 2px rgba(100,100,100,.15)}.au-select .au-select-list.bottom[data-v-7d5e74ef]{top:100%;bottom:unset}.au-select .au-select-list.active[data-v-7d5e74ef]{visibility:visible;opacity:1;pointer-events:auto}.au-select .au-select-list[data-v-7d5e74ef]::-webkit-scrollbar{-webkit-appearance:none;height:4px;width:4px;cursor:pointer}.au-select .au-select-list[data-v-7d5e74ef]::-webkit-scrollbar-track{-webkit-box-shadow:inset 0 0 4px #f7f7f7;box-shadow:inset 0 0 4px #f7f7f7}.au-select .au-select-list[data-v-7d5e74ef]::-webkit-scrollbar-thumb{background-color:#e0e8f0;border-radius:2px;outline:0;background-clip:border-box;cursor:pointer}.au-select .au-select-text[data-v-7d5e74ef]{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis}.au-select.is-clearable .au-select-text[data-v-7d5e74ef]{max-width:calc(100% - 48px)}.au-select .chips[data-v-7d5e74ef]{padding:4px 20px 4px 0;display:flex;flex-wrap:wrap;margin-top:-4px}.au-select .chips .chips-item[data-v-7d5e74ef]{font-size:11px;border:1px solid #e0e8f0;padding:4px;background-color:#fff;border-radius:3px;margin-top:4px;margin-right:4px}.au-select .au-select-list__search[data-v-7d5e74ef]{display:flex;flex-wrap:nowrap;padding:8px}",
+  inject("data-v-35f44766_0", {
+    source: ".au-select[data-v-35f44766]{position:relative;width:auto;min-height:40px;min-width:60px;font-size:14px;user-select:none}.au-select label[data-v-35f44766]{display:inline-block;margin-bottom:5px;padding-left:1px;font-size:13px;line-height:16px;font-family:inherit;font-weight:500}.au-select.is-small[data-v-35f44766]{min-height:32px;font-size:12px}.au-select.is-small label[data-v-35f44766]{font-size:12px;line-height:14px}.au-select.is-small .au-select-item[data-v-35f44766],.au-select.is-small .au-select-selected[data-v-35f44766]{min-height:32px}.au-select.is-tiny[data-v-35f44766]{min-height:24px;font-size:11px}.au-select.is-tiny .au-select-placeholder[data-v-35f44766],.au-select.is-tiny .au-select-selected[data-v-35f44766]{font-size:11px}.au-select.is-tiny label[data-v-35f44766]{font-size:12px;line-height:14px}.au-select.is-tiny .au-select-item[data-v-35f44766],.au-select.is-tiny .au-select-selected[data-v-35f44766]{min-height:24px}.au-select .au-select-item[data-v-35f44766],.au-select .au-select-selected[data-v-35f44766]{position:relative;display:flex;align-items:center;width:100%;min-height:40px;font-weight:500;background-color:#fff;padding:0 8px;cursor:pointer}.au-select .au-select-placeholder[data-v-35f44766]{font-weight:300;color:#9f9f9f;white-space:nowrap}.au-select .au-select-selected[data-v-35f44766]{border-radius:2px;border:1px solid #e0e8f0;background-color:#f0f4fb;overflow:hidden;font-weight:400;font-size:12px;white-space:nowrap}.au-select .au-select-selected[data-v-35f44766]::before{content:\"\";position:absolute;width:27px;height:100%;background-color:#f0f4fb;border-left:1px solid #e0e8f0;right:0;top:0}.au-select .au-select-selected[data-v-35f44766]::after{content:\"\";-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%;background-color:#333;width:6px;height:11px;position:absolute;transform:translate(-50%,-50%) rotate(90deg);top:50%;right:8px;transition:.3s}.au-select .au-select-selected.active[data-v-35f44766]{border-radius:2px 2px 0 0}.au-select .au-select-selected.active[data-v-35f44766]::after{transform:translate(-50%,-50%) rotate(270deg);transition:.3s}.au-select.is-disabled[data-v-35f44766]{opacity:.7;pointer-events:none}.au-select.is-inverse .au-select-selected[data-v-35f44766]{background-color:#fff}.au-select.is-inverse .au-select-selected[data-v-35f44766]::before{background-color:#fff}.au-select .au-select-clear[data-v-35f44766]{position:absolute;right:34px;cursor:pointer}.au-select .au-select-clear[data-v-35f44766]:hover{opacity:.7}.au-select .au-select-item[data-v-35f44766]:hover{background-color:#e0e8f0}.au-select .au-select-item.selected[data-v-35f44766]{background-color:rgba(178,184,196,.1);color:#3f6ada}.au-select .au-select-item.selected[data-v-35f44766]:hover{background-color:rgba(178,184,196,.3)}.au-select .au-select-item.disabled[data-v-35f44766]{pointer-events:none;color:#9f9f9f}.au-select .au-select-list[data-v-35f44766]{position:absolute;width:100%;background-color:#fff;border:1px solid #e0e8f0;box-shadow:0 2px 2px rgba(100,100,100,.15);max-height:160px;overflow-x:hidden;overflow-y:scroll;border-radius:0 0 0 2px;pointer-events:none;visibility:hidden;opacity:0;z-index:1}.au-select .au-select-list.top[data-v-35f44766]{top:unset;bottom:100%;box-shadow:0 -1px 2px rgba(100,100,100,.15)}.au-select .au-select-list.bottom[data-v-35f44766]{top:100%;bottom:unset}.au-select .au-select-list.active[data-v-35f44766]{visibility:visible;opacity:1;pointer-events:auto}.au-select .au-select-list[data-v-35f44766]::-webkit-scrollbar{-webkit-appearance:none;height:4px;width:4px;cursor:pointer}.au-select .au-select-list[data-v-35f44766]::-webkit-scrollbar-track{-webkit-box-shadow:inset 0 0 4px #f7f7f7;box-shadow:inset 0 0 4px #f7f7f7}.au-select .au-select-list[data-v-35f44766]::-webkit-scrollbar-thumb{background-color:#e0e8f0;border-radius:2px;outline:0;background-clip:border-box;cursor:pointer}.au-select .au-select-text[data-v-35f44766]{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis}.au-select.is-clearable .au-select-text[data-v-35f44766]{max-width:calc(100% - 48px)}.au-select .chips[data-v-35f44766]{padding:4px 20px 4px 0;display:flex;flex-wrap:wrap;margin-top:-4px}.au-select .chips .chips-item[data-v-35f44766]{font-size:11px;border:1px solid #e0e8f0;padding:4px;background-color:#fff;border-radius:3px;margin-top:4px;margin-right:4px}.au-select .au-select-list__search[data-v-35f44766]{display:flex;flex-wrap:nowrap;padding:8px}",
     map: undefined,
     media: undefined
   });
@@ -29436,10 +29438,10 @@ var __vue_inject_styles__$m = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$m = "data-v-7d5e74ef";
+var __vue_scope_id__$m = "data-v-35f44766";
 /* module identifier */
 
-var __vue_module_identifier__$k = "data-v-7d5e74ef";
+var __vue_module_identifier__$k = "data-v-35f44766";
 /* functional template */
 
 var __vue_is_functional_template__$m = false;
@@ -44240,6 +44242,10 @@ var __vue_component__$m = __vue_component__$l;//
 //
 //
 //
+//
+//
+//
+//
 var script$c = {
   name: 'au-table',
   props: {
@@ -44253,6 +44259,10 @@ var script$c = {
     },
     // Опции
     selectable: {
+      type: Boolean,
+      default: false
+    },
+    selectableRadio: {
       type: Boolean,
       default: false
     },
@@ -44441,12 +44451,12 @@ var __vue_render__$c = function __vue_render__() {
 
   return _c('div', {
     staticClass: "au-table"
-  }, [_vm._ssrNode("<table data-v-60b9c2fe>", "</table>", [!_vm.hideThead ? _vm._ssrNode("<thead data-v-60b9c2fe>", "</thead>", [_vm._ssrNode("<tr data-v-60b9c2fe>", "</tr>", [_vm.selectable ? _vm._ssrNode("<th class=\"checkbox-cell\" data-v-60b9c2fe>", "</th>", [_vm._ssrNode("<div class=\"cell-content\" data-v-60b9c2fe>", "</div>", [_c('au-checkbox', {
+  }, [_vm._ssrNode("<table data-v-62847947>", "</table>", [!_vm.hideThead ? _vm._ssrNode("<thead data-v-62847947>", "</thead>", [_vm._ssrNode("<tr data-v-62847947>", "</tr>", [_vm.selectable ? _vm._ssrNode("<th class=\"checkbox-cell\" data-v-62847947>", "</th>", [_vm._ssrNode("<div class=\"cell-content\" data-v-62847947>", "</div>", [_c('au-checkbox', {
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: !_vm.isLoading,
-      expression: "!isLoading"
+      value: !_vm.isLoading && !_vm.selectableRadio,
+      expression: "!isLoading && !selectableRadio"
     }],
     attrs: {
       "value": _vm.selectionSummary,
@@ -44460,17 +44470,17 @@ var __vue_render__$c = function __vue_render__() {
   })], 1)]) : _vm._e(), _vm._ssrNode(" "), _vm._l(_vm.columns, function (column) {
     return _vm._ssrNode("<th" + _vm._ssrStyle(null, {
       width: column.width ? column.width + 'px' : null
-    }, null) + " data-v-60b9c2fe>", "</th>", [_vm._ssrNode("<div class=\"cell-content\" data-v-60b9c2fe>", "</div>", [_vm._t("header." + column.key, function () {
+    }, null) + " data-v-62847947>", "</th>", [_vm._ssrNode("<div class=\"cell-content\" data-v-62847947>", "</div>", [_vm._t("header." + column.key, function () {
       return [_c('span', [_vm._v(_vm._s(column.title))])];
     }, {
       "item": column
-    }), _vm._ssrNode(" "), column.sortable ? _vm._ssrNode("<div class=\"column-sorting\" data-v-60b9c2fe>", "</div>", [_c('au-icon', {
+    }), _vm._ssrNode(" "), column.sortable ? _vm._ssrNode("<div class=\"column-sorting\" data-v-62847947>", "</div>", [_c('au-icon', {
       attrs: {
         "size": 10,
         "icon": _vm.iconSort(column)
       }
     })], 1) : _vm._e()], 2)]);
-  }), _vm._ssrNode(" "), _vm.settingsIcon ? _vm._ssrNode("<th class=\"settings-cell\" data-v-60b9c2fe>", "</th>", [_vm._ssrNode("<div class=\"cell-content\" data-v-60b9c2fe>", "</div>", [_vm.settingsIcon ? _c('au-icon', {
+  }), _vm._ssrNode(" "), _vm.settingsIcon ? _vm._ssrNode("<th class=\"settings-cell\" data-v-62847947>", "</th>", [_vm._ssrNode("<div class=\"cell-content\" data-v-62847947>", "</div>", [_vm.settingsIcon ? _c('au-icon', {
     staticClass: "au-table-settings",
     attrs: {
       "icon": "mdi-cog",
@@ -44482,13 +44492,14 @@ var __vue_render__$c = function __vue_render__() {
         return _vm.$emit('settingsIcon');
       }
     }
-  }) : _vm._e()], 1)]) : _vm._e()], 2)]) : _vm._e(), _vm._ssrNode(" "), _vm._ssrNode("<tbody data-v-60b9c2fe>", "</tbody>", [_vm._l(_vm.pageContent, function (row, rowIndex) {
+  }) : _vm._e()], 1)]) : _vm._e()], 2)]) : _vm._e(), _vm._ssrNode(" "), _vm._ssrNode("<tbody data-v-62847947>", "</tbody>", [_vm._l(_vm.pageContent, function (row, rowIndex) {
     return [_vm._ssrNode("<tr" + _vm._ssrClass(null, {
       even: rowIndex % 2 != 0,
       odd: rowIndex % 2 === 0
-    }) + " data-v-60b9c2fe>", "</tr>", [_vm.selectable ? _vm._ssrNode("<td class=\"checkbox-cell\" data-v-60b9c2fe>", "</td>", [_vm._ssrNode("<div class=\"cell-content\" data-v-60b9c2fe>", "</div>", [_c('au-checkbox', {
+    }) + " data-v-62847947>", "</tr>", [_vm.selectable ? _vm._ssrNode("<td class=\"checkbox-cell\" data-v-62847947>", "</td>", [_vm._ssrNode("<div class=\"cell-content\" data-v-62847947>", "</div>", [_c('au-checkbox', {
       attrs: {
-        "value": row.selected
+        "value": row.selected,
+        "rounded": _vm.selectableRadio
       },
       on: {
         "input": function input($event) {
@@ -44496,7 +44507,7 @@ var __vue_render__$c = function __vue_render__() {
         }
       }
     })], 1)]) : _vm._e(), _vm._ssrNode(" "), _vm._l(_vm.columns, function (column, colIndex) {
-      return _vm._ssrNode("<td" + _vm._ssrAttr("colspan", _vm.settingsIcon && colIndex === _vm.columns.length - 1 ? 2 : 1) + " data-v-60b9c2fe>", "</td>", [_vm._ssrNode("<div" + _vm._ssrClass("cell-content", "align-" + (column.align || 'unset')) + " data-v-60b9c2fe>", "</div>", [_vm._t("item." + column.key, function () {
+      return _vm._ssrNode("<td" + _vm._ssrAttr("colspan", _vm.settingsIcon && colIndex === _vm.columns.length - 1 ? 2 : 1) + " data-v-62847947>", "</td>", [_vm._ssrNode("<div" + _vm._ssrClass("cell-content", "align-" + (column.align || 'unset')) + " data-v-62847947>", "</div>", [_vm._t("item." + column.key, function () {
         return [_vm._v("\n                " + _vm._s(row[column.key] || '-') + "\n              ")];
       }, {
         "item": row,
@@ -44521,12 +44532,12 @@ var __vue_render__$c = function __vue_render__() {
     })], 2), _vm._ssrNode(" "), _vm.isExpanded(row.id) ? _vm._ssrNode("<tr" + _vm._ssrClass("au-table-expanded", {
       even: rowIndex % 2 != 0,
       odd: rowIndex % 2 === 0
-    }) + " data-v-60b9c2fe>", "</tr>", [_vm._ssrNode("<td" + _vm._ssrAttr("colspan", _vm.colspanMassActions + 1) + " data-v-60b9c2fe>", "</td>", [_vm._ssrNode("<div class=\"cell-content\" data-v-60b9c2fe>", "</div>", [_vm._t("item.expanded", null, {
+    }) + " data-v-62847947>", "</tr>", [_vm._ssrNode("<td" + _vm._ssrAttr("colspan", _vm.colspanMassActions + 1) + " data-v-62847947>", "</td>", [_vm._ssrNode("<div class=\"cell-content\" data-v-62847947>", "</div>", [_vm._t("item.expanded", null, {
       "item": row
     })], 2)])]) : _vm._e()];
   }), _vm._ssrNode(" " + _vm._ssrList(_vm.placeholderCount, function (placeholder, index) {
-    return "<tr class=\"placeholder-tr\" data-v-60b9c2fe><td" + _vm._ssrAttr("colspan", _vm.colspanMassActions + 1) + " data-v-60b9c2fe><div class=\"cell-content\" data-v-60b9c2fe></div></td></tr>";
-  }) + " "), _vm.selectable && _vm.pageContent.length ? _vm._ssrNode("<tr class=\"mass-actions\" data-v-60b9c2fe>", "</tr>", [_vm._ssrNode("<td class=\"checkbox-cell\" data-v-60b9c2fe>", "</td>", [_vm._ssrNode("<div class=\"cell-content\" data-v-60b9c2fe>", "</div>", [!_vm.isLoading ? _c('au-checkbox', {
+    return "<tr class=\"placeholder-tr\" data-v-62847947><td" + _vm._ssrAttr("colspan", _vm.colspanMassActions + 1) + " data-v-62847947><div class=\"cell-content\" data-v-62847947></div></td></tr>";
+  }) + " "), _vm.selectable && _vm.pageContent.length && !_vm.selectableRadio ? _vm._ssrNode("<tr class=\"mass-actions\" data-v-62847947>", "</tr>", [_vm._ssrNode("<td class=\"checkbox-cell\" data-v-62847947>", "</td>", [_vm._ssrNode("<div class=\"cell-content\" data-v-62847947>", "</div>", [!_vm.isLoading ? _c('au-checkbox', {
     attrs: {
       "value": _vm.selectionSummary,
       "partial": _vm.selectionSummaryPartial
@@ -44536,7 +44547,7 @@ var __vue_render__$c = function __vue_render__() {
         return _vm.$emit('selectAll');
       }
     }
-  }) : _vm._e()], 1)]), _vm._ssrNode(" "), _vm._ssrNode("<td" + _vm._ssrAttr("colspan", _vm.colspanMassActions) + " data-v-60b9c2fe>", "</td>", [!_vm.isLoading ? _vm._ssrNode("<div class=\"cell-content\" data-v-60b9c2fe>", "</div>", [_vm._t("massactions")], 2) : _vm._e()])], 2) : _vm._e(), _vm._ssrNode(" " + (!_vm.pageContent.length && !_vm.isLoading ? "<tr data-v-60b9c2fe><td" + _vm._ssrAttr("colspan", _vm.colspanNotFound) + " class=\"not-found\" data-v-60b9c2fe><div class=\"cell-content\" data-v-60b9c2fe>Ничего не найдено</div></td></tr>" : "<!---->"))], 2)], 2), _vm._ssrNode(" "), _vm.isLoading ? _vm._ssrNode("<div class=\"is-loading-overlay\" data-v-60b9c2fe>", "</div>", [_c('au-spinner', {
+  }) : _vm._e()], 1)]), _vm._ssrNode(" "), _vm._ssrNode("<td" + _vm._ssrAttr("colspan", _vm.colspanMassActions) + " data-v-62847947>", "</td>", [!_vm.isLoading ? _vm._ssrNode("<div class=\"cell-content\" data-v-62847947>", "</div>", [_vm._t("massactions")], 2) : _vm._e()])], 2) : _vm._e(), _vm._ssrNode(" " + (!_vm.pageContent.length && !_vm.isLoading ? "<tr data-v-62847947><td" + _vm._ssrAttr("colspan", _vm.colspanNotFound) + " class=\"not-found\" data-v-62847947><div class=\"cell-content\" data-v-62847947>Ничего не найдено</div></td></tr>" : "<!---->"))], 2)], 2), _vm._ssrNode(" "), _vm.isLoading ? _vm._ssrNode("<div class=\"is-loading-overlay\" data-v-62847947>", "</div>", [_c('au-spinner', {
     attrs: {
       "color": "dodgerblue",
       "size": 80
@@ -44552,7 +44563,7 @@ var __vue_render__$c = function __vue_render__() {
       "changePage": _vm.changePage,
       "changePerPage": _vm.changePerPage
     }
-  }) : _vm._e(), _vm._ssrNode(" " + (_vm.isLoading && !_vm.hidePagination ? "<div class=\"pagination-placeholder\" data-v-60b9c2fe></div>" : "<!---->"))], 2);
+  }) : _vm._e(), _vm._ssrNode(" " + (_vm.isLoading && !_vm.hidePagination ? "<div class=\"pagination-placeholder\" data-v-62847947></div>" : "<!---->"))], 2);
 };
 
 var __vue_staticRenderFns__$c = [];
@@ -44560,8 +44571,8 @@ var __vue_staticRenderFns__$c = [];
 
 var __vue_inject_styles__$c = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-60b9c2fe_0", {
-    source: ".au-table[data-v-60b9c2fe]{position:relative}.au-table table[data-v-60b9c2fe]{width:100%;margin-bottom:16px;text-align:left;border-spacing:0;border-collapse:separate}.au-table thead th[data-v-60b9c2fe]{font-weight:500;border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear;cursor:pointer}.au-table thead th[data-v-60b9c2fe]:hover{border-color:#e1e9f7;background-color:#e1e8f5}.au-table thead th[data-v-60b9c2fe]:not(:last-child){border-right:0}.au-table thead th:not(:last-child) .cell-content[data-v-60b9c2fe]{padding-right:10px}.au-table thead th[data-v-60b9c2fe]:first-child{border-radius:4px 0 0 4px}.au-table thead th[data-v-60b9c2fe]:last-child{border-radius:0 4px 4px 0}.au-table tbody .even[data-v-60b9c2fe]{background-color:#f3f6f9}.au-table tbody .odd[data-v-60b9c2fe]{background-color:#fff}.au-table td[data-v-60b9c2fe],.au-table th[data-v-60b9c2fe]{padding:0;vertical-align:middle}.au-table .mass-actions td[data-v-60b9c2fe]{border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear}.au-table .mass-actions td[data-v-60b9c2fe]:not(:last-child){border-right:0}.au-table .mass-actions td[data-v-60b9c2fe]:first-child{border-radius:4px 0 0 4px}.au-table .mass-actions td[data-v-60b9c2fe]:last-child{border-radius:0 4px 4px 0}.au-table .checkbox-cell[data-v-60b9c2fe]{width:38px}.au-table .settings-cell[data-v-60b9c2fe]{width:32px}.au-table .cell-content[data-v-60b9c2fe]{display:flex;align-items:center;min-height:32px;padding:8px 11px;font-size:12px;line-height:16px}.au-table .cell-content.align-left[data-v-60b9c2fe]{justify-content:flex-start}.au-table .cell-content.align-right[data-v-60b9c2fe]{justify-content:flex-end}.au-table .cell-content.align-center[data-v-60b9c2fe]{justify-content:center}.au-table .not-found[data-v-60b9c2fe]{font-size:12px;line-height:16px;text-align:center;background-color:#f3f6f9}.au-table .not-found .cell-content[data-v-60b9c2fe]{justify-content:center}.au-table .column-sorting[data-v-60b9c2fe]{margin-left:auto}.expand-arrow[data-v-60b9c2fe]{margin-left:auto;margin-top:-2px;margin-bottom:-2px;cursor:pointer;transition:all .25s ease}.expand-arrow[data-v-60b9c2fe]:hover{opacity:.9}.expand-arrow.expanded[data-v-60b9c2fe]{transform:rotate(180deg);background-color:#3f6ada!important}.au-table-settings[data-v-60b9c2fe]{cursor:pointer}.au-table-settings[data-v-60b9c2fe]:hover{background-color:#3f6ada!important}.pagination-placeholder[data-v-60b9c2fe]{height:32px;background-color:#fafafa;border-radius:5px}.is-loading-overlay[data-v-60b9c2fe]{position:absolute;display:flex;align-items:center;justify-content:center;width:100%;height:calc(100% - 48px);left:0;top:0;background-color:rgba(64,58,116,.1);border-radius:3px}",
+  inject("data-v-62847947_0", {
+    source: ".au-table[data-v-62847947]{position:relative}.au-table table[data-v-62847947]{width:100%;margin-bottom:16px;text-align:left;border-spacing:0;border-collapse:separate}.au-table thead th[data-v-62847947]{font-weight:500;border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear;cursor:pointer}.au-table thead th[data-v-62847947]:hover{border-color:#e1e9f7;background-color:#e1e8f5}.au-table thead th[data-v-62847947]:not(:last-child){border-right:0}.au-table thead th:not(:last-child) .cell-content[data-v-62847947]{padding-right:10px}.au-table thead th[data-v-62847947]:first-child{border-radius:4px 0 0 4px}.au-table thead th[data-v-62847947]:last-child{border-radius:0 4px 4px 0}.au-table tbody .even[data-v-62847947]{background-color:#f3f6f9}.au-table tbody .odd[data-v-62847947]{background-color:#fff}.au-table td[data-v-62847947],.au-table th[data-v-62847947]{padding:0;vertical-align:middle}.au-table .mass-actions td[data-v-62847947]{border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear}.au-table .mass-actions td[data-v-62847947]:not(:last-child){border-right:0}.au-table .mass-actions td[data-v-62847947]:first-child{border-radius:4px 0 0 4px}.au-table .mass-actions td[data-v-62847947]:last-child{border-radius:0 4px 4px 0}.au-table .checkbox-cell[data-v-62847947]{width:38px}.au-table .settings-cell[data-v-62847947]{width:32px}.au-table .cell-content[data-v-62847947]{display:flex;align-items:center;min-height:32px;padding:8px 11px;font-size:12px;line-height:16px}.au-table .cell-content.align-left[data-v-62847947]{justify-content:flex-start}.au-table .cell-content.align-right[data-v-62847947]{justify-content:flex-end}.au-table .cell-content.align-center[data-v-62847947]{justify-content:center}.au-table .not-found[data-v-62847947]{font-size:12px;line-height:16px;text-align:center;background-color:#f3f6f9}.au-table .not-found .cell-content[data-v-62847947]{justify-content:center}.au-table .column-sorting[data-v-62847947]{margin-left:auto;height:12px}.expand-arrow[data-v-62847947]{margin-left:auto;margin-top:-2px;margin-bottom:-2px;cursor:pointer;transition:all .25s ease}.expand-arrow[data-v-62847947]:hover{opacity:.9}.expand-arrow.expanded[data-v-62847947]{transform:rotate(180deg);background-color:#3f6ada!important}.au-table-settings[data-v-62847947]{cursor:pointer}.au-table-settings[data-v-62847947]:hover{background-color:#3f6ada!important}.pagination-placeholder[data-v-62847947]{height:32px;background-color:#fafafa;border-radius:5px}.is-loading-overlay[data-v-62847947]{position:absolute;display:flex;align-items:center;justify-content:center;width:100%;height:calc(100% - 48px);left:0;top:0;background-color:rgba(64,58,116,.1);border-radius:3px}",
     map: undefined,
     media: undefined
   });
@@ -44569,10 +44580,10 @@ var __vue_inject_styles__$c = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$c = "data-v-60b9c2fe";
+var __vue_scope_id__$c = "data-v-62847947";
 /* module identifier */
 
-var __vue_module_identifier__$a = "data-v-60b9c2fe";
+var __vue_module_identifier__$a = "data-v-62847947";
 /* functional template */
 
 var __vue_is_functional_template__$c = false;
@@ -45807,11 +45818,6 @@ var script$3 = {
         }
       }
     };
-  },
-  methods: {
-    removeMessage: function removeMessage(index) {
-      this.value.splice(index, 1);
-    }
   }
 };/* script */
 var __vue_script__$3 = script$3;
@@ -45827,7 +45833,7 @@ var __vue_render__$3 = function __vue_render__() {
   return _c('div', {
     staticClass: "au-alerts"
   }, [_vm._ssrNode(_vm._ssrList(_vm.value, function (message, index) {
-    return "<div" + _vm._ssrClass("message", message.type) + " data-v-9661a9cc>" + _vm._ssrEscape("\n    " + _vm._s(message.text) + "\n  ") + "</div>";
+    return "<div" + _vm._ssrClass("message", message.type) + " data-v-fcef4866>" + _vm._ssrEscape("\n    " + _vm._s(message.text) + "\n  ") + "</div>";
   }))]);
 };
 
@@ -45836,8 +45842,8 @@ var __vue_staticRenderFns__$3 = [];
 
 var __vue_inject_styles__$3 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-9661a9cc_0", {
-    source: ".au-alerts[data-v-9661a9cc]{position:fixed;width:300px;height:auto;bottom:10px;right:16px}.message[data-v-9661a9cc]{width:100%;padding:10px 14px 8px;margin-bottom:6px;font-size:13px;line-height:16px;color:#fff;background-color:#1e90ff;border-radius:5px;cursor:pointer}.message[data-v-9661a9cc]:hover{opacity:.9}.message.info[data-v-9661a9cc]{background-color:#1e90ff}.message.warning[data-v-9661a9cc]{color:#000;background-color:Gold}.message.error[data-v-9661a9cc]{background-color:#cd5c5c}",
+  inject("data-v-fcef4866_0", {
+    source: ".au-alerts[data-v-fcef4866]{position:fixed;width:300px;height:auto;bottom:10px;right:16px}.message[data-v-fcef4866]{width:100%;padding:10px 14px 8px;margin-bottom:6px;font-size:13px;line-height:16px;color:#fff;background-color:#1e90ff;border-radius:5px;cursor:pointer}.message[data-v-fcef4866]:hover{opacity:.9}.message.info[data-v-fcef4866]{background-color:#1e90ff}.message.warning[data-v-fcef4866]{color:#000;background-color:Gold}.message.error[data-v-fcef4866]{background-color:#cd5c5c}",
     map: undefined,
     media: undefined
   });
@@ -45845,10 +45851,10 @@ var __vue_inject_styles__$3 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$3 = "data-v-9661a9cc";
+var __vue_scope_id__$3 = "data-v-fcef4866";
 /* module identifier */
 
-var __vue_module_identifier__$1 = "data-v-9661a9cc";
+var __vue_module_identifier__$1 = "data-v-fcef4866";
 /* functional template */
 
 var __vue_is_functional_template__$3 = false;
