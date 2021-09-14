@@ -25,6 +25,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    timeout: {
+      type: Number,
+      default: 6000,
+    },
   },
 
   data() {
@@ -42,6 +46,14 @@ export default {
       },
     };
   },
+
+  watch: {
+    value(arr) {
+      if (arr?.length && this.timeout) {
+        setTimeout(() => (this.$emit('removeMessage', 0)), this.timeout);
+      }
+    },
+  },
 };
 </script>
 
@@ -52,18 +64,20 @@ export default {
   height: auto;
   bottom: 10px;
   right: 16px;
+  z-index: 100;
 }
 
 .message {
   width: 100%;
-  padding: 10px 14px 8px;
+  padding: 16px 20px 14px;
   margin-bottom: 6px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 16px;
   color: white;
   background-color: DodgerBlue;
   border-radius: 5px;
   cursor: pointer;
+  opacity: 0.75;
 
   &:hover {
     opacity: 0.9;

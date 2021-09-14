@@ -47,6 +47,7 @@
   selectable-radio - скругляет чекбоксы, убирает selectAll чекбоксы
   is-loading
   expanded: Array
+  expanded-key: String - свойство для привязки expand, если id отсутствует у объектов
 
   settings-icon - включает отображение иконки настроек
   no-data-text: String

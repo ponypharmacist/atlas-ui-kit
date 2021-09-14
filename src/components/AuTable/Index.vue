@@ -83,7 +83,7 @@
                 :name="`item.${column.key}`"
                 :item="row"
                 :expand="expandRow"
-                :is-expanded="isExpanded(row.id)"
+                :is-expanded="isExpanded(row[expandedKey])"
               >
                 {{ row[column.key] || '-' }}
               </slot>
@@ -92,7 +92,7 @@
               <au-icon
                 v-if="colIndex + 1 === columns.length && expanded"
                 class="expand-arrow"
-                :class="{ expanded: isExpanded(row.id) }"
+                :class="{ expanded: isExpanded(row[expandedKey]) }"
                 icon="mdi-chevron-down"
                 :size="20"
                 color="#666"
@@ -104,7 +104,7 @@
 
         <!-- Раскрывающееся дочернее содержимое строки -->
         <tr
-          v-if="isExpanded(row.id)"
+          v-if="isExpanded(row[expandedKey])"
           :key="`table-row-expanded-${rowIndex}`"
           class="au-table-expanded"
           :class="{ even: rowIndex % 2 != 0, odd: rowIndex % 2 === 0 }"
@@ -228,6 +228,10 @@ export default {
     expanded: {
       type: Array,
       default: null,
+    },
+    expandedKey: {
+      type: String,
+      default: 'id',
     },
     // Внешние настройки пагинации и сортировки
     tableSettings: {
@@ -382,13 +386,13 @@ export default {
     },
 
     // Expanded
-    expandRow({ id }) {
-      if (this.expanded?.includes(id)) {
-        const index = this.expanded.findIndex((i) => i === id);
+    expandRow(row) {
+      if (this.expanded?.includes(row[this.expandedKey])) {
+        const index = this.expanded.findIndex((i) => i === row[this.expandedKey]);
 
         this.expanded.splice(index, 1);
       } else {
-        this.expanded.push(id);
+        this.expanded.push(row[this.expandedKey]);
       }
     },
 

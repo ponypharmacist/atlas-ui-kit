@@ -16,6 +16,7 @@
 
   <pre>&lt;au-alerts
     v-model: Array
+    timeout: Number | задержка перед исчезновением в миллисекундах
     @removeMessage - возвращает index сообщения
 /&gt;</pre>
 </div>
