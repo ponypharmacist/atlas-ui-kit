@@ -11,6 +11,8 @@
       value-field="title"
       id-field="id"
       placeholder="Bla bla bla bla bla bla bla"
+      autocomplete
+      @autocompleteInput="autocompleteInput"
     />
     </div>
     <au-select
@@ -53,6 +55,7 @@
   close-on-select
 
   multiselect
+  autocomplete
   clearable
   disabled
   inverse
@@ -61,6 +64,7 @@
 
   @change
   @showList
+  @autocompleteInput
 /&gt;
 
 #item={ item } - slot, кастомный шаблон для элемента списка</pre>
@@ -84,6 +88,12 @@ export default {
         { id: 4, title: 'Option Four' },
       ],
     };
+  },
+
+  methods: {
+    autocompleteInput(text) {
+      console.log(`Autocomplete text: ${text}`);
+    },
   },
 };
 </script>

@@ -58,7 +58,7 @@
       v-if="isActive"
     >
       <div
-        v-if="list.length > 15 || searchQuery"
+        v-if="list.length > 15 || searchQuery || autocomplete"
         class="au-select-list__search"
       >
         <au-input
@@ -67,6 +67,7 @@
           inverse
           small
           full-width
+          @input="searchQueryInput"
         />
       </div>
 
@@ -147,7 +148,10 @@ export default {
       type: Boolean,
       default: false,
     },
-
+    autocomplete: {
+      type: Boolean,
+      default: false,
+    },
     clearable: {
       type: Boolean,
       default: true,
@@ -301,6 +305,14 @@ export default {
     onClickAway() {
       this.isActive = false;
       this.searchQuery = null;
+    },
+
+    searchQueryInput(text) {
+      this.searchQuery = text;
+
+      if (this.autocomplete) {
+        this.$emit('autocompleteInput', text);
+      }
     },
 
     showList() {
