@@ -210,7 +210,7 @@ export default {
     },
 
     listData() {
-      if (!this.searchQuery || this.searchQuery === '') return this.list;
+      if (!this.searchQuery || this.searchQuery === '' || this.autocomplete) return this.list;
 
       return this.list
         .filter(
