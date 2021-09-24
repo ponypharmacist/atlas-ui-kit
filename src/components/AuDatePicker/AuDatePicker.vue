@@ -28,7 +28,8 @@
       v-on="inputEvents"
     >
       <template #suffix>
-        <au-icon icon="mdi-calendar-month-outline" :size="iconSize" color="#9db9d1"/>
+        <au-icon v-if="!inputValue" icon="mdi-calendar-month-outline" :size="iconSize" color="#9db9d1"/>
+        <au-icon v-show="inputValue" icon="mdi-close" :size="iconSize" color="#9db9d1" @click.native="clearInput"/>
       </template>
     </au-input>
 
@@ -59,7 +60,8 @@
         v-on="inputEvents.start"
       >
         <template #suffix>
-          <au-icon icon="mdi-calendar-month-outline" :size="iconSize" color="#9db9d1"/>
+          <au-icon v-if="!inputValue.start" icon="mdi-calendar-month-outline" :size="iconSize" color="#9db9d1"/>
+          <au-icon v-show="inputValue.start" icon="mdi-close" :size="iconSize" color="#9db9d1" @click.native="clearInput"/>
         </template>
       </au-input>
 
@@ -77,7 +79,8 @@
         v-on="inputEvents.end"
       >
         <template #suffix>
-          <au-icon icon="mdi-calendar-month-outline" :size="iconSize" color="#9db9d1"/>
+          <au-icon v-if="!inputValue.end" icon="mdi-calendar-month-outline" :size="iconSize" color="#9db9d1"/>
+          <au-icon v-show="inputValue.end" icon="mdi-close" :size="iconSize" color="#9db9d1" @click.native="clearInput"/>
         </template>
       </au-input>
     </div>
@@ -248,6 +251,19 @@ export default {
         case 'date':
         default:
           return { input: 'DD.MM.YYYY' };
+      }
+    },
+  },
+
+  methods: {
+    clearInput() {
+      if (this.isRange) {
+        this.$emit('input', {
+          start: null,
+          end: null,
+        });
+      } else {
+        this.$emit('input', null);
       }
     },
   },

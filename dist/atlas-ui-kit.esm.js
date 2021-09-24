@@ -28889,6 +28889,19 @@ var script$o = {
       }
     }
 
+  },
+  methods: {
+    clearInput() {
+      if (this.isRange) {
+        this.$emit('input', {
+          start: null,
+          end: null
+        });
+      } else {
+        this.$emit('input', null);
+      }
+    }
+
   }
 };
 
@@ -28936,11 +28949,28 @@ var __vue_render__$o = function () {
           scopedSlots: _vm._u([{
             key: "suffix",
             fn: function () {
-              return [_c('au-icon', {
+              return [!inputValue ? _c('au-icon', {
                 attrs: {
                   "icon": "mdi-calendar-month-outline",
                   "size": _vm.iconSize,
                   "color": "#9db9d1"
+                }
+              }) : _vm._e(), _vm._v(" "), _c('au-icon', {
+                directives: [{
+                  name: "show",
+                  rawName: "v-show",
+                  value: inputValue,
+                  expression: "inputValue"
+                }],
+                attrs: {
+                  "icon": "mdi-close",
+                  "size": _vm.iconSize,
+                  "color": "#9db9d1"
+                },
+                nativeOn: {
+                  "click": function ($event) {
+                    return _vm.clearInput.apply(null, arguments);
+                  }
                 }
               })];
             },
@@ -28967,11 +28997,28 @@ var __vue_render__$o = function () {
           scopedSlots: _vm._u([{
             key: "suffix",
             fn: function () {
-              return [_c('au-icon', {
+              return [!inputValue.start ? _c('au-icon', {
                 attrs: {
                   "icon": "mdi-calendar-month-outline",
                   "size": _vm.iconSize,
                   "color": "#9db9d1"
+                }
+              }) : _vm._e(), _vm._v(" "), _c('au-icon', {
+                directives: [{
+                  name: "show",
+                  rawName: "v-show",
+                  value: inputValue.start,
+                  expression: "inputValue.start"
+                }],
+                attrs: {
+                  "icon": "mdi-close",
+                  "size": _vm.iconSize,
+                  "color": "#9db9d1"
+                },
+                nativeOn: {
+                  "click": function ($event) {
+                    return _vm.clearInput.apply(null, arguments);
+                  }
                 }
               })];
             },
@@ -28993,11 +29040,28 @@ var __vue_render__$o = function () {
           scopedSlots: _vm._u([{
             key: "suffix",
             fn: function () {
-              return [_c('au-icon', {
+              return [!inputValue.end ? _c('au-icon', {
                 attrs: {
                   "icon": "mdi-calendar-month-outline",
                   "size": _vm.iconSize,
                   "color": "#9db9d1"
+                }
+              }) : _vm._e(), _vm._v(" "), _c('au-icon', {
+                directives: [{
+                  name: "show",
+                  rawName: "v-show",
+                  value: inputValue.end,
+                  expression: "inputValue.end"
+                }],
+                attrs: {
+                  "icon": "mdi-close",
+                  "size": _vm.iconSize,
+                  "color": "#9db9d1"
+                },
+                nativeOn: {
+                  "click": function ($event) {
+                    return _vm.clearInput.apply(null, arguments);
+                  }
                 }
               })];
             },
@@ -29021,8 +29085,8 @@ var __vue_staticRenderFns__$o = [];
 
 const __vue_inject_styles__$o = function (inject) {
   if (!inject) return;
-  inject("data-v-4eb24098_0", {
-    source: ".au-date-picker[data-v-4eb24098]{position:relative}.range-wrap-label[data-v-4eb24098]{width:100%;margin-bottom:5px;font-size:13px;line-height:16px;font-weight:500}.range-wrap[data-v-4eb24098]{display:flex;flex-wrap:wrap;justify-content:space-between}.range-wrap.is-small .range-wrap-label[data-v-4eb24098]{font-size:12px;line-height:14px}.range-wrap.is-tiny .range-wrap-label[data-v-4eb24098]{display:none}.range-input-left[data-v-4eb24098],.range-input-right[data-v-4eb24098]{width:48%}",
+  inject("data-v-7414cd38_0", {
+    source: ".au-date-picker[data-v-7414cd38]{position:relative}.range-wrap-label[data-v-7414cd38]{width:100%;margin-bottom:5px;font-size:13px;line-height:16px;font-weight:500}.range-wrap[data-v-7414cd38]{display:flex;flex-wrap:wrap;justify-content:space-between}.range-wrap.is-small .range-wrap-label[data-v-7414cd38]{font-size:12px;line-height:14px}.range-wrap.is-tiny .range-wrap-label[data-v-7414cd38]{display:none}.range-input-left[data-v-7414cd38],.range-input-right[data-v-7414cd38]{width:48%}",
     map: undefined,
     media: undefined
   });
@@ -29030,7 +29094,7 @@ const __vue_inject_styles__$o = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$o = "data-v-4eb24098";
+const __vue_scope_id__$o = "data-v-7414cd38";
 /* module identifier */
 
 const __vue_module_identifier__$m = undefined;
