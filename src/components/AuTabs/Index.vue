@@ -49,7 +49,7 @@ export default {
       });
 
       this.activeItem = itemId;
-      this.$emit('tab-change');
+      this.$emit('tab-change', itemId);
     },
   },
 };
