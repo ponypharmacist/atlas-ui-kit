@@ -165,23 +165,24 @@ export default {
       get() {
         if (this.isRange) {
           return {
-            start: this.value.start ? moment.unix(this.value.start).toISOString() : null,
-            end: this.value.start ? moment.unix(this.value.end).toISOString() : null,
+            start: this.value.start ? this.formatMidnight(this.value.start) : null,
+            end: this.value.start ? this.formatMidnight(this.value.end) : null,
           };
         }
 
-        if (this.value) return moment.unix(this.value).toISOString();
+        if (this.value) return moment(this.value);
 
         return this.value;
       },
+
       set(newValue) {
         if (this.isRange) {
           this.$emit('input', {
-            start: moment(newValue.start).unix(),
-            end: moment(newValue.end).unix(),
+            start: this.formatMidnight(newValue.start),
+            end: this.formatMidnight(newValue.end),
           });
         } else {
-          this.$emit('input', moment(newValue).unix());
+          this.$emit('input', this.formatMidnight(newValue));
         }
       },
     },
@@ -220,6 +221,7 @@ export default {
           return 'date';
       }
     },
+
     placeholder() {
       switch (this.type) {
         case 'time':
@@ -231,17 +233,7 @@ export default {
           return 'дд.мм.гггг';
       }
     },
-    dateFormat() {
-      switch (this.type) {
-        case 'time':
-          return 'HH:mm:ss';
-        case 'datetime':
-          return 'DD.MM.YYYY HH:mm:ss';
-        case 'date':
-        default:
-          return 'DD.MM.YYYY';
-      }
-    },
+
     inputMask() {
       switch (this.type) {
         case 'time':
@@ -253,9 +245,24 @@ export default {
           return { input: 'DD.MM.YYYY' };
       }
     },
+    // dateFormat() {
+    //   switch (this.type) {
+    //     case 'time':
+    //       return 'HH:mm:ss';
+    //     case 'datetime':
+    //       return 'DD.MM.YYYY HH:mm:ss';
+    //     case 'date':
+    //     default:
+    //       return 'DD.MM.YYYY';
+    //   }
+    // },
   },
 
   methods: {
+    formatMidnight(datetime) {
+      return `${moment(datetime).format('YYYY-MM-DD')} 00:00:00`;
+    },
+
     clearInput() {
       if (this.isRange) {
         this.$emit('input', {

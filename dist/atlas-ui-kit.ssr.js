@@ -28760,22 +28760,22 @@ var script$o = {
       get: function get() {
         if (this.isRange) {
           return {
-            start: this.value.start ? moment.unix(this.value.start).toISOString() : null,
-            end: this.value.start ? moment.unix(this.value.end).toISOString() : null
+            start: this.value.start ? this.formatMidnight(this.value.start) : null,
+            end: this.value.start ? this.formatMidnight(this.value.end) : null
           };
         }
 
-        if (this.value) return moment.unix(this.value).toISOString();
+        if (this.value) return moment(this.value);
         return this.value;
       },
       set: function set(newValue) {
         if (this.isRange) {
           this.$emit('input', {
-            start: moment(newValue.start).unix(),
-            end: moment(newValue.end).unix()
+            start: this.formatMidnight(newValue.start),
+            end: this.formatMidnight(newValue.end)
           });
         } else {
-          this.$emit('input', moment(newValue).unix());
+          this.$emit('input', this.formatMidnight(newValue));
         }
       }
     },
@@ -28821,19 +28821,6 @@ var script$o = {
           return 'дд.мм.гггг';
       }
     },
-    dateFormat: function dateFormat() {
-      switch (this.type) {
-        case 'time':
-          return 'HH:mm:ss';
-
-        case 'datetime':
-          return 'DD.MM.YYYY HH:mm:ss';
-
-        case 'date':
-        default:
-          return 'DD.MM.YYYY';
-      }
-    },
     inputMask: function inputMask() {
       switch (this.type) {
         case 'time':
@@ -28853,9 +28840,23 @@ var script$o = {
             input: 'DD.MM.YYYY'
           };
       }
-    }
+    } // dateFormat() {
+    //   switch (this.type) {
+    //     case 'time':
+    //       return 'HH:mm:ss';
+    //     case 'datetime':
+    //       return 'DD.MM.YYYY HH:mm:ss';
+    //     case 'date':
+    //     default:
+    //       return 'DD.MM.YYYY';
+    //   }
+    // },
+
   },
   methods: {
+    formatMidnight: function formatMidnight(datetime) {
+      return "".concat(moment(datetime).format('YYYY-MM-DD'), " 00:00:00");
+    },
     clearInput: function clearInput() {
       if (this.isRange) {
         this.$emit('input', {
@@ -29047,8 +29048,8 @@ var __vue_staticRenderFns__$o = [];
 
 var __vue_inject_styles__$o = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-7414cd38_0", {
-    source: ".au-date-picker[data-v-7414cd38]{position:relative}.range-wrap-label[data-v-7414cd38]{width:100%;margin-bottom:5px;font-size:13px;line-height:16px;font-weight:500}.range-wrap[data-v-7414cd38]{display:flex;flex-wrap:wrap;justify-content:space-between}.range-wrap.is-small .range-wrap-label[data-v-7414cd38]{font-size:12px;line-height:14px}.range-wrap.is-tiny .range-wrap-label[data-v-7414cd38]{display:none}.range-input-left[data-v-7414cd38],.range-input-right[data-v-7414cd38]{width:48%}",
+  inject("data-v-7b5f8dc8_0", {
+    source: ".au-date-picker[data-v-7b5f8dc8]{position:relative}.range-wrap-label[data-v-7b5f8dc8]{width:100%;margin-bottom:5px;font-size:13px;line-height:16px;font-weight:500}.range-wrap[data-v-7b5f8dc8]{display:flex;flex-wrap:wrap;justify-content:space-between}.range-wrap.is-small .range-wrap-label[data-v-7b5f8dc8]{font-size:12px;line-height:14px}.range-wrap.is-tiny .range-wrap-label[data-v-7b5f8dc8]{display:none}.range-input-left[data-v-7b5f8dc8],.range-input-right[data-v-7b5f8dc8]{width:48%}",
     map: undefined,
     media: undefined
   });
@@ -29056,10 +29057,10 @@ var __vue_inject_styles__$o = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$o = "data-v-7414cd38";
+var __vue_scope_id__$o = "data-v-7b5f8dc8";
 /* module identifier */
 
-var __vue_module_identifier__$m = "data-v-7414cd38";
+var __vue_module_identifier__$m = "data-v-7b5f8dc8";
 /* functional template */
 
 var __vue_is_functional_template__$o = false;
@@ -29075,7 +29076,7 @@ var script$n = {
   name: 'au-date',
   props: {
     value: {
-      type: [String, Number],
+      type: [String, Number, Object],
       default: null
     },
     format: {
@@ -29085,7 +29086,7 @@ var script$n = {
   },
   computed: {
     date: function date() {
-      if (this.value) return moment.unix(this.value).format(this.format);
+      if (this.value) return moment(this.value).format(this.format);
       return this.value;
     }
   }
@@ -29108,8 +29109,8 @@ var __vue_staticRenderFns__$n = [];
 
 var __vue_inject_styles__$n = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-269390bc_0", {
-    source: ".au-date[data-v-269390bc]{position:relative}.range-wrap-label[data-v-269390bc]{width:100%;margin-bottom:5px;font-size:13px;line-height:16px;font-weight:500}.range-wrap[data-v-269390bc]{display:flex;flex-wrap:wrap;justify-content:space-between}.range-wrap.is-small .range-wrap-label[data-v-269390bc]{font-size:12px;line-height:14px}.range-wrap.is-tiny .range-wrap-label[data-v-269390bc]{display:none}.range-input-left[data-v-269390bc],.range-input-right[data-v-269390bc]{width:48%}",
+  inject("data-v-71ce8903_0", {
+    source: ".au-date[data-v-71ce8903]{position:relative}.range-wrap-label[data-v-71ce8903]{width:100%;margin-bottom:5px;font-size:13px;line-height:16px;font-weight:500}.range-wrap[data-v-71ce8903]{display:flex;flex-wrap:wrap;justify-content:space-between}.range-wrap.is-small .range-wrap-label[data-v-71ce8903]{font-size:12px;line-height:14px}.range-wrap.is-tiny .range-wrap-label[data-v-71ce8903]{display:none}.range-input-left[data-v-71ce8903],.range-input-right[data-v-71ce8903]{width:48%}",
     map: undefined,
     media: undefined
   });
@@ -29117,10 +29118,10 @@ var __vue_inject_styles__$n = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$n = "data-v-269390bc";
+var __vue_scope_id__$n = "data-v-71ce8903";
 /* module identifier */
 
-var __vue_module_identifier__$l = "data-v-269390bc";
+var __vue_module_identifier__$l = "data-v-71ce8903";
 /* functional template */
 
 var __vue_is_functional_template__$n = false;

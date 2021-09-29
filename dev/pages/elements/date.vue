@@ -55,11 +55,13 @@
 
   <h2 id="au-date">Отображение даты</h2>
   <div class="demo-item">
-    <au-date :value="1627889781"/>
+    <au-date
+      :value="dateSelected || '2021-09-29 11:29:30'"
+    />
   </div>
 
   <pre>&lt;au-date
-    value: String, Number
+    value: String, Number, Object
     format: String | 'DD.MM.YYYY'
 /&gt;</pre>
 </div>

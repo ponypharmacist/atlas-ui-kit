@@ -14,7 +14,7 @@ export default {
 
   props: {
     value: {
-      type: [String, Number],
+      type: [String, Number, Object],
       default: null,
     },
     format: {
@@ -25,7 +25,7 @@ export default {
 
   computed: {
     date() {
-      if (this.value) return moment.unix(this.value).format(this.format);
+      if (this.value) return moment(this.value).format(this.format);
 
       return this.value;
     },
