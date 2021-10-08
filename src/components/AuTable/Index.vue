@@ -13,6 +13,8 @@
               :partial="selectionSummaryPartial"
               @click.native="$emit('selectAll')"
             />
+
+            <slot v-if="selectableRadio" name="header.selectable"/>
           </div>
         </th>
 

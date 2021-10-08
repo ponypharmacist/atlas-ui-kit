@@ -58,7 +58,7 @@ export default {
     },
   },
 
-  mounted() {
+  async mounted() {
     this.tabs = this.$children;
 
     if (this.tabs.length) {
@@ -68,9 +68,14 @@ export default {
 
     window.addEventListener('resize', this.resizeMenu);
     this.resizeMenu();
-    this.$nextTick(() => {
-      this.resizeMenu();
-    });
+
+    // await this.$nextTick(() => {
+    //   setTimeout(this.resizeMenu(), 300);
+    // });
+  },
+
+  updated() {
+    this.resizeMenu();
   },
 
   beforeDestroy() {
@@ -82,7 +87,7 @@ export default {
       const parent = document.getElementById(this.parentId);
       const visibleList = document.getElementById(this.visibleId);
       const hiddenList = document.getElementById(this.hiddenId);
-      const baseOffset = 88;
+      const baseOffset = 48;
 
       [...visibleList.children].forEach(() => {
         const toHide = visibleList.children[visibleList.children.length - 1];

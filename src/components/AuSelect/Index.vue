@@ -513,7 +513,7 @@ export default {
   }
 
   // List
-  $max-list-height: 160;
+  $max-list-height: 240;
 
   .au-select-list {
     position: absolute;
