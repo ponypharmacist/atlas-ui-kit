@@ -34,6 +34,8 @@ Vue.use(atlasUiKit);</pre>
 
   <demo-color-picker/>
 
+  <demo-editor/>
+
   <demo-breadcrumbs/>
 
   <demo-loader/>
@@ -73,6 +75,7 @@ import DemoSlider from './elements/slider.vue';
 import DemoDate from './elements/date.vue';
 import DemoSelect from './elements/select.vue';
 import DemoDropdownButtons from './elements/dropdownButtons.vue';
+import DemoEditor from './elements/editor.vue';
 import DemoBreadcrumbs from './elements/breadcrumbs.vue';
 import DemoLoader from './elements/loader.vue';
 import DemoTables from './elements/tables.vue';
@@ -102,6 +105,7 @@ export default {
     DemoDate,
     DemoSelect,
     DemoDropdownButtons,
+    DemoEditor,
     DemoBreadcrumbs,
     DemoLoader,
     DemoTables,
@@ -136,6 +140,7 @@ export default {
         { title: 'Быстрые фильтры', alias: 'au-filters-resizable' },
         { title: 'Список с ручной сортировкой', alias: 'au-draggable-list' },
         { title: 'Пипетка', alias: 'au-color-picker' },
+        { title: 'Редактор TipTap', alias: 'au-editor' },
 
         { title: 'Вывод информации' },
         { title: 'Хлебные крошки', alias: 'au-breadcrumbs' },

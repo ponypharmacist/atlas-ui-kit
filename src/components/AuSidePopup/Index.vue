@@ -89,7 +89,6 @@ export default {
   top: 0;
   right: 0;
   width: 600px;
-  box-shadow: -2px 0 14px rgba(218, 229, 247, 0.33);
   z-index: 8;
   transform: translateX(100%);
   transition: transform 0.5s;
@@ -125,6 +124,7 @@ export default {
   &.open {
     transform: translateX(0);
     transition: transform 0.5s;
+    box-shadow: -2px 0 14px rgba(218, 229, 247, 0.33);
   }
 
   .close {

@@ -161,7 +161,7 @@
           class="not-found"
           :colspan="colspanNotFound"
         >
-          <div class="cell-content">Ничего не найдено</div>
+          <div class="cell-content">{{ noDataText || 'Ничего не найдено' }}</div>
         </td>
       </tr>
 
