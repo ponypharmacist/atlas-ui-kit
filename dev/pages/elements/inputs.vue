@@ -60,6 +60,14 @@
       </template>
     </au-input>
 
+    <au-input
+      v-model="inputArray"
+      full-width
+      multiple
+    />
+
+    <p>{{ inputArray }}</p>
+
     <pre>&lt;au-input
   value: [String, Number, Array] {{ inputModel }}
   label: String
@@ -74,6 +82,7 @@
   disabled
   readonly
   autofocus
+  multiple
 
   full-width
   small
@@ -95,6 +104,7 @@ export default {
   data() {
     return {
       inputModel: null,
+      inputArray: [],
       valueIcon: 'icon',
     };
   },

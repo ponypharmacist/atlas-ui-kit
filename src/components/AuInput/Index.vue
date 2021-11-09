@@ -21,8 +21,8 @@
       />
 
       <input
+        v-if="!multiple"
         ref="input"
-        :class="[]"
         :type="type"
         :placeholder="placeholder"
         :name="name"
@@ -36,7 +36,40 @@
         @focus="onFocus"
         @focusin="isFocused = true"
         @focusout="isFocused = false"
-      >
+      />
+
+      <div v-else class="multiple-values">
+        <div
+          v-for="(item, index) in value"
+          :key="`chip-${index}-${item}`"
+          class="input-chip"
+        >
+          {{ item }}
+        </div>
+
+        <input
+          ref="input"
+          type="text"
+          placeholder="Добавляйте значения по очереди"
+          :name="name"
+          :required="required"
+          v-model="nextItemText"
+          :disabled="disabled || readonly"
+          autocomplete="off"
+          v-mask="mask"
+          @focusin="isFocused = true"
+          @focusout="isFocused = false"
+        />
+      </div>
+
+      <au-icon
+        v-if="multiple"
+        class="au-input-clear"
+        icon="mdi-plus-circle"
+        :size="iconSize + 4"
+        color="dodgerblue"
+        @click.native.stop="addNextItem"
+      />
 
       <au-icon
         v-if="clearable && value"
@@ -125,6 +158,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    multiple: {
+      type: Boolean,
+      default: false,
+    },
 
     fullWidth: {
       type: Boolean,
@@ -146,6 +183,7 @@ export default {
 
   data: () => ({
     isFocused: false,
+    nextItemText: null,
   }),
 
   computed: {
@@ -188,11 +226,25 @@ export default {
     onChange(event) {
       this.$emit('change', event.target.value);
     },
+
     onInput(event) {
       this.$emit('input', event.target.value);
     },
+
     onFocus(event) {
       this.$emit('focus', event.target.value);
+    },
+
+    // Multple items methods
+    addNextItem() {
+      if (Array.isArray(this.value)) {
+        const arr = [...this.value];
+
+        arr.push(this.nextItemText);
+        this.$emit('input', arr);
+
+        this.nextItemText = null;
+      }
     },
   },
 };
@@ -356,6 +408,25 @@ export default {
     &:hover {
       opacity: 0.7;
     }
+  }
+}
+
+.multiple-values {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  input {
+    width: 100%;
+  }
+
+  .input-chip {
+    margin-right: 4px;
+    padding: 4px 6px;
+    // font-size: 12px;
+    border-radius: 12px;
+    background-color: #f1f1f1;
+    border: thin solid #ddd;
   }
 }
 </style>
