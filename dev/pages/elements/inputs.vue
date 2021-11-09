@@ -66,6 +66,13 @@
       multiple
     />
 
+    <au-input
+      v-model="inputArray"
+      full-width
+      multiple
+      disabled
+    />
+
     <p>{{ inputArray }}</p>
 
     <pre>&lt;au-input

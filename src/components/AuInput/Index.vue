@@ -43,6 +43,7 @@
           v-for="(item, index) in value"
           :key="`chip-${index}-${item}`"
           class="input-chip"
+          @click="removeChip(index)"
         >
           {{ item }}
         </div>
@@ -198,6 +199,7 @@ export default {
           'is-inverse': this.inverse,
           'is-disabled': this.disabled,
           'is-error': this.hasErrors,
+          'is-multiple': this.multiple,
         },
       ];
     },
@@ -237,6 +239,8 @@ export default {
 
     // Multple items methods
     addNextItem() {
+      if (!this.nextItemText) return;
+
       if (Array.isArray(this.value)) {
         const arr = [...this.value];
 
@@ -244,6 +248,17 @@ export default {
         this.$emit('input', arr);
 
         this.nextItemText = null;
+      }
+    },
+
+    removeChip(index) {
+      if (this.disabled || this.readonly) return;
+
+      if (Array.isArray(this.value)) {
+        const arr = [...this.value];
+
+        arr.splice(index, 1);
+        this.$emit('input', arr);
       }
     },
   },
@@ -411,22 +426,54 @@ export default {
   }
 }
 
-.multiple-values {
-  display: flex;
-  align-items: center;
-  width: 100%;
-
-  input {
+// Multiple values + chips
+.is-multiple {
+  .multiple-values {
+    display: flex;
+    align-items: center;
     width: 100%;
+
+    input {
+      width: 100%;
+    }
+
+    .input-chip {
+      margin-right: 4px;
+      padding: 4px 6px;
+      border-radius: 12px;
+      background-color: #f1f1f1;
+      border: thin solid #ddd;
+      cursor: pointer;
+    }
   }
 
-  .input-chip {
-    margin-right: 4px;
-    padding: 4px 6px;
-    // font-size: 12px;
-    border-radius: 12px;
-    background-color: #f1f1f1;
-    border: thin solid #ddd;
+  .au-input-content {
+    padding-right: 28px;
+  }
+
+  &.is-small {
+    .input-chip {
+      padding: 2px 4px;
+      font-size: 12px;
+    }
+  }
+
+  &.is-tiny {
+    .input-chip {
+      padding: 2px 4px;
+      font-size: 12px;
+    }
+  }
+
+  &.is-disabled {
+    .input-chip {
+      color: #999;
+      cursor: not-allowed;
+    }
+
+    .au-input-clear {
+      cursor: not-allowed;
+    }
   }
 }
 </style>
