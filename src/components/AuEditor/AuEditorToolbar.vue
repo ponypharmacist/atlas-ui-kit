@@ -9,17 +9,18 @@
       v-if="item.children"
       :key="key"
       class="toolbar-item toolbar-parent"
+      :class="[item.icon]"
     >
       <au-icon :icon="`mdi-${item.icon}`" :size="iconSize" :color="iconColor"/>
 
       <div class="toolbar-children">
         <div
           v-for="subitem in item.children"
-          :key="subitem.name"
-          :class="['toolbar-item', { 'is-active': editor.isActive(key) }, subitem.icon]"
+          :key="subitem.icon"
+          :class="['toolbar-item', { 'is-active': editor.isActive(subitem.name, subitem.arg) }]"
           :title="subitem.title || ''"
-          :disabled="isDisabled(subitem.command)"
-          @click="runCommand(subitem.command)"
+          :disabled="isDisabled(subitem.command, subitem.arg)"
+          @click="runCommand(subitem.command, subitem.arg)"
         >
           <au-icon :icon="`mdi-${subitem.icon}`" :size="iconSize" :color="iconColor"/>
         </div>
@@ -29,10 +30,10 @@
     <!-- Единичные кнопки -->
     <div
       v-else
-      :key="key"
-      :class="['toolbar-item', { 'is-active': editor.isActive(key) }, item.icon]"
+      :key="item.icon"
+      :class="['toolbar-item', { 'is-active': editor.isActive(key, item.arg) }, item.icon]"
       :title="item.title || ''"
-      @click="runCommand(item.command)"
+      @click="runCommand(item.command, item.arg)"
     >
       <au-icon :icon="`mdi-${item.icon}`" :size="iconSize" :color="iconColor"/>
     </div>
@@ -62,14 +63,47 @@ export default {
       iconColor: '#000',
 
       defaultSchema: {
-        // undo: {
-        //   icon: 'undo',
-        //   command: 'undo',
-        // },
-        // redo: {
-        //   icon: 'redo',
-        //   command: 'redo',
-        // },
+        pilcrow: {
+          icon: 'format-pilcrow',
+          command: null,
+          title: 'Заголовки',
+          children: [
+            {
+              name: 'paragraph',
+              icon: 'format-paragraph',
+              command: 'setParagraph',
+              title: 'Параграф',
+            },
+            {
+              name: 'heading',
+              icon: 'format-header-1',
+              command: 'toggleHeading',
+              arg: { level: 1 },
+              title: 'Заголовок 1 уровня',
+            },
+            {
+              name: 'heading',
+              icon: 'format-header-2',
+              command: 'toggleHeading',
+              arg: { level: 2 },
+              title: 'Заголовок 2 уровня',
+            },
+            {
+              name: 'heading',
+              icon: 'format-header-3',
+              command: 'toggleHeading',
+              arg: { level: 3 },
+              title: 'Заголовок 3 уровня',
+            },
+            {
+              name: 'heading',
+              icon: 'format-header-4',
+              command: 'toggleHeading',
+              arg: { level: 4 },
+              title: 'Заголовок 4 уровня',
+            },
+          ],
+        },
         bold: {
           icon: 'format-bold',
           command: 'toggleBold',
@@ -85,6 +119,11 @@ export default {
           command: 'toggleStrike',
           title: 'Зачеркнутый',
         },
+        underline: {
+          icon: 'format-underline',
+          command: 'toggleUnderline',
+          title: 'Подчеркнутый',
+        },
         bulletList: {
           icon: 'format-list-bulleted',
           command: 'toggleBulletList',
@@ -95,6 +134,12 @@ export default {
           command: 'toggleOrderedList',
           title: 'Нумерованый список',
         },
+        highlight: {
+          icon: 'format-color-highlight',
+          command: 'toggleHighlight',
+          title: 'Выделение',
+          arg: { },
+        },
         tables: {
           icon: 'table',
           command: null,
@@ -104,6 +149,7 @@ export default {
               name: 'table-insert',
               icon: 'table-large-plus',
               command: 'insertTable',
+              arg: { rows: 3, cols: 3, withHeaderRow: true },
               title: 'Вставить таблицу',
             },
             {
@@ -171,6 +217,15 @@ export default {
             },
           ],
         },
+        // Иконки справа
+        undo: {
+          icon: 'undo',
+          command: 'undo',
+        },
+        redo: {
+          icon: 'redo',
+          command: 'redo',
+        },
       },
     };
   },
@@ -182,18 +237,12 @@ export default {
   },
 
   methods: {
-    runCommand(command) {
-      // Особенные команды
-      if (command === 'insertTable') {
-        this.editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
-      } else {
-        // Все остальные
-        this.editor.chain().focus()[command]().run();
-      }
+    runCommand(command, arg = null) {
+      this.editor.chain().focus()[command](arg).run();
     },
 
-    isDisabled(command) {
-      return !this.editor.can()[command]();
+    isDisabled(command, arg = null) {
+      return !this.editor.can()[command](arg);
     },
   },
 };
@@ -250,6 +299,10 @@ export default {
   }
 }
 
+.toolbar-item.undo {
+  margin-left: auto;
+}
+
 .toolbar-children {
   position: absolute;
   z-index: 2;
@@ -263,6 +316,10 @@ export default {
   border-radius: 5px;
   box-shadow: 0 0 2px 2px #ddd;
   cursor: default;
+}
+
+.format-pilcrow .toolbar-children {
+  width: 178px;
 }
 
 .toolbar-parent {

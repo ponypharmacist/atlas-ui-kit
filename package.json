@@ -38,6 +38,7 @@
     "@tiptap/extension-table-header": "^2.0.0-beta.15",
     "@tiptap/extension-table-row": "^2.0.0-beta.13",
     "@tiptap/extension-typography": "^2.0.0-beta.14",
+    "@tiptap/extension-underline": "^2.0.0-beta.18",
     "@tiptap/starter-kit": "^2.0.0-beta.82",
     "@tiptap/vue-2": "^2.0.0-beta.39",
     "lodash": "^4.17.20",

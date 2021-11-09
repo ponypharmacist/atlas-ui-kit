@@ -11,6 +11,8 @@ import { Editor, EditorContent } from '@tiptap/vue-2';
 import StarterKit from '@tiptap/starter-kit';
 import ExtensionImage from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
+import Underline from '@tiptap/extension-underline';
+import Highlight from '@tiptap/extension-highlight';
 import Table from '@tiptap/extension-table';
 import TableRow from '@tiptap/extension-table-row';
 import TableCell from '@tiptap/extension-table-cell';
@@ -54,6 +56,8 @@ export default {
         StarterKit,
         ExtensionImage,
         Link,
+        Underline,
+        Highlight,
         Table,
         TableRow,
         TableCell,

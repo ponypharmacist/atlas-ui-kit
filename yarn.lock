@@ -1242,6 +1242,11 @@
   dependencies:
     prosemirror-inputrules "^1.1.3"
 
+"@tiptap/extension-underline@^2.0.0-beta.18":
+  version "2.0.0-beta.18"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-underline/-/extension-underline-2.0.0-beta.18.tgz#25fc72788565ca80a52b111b31124c346a5053a0"
+  integrity sha512-zYx9aAAbwKdrF/QJvRhaZFpBebcmXNYAjZmYyyErTR1NXmPi2SMAE8OaDC3S7xRnt8HeHwDAUbqiUfXJWG1XRA==
+
 "@tiptap/starter-kit@^2.0.0-beta.82":
   version "2.0.0-beta.117"
   resolved "https://registry.yarnpkg.com/@tiptap/starter-kit/-/starter-kit-2.0.0-beta.117.tgz#5e7d5c2f09270ac6e06b81857afb5548320e9373"

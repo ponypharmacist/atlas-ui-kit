@@ -18,25 +18,29 @@
   <br/>
 
   <pre>&lt;au-editor
-    v-model: String
-    @input</pre>
+  v-model: String
+  @input
+/&gt;</pre>
 
   <pre>&lt;au-editor-toolbar
-    editor
-    schema</pre>
+  editor
+  schema
+/&gt;</pre>
 
   <p>Схема кнопок для тулбара редактора выглядит примерно так.</p>
   <p>Хочешь свою схему? Скопируй default-схему, сделай как надо и скорми тулбару через проп schema.</p>
 
   <pre>defaultSchema: {
   bold: {
-    icon: 'format-bold', (название из mdi-icons)
-    command: 'toggleBold', (команда из tiptap)
+    icon: 'format-bold',    (название из mdi-icons)
+    command: 'toggleBold',  (команда из tiptap)
+    arg: '{ level: 1 }',    (аргумент для сложных команд)
     title: 'Полужирный',
     children: [
       {
         name: '',
         command: '',
+        arg: {},
         icon: '',
         title: '',
       }
