@@ -2,6 +2,7 @@
 
 <v-popover
   popover-class="au-popover"
+  :open="open"
   :placement="placement"
   :trigger="trigger"
   :disabled="disabled"
@@ -27,6 +28,10 @@ export default {
   components: { VPopover },
 
   props: {
+    open: {
+      type: Boolean,
+      default: false,
+    },
     placement: {
       type: String,
       default: 'bottom',

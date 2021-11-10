@@ -48,7 +48,7 @@
 &gt;
   slot - default slot
   #popover - слот для содержимого поповера
-&lt;au-popover/&gt;</pre>
+&lt;/au-popover&gt;</pre>
   </div>
 
   <h2 id="au-tooltip">Тултип</h2>

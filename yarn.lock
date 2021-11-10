@@ -1207,6 +1207,16 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-strike/-/extension-strike-2.0.0-beta.17.tgz#2280ea4e8c50189c2729814d2ae484e58c712a36"
   integrity sha512-+WRd0RuCK4+jFKNVN+4rHTa5VMqqGDO2uc+TknkqhFqWp/z96OAGlpHJOwPrnW1fLbpjEBBQIr1vVYSw6KgcZg==
 
+"@tiptap/extension-subscript@^2.0.0-beta.9":
+  version "2.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-subscript/-/extension-subscript-2.0.0-beta.9.tgz#4d86e904ec081384696562a5f550e81a1ddf2c76"
+  integrity sha512-wrmcDbXeilBW9HjJi34KpUioBCYD5zyaRu1hnIymVRwmfLNrwGpNyo/8VZTfNDdvliyMYHiRVFI4Mott6OzmgA==
+
+"@tiptap/extension-superscript@^2.0.0-beta.9":
+  version "2.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-superscript/-/extension-superscript-2.0.0-beta.9.tgz#be43b0e85f6440ed200831309060c3f0691811f2"
+  integrity sha512-BxXvCDGtIiuPmY9JbgIEjNbrFzXN3SBj178CfmDcu/FrQimwcqmsfLP3JOu1ZbUwQJuNwubx026vHXPzHlLXDA==
+
 "@tiptap/extension-table-cell@^2.0.0-beta.13":
   version "2.0.0-beta.15"
   resolved "https://registry.yarnpkg.com/@tiptap/extension-table-cell/-/extension-table-cell-2.0.0-beta.15.tgz#2059946b1657f0f22415bda84cee77fb1eb232b1"

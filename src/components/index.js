@@ -11,7 +11,7 @@ export { default as AuDropdownButton } from './AuDropdownButton';
 export { default as AuDropdownContentButton } from './AuDropdownContentButton';
 export { default as AuFiltersResizable } from './AuFiltersResizable';
 export { default as AuDraggableList } from './AuDraggableList';
-export { AuEditor, AuEditorToolbar } from './AuEditor';
+export { AuEditor, AuEditorToolbar, AuEditorLink } from './AuEditor';
 
 // Вывод информации (в первую очередь)
 export { default as AuBreadcrumbs } from './AuBreadcrumbs';

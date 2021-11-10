@@ -10,6 +10,7 @@
 
     <au-editor
       v-model="editorContent"
+      :show-toolbar="false"
       @ready="onEditorReady"
     />
   </div>
@@ -19,16 +20,20 @@
 
   <pre>&lt;au-editor
   v-model: String
+  show-toolbar
   @input
-/&gt;</pre>
+/&gt;
+&nbsp;</pre>
 
   <pre>&lt;au-editor-toolbar
   editor
-  schema
+  schema        (заменяет default схему)
+  extend-schema (дополняет default схему)
 /&gt;</pre>
 
   <p>Схема кнопок для тулбара редактора выглядит примерно так.</p>
   <p>Хочешь свою схему? Скопируй default-схему, сделай как надо и скорми тулбару через проп schema.</p>
+  <p>Через проп extend-schema можно добавить элементы, не меняя базовую схему.</p>
 
   <pre>defaultSchema: {
   bold: {

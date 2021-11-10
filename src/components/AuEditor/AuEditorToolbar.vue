@@ -4,9 +4,20 @@
   <template
     v-for="(item, key) in toolbarSchema"
   >
+    <!-- Кастомные компоненты -->
+    <component
+      v-if="item.component"
+      :key="key"
+      :is="item.component"
+      :editor="editor"
+      :icon="item.icon"
+      :icon-size="iconSize"
+      :icon-color="iconColor"
+    />
+
     <!-- Группы кнопок -->
     <div
-      v-if="item.children"
+      v-else-if="item.children"
       :key="key"
       class="toolbar-item toolbar-parent"
       :class="[item.icon]"
@@ -17,9 +28,10 @@
         <div
           v-for="subitem in item.children"
           :key="subitem.icon"
-          :class="['toolbar-item', { 'is-active': editor.isActive(subitem.name, subitem.arg) }]"
+          class="toolbar-item"
+          :class="{ 'is-active': editor.isActive(subitem.name, subitem.arg) }"
           :title="subitem.title || ''"
-          :disabled="isDisabled(subitem.command, subitem.arg)"
+          :disabled="subitem.command ? isDisabled(subitem.command, subitem.arg) : false"
           @click="runCommand(subitem.command, subitem.arg)"
         >
           <au-icon :icon="`mdi-${subitem.icon}`" :size="iconSize" :color="iconColor"/>
@@ -55,14 +67,26 @@ export default {
       type: Object,
       default: null,
     },
+    extendSchema: {
+      type: Object,
+      default: () => {},
+    },
   },
 
   data() {
     return {
       iconSize: 22,
       iconColor: '#000',
+    };
+  },
 
-      defaultSchema: {
+  computed: {
+    toolbarSchema() {
+      return this.schema || this.defaultSchema || null;
+    },
+
+    defaultSchema() {
+      return {
         pilcrow: {
           icon: 'format-pilcrow',
           command: null,
@@ -124,6 +148,27 @@ export default {
           command: 'toggleUnderline',
           title: 'Подчеркнутый',
         },
+        subscript: {
+          icon: 'format-subscript',
+          command: 'toggleSubscript',
+          title: 'Подстрочный',
+        },
+        superscript: {
+          icon: 'format-superscript',
+          command: 'toggleSuperscript',
+          title: 'Надстрочный',
+        },
+        highlight: {
+          icon: 'format-color-highlight',
+          command: 'toggleHighlight',
+          title: 'Выделение',
+          arg: { },
+        },
+        clearNodes: {
+          icon: 'format-clear',
+          command: 'unsetAllMarks',
+          title: 'Очистить форматирование',
+        },
         bulletList: {
           icon: 'format-list-bulleted',
           command: 'toggleBulletList',
@@ -134,11 +179,10 @@ export default {
           command: 'toggleOrderedList',
           title: 'Нумерованый список',
         },
-        highlight: {
-          icon: 'format-color-highlight',
-          command: 'toggleHighlight',
-          title: 'Выделение',
-          arg: { },
+        linkCustom: {
+          icon: 'link',
+          component: 'au-editor-link',
+          title: 'Ссылка',
         },
         tables: {
           icon: 'table',
@@ -217,6 +261,10 @@ export default {
             },
           ],
         },
+
+        // Дополнительные элементы из пропса
+        ...this.extendSchema,
+
         // Иконки справа
         undo: {
           icon: 'undo',
@@ -226,13 +274,7 @@ export default {
           icon: 'redo',
           command: 'redo',
         },
-      },
-    };
-  },
-
-  computed: {
-    toolbarSchema() {
-      return this.schema || this.defaultSchema || null;
+      };
     },
   },
 
@@ -248,17 +290,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.au-editor-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 4px;
-  padding: 0 0 0 3px;
-
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
+<style lang="scss">
 .toolbar-item {
   display: flex;
   flex: 0 0 auto;
@@ -297,6 +329,18 @@ export default {
       background-color: #aaa !important;
     }
   }
+}
+</style>
+
+<style lang="scss" scoped>
+.au-editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+  padding: 0 0 0 3px;
+
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .toolbar-item.undo {

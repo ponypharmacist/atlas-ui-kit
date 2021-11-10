@@ -1,6 +1,8 @@
 <template>
 
 <div class="au-editor">
+  <au-editor-toolbar v-if="editor && showToolbar" :editor="editor"/>
+
   <editor-content class="au-editor-tiptap" :editor="editor"/>
 </div>
 
@@ -12,6 +14,8 @@ import StarterKit from '@tiptap/starter-kit';
 import ExtensionImage from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import Underline from '@tiptap/extension-underline';
+import Subscript from '@tiptap/extension-subscript';
+import Superscript from '@tiptap/extension-superscript';
 import Highlight from '@tiptap/extension-highlight';
 import Table from '@tiptap/extension-table';
 import TableRow from '@tiptap/extension-table-row';
@@ -29,6 +33,10 @@ export default {
     value: {
       type: String,
       default: '',
+    },
+    showToolbar: {
+      type: Boolean,
+      default: true,
     },
   },
 
@@ -57,6 +65,8 @@ export default {
         ExtensionImage,
         Link,
         Underline,
+        Subscript,
+        Superscript,
         Highlight,
         Table,
         TableRow,
@@ -88,6 +98,10 @@ export default {
 <style lang="scss" scoped>
 .au-editor {
   width: 100%;
+}
+
+.au-editor-tiptap {
+  width: 100%;
   min-height: 160px;
   padding: 0 12px;
   border: 1px solid #ddd;
@@ -117,6 +131,15 @@ export default {
 
   p {
     margin: 12px 0;
+  }
+
+  a {
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      color: dodgerblue;
+    }
   }
 
   /* Table-specific styling */
