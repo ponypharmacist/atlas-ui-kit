@@ -131,6 +131,7 @@ export default {
         { title: 'Иконки', alias: 'au-icon' },
         { title: 'Кнопка', alias: 'au-button' },
         { title: 'Чекбокс', alias: 'au-checkbox' },
+        { title: 'Переключатель', alias: 'au-switch' },
         { title: 'Поле ввода', alias: 'au-input' },
         { title: 'Слайдер / диапазон', alias: 'au-range-slider' },
         { title: 'Дата и время', alias: 'au-date-picker' },

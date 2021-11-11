@@ -76,6 +76,20 @@
   @input
 /&gt;</pre>
   </div>
+
+  <h2 id="au-switch">Переключатель</h2>
+  <div class="demo-item">
+    <div class="d-flex">
+      <au-switch v-model="switchValue"/>
+      <au-switch v-model="switchValue2"/>
+      <au-switch v-model="switchValue2" disabled/>
+    </div>
+
+    <pre>&lt;au-switch
+  v-model: Boolean
+  disabled
+/&gt;</pre>
+  </div>
 </div>
 
 </template>
@@ -86,6 +100,8 @@ export default {
 
   data() {
     return {
+      switchValue: false,
+      switchValue2: true,
       checkboxTrue: true,
       checkboxFalse: false,
     };
