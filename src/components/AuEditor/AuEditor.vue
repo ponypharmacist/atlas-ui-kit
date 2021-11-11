@@ -1,7 +1,12 @@
 <template>
 
 <div class="au-editor">
-  <au-editor-toolbar v-if="editor && showToolbar" :editor="editor"/>
+  <au-editor-toolbar
+    v-if="editor && showToolbar"
+    :editor="editor"
+    :schema="schema"
+    :extend-schema="extendSchema"
+  />
 
   <editor-content class="au-editor-tiptap" :editor="editor"/>
 </div>
@@ -37,6 +42,14 @@ export default {
     showToolbar: {
       type: Boolean,
       default: true,
+    },
+    schema: {
+      type: Object,
+      default: null,
+    },
+    extendSchema: {
+      type: Object,
+      default: () => {},
     },
   },
 
@@ -98,19 +111,19 @@ export default {
 <style lang="scss" scoped>
 .au-editor {
   width: 100%;
-}
-
-.au-editor-tiptap {
-  width: 100%;
-  min-height: 160px;
-  padding: 0 12px;
   border: 1px solid #ddd;
   border-radius: 4px;
   background-color: #fafafa;
 }
 
+.au-editor-tiptap {
+  width: 100%;
+  padding: 0 12px;
+}
+
 ::v-deep .au-editor-tiptap > div {
   outline: none!important;
+  min-height: 160px;
 }
 
 // Типографика в редакторе
@@ -140,6 +153,27 @@ export default {
     &:hover {
       color: dodgerblue;
     }
+  }
+
+  h1, h2, h3, h4, h5 {
+    padding: 0;
+    margin: 9px 0;
+    font-weight: 500;
+  }
+  h1 {
+    font-size: 26px;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+  h5 {
+    font-size: 22px;
   }
 
   /* Table-specific styling */

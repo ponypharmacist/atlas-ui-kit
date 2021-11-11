@@ -338,9 +338,15 @@ export default {
   flex-wrap: wrap;
   margin-bottom: 4px;
   padding: 0 0 0 3px;
+  background-color: #fff;
 
   border: 1px solid #ddd;
   border-radius: 4px;
+}
+
+.au-editor .au-editor-toolbar {
+  border-width: 0 0 1px 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .toolbar-item.undo {

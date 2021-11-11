@@ -10,7 +10,7 @@
 
     <au-editor
       v-model="editorContent"
-      :show-toolbar="false"
+      :show-toolbar="true"
       @ready="onEditorReady"
     />
   </div>
@@ -21,6 +21,8 @@
   <pre>&lt;au-editor
   v-model: String
   show-toolbar
+  schema        (заменяет default схему)
+  extend-schema (дополняет default схему)
   @input
 /&gt;
 &nbsp;</pre>

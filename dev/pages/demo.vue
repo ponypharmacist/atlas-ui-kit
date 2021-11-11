@@ -195,6 +195,14 @@ export default {
     font-size: 24px;
     line-height: 28px;
   }
+  h3 {
+    font-family: Ruda, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+  }
+  h4 {
+    font-family: Ruda, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+  }
 
   .demo-item {
     & > .au-input,
