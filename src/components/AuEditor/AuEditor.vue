@@ -26,6 +26,8 @@ import Table from '@tiptap/extension-table';
 import TableRow from '@tiptap/extension-table-row';
 import TableCell from '@tiptap/extension-table-cell';
 import TableHeader from '@tiptap/extension-table-header';
+import InfoPanel from './plugins/info-panel';
+import InfoStatus from './plugins/info-status';
 
 export default {
   name: 'au-editor',
@@ -50,6 +52,10 @@ export default {
     extendSchema: {
       type: Object,
       default: () => {},
+    },
+    extensions: {
+      type: Array,
+      default: () => [],
     },
   },
 
@@ -85,6 +91,9 @@ export default {
         TableRow,
         TableCell,
         TableHeader,
+        ...this.extensions,
+        InfoPanel,
+        InfoStatus,
       ],
       content: this.value,
       onUpdate: () => {

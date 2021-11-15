@@ -23,6 +23,7 @@
   show-toolbar
   schema        (заменяет default схему)
   extend-schema (дополняет default схему)
+  extensions    (доп. расширения для самого редактора)
   @input
 /&gt;
 &nbsp;</pre>
@@ -43,6 +44,7 @@
     command: 'toggleBold',  (команда из tiptap)
     arg: '{ level: 1 }',    (аргумент для сложных команд)
     title: 'Полужирный',
+    component               (компонент для кастомных кнопок)
     children: [
       {
         name: '',
@@ -50,6 +52,7 @@
         arg: {},
         icon: '',
         title: '',
+        disabled: false (принудительно отключить проверку для кастомных компонентов)
       }
     ],
   },

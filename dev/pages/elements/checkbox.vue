@@ -113,6 +113,7 @@ export default {
 .checkbox-wrap {
   width: 400px;
   height: 32px;
+  flex: 0 0 auto;
   line-height: 16px;
   margin: 6px 0 6px;
   padding: 8px;

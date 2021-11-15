@@ -316,6 +316,10 @@ export default {
           rgba($blue, 0.3) 0%,
           rgba($blue, 0) 100%
         );
+
+        .au-icon {
+          background-color: #fafafa !important;
+        }
       }
     }
   }

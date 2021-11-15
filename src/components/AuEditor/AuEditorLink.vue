@@ -96,10 +96,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.au-editor-link {
-  font-size: inherit;
-}
-
 .au-editor-link-popover {
   display: flex;
   align-items: flex-end;

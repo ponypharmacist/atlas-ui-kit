@@ -14,6 +14,7 @@
       <au-button label="default"/>
       <au-button shadow label="shadow"/>
       <au-button white bordered label="white bordered"/>
+      <au-button icon="mdi-eye" white bordered label="wb icon"/>
       <au-button icon="mdi-eye" label="icon='mdi-eye'"/>
       <au-button icon="mdi-eye" link label="is link"/>
       <au-button icon="mdi-eye" link red label="is-link red icon"/>

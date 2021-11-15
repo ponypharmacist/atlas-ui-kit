@@ -24,17 +24,24 @@
     >
       <au-icon :icon="`mdi-${item.icon}`" :size="iconSize" :color="iconColor"/>
 
+      <au-icon icon="mdi-chevron-down" :size="12" :color="iconColor"/>
+
       <div class="toolbar-children">
         <div
           v-for="subitem in item.children"
           :key="subitem.icon"
           class="toolbar-item"
-          :class="{ 'is-active': editor.isActive(subitem.name, subitem.arg) }"
+          :class="{
+            'is-active': subitem.isCustom ? false : editor.isActive(subitem.name, subitem.arg),
+            'is-text': !subitem.icon,
+          }"
           :title="subitem.title || ''"
-          :disabled="subitem.command ? isDisabled(subitem.command, subitem.arg) : false"
+          :disabled="isDisabled(subitem.command, subitem.arg, subitem.isCustom)"
           @click="runCommand(subitem.command, subitem.arg)"
         >
-          <au-icon :icon="`mdi-${subitem.icon}`" :size="iconSize" :color="iconColor"/>
+          <au-icon v-if="subitem.icon" :icon="`mdi-${subitem.icon}`" :size="iconSize" :color="iconColor"/>
+
+          <div v-else class="toolbar-item-title">{{ subitem.title }}</div>
         </div>
       </div>
     </div>
@@ -94,34 +101,29 @@ export default {
           children: [
             {
               name: 'paragraph',
-              icon: 'format-paragraph',
               command: 'setParagraph',
               title: 'Параграф',
             },
             {
               name: 'heading',
-              icon: 'format-header-1',
               command: 'toggleHeading',
               arg: { level: 1 },
               title: 'Заголовок 1 уровня',
             },
             {
               name: 'heading',
-              icon: 'format-header-2',
               command: 'toggleHeading',
               arg: { level: 2 },
               title: 'Заголовок 2 уровня',
             },
             {
               name: 'heading',
-              icon: 'format-header-3',
               command: 'toggleHeading',
               arg: { level: 3 },
               title: 'Заголовок 3 уровня',
             },
             {
               name: 'heading',
-              icon: 'format-header-4',
               command: 'toggleHeading',
               arg: { level: 4 },
               title: 'Заголовок 4 уровня',
@@ -262,6 +264,26 @@ export default {
           ],
         },
 
+        customBlocks: {
+          icon: 'plus-thick',
+          command: null,
+          title: 'Дополнительно',
+          children: [
+            {
+              name: 'info_panel',
+              command: 'toggleInfoPanel',
+              title: 'Выноска',
+              isCustom: true,
+            },
+            {
+              name: 'info_status',
+              command: 'toggleInfoStatus',
+              title: 'Статус',
+              isCustom: true,
+            },
+          ],
+        },
+
         // Дополнительные элементы из пропса
         ...this.extendSchema,
 
@@ -283,7 +305,10 @@ export default {
       this.editor.chain().focus()[command](arg).run();
     },
 
-    isDisabled(command, arg = null) {
+    isDisabled(command, arg = null, isCustom) {
+      if (isCustom) return false;
+      if (!command) return false;
+
       return !this.editor.can()[command](arg);
     },
   },
@@ -319,6 +344,23 @@ export default {
     & > .au-icon {
       background-color: #fff !important;
     }
+
+    &.is-text {
+      color: #fff;
+    }
+  }
+
+  &.is-text {
+    width: auto;
+    display: block;
+
+    &:hover {
+      color: #fff;
+    }
+
+    &[disabled] {
+      color: #999;
+    }
   }
 
   &[disabled] {
@@ -329,6 +371,10 @@ export default {
       background-color: #aaa !important;
     }
   }
+}
+
+.toolbar-item-title {
+  text-align: left;
 }
 </style>
 
@@ -353,6 +399,16 @@ export default {
   margin-left: auto;
 }
 
+.toolbar-parent {
+  position: relative;
+  width: 42px;
+  padding: 8px 6px 8px 8px;
+
+  &:hover .toolbar-children {
+    display: block;
+  }
+}
+
 .toolbar-children {
   position: absolute;
   z-index: 2;
@@ -360,7 +416,6 @@ export default {
   left: 0;
   display: none;
   flex-wrap: wrap;
-  width: 144px;
   padding: 2px 0 2px 4px;
   background-color: #fff;
   border-radius: 5px;
@@ -368,16 +423,16 @@ export default {
   cursor: default;
 }
 
+.table .toolbar-children {
+  width: 144px;
+}
+
 .format-pilcrow .toolbar-children {
   width: 178px;
 }
 
-.toolbar-parent {
-  position: relative;
-
-  &:hover .toolbar-children {
-    display: flex;
-  }
+.table:hover .toolbar-children {
+  display: flex;
 }
 
 </style>
