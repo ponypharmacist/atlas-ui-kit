@@ -186,7 +186,7 @@ function _nonIterableRest() {
 //
 //
 //
-var script$A = {
+var script$C = {
   name: 'au-icon',
   inheritAttrs: false,
   props: {
@@ -363,10 +363,10 @@ function renderStyles(styles) {
     }
     return css;
 }/* script */
-var __vue_script__$A = script$A;
+var __vue_script__$C = script$C;
 /* template */
 
-var __vue_render__$A = function __vue_render__() {
+var __vue_render__$C = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -382,10 +382,10 @@ var __vue_render__$A = function __vue_render__() {
   }, []) : _vm._e();
 };
 
-var __vue_staticRenderFns__$A = [];
+var __vue_staticRenderFns__$C = [];
 /* style */
 
-var __vue_inject_styles__$A = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$C = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-07b17543_0", {
     source: ".au-icon[data-v-07b17543]{display:inline-block;flex:0 0 auto;width:12px;height:12px;box-sizing:border-box;transition:background-color .15s linear}.au-icon.au-icon-white[data-v-07b17543]{background-color:#fff}.au-icon.au-icon-blue[data-v-07b17543]{background-color:#3f6ada}.au-icon.au-icon-error[data-v-07b17543]{background-color:#ff2c2c!important}",
@@ -396,27 +396,27 @@ var __vue_inject_styles__$A = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$A = "data-v-07b17543";
+var __vue_scope_id__$C = "data-v-07b17543";
 /* module identifier */
 
-var __vue_module_identifier__$y = "data-v-07b17543";
+var __vue_module_identifier__$A = "data-v-07b17543";
 /* functional template */
 
-var __vue_is_functional_template__$A = false;
+var __vue_is_functional_template__$C = false;
 /* style inject shadow dom */
 
-var __vue_component__$Z = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$A,
-  staticRenderFns: __vue_staticRenderFns__$A
-}, __vue_inject_styles__$A, __vue_script__$A, __vue_scope_id__$A, __vue_is_functional_template__$A, __vue_module_identifier__$y, false, undefined, createInjectorSSR, undefined);
+var __vue_component__$$ = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$C,
+  staticRenderFns: __vue_staticRenderFns__$C
+}, __vue_inject_styles__$C, __vue_script__$C, __vue_scope_id__$C, __vue_is_functional_template__$C, __vue_module_identifier__$A, false, undefined, createInjectorSSR, undefined);
 
-var AuIcon = __vue_component__$Z;//
+var AuIcon = __vue_component__$$;//
 //
 //
 //
 //
 //
-var script$z = {
+var script$B = {
   name: 'spinner-dots',
   inheritAttrs: false,
   props: {
@@ -447,10 +447,10 @@ var script$z = {
     }
   }
 };/* script */
-var __vue_script__$z = script$z;
+var __vue_script__$B = script$B;
 /* template */
 
-var __vue_render__$z = function __vue_render__() {
+var __vue_render__$B = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -465,10 +465,10 @@ var __vue_render__$z = function __vue_render__() {
   }))]);
 };
 
-var __vue_staticRenderFns__$z = [];
+var __vue_staticRenderFns__$B = [];
 /* style */
 
-var __vue_inject_styles__$z = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$B = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-5b3d11e0_0", {
     source: ".spinner-dots[data-v-5b3d11e0]{font-size:0;text-align:center;white-space:nowrap;display:flex;align-items:center;color:inherit}.spinner-dots>div[data-v-5b3d11e0]{background-color:currentColor;border-radius:100%;display:inline-block;animation:sk-bouncedelay-data-v-5b3d11e0 1s infinite ease-in-out both}.spinner-dots .bounce1[data-v-5b3d11e0]{animation-delay:-.3333333333s}.spinner-dots .bounce2[data-v-5b3d11e0]{animation-delay:-.1666666667s}@-webkit-keyframes sk-bouncedelay-data-v-5b3d11e0{0%,100%,80%{transform:scale(.37)}40%{transform:scale(.55)}}@keyframes sk-bouncedelay-data-v-5b3d11e0{0%,100%,80%{transform:scale(.37)}40%{transform:scale(.55)}}",
@@ -479,27 +479,27 @@ var __vue_inject_styles__$z = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$z = "data-v-5b3d11e0";
+var __vue_scope_id__$B = "data-v-5b3d11e0";
 /* module identifier */
 
-var __vue_module_identifier__$x = "data-v-5b3d11e0";
+var __vue_module_identifier__$z = "data-v-5b3d11e0";
 /* functional template */
 
-var __vue_is_functional_template__$z = false;
+var __vue_is_functional_template__$B = false;
 /* style inject shadow dom */
 
-var __vue_component__$Y = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$z,
-  staticRenderFns: __vue_staticRenderFns__$z
-}, __vue_inject_styles__$z, __vue_script__$z, __vue_scope_id__$z, __vue_is_functional_template__$z, __vue_module_identifier__$x, false, undefined, createInjectorSSR, undefined);
+var __vue_component__$_ = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$B,
+  staticRenderFns: __vue_staticRenderFns__$B
+}, __vue_inject_styles__$B, __vue_script__$B, __vue_scope_id__$B, __vue_is_functional_template__$B, __vue_module_identifier__$z, false, undefined, createInjectorSSR, undefined);
 
-var SpinnerDots = __vue_component__$Y;//
+var SpinnerDots = __vue_component__$_;//
 //
 //
 //
 //
 //
-var script$y = {
+var script$A = {
   name: 'spinner-fading-circle',
   inheritAttrs: false,
   props: {
@@ -518,10 +518,10 @@ var script$y = {
     }
   }
 };/* script */
-var __vue_script__$y = script$y;
+var __vue_script__$A = script$A;
 /* template */
 
-var __vue_render__$y = function __vue_render__() {
+var __vue_render__$A = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -537,10 +537,10 @@ var __vue_render__$y = function __vue_render__() {
   }))]);
 };
 
-var __vue_staticRenderFns__$y = [];
+var __vue_staticRenderFns__$A = [];
 /* style */
 
-var __vue_inject_styles__$y = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$A = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-56be54e2_0", {
     source: ".sk-fading-circle[data-v-56be54e2]{position:relative;width:36px;height:36px;color:currentColor}.sk-fading-circle .sk-circle[data-v-56be54e2]{width:100%;height:100%;position:absolute;left:0;top:0}.sk-fading-circle .sk-circle[data-v-56be54e2]::before{content:\"\";display:block;margin:0 auto;width:4px;height:4px;overflow:hidden;background-color:currentColor;border-radius:2px;animation:sk-circleFadeDelay-data-v-56be54e2 .8s infinite ease-in-out both}.sk-fading-circle .sk-circle1[data-v-56be54e2]{transform:rotate(0)}.sk-fading-circle .sk-circle1[data-v-56be54e2]::before{animation-delay:-.8s}.sk-fading-circle .sk-circle2[data-v-56be54e2]{transform:rotate(45deg)}.sk-fading-circle .sk-circle2[data-v-56be54e2]::before{animation-delay:-.7s}.sk-fading-circle .sk-circle3[data-v-56be54e2]{transform:rotate(90deg)}.sk-fading-circle .sk-circle3[data-v-56be54e2]::before{animation-delay:-.6s}.sk-fading-circle .sk-circle4[data-v-56be54e2]{transform:rotate(135deg)}.sk-fading-circle .sk-circle4[data-v-56be54e2]::before{animation-delay:-.5s}.sk-fading-circle .sk-circle5[data-v-56be54e2]{transform:rotate(180deg)}.sk-fading-circle .sk-circle5[data-v-56be54e2]::before{animation-delay:-.4s}.sk-fading-circle .sk-circle6[data-v-56be54e2]{transform:rotate(225deg)}.sk-fading-circle .sk-circle6[data-v-56be54e2]::before{animation-delay:-.3s}.sk-fading-circle .sk-circle7[data-v-56be54e2]{transform:rotate(270deg)}.sk-fading-circle .sk-circle7[data-v-56be54e2]::before{animation-delay:-.2s}.sk-fading-circle .sk-circle8[data-v-56be54e2]{transform:rotate(315deg)}.sk-fading-circle .sk-circle8[data-v-56be54e2]::before{animation-delay:-.1s}@keyframes sk-circleFadeDelay-data-v-56be54e2{0%,100%,39%{opacity:0}40%{opacity:1}}",
@@ -551,21 +551,21 @@ var __vue_inject_styles__$y = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$y = "data-v-56be54e2";
+var __vue_scope_id__$A = "data-v-56be54e2";
 /* module identifier */
 
-var __vue_module_identifier__$w = "data-v-56be54e2";
+var __vue_module_identifier__$y = "data-v-56be54e2";
 /* functional template */
 
-var __vue_is_functional_template__$y = false;
+var __vue_is_functional_template__$A = false;
 /* style inject shadow dom */
 
-var __vue_component__$X = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$y,
-  staticRenderFns: __vue_staticRenderFns__$y
-}, __vue_inject_styles__$y, __vue_script__$y, __vue_scope_id__$y, __vue_is_functional_template__$y, __vue_module_identifier__$w, false, undefined, createInjectorSSR, undefined);
+var __vue_component__$Z = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$A,
+  staticRenderFns: __vue_staticRenderFns__$A
+}, __vue_inject_styles__$A, __vue_script__$A, __vue_scope_id__$A, __vue_is_functional_template__$A, __vue_module_identifier__$y, false, undefined, createInjectorSSR, undefined);
 
-var SpinnerFadingCircle = __vue_component__$X;var AuSpinner = {
+var SpinnerFadingCircle = __vue_component__$Z;var AuSpinner = {
   name: 'au-spinner',
   inheritAttrs: false,
   props: {
@@ -604,7 +604,7 @@ var SpinnerFadingCircle = __vue_component__$X;var AuSpinner = {
         });
     }
   }
-};var script$x = {
+};var script$z = {
   name: 'au-button',
   components: {
     AuIcon: AuIcon,
@@ -707,10 +707,10 @@ var SpinnerFadingCircle = __vue_component__$X;var AuSpinner = {
     }
   }
 };/* script */
-var __vue_script__$x = script$x;
+var __vue_script__$z = script$z;
 /* template */
 
-var __vue_render__$x = function __vue_render__() {
+var __vue_render__$z = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -749,13 +749,13 @@ var __vue_render__$x = function __vue_render__() {
   })], 1) : _vm._e()], 2);
 };
 
-var __vue_staticRenderFns__$x = [];
+var __vue_staticRenderFns__$z = [];
 /* style */
 
-var __vue_inject_styles__$x = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$z = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-28c81570_0", {
-    source: ".au-button[data-v-28c81570]{position:relative;display:flex;justify-content:center;align-items:center;font-family:inherit;font-size:13px;font-weight:500;height:32px;border-radius:4px;border:none;outline:0;cursor:pointer;padding:0 16px;color:#fff;background-color:#3f6ada;transition:.3s;background-image:linear-gradient(180deg,rgba(152,210,255,.3) 0,rgba(255,255,255,0) 100%)}.au-button[data-v-28c81570]:hover{background-image:linear-gradient(180deg,rgba(63,106,218,.3) 0,rgba(63,106,218,0) 100%)}.au-button[data-v-28c81570]  .au-icon{margin-right:8px}.au-button.is-full-width[data-v-28c81570]{width:100%}.au-button.is-shadow[data-v-28c81570]{box-shadow:0 2px 2px rgba(20,20,20,.15)}.au-button.is-white[data-v-28c81570]{color:#3f6ada;background-color:#fff;background-image:none}.au-button.is-link[data-v-28c81570]{background-color:transparent!important;background-image:none;color:#3f6ada}.au-button.is-link .au-icon[data-v-28c81570]{background-color:#3f6ada!important}.au-button.is-link[data-v-28c81570]:hover{color:#2a3f64}.au-button.is-link:hover .au-icon[data-v-28c81570]{background-color:#2a3f64!important}.au-button.is-link.is-red[data-v-28c81570]{color:#ff6c59}.au-button.is-link.is-red .au-icon[data-v-28c81570]{background-color:#ff6c59!important}.au-button.is-link.is-red[data-v-28c81570]:hover{color:#eb5f4d}.au-button.is-link.is-red:hover .au-icon[data-v-28c81570]{background-color:#eb5f4d!important}.au-button.is-link.is-white[data-v-28c81570]{color:#fff}.au-button.is-link.is-white .au-icon[data-v-28c81570]{background-color:#fff!important}.au-button.is-link.is-white[data-v-28c81570]:hover{color:#fafafa}.au-button.is-link.is-white:hover .au-icon[data-v-28c81570]{background-color:#fafafa!important}.au-button.is-large[data-v-28c81570]{font-size:14px;height:40px}.au-button.is-tiny[data-v-28c81570]{font-size:12px;height:24px}.au-button.is-bordered[data-v-28c81570]{border:1px solid #e0e8f0;transition:border-color .2s,color .2s,background-color .2s}.au-button.is-bordered[data-v-28c81570]:hover{border-color:#cfd9e3}.au-button.is-bordered.is-white[data-v-28c81570]:hover{color:#fff;background-color:#3f6ada;background-image:linear-gradient(180deg,rgba(63,106,218,.3) 0,rgba(63,106,218,0) 100%)}.au-button.is-red[data-v-28c81570]{background-color:#ff6c59;color:#fff;background-image:none}.au-button.is-red[data-v-28c81570]:hover{background-color:#eb5f4d}.au-button.disabled[data-v-28c81570]{opacity:.5;background-image:none;pointer-events:none}.au-button.disabled.is-white[data-v-28c81570]{border:1px solid #fff}.au-button .label[data-v-28c81570]{white-space:nowrap}.au-button .button-loader[data-v-28c81570]{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center}.au-button.is-transparent[data-v-28c81570]{background-color:rgba(0,0,0,.2);background-image:none}.au-button.is-transparent[data-v-28c81570]:hover{background-color:rgba(0,0,0,.15)}.au-button.is-transparent.is-white[data-v-28c81570]{background-color:rgba(255,255,255,.75)}.au-button.is-transparent.is-white[data-v-28c81570]:hover{background-color:rgba(255,255,255,.85)}.au-button.is-round[data-v-28c81570]{width:32px;border-radius:50%;padding:0;text-align:center}.au-button.is-round.is-large[data-v-28c81570]{width:40px}.au-button.is-round.is-tiny[data-v-28c81570]{width:24px}.au-button.is-round .au-icon[data-v-28c81570]{margin-right:0}.is-loading .au-icon[data-v-28c81570],.is-loading span[data-v-28c81570]{opacity:0}",
+  inject("data-v-369f1688_0", {
+    source: ".au-button[data-v-369f1688]{position:relative;display:flex;justify-content:center;align-items:center;font-family:inherit;font-size:13px;font-weight:500;height:32px;border-radius:4px;border:none;outline:0;cursor:pointer;padding:0 16px;color:#fff;background-color:#3f6ada;transition:.3s;background-image:linear-gradient(180deg,rgba(152,210,255,.3) 0,rgba(255,255,255,0) 100%)}.au-button[data-v-369f1688]:hover{background-image:linear-gradient(180deg,rgba(63,106,218,.3) 0,rgba(63,106,218,0) 100%)}.au-button[data-v-369f1688]  .au-icon{margin-right:8px}.au-button.is-full-width[data-v-369f1688]{width:100%}.au-button.is-shadow[data-v-369f1688]{box-shadow:0 2px 2px rgba(20,20,20,.15)}.au-button.is-white[data-v-369f1688]{color:#3f6ada;background-color:#fff;background-image:none}.au-button.is-link[data-v-369f1688]{background-color:transparent!important;background-image:none;color:#3f6ada}.au-button.is-link .au-icon[data-v-369f1688]{background-color:#3f6ada!important}.au-button.is-link[data-v-369f1688]:hover{color:#2a3f64}.au-button.is-link:hover .au-icon[data-v-369f1688]{background-color:#2a3f64!important}.au-button.is-link.is-red[data-v-369f1688]{color:#ff6c59}.au-button.is-link.is-red .au-icon[data-v-369f1688]{background-color:#ff6c59!important}.au-button.is-link.is-red[data-v-369f1688]:hover{color:#eb5f4d}.au-button.is-link.is-red:hover .au-icon[data-v-369f1688]{background-color:#eb5f4d!important}.au-button.is-link.is-white[data-v-369f1688]{color:#fff}.au-button.is-link.is-white .au-icon[data-v-369f1688]{background-color:#fff!important}.au-button.is-link.is-white[data-v-369f1688]:hover{color:#fafafa}.au-button.is-link.is-white:hover .au-icon[data-v-369f1688]{background-color:#fafafa!important}.au-button.is-large[data-v-369f1688]{font-size:14px;height:40px}.au-button.is-tiny[data-v-369f1688]{font-size:12px;height:24px}.au-button.is-bordered[data-v-369f1688]{border:1px solid #e0e8f0;transition:border-color .2s,color .2s,background-color .2s}.au-button.is-bordered[data-v-369f1688]:hover{border-color:#cfd9e3}.au-button.is-bordered.is-white[data-v-369f1688]:hover{color:#fff;background-color:#3f6ada;background-image:linear-gradient(180deg,rgba(63,106,218,.3) 0,rgba(63,106,218,0) 100%)}.au-button.is-bordered.is-white:hover .au-icon[data-v-369f1688]{background-color:#fafafa!important}.au-button.is-red[data-v-369f1688]{background-color:#ff6c59;color:#fff;background-image:none}.au-button.is-red[data-v-369f1688]:hover{background-color:#eb5f4d}.au-button.disabled[data-v-369f1688]{opacity:.5;background-image:none;pointer-events:none}.au-button.disabled.is-white[data-v-369f1688]{border:1px solid #fff}.au-button .label[data-v-369f1688]{white-space:nowrap}.au-button .button-loader[data-v-369f1688]{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center}.au-button.is-transparent[data-v-369f1688]{background-color:rgba(0,0,0,.2);background-image:none}.au-button.is-transparent[data-v-369f1688]:hover{background-color:rgba(0,0,0,.15)}.au-button.is-transparent.is-white[data-v-369f1688]{background-color:rgba(255,255,255,.75)}.au-button.is-transparent.is-white[data-v-369f1688]:hover{background-color:rgba(255,255,255,.85)}.au-button.is-round[data-v-369f1688]{width:32px;border-radius:50%;padding:0;text-align:center}.au-button.is-round.is-large[data-v-369f1688]{width:40px}.au-button.is-round.is-tiny[data-v-369f1688]{width:24px}.au-button.is-round .au-icon[data-v-369f1688]{margin-right:0}.is-loading .au-icon[data-v-369f1688],.is-loading span[data-v-369f1688]{opacity:0}",
     map: undefined,
     media: undefined
   });
@@ -763,21 +763,21 @@ var __vue_inject_styles__$x = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$x = "data-v-28c81570";
+var __vue_scope_id__$z = "data-v-369f1688";
 /* module identifier */
 
-var __vue_module_identifier__$v = "data-v-28c81570";
+var __vue_module_identifier__$x = "data-v-369f1688";
 /* functional template */
 
-var __vue_is_functional_template__$x = false;
+var __vue_is_functional_template__$z = false;
 /* style inject shadow dom */
 
-var __vue_component__$V = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$x,
-  staticRenderFns: __vue_staticRenderFns__$x
-}, __vue_inject_styles__$x, __vue_script__$x, __vue_scope_id__$x, __vue_is_functional_template__$x, __vue_module_identifier__$v, false, undefined, createInjectorSSR, undefined);
+var __vue_component__$X = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$z,
+  staticRenderFns: __vue_staticRenderFns__$z
+}, __vue_inject_styles__$z, __vue_script__$z, __vue_scope_id__$z, __vue_is_functional_template__$z, __vue_module_identifier__$x, false, undefined, createInjectorSSR, undefined);
 
-var __vue_component__$W = __vue_component__$V;//
+var __vue_component__$Y = __vue_component__$X;//
 //
 //
 //
@@ -794,7 +794,7 @@ var __vue_component__$W = __vue_component__$V;//
 //
 //
 //
-var script$w = {
+var script$y = {
   name: 'au-checkbox',
   props: {
     value: {
@@ -859,10 +859,10 @@ var script$w = {
     }
   }
 };/* script */
-var __vue_script__$w = script$w;
+var __vue_script__$y = script$y;
 /* template */
 
-var __vue_render__$w = function __vue_render__() {
+var __vue_render__$y = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -881,10 +881,10 @@ var __vue_render__$w = function __vue_render__() {
   }) + _vm._ssrStyle(null, _vm.checkboxStyle, null) + " data-v-4cdcc920></div> " + (_vm.label ? "<label data-v-4cdcc920>" + _vm._ssrEscape(_vm._s(_vm.label)) + "</label>" : "<!---->"))]);
 };
 
-var __vue_staticRenderFns__$w = [];
+var __vue_staticRenderFns__$y = [];
 /* style */
 
-var __vue_inject_styles__$w = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$y = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-4cdcc920_0", {
     source: ".au-checkbox[data-v-4cdcc920]{position:relative;display:inline-flex;align-items:center;height:16px;min-width:16px;font-size:12px;line-height:16px;font-weight:500;font-family:inherit;cursor:pointer;user-select:none}.au-checkbox label[data-v-4cdcc920]{line-height:16px;margin-left:6px;cursor:pointer;transition:color .2s linear}.au-checkbox .checkbox[data-v-4cdcc920]{width:14px;height:14px;outline:0;background-color:#ebf2f7;background-image:linear-gradient(to top,rgba(255,255,255,0) 0,#fff 100%);border:1px solid #d4dce6;border-radius:2px;box-sizing:border-box;transition:border-color .2s linear}.au-checkbox .checkbox[data-v-4cdcc920]::before{position:absolute;content:\"\";height:12px;width:12px}.au-checkbox .checkbox.checked[data-v-4cdcc920]{background-image:linear-gradient(to top,rgba(255,255,255,0) 0,rgba(255,255,255,.12) 100%)}.au-checkbox .checkbox.checked[data-v-4cdcc920]::before{-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjYiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMjAiIHN0cm9rZS13aWR0aD0iMS44IiBkPSJNMSAyLjEyNnYwTDIuOTg1IDQuMjR2MEw2LjI3MyAxdjAiLz48L3N2Zz4=) no-repeat 50% 60%/8px 6px;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjYiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMjAiIHN0cm9rZS13aWR0aD0iMS44IiBkPSJNMSAyLjEyNnYwTDIuOTg1IDQuMjR2MEw2LjI3MyAxdjAiLz48L3N2Zz4=) no-repeat 50% 60%/8px 6px;background-color:#fff}.au-checkbox:hover .checkbox[data-v-4cdcc920]{border-color:#3f6ada}.au-checkbox.label-left label[data-v-4cdcc920]{order:1;margin:0 6px 0 0}.au-checkbox.label-left .checkbox[data-v-4cdcc920]{order:2}.au-checkbox.full-width[data-v-4cdcc920]{width:100%}.au-checkbox.full-width label[data-v-4cdcc920]{margin-left:auto}.au-checkbox.full-width.label-left label[data-v-4cdcc920]{margin:0 auto 0 0}.au-checkbox.partial .checkbox[data-v-4cdcc920]{border-color:#d4dce6;background-color:#ebf2f7;background-image:linear-gradient(to top,rgba(255,255,255,0) 0,#fff 100%)}.au-checkbox.partial .checkbox[data-v-4cdcc920]:before{-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjYiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMjAiIHN0cm9rZS13aWR0aD0iMS44IiBkPSJNMSAyLjEyNnYwTDIuOTg1IDQuMjR2MEw2LjI3MyAxdjAiLz48L3N2Zz4=) no-repeat 50% 60%/8px 6px;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjYiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMjAiIHN0cm9rZS13aWR0aD0iMS44IiBkPSJNMSAyLjEyNnYwTDIuOTg1IDQuMjR2MEw2LjI3MyAxdjAiLz48L3N2Zz4=) no-repeat 50% 60%/8px 6px;background-color:#bdc6d6}.au-checkbox.partial .checkbox[data-v-4cdcc920]:hover{border-color:#3f6ada}.au-checkbox.disabled[data-v-4cdcc920]{color:#999;cursor:default;cursor:default}.au-checkbox.disabled .checkbox[data-v-4cdcc920]{background-image:none;border-color:#d4dce6}.au-checkbox.disabled .checkbox.checked[data-v-4cdcc920]{background-color:#b1bbcb}.au-checkbox.disabled label[data-v-4cdcc920]{cursor:default}.au-checkbox.disabled:hover .checkbox[data-v-4cdcc920]::before{border-color:#ccc}",
@@ -895,28 +895,28 @@ var __vue_inject_styles__$w = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$w = "data-v-4cdcc920";
+var __vue_scope_id__$y = "data-v-4cdcc920";
 /* module identifier */
 
-var __vue_module_identifier__$u = "data-v-4cdcc920";
+var __vue_module_identifier__$w = "data-v-4cdcc920";
 /* functional template */
 
-var __vue_is_functional_template__$w = false;
+var __vue_is_functional_template__$y = false;
 /* style inject shadow dom */
 
-var __vue_component__$T = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$w,
-  staticRenderFns: __vue_staticRenderFns__$w
-}, __vue_inject_styles__$w, __vue_script__$w, __vue_scope_id__$w, __vue_is_functional_template__$w, __vue_module_identifier__$u, false, undefined, createInjectorSSR, undefined);
+var __vue_component__$V = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$y,
+  staticRenderFns: __vue_staticRenderFns__$y
+}, __vue_inject_styles__$y, __vue_script__$y, __vue_scope_id__$y, __vue_is_functional_template__$y, __vue_module_identifier__$w, false, undefined, createInjectorSSR, undefined);
 
-var __vue_component__$U = __vue_component__$T;//
+var __vue_component__$W = __vue_component__$V;//
 //
 //
 //
 //
 //
 //
-var script$v = {
+var script$x = {
   name: 'au-switch',
   props: {
     value: {
@@ -944,10 +944,10 @@ var script$v = {
     }
   }
 };/* script */
-var __vue_script__$v = script$v;
+var __vue_script__$x = script$x;
 /* template */
 
-var __vue_render__$v = function __vue_render__() {
+var __vue_render__$x = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -964,10 +964,10 @@ var __vue_render__$v = function __vue_render__() {
   }, []);
 };
 
-var __vue_staticRenderFns__$v = [];
+var __vue_staticRenderFns__$x = [];
 /* style */
 
-var __vue_inject_styles__$v = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$x = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-d0aff68e_0", {
     source: ".au-switch[data-v-d0aff68e]{position:relative;width:36px;height:20px;background-color:#f0f4fb;border-radius:16px;transition:all .15s linear;cursor:pointer}.au-switch[data-v-d0aff68e]:before{position:absolute;left:1px;top:1px;width:18px;height:18px;content:\"\";border-radius:50%;background-color:#fff;transition:left .15s linear;box-shadow:0 3px 6px rgba(0,0,0,.22),0 0 8px transparent}.au-switch.is-checked[data-v-d0aff68e]{background-color:#3f6ada}.au-switch.is-checked[data-v-d0aff68e]:before{left:17px}.au-switch.is-disabled[data-v-d0aff68e]{background-color:#f1f1f1!important;cursor:default}",
@@ -978,21 +978,21 @@ var __vue_inject_styles__$v = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$v = "data-v-d0aff68e";
+var __vue_scope_id__$x = "data-v-d0aff68e";
 /* module identifier */
 
-var __vue_module_identifier__$t = "data-v-d0aff68e";
+var __vue_module_identifier__$v = "data-v-d0aff68e";
 /* functional template */
 
-var __vue_is_functional_template__$v = false;
+var __vue_is_functional_template__$x = false;
 /* style inject shadow dom */
 
-var __vue_component__$R = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$v,
-  staticRenderFns: __vue_staticRenderFns__$v
-}, __vue_inject_styles__$v, __vue_script__$v, __vue_scope_id__$v, __vue_is_functional_template__$v, __vue_module_identifier__$t, false, undefined, createInjectorSSR, undefined);
+var __vue_component__$T = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$x,
+  staticRenderFns: __vue_staticRenderFns__$x
+}, __vue_inject_styles__$x, __vue_script__$x, __vue_scope_id__$x, __vue_is_functional_template__$x, __vue_module_identifier__$v, false, undefined, createInjectorSSR, undefined);
 
-var __vue_component__$S = __vue_component__$R;function _typeof$3(obj) {
+var __vue_component__$U = __vue_component__$T;function _typeof$3(obj) {
   "@babel/helpers - typeof";
 
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
@@ -1703,7 +1703,7 @@ function isSymbol(value) {
 }
 
 var isSymbol_1 = isSymbol;/** Used as references for various `Number` constants. */
-var INFINITY = 1 / 0;
+var INFINITY$1 = 1 / 0;
 
 /** Used to convert symbols to primitives and strings. */
 var symbolProto$1 = _Symbol ? _Symbol.prototype : undefined,
@@ -1730,7 +1730,7 @@ function baseToString(value) {
     return symbolToString ? symbolToString.call(value) : '';
   }
   var result = (value + '');
-  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+  return (result == '0' && (1 / value) == -INFINITY$1) ? '-0' : result;
 }
 
 var _baseToString = baseToString;/**
@@ -1783,7 +1783,7 @@ function uniqueId(prefix) {
   return toString_1(prefix) + id;
 }
 
-var uniqueId_1 = uniqueId;var script$u = {
+var uniqueId_1 = uniqueId;var script$w = {
   name: 'au-input',
   model: {
     prop: 'value',
@@ -1942,10 +1942,10 @@ var uniqueId_1 = uniqueId;var script$u = {
     }
   }
 };/* script */
-var __vue_script__$u = script$u;
+var __vue_script__$w = script$w;
 /* template */
 
-var __vue_render__$u = function __vue_render__() {
+var __vue_render__$w = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -2083,10 +2083,10 @@ var __vue_render__$u = function __vue_render__() {
   }) : _vm._e(), _vm._ssrNode(" "), _vm._t("suffix")], 2)], 2);
 };
 
-var __vue_staticRenderFns__$u = [];
+var __vue_staticRenderFns__$w = [];
 /* style */
 
-var __vue_inject_styles__$u = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$w = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-b5723436_0", {
     source: ".au-input[data-v-b5723436]{position:relative;display:flex;flex-direction:column;width:120px}.au-input label[data-v-b5723436]{margin-bottom:5px;font-size:13px;line-height:16px;font-family:inherit;font-weight:500}.au-input .au-input-content[data-v-b5723436]{display:flex;align-items:center;padding:10px 12px;width:100%;height:40px;border-radius:4px;border:1px solid #e0e8f0;background-color:#f0f4fb;transition:.3s}.au-input .au-input-content.has-icon[data-v-b5723436]{padding:10px 12px 10px 44px}.au-input .au-input-content .au-select-icon[data-v-b5723436]{position:absolute;left:16px}.au-input input[data-v-b5723436]{height:100%;width:100%;font-size:14px;font-weight:500;outline:0;background-color:transparent;border:none}.au-input input[data-v-b5723436]::placeholder{color:#9f9f9f}.au-input input[disabled][data-v-b5723436]{pointer-events:none}.au-input.is-disabled[data-v-b5723436]{opacity:.5;cursor:not-allowed}.au-input.is-inverse .au-input-content[data-v-b5723436]{background-color:#fff}.au-input.is-error .au-input-content[data-v-b5723436]{border:1px solid #ff2c2c;background-color:#fff1f0}.au-input.wrong .au-input-content[data-v-b5723436]{border:1px solid #ff6c59;box-shadow:1px 0 0 2px rgba(220,53,69,.25)}.au-input.is-focused .au-input-content[data-v-b5723436]{border:1px solid #3f6ada;box-shadow:unset}.au-input.is-full-width[data-v-b5723436]{width:100%}.au-input.is-small .au-input-content[data-v-b5723436]{height:32px;padding:0 10px;border-radius:2px}.au-input.is-small .au-input-content.has-icon[data-v-b5723436]{padding:0 10px 0 32px}.au-input.is-small .au-input-content .au-select-icon[data-v-b5723436]{position:absolute;left:12px;top:50%;transform:translateY(-50%)}.au-input.is-small label[data-v-b5723436]{font-size:12px;line-height:14px}.au-input.is-small input[data-v-b5723436]{font-size:12px;font-weight:400}.au-input.is-tiny .au-input-content[data-v-b5723436]{height:24px;padding:0 6px;border-radius:2px}.au-input.is-tiny .au-input-content.has-icon[data-v-b5723436]{padding:0 10px 0 28px}.au-input.is-tiny .au-input-content .au-select-icon[data-v-b5723436]{position:absolute;left:10px;top:50%;transform:translateY(-50%)}.au-input.is-tiny label[data-v-b5723436]{display:none}.au-input.is-tiny input[data-v-b5723436]{font-size:12px;font-weight:400}.au-input .au-input-clear[data-v-b5723436]{position:absolute;right:8px;cursor:pointer}.au-input .au-input-clear[data-v-b5723436]:hover{opacity:.7}.is-multiple .multiple-values[data-v-b5723436]{display:flex;align-items:center;width:100%}.is-multiple .multiple-values input[data-v-b5723436]{width:100%}.is-multiple .multiple-values .input-chip[data-v-b5723436]{margin-right:4px;padding:4px 6px;border-radius:12px;background-color:#f1f1f1;border:thin solid #ddd;cursor:pointer}.is-multiple .au-input-content[data-v-b5723436]{padding-right:28px}.is-multiple.is-small .input-chip[data-v-b5723436]{padding:2px 4px;font-size:12px}.is-multiple.is-tiny .input-chip[data-v-b5723436]{padding:2px 4px;font-size:12px}.is-multiple.is-disabled .input-chip[data-v-b5723436]{color:#999;cursor:not-allowed}.is-multiple.is-disabled .au-input-clear[data-v-b5723436]{cursor:not-allowed}",
@@ -2097,21 +2097,21 @@ var __vue_inject_styles__$u = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$u = "data-v-b5723436";
+var __vue_scope_id__$w = "data-v-b5723436";
 /* module identifier */
 
-var __vue_module_identifier__$s = "data-v-b5723436";
+var __vue_module_identifier__$u = "data-v-b5723436";
 /* functional template */
 
-var __vue_is_functional_template__$u = false;
+var __vue_is_functional_template__$w = false;
 /* style inject shadow dom */
 
-var __vue_component__$P = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$u,
-  staticRenderFns: __vue_staticRenderFns__$u
-}, __vue_inject_styles__$u, __vue_script__$u, __vue_scope_id__$u, __vue_is_functional_template__$u, __vue_module_identifier__$s, false, undefined, createInjectorSSR, undefined);
+var __vue_component__$R = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$w,
+  staticRenderFns: __vue_staticRenderFns__$w
+}, __vue_inject_styles__$w, __vue_script__$w, __vue_scope_id__$w, __vue_is_functional_template__$w, __vue_module_identifier__$u, false, undefined, createInjectorSSR, undefined);
 
-var __vue_component__$Q = __vue_component__$P;var vueSliderComponent_umd_min = createCommonjsModule(function (module, exports) {
+var __vue_component__$S = __vue_component__$R;var vueSliderComponent_umd_min = createCommonjsModule(function (module, exports) {
 (function(t,e){module.exports=e(Vue__default['default']);})("undefined"!==typeof self?self:commonjsGlobal,(function(t){return function(t){var e={};function r(n){if(e[n])return e[n].exports;var o=e[n]={i:n,l:!1,exports:{}};return t[n].call(o.exports,o,o.exports,r),o.l=!0,o.exports}return r.m=t,r.c=e,r.d=function(t,e,n){r.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:n});},r.r=function(t){"undefined"!==typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0});},r.t=function(t,e){if(1&e&&(t=r(t)),8&e)return t;if(4&e&&"object"===typeof t&&t&&t.__esModule)return t;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var o in t)r.d(n,o,function(e){return t[e]}.bind(null,o));return n},r.n=function(t){var e=t&&t.__esModule?function(){return t["default"]}:function(){return t};return r.d(e,"a",e),e},r.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},r.p="",r(r.s="fb15")}({2638:function(t,e,r){function n(){return n=Object.assign||function(t){for(var e,r=1;r<arguments.length;r++)for(var n in e=arguments[r],e)Object.prototype.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t},n.apply(this,arguments)}var o=["attrs","props","domProps"],i=["class","style","directives"],a=["on","nativeOn"],s=function(t){return t.reduce((function(t,e){for(var r in e)if(t[r])if(-1!==o.indexOf(r))t[r]=n({},t[r],e[r]);else if(-1!==i.indexOf(r)){var s=t[r]instanceof Array?t[r]:[t[r]],c=e[r]instanceof Array?e[r]:[e[r]];t[r]=s.concat(c);}else if(-1!==a.indexOf(r))for(var l in e[r])if(t[r][l]){var f=t[r][l]instanceof Array?t[r][l]:[t[r][l]],d=e[r][l]instanceof Array?e[r][l]:[e[r][l]];t[r][l]=f.concat(d);}else t[r][l]=e[r][l];else if("hook"==r)for(var h in e[r])t[r][h]=t[r][h]?u(t[r][h],e[r][h]):e[r][h];else t[r]=e[r];else t[r]=e[r];return t}),{})},u=function(t,e){return function(){t&&t.apply(this,arguments),e&&e.apply(this,arguments);}};t.exports=s;},"4abb":function(t,e,r){},"4ed8":function(t,e,r){},"556c":function(t,e,r){},"65d9":function(t,e,r){/**
   * vue-class-component v7.0.1
   * (c) 2015-present Evan You
@@ -2120,7 +2120,7 @@ var __vue_component__$Q = __vue_component__$P;var vueSliderComponent_umd_min = c
 
 });
 
-var VueSlider = /*@__PURE__*/getDefaultExportFromCjs(vueSliderComponent_umd_min);var script$t = {
+var VueSlider = /*@__PURE__*/getDefaultExportFromCjs(vueSliderComponent_umd_min);var script$v = {
   name: 'au-range-slider',
   components: {
     VueSlider: VueSlider
@@ -2188,10 +2188,10 @@ var VueSlider = /*@__PURE__*/getDefaultExportFromCjs(vueSliderComponent_umd_min)
     }
   }
 };/* script */
-var __vue_script__$t = script$t;
+var __vue_script__$v = script$v;
 /* template */
 
-var __vue_render__$t = function __vue_render__() {
+var __vue_render__$v = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -2219,10 +2219,10 @@ var __vue_render__$t = function __vue_render__() {
   }), _vm._ssrNode(" <div class=\"range-slider-max\">" + _vm._ssrEscape(_vm._s(_vm.isSingle ? _vm.model : _vm.model[1])) + "</div>")], 2)], 2);
 };
 
-var __vue_staticRenderFns__$t = [];
+var __vue_staticRenderFns__$v = [];
 /* style */
 
-var __vue_inject_styles__$t = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$v = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-2c1b2e1f_0", {
     source: ".vue-slider-dot{position:absolute;-webkit-transition:all 0s;transition:all 0s;z-index:5}.vue-slider-dot:focus{outline:0}.vue-slider-dot-tooltip{position:absolute;visibility:hidden}.vue-slider-dot-hover:hover .vue-slider-dot-tooltip,.vue-slider-dot-tooltip-show{visibility:visible}.vue-slider-dot-tooltip-top{top:-10px;left:50%;-webkit-transform:translate(-50%,-100%);transform:translate(-50%,-100%)}.vue-slider-dot-tooltip-bottom{bottom:-10px;left:50%;-webkit-transform:translate(-50%,100%);transform:translate(-50%,100%)}.vue-slider-dot-tooltip-left{left:-10px;top:50%;-webkit-transform:translate(-100%,-50%);transform:translate(-100%,-50%)}.vue-slider-dot-tooltip-right{right:-10px;top:50%;-webkit-transform:translate(100%,-50%);transform:translate(100%,-50%)}.vue-slider-marks{position:relative;width:100%;height:100%}.vue-slider-mark{position:absolute;z-index:1}.vue-slider-ltr .vue-slider-mark,.vue-slider-rtl .vue-slider-mark{width:0;height:100%;top:50%}.vue-slider-ltr .vue-slider-mark-step,.vue-slider-rtl .vue-slider-mark-step{top:0}.vue-slider-ltr .vue-slider-mark-label,.vue-slider-rtl .vue-slider-mark-label{top:100%;margin-top:10px}.vue-slider-ltr .vue-slider-mark{-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}.vue-slider-ltr .vue-slider-mark-step{left:0}.vue-slider-ltr .vue-slider-mark-label{left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}.vue-slider-rtl .vue-slider-mark{-webkit-transform:translate(50%,-50%);transform:translate(50%,-50%)}.vue-slider-rtl .vue-slider-mark-step{right:0}.vue-slider-rtl .vue-slider-mark-label{right:50%;-webkit-transform:translateX(50%);transform:translateX(50%)}.vue-slider-btt .vue-slider-mark,.vue-slider-ttb .vue-slider-mark{width:100%;height:0;left:50%}.vue-slider-btt .vue-slider-mark-step,.vue-slider-ttb .vue-slider-mark-step{left:0}.vue-slider-btt .vue-slider-mark-label,.vue-slider-ttb .vue-slider-mark-label{left:100%;margin-left:10px}.vue-slider-btt .vue-slider-mark{-webkit-transform:translate(-50%,50%);transform:translate(-50%,50%)}.vue-slider-btt .vue-slider-mark-step{top:0}.vue-slider-btt .vue-slider-mark-label{top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)}.vue-slider-ttb .vue-slider-mark{-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}.vue-slider-ttb .vue-slider-mark-step{bottom:0}.vue-slider-ttb .vue-slider-mark-label{bottom:50%;-webkit-transform:translateY(50%);transform:translateY(50%)}.vue-slider-mark-label,.vue-slider-mark-step{position:absolute}.vue-slider{position:relative;-webkit-box-sizing:content-box;box-sizing:content-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;display:block;-webkit-tap-highlight-color:transparent}.vue-slider-rail{position:relative;width:100%;height:100%;-webkit-transition-property:width,height,left,right,top,bottom;transition-property:width,height,left,right,top,bottom}.vue-slider-process{position:absolute;z-index:1}.au-range-slider{display:flex;flex-direction:column;width:100%;font-family:inherit}.au-range-slider .vue-slider{width:100%!important}.au-range-slider .vue-slider-dot{width:12px!important;height:12px!important;border:2px solid #3f6ada;background-color:#fff;border-radius:50%;cursor:pointer}.au-range-slider .vue-slider-process{background-color:#3f6ada}.au-range-slider .range-slider-label{margin-bottom:5px;font-size:13px;line-height:16px;font-weight:500}.au-range-slider .range-slider-box{display:flex;align-items:center;width:100%;height:32px;padding:0 12px;font-size:13px;border-radius:2px;border:1px solid #ebeff6;background-color:#f9fafd}.au-range-slider .range-slider-min{min-width:7px;margin-right:12px;text-align:left}.au-range-slider .range-slider-max{min-width:14px;margin-left:12px;text-align:right}.au-range-slider.is-single .range-slider-box{padding-left:14px}.au-range-slider.is-single .vue-slider-rail{background-color:#3f6ada}.au-range-slider.is-inverse .range-slider-box{background-color:#fff}.au-range-slider.is-small .range-slider-box{height:32px;font-size:12px}.au-range-slider.is-small .range-slider-label{font-size:12px;line-height:14px}.au-range-slider.is-tiny .range-slider-box{height:24px;font-size:12px}.au-range-slider.is-tiny .range-slider-label{font-size:12px;line-height:14px}.au-range-slider.is-disabled{user-select:none;pointer-events:none}.au-range-slider.is-disabled .vue-slider-dot{border-color:#888}.au-range-slider.is-disabled .vue-slider-process{background-color:#888}.au-range-slider.is-disabled .vue-slider-rail{background-color:#888}",
@@ -2233,21 +2233,21 @@ var __vue_inject_styles__$t = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$t = undefined;
+var __vue_scope_id__$v = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$r = "data-v-2c1b2e1f";
+var __vue_module_identifier__$t = "data-v-2c1b2e1f";
 /* functional template */
 
-var __vue_is_functional_template__$t = false;
+var __vue_is_functional_template__$v = false;
 /* style inject shadow dom */
 
-var __vue_component__$N = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$t,
-  staticRenderFns: __vue_staticRenderFns__$t
-}, __vue_inject_styles__$t, __vue_script__$t, __vue_scope_id__$t, __vue_is_functional_template__$t, __vue_module_identifier__$r, false, undefined, createInjectorSSR, undefined);
+var __vue_component__$P = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$v,
+  staticRenderFns: __vue_staticRenderFns__$v
+}, __vue_inject_styles__$v, __vue_script__$v, __vue_scope_id__$v, __vue_is_functional_template__$v, __vue_module_identifier__$t, false, undefined, createInjectorSSR, undefined);
 
-var __vue_component__$O = __vue_component__$N;var datePicker_umd = createCommonjsModule(function (module, exports) {
+var __vue_component__$Q = __vue_component__$P;var datePicker_umd = createCommonjsModule(function (module, exports) {
 (function webpackUniversalModuleDefinition(root, factory) {
 	module.exports = factory(Vue__default['default']);
 })((typeof self !== 'undefined' ? self : commonjsGlobal), function(__WEBPACK_EXTERNAL_MODULE__8bbf__) {
@@ -28890,7 +28890,7 @@ var VDatePicker = /*@__PURE__*/getDefaultExportFromCjs(datePicker_umd);var momen
 
 })));
 });//
-var script$s = {
+var script$u = {
   name: 'au-date-picker',
   components: {
     VDatePicker: VDatePicker
@@ -29068,10 +29068,10 @@ var script$s = {
     }
   }
 };/* script */
-var __vue_script__$s = script$s;
+var __vue_script__$u = script$u;
 /* template */
 
-var __vue_render__$s = function __vue_render__() {
+var __vue_render__$u = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -29242,10 +29242,10 @@ var __vue_render__$s = function __vue_render__() {
   });
 };
 
-var __vue_staticRenderFns__$s = [];
+var __vue_staticRenderFns__$u = [];
 /* style */
 
-var __vue_inject_styles__$s = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$u = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-7b5f8dc8_0", {
     source: ".au-date-picker[data-v-7b5f8dc8]{position:relative}.range-wrap-label[data-v-7b5f8dc8]{width:100%;margin-bottom:5px;font-size:13px;line-height:16px;font-weight:500}.range-wrap[data-v-7b5f8dc8]{display:flex;flex-wrap:wrap;justify-content:space-between}.range-wrap.is-small .range-wrap-label[data-v-7b5f8dc8]{font-size:12px;line-height:14px}.range-wrap.is-tiny .range-wrap-label[data-v-7b5f8dc8]{display:none}.range-input-left[data-v-7b5f8dc8],.range-input-right[data-v-7b5f8dc8]{width:48%}",
@@ -29256,22 +29256,22 @@ var __vue_inject_styles__$s = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$s = "data-v-7b5f8dc8";
+var __vue_scope_id__$u = "data-v-7b5f8dc8";
 /* module identifier */
 
-var __vue_module_identifier__$q = "data-v-7b5f8dc8";
+var __vue_module_identifier__$s = "data-v-7b5f8dc8";
 /* functional template */
 
-var __vue_is_functional_template__$s = false;
+var __vue_is_functional_template__$u = false;
 /* style inject shadow dom */
 
-var __vue_component__$L = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$s,
-  staticRenderFns: __vue_staticRenderFns__$s
-}, __vue_inject_styles__$s, __vue_script__$s, __vue_scope_id__$s, __vue_is_functional_template__$s, __vue_module_identifier__$q, false, undefined, createInjectorSSR, undefined);
+var __vue_component__$N = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$u,
+  staticRenderFns: __vue_staticRenderFns__$u
+}, __vue_inject_styles__$u, __vue_script__$u, __vue_scope_id__$u, __vue_is_functional_template__$u, __vue_module_identifier__$s, false, undefined, createInjectorSSR, undefined);
 
-var __vue_component__$M = __vue_component__$L;//
-var script$r = {
+var __vue_component__$O = __vue_component__$N;//
+var script$t = {
   name: 'au-date',
   props: {
     value: {
@@ -29290,10 +29290,10 @@ var script$r = {
     }
   }
 };/* script */
-var __vue_script__$r = script$r;
+var __vue_script__$t = script$t;
 /* template */
 
-var __vue_render__$r = function __vue_render__() {
+var __vue_render__$t = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -29303,10 +29303,10 @@ var __vue_render__$r = function __vue_render__() {
   return _c('span', [_vm._ssrNode(_vm._ssrEscape("\n  " + _vm._s(_vm.date) + "\n"))]);
 };
 
-var __vue_staticRenderFns__$r = [];
+var __vue_staticRenderFns__$t = [];
 /* style */
 
-var __vue_inject_styles__$r = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$t = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-71ce8903_0", {
     source: ".au-date[data-v-71ce8903]{position:relative}.range-wrap-label[data-v-71ce8903]{width:100%;margin-bottom:5px;font-size:13px;line-height:16px;font-weight:500}.range-wrap[data-v-71ce8903]{display:flex;flex-wrap:wrap;justify-content:space-between}.range-wrap.is-small .range-wrap-label[data-v-71ce8903]{font-size:12px;line-height:14px}.range-wrap.is-tiny .range-wrap-label[data-v-71ce8903]{display:none}.range-input-left[data-v-71ce8903],.range-input-right[data-v-71ce8903]{width:48%}",
@@ -29317,21 +29317,21 @@ var __vue_inject_styles__$r = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$r = "data-v-71ce8903";
+var __vue_scope_id__$t = "data-v-71ce8903";
 /* module identifier */
 
-var __vue_module_identifier__$p = "data-v-71ce8903";
+var __vue_module_identifier__$r = "data-v-71ce8903";
 /* functional template */
 
-var __vue_is_functional_template__$r = false;
+var __vue_is_functional_template__$t = false;
 /* style inject shadow dom */
 
-var __vue_component__$J = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$r,
-  staticRenderFns: __vue_staticRenderFns__$r
-}, __vue_inject_styles__$r, __vue_script__$r, __vue_scope_id__$r, __vue_is_functional_template__$r, __vue_module_identifier__$p, false, undefined, createInjectorSSR, undefined);
+var __vue_component__$L = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$t,
+  staticRenderFns: __vue_staticRenderFns__$t
+}, __vue_inject_styles__$t, __vue_script__$t, __vue_scope_id__$t, __vue_is_functional_template__$t, __vue_module_identifier__$r, false, undefined, createInjectorSSR, undefined);
 
-var __vue_component__$K = __vue_component__$J;var Vue$1 = Vue__default['default'];
+var __vue_component__$M = __vue_component__$L;var Vue$1 = Vue__default['default'];
 Vue$1 = 'default' in Vue$1 ? Vue$1['default'] : Vue$1;
 
 var version$1 = '2.2.2';
@@ -29397,7 +29397,7 @@ var directive$1 = {
   },
   unbind: unbind,
 };
-var directive_1 = directive$1;var script$q = {
+var directive_1 = directive$1;var script$s = {
   name: 'au-select',
   directives: {
     clickaway: directive_1
@@ -29631,10 +29631,10 @@ var directive_1 = directive$1;var script$q = {
     }
   }
 };/* script */
-var __vue_script__$q = script$q;
+var __vue_script__$s = script$s;
 /* template */
 
-var __vue_render__$q = function __vue_render__() {
+var __vue_render__$s = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -29701,10 +29701,10 @@ var __vue_render__$q = function __vue_render__() {
   })], 2) : _vm._e()], 2);
 };
 
-var __vue_staticRenderFns__$q = [];
+var __vue_staticRenderFns__$s = [];
 /* style */
 
-var __vue_inject_styles__$q = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$s = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-aec6a700_0", {
     source: ".au-select[data-v-aec6a700]{position:relative;width:auto;min-height:40px;min-width:60px;font-size:14px;user-select:none}.au-select label[data-v-aec6a700]{display:inline-block;margin-bottom:5px;padding-left:1px;font-size:13px;line-height:16px;font-family:inherit;font-weight:500}.au-select.is-small[data-v-aec6a700]{min-height:32px;font-size:12px}.au-select.is-small label[data-v-aec6a700]{font-size:12px;line-height:14px}.au-select.is-small .au-select-item[data-v-aec6a700],.au-select.is-small .au-select-selected[data-v-aec6a700]{min-height:32px}.au-select.is-tiny[data-v-aec6a700]{min-height:24px;font-size:11px}.au-select.is-tiny .au-select-placeholder[data-v-aec6a700],.au-select.is-tiny .au-select-selected[data-v-aec6a700]{font-size:11px}.au-select.is-tiny label[data-v-aec6a700]{font-size:12px;line-height:14px}.au-select.is-tiny .au-select-item[data-v-aec6a700],.au-select.is-tiny .au-select-selected[data-v-aec6a700]{min-height:24px}.au-select .au-select-item[data-v-aec6a700],.au-select .au-select-selected[data-v-aec6a700]{position:relative;display:flex;align-items:center;width:100%;min-height:40px;font-weight:500;background-color:#fff;padding:0 8px;cursor:pointer}.au-select .au-select-placeholder[data-v-aec6a700]{font-weight:300;color:#9f9f9f;white-space:nowrap}.au-select .au-select-selected[data-v-aec6a700]{border-radius:2px;border:1px solid #e0e8f0;background-color:#f0f4fb;overflow:hidden;font-weight:400;font-size:12px;white-space:nowrap}.au-select .au-select-selected[data-v-aec6a700]::before{content:\"\";position:absolute;width:27px;height:100%;background-color:#f0f4fb;border-left:1px solid #e0e8f0;right:0;top:0}.au-select .au-select-selected[data-v-aec6a700]::after{content:\"\";-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%;background-color:#333;width:6px;height:11px;position:absolute;transform:translate(-50%,-50%) rotate(90deg);top:50%;right:8px;transition:.3s}.au-select .au-select-selected.active[data-v-aec6a700]{border-radius:2px 2px 0 0}.au-select .au-select-selected.active[data-v-aec6a700]::after{transform:translate(-50%,-50%) rotate(270deg);transition:.3s}.au-select.is-disabled[data-v-aec6a700]{opacity:.7;pointer-events:none}.au-select.is-inverse .au-select-selected[data-v-aec6a700]{background-color:#fff}.au-select.is-inverse .au-select-selected[data-v-aec6a700]::before{background-color:#fff}.au-select .au-select-clear[data-v-aec6a700]{position:absolute;right:34px;cursor:pointer}.au-select .au-select-clear[data-v-aec6a700]:hover{opacity:.7}.au-select .au-select-item[data-v-aec6a700]:hover{background-color:#e0e8f0}.au-select .au-select-item.selected[data-v-aec6a700]{background-color:rgba(178,184,196,.1);color:#3f6ada}.au-select .au-select-item.selected[data-v-aec6a700]:hover{background-color:rgba(178,184,196,.3)}.au-select .au-select-item.disabled[data-v-aec6a700]{pointer-events:none;color:#9f9f9f}.au-select .au-select-list[data-v-aec6a700]{position:absolute;width:100%;background-color:#fff;border:1px solid #e0e8f0;box-shadow:0 2px 2px rgba(100,100,100,.15);max-height:240px;overflow-x:hidden;overflow-y:scroll;border-radius:0 0 0 2px;pointer-events:none;visibility:hidden;opacity:0;z-index:1}.au-select .au-select-list.top[data-v-aec6a700]{top:unset;bottom:100%;box-shadow:0 -1px 2px rgba(100,100,100,.15)}.au-select .au-select-list.bottom[data-v-aec6a700]{top:100%;bottom:unset}.au-select .au-select-list.active[data-v-aec6a700]{visibility:visible;opacity:1;pointer-events:auto}.au-select .au-select-list[data-v-aec6a700]::-webkit-scrollbar{-webkit-appearance:none;height:4px;width:4px;cursor:pointer}.au-select .au-select-list[data-v-aec6a700]::-webkit-scrollbar-track{-webkit-box-shadow:inset 0 0 4px #f7f7f7;box-shadow:inset 0 0 4px #f7f7f7}.au-select .au-select-list[data-v-aec6a700]::-webkit-scrollbar-thumb{background-color:#e0e8f0;border-radius:2px;outline:0;background-clip:border-box;cursor:pointer}.au-select .au-select-text[data-v-aec6a700]{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis}.au-select.is-clearable .au-select-text[data-v-aec6a700]{max-width:calc(100% - 48px)}.au-select .chips[data-v-aec6a700]{padding:4px 20px 4px 0;display:flex;flex-wrap:wrap;margin-top:-4px}.au-select .chips .chips-item[data-v-aec6a700]{font-size:11px;border:1px solid #e0e8f0;padding:4px;background-color:#fff;border-radius:3px;margin-top:4px;margin-right:4px}.au-select .au-select-list__search[data-v-aec6a700]{display:flex;flex-wrap:nowrap;padding:8px}",
@@ -29715,21 +29715,21 @@ var __vue_inject_styles__$q = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$q = "data-v-aec6a700";
+var __vue_scope_id__$s = "data-v-aec6a700";
 /* module identifier */
 
-var __vue_module_identifier__$o = "data-v-aec6a700";
+var __vue_module_identifier__$q = "data-v-aec6a700";
 /* functional template */
 
-var __vue_is_functional_template__$q = false;
+var __vue_is_functional_template__$s = false;
 /* style inject shadow dom */
 
-var __vue_component__$H = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$q,
-  staticRenderFns: __vue_staticRenderFns__$q
-}, __vue_inject_styles__$q, __vue_script__$q, __vue_scope_id__$q, __vue_is_functional_template__$q, __vue_module_identifier__$o, false, undefined, createInjectorSSR, undefined);
+var __vue_component__$J = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$s,
+  staticRenderFns: __vue_staticRenderFns__$s
+}, __vue_inject_styles__$s, __vue_script__$s, __vue_scope_id__$s, __vue_is_functional_template__$s, __vue_module_identifier__$q, false, undefined, createInjectorSSR, undefined);
 
-var __vue_component__$I = __vue_component__$H;//
+var __vue_component__$K = __vue_component__$J;//
 //
 //
 //
@@ -29759,7 +29759,7 @@ var __vue_component__$I = __vue_component__$H;//
 //
 //
 //
-var script$p = {
+var script$r = {
   name: 'au-dropdown-button',
   props: {
     list: {
@@ -29830,10 +29830,10 @@ var script$p = {
     }
   }
 };/* script */
-var __vue_script__$p = script$p;
+var __vue_script__$r = script$r;
 /* template */
 
-var __vue_render__$p = function __vue_render__() {
+var __vue_render__$r = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -29871,10 +29871,10 @@ var __vue_render__$p = function __vue_render__() {
   }), _vm._v(" "), !_vm.list ? _vm._t("list") : _vm._e()], 2) : _vm._e()])], 2);
 };
 
-var __vue_staticRenderFns__$p = [];
+var __vue_staticRenderFns__$r = [];
 /* style */
 
-var __vue_inject_styles__$p = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$r = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-35d9a1b4_0", {
     source: ".au-dropdown-button{display:inline-block;position:relative;height:32px}.au-dropdown-button:hover .au-dropdown-button-main:after{transform:translate(-50%,-50%) rotate(270deg);transition:.3s}.au-dropdown-button .au-dropdown-button-main{position:relative;display:flex;justify-content:center;align-items:center;font-size:12px;font-weight:500;width:100%;height:32px;color:#fff;border-radius:4px;background-color:#3f6ada;background-image:linear-gradient(180deg,rgba(152,210,255,.3) 0,rgba(255,255,255,0) 100%);padding:0 47px 0 15px;overflow:hidden;cursor:pointer}.au-dropdown-button .au-dropdown-button-main:before{content:\"\";position:absolute;width:32px;height:32px;background-color:rgba(255,255,255,.1);right:0;top:0}.au-dropdown-button .au-dropdown-button-main:after{content:\"\";-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%;background-color:#fff;width:6px;height:11px;position:absolute;transform:translate(-50%,-50%) rotate(90deg);top:50%;right:10px;transition:.3s}.au-dropdown-button .au-dropdown-button-main .au-icon{margin-right:6px}.au-dropdown-button .au-dropdown-button-main svg{width:12px;height:12px;fill:#fff}.au-dropdown-button .au-dropdown-button-list{position:absolute;left:0;width:100%;max-height:235px;list-style:none;background-color:#fff;border-radius:4px;overflow-x:hidden;z-index:1000;box-shadow:0 11px 29px rgba(11,66,136,.2),0 -1px 9px rgba(11,66,136,.07)}.au-dropdown-button li:not(.list-header){font-size:12px;line-height:16px;padding:8px 16px;cursor:pointer}.au-dropdown-button li:not(.list-header):hover{background-color:#e0e8f0}.au-dropdown-button li.list-header{font-size:11px;font-weight:500;line-height:16px;padding:8px 16px;cursor:default;border-top:1px solid #e0e8f0}.au-dropdown-button.is-large{height:40px}.au-dropdown-button.is-large .au-dropdown-button-main{height:40px}.au-dropdown-button.is-large .au-dropdown-button-main:before{height:40px}.au-dropdown-button--bottom .au-dropdown-button-list{top:32px}.au-dropdown-button--top .au-dropdown-button-list{bottom:32px;top:unset}.au-dropdown-button--bottom.is-large .au-dropdown-button-list{top:40px}.au-dropdown-button--top.is-large .au-dropdown-button-list{bottom:40px;top:unset}.is-white .au-dropdown-button-main{position:relative;display:flex;justify-content:center;align-items:center;font-size:12px;font-weight:500;width:100%;height:32px;color:#3f6ada;border-radius:4px;background-color:#fff;background-image:none}.is-white .au-dropdown-button-main:before{border-left:thin solid rgba(63,107,218,.25)}.is-white .au-dropdown-button-main:after{background-color:#3f6ada}",
@@ -29885,21 +29885,21 @@ var __vue_inject_styles__$p = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$p = undefined;
+var __vue_scope_id__$r = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$n = "data-v-35d9a1b4";
+var __vue_module_identifier__$p = "data-v-35d9a1b4";
 /* functional template */
 
-var __vue_is_functional_template__$p = false;
+var __vue_is_functional_template__$r = false;
 /* style inject shadow dom */
 
-var __vue_component__$F = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$p,
-  staticRenderFns: __vue_staticRenderFns__$p
-}, __vue_inject_styles__$p, __vue_script__$p, __vue_scope_id__$p, __vue_is_functional_template__$p, __vue_module_identifier__$n, false, undefined, createInjectorSSR, undefined);
+var __vue_component__$H = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$r,
+  staticRenderFns: __vue_staticRenderFns__$r
+}, __vue_inject_styles__$r, __vue_script__$r, __vue_scope_id__$r, __vue_is_functional_template__$r, __vue_module_identifier__$p, false, undefined, createInjectorSSR, undefined);
 
-var __vue_component__$G = __vue_component__$F;function _typeof$2(obj) {
+var __vue_component__$I = __vue_component__$H;function _typeof$2(obj) {
   "@babel/helpers - typeof";
 
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
@@ -34463,7 +34463,7 @@ function initCompat() {
   }
 }
 
-var script$o = {
+var script$q = {
   name: 'ResizeObserver',
   props: {
     emitOnMount: {
@@ -34628,10 +34628,10 @@ function normalizeComponent$1(template, style, script, scopeId, isFunctionalTemp
 }
 
 /* script */
-var __vue_script__$o = script$o;
+var __vue_script__$q = script$q;
 /* template */
 
-var __vue_render__$o = function __vue_render__() {
+var __vue_render__$q = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -34646,35 +34646,35 @@ var __vue_render__$o = function __vue_render__() {
   });
 };
 
-var __vue_staticRenderFns__$o = [];
-__vue_render__$o._withStripped = true;
+var __vue_staticRenderFns__$q = [];
+__vue_render__$q._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$o = undefined;
+var __vue_inject_styles__$q = undefined;
 /* scoped */
 
-var __vue_scope_id__$o = "data-v-8859cc6c";
+var __vue_scope_id__$q = "data-v-8859cc6c";
 /* module identifier */
 
-var __vue_module_identifier__$m = undefined;
+var __vue_module_identifier__$o = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$o = false;
+var __vue_is_functional_template__$q = false;
 /* style inject */
 
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$E = /*#__PURE__*/normalizeComponent$1({
-  render: __vue_render__$o,
-  staticRenderFns: __vue_staticRenderFns__$o
-}, __vue_inject_styles__$o, __vue_script__$o, __vue_scope_id__$o, __vue_is_functional_template__$o, __vue_module_identifier__$m, false, undefined, undefined, undefined);
+var __vue_component__$G = /*#__PURE__*/normalizeComponent$1({
+  render: __vue_render__$q,
+  staticRenderFns: __vue_staticRenderFns__$q
+}, __vue_inject_styles__$q, __vue_script__$q, __vue_scope_id__$q, __vue_is_functional_template__$q, __vue_module_identifier__$o, false, undefined, undefined, undefined);
 
 function install$2(Vue) {
   // eslint-disable-next-line vue/component-definition-name-casing
-  Vue.component('resize-observer', __vue_component__$E);
-  Vue.component('ResizeObserver', __vue_component__$E);
+  Vue.component('resize-observer', __vue_component__$G);
+  Vue.component('ResizeObserver', __vue_component__$G);
 }
 
 var plugin$1 = {
@@ -36665,10 +36665,10 @@ if (typeof window !== 'undefined') {
   Element$1 = window.Element;
 }
 
-var script$n = {
+var script$p = {
   name: 'VPopover',
   components: {
-    ResizeObserver: __vue_component__$E
+    ResizeObserver: __vue_component__$G
   },
   props: {
     open: {
@@ -37415,10 +37415,10 @@ function normalizeComponent(template, style, script, scopeId, isFunctionalTempla
 }
 
 /* script */
-var __vue_script__$n = script$n;
+var __vue_script__$p = script$p;
 /* template */
 
-var __vue_render__$n = function __vue_render__() {
+var __vue_render__$p = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -37478,30 +37478,30 @@ var __vue_render__$n = function __vue_render__() {
   })])])]);
 };
 
-var __vue_staticRenderFns__$n = [];
-__vue_render__$n._withStripped = true;
+var __vue_staticRenderFns__$p = [];
+__vue_render__$p._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$n = undefined;
+var __vue_inject_styles__$p = undefined;
 /* scoped */
 
-var __vue_scope_id__$n = undefined;
+var __vue_scope_id__$p = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$l = undefined;
+var __vue_module_identifier__$n = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$n = false;
+var __vue_is_functional_template__$p = false;
 /* style inject */
 
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$D = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$n,
-  staticRenderFns: __vue_staticRenderFns__$n
-}, __vue_inject_styles__$n, __vue_script__$n, __vue_scope_id__$n, __vue_is_functional_template__$n, __vue_module_identifier__$l, false, undefined, undefined, undefined);
+var __vue_component__$F = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$p,
+  staticRenderFns: __vue_staticRenderFns__$p
+}, __vue_inject_styles__$p, __vue_script__$p, __vue_scope_id__$p, __vue_is_functional_template__$p, __vue_module_identifier__$n, false, undefined, undefined, undefined);
 
 function styleInject(css, ref) {
   if ( ref === void 0 ) ref = {};
@@ -37543,11 +37543,11 @@ function install$1(Vue) {
   directive.options = finalOptions;
   Vue.directive('tooltip', directive);
   Vue.directive('close-popover', vclosepopover);
-  Vue.component('VPopover', __vue_component__$D);
+  Vue.component('VPopover', __vue_component__$F);
 }
 var VTooltip = directive;
 var VClosePopover = vclosepopover;
-var VPopover = __vue_component__$D;
+var VPopover = __vue_component__$F;
 var plugin = {
   install: install$1,
 
@@ -37572,7 +37572,7 @@ if (typeof window !== 'undefined') {
 if (GlobalVue) {
   GlobalVue.use(plugin);
 }//
-var script$m = {
+var script$o = {
   name: 'au-dropdown-content-button',
   components: {
     VPopover: VPopover
@@ -37602,10 +37602,10 @@ var script$m = {
     }
   }
 };/* script */
-var __vue_script__$m = script$m;
+var __vue_script__$o = script$o;
 /* template */
 
-var __vue_render__$m = function __vue_render__() {
+var __vue_render__$o = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -37648,10 +37648,10 @@ var __vue_render__$m = function __vue_render__() {
   })], 1);
 };
 
-var __vue_staticRenderFns__$m = [];
+var __vue_staticRenderFns__$o = [];
 /* style */
 
-var __vue_inject_styles__$m = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$o = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-c4b30284_0", {
     source: ".dropdown-content-button__container[data-v-c4b30284]{width:240px}",
@@ -37666,21 +37666,21 @@ var __vue_inject_styles__$m = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$m = "data-v-c4b30284";
+var __vue_scope_id__$o = "data-v-c4b30284";
 /* module identifier */
 
-var __vue_module_identifier__$k = "data-v-c4b30284";
+var __vue_module_identifier__$m = "data-v-c4b30284";
 /* functional template */
 
-var __vue_is_functional_template__$m = false;
+var __vue_is_functional_template__$o = false;
 /* style inject shadow dom */
 
-var __vue_component__$B = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$m,
-  staticRenderFns: __vue_staticRenderFns__$m
-}, __vue_inject_styles__$m, __vue_script__$m, __vue_scope_id__$m, __vue_is_functional_template__$m, __vue_module_identifier__$k, false, undefined, createInjectorSSR, undefined);
+var __vue_component__$D = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$o,
+  staticRenderFns: __vue_staticRenderFns__$o
+}, __vue_inject_styles__$o, __vue_script__$o, __vue_scope_id__$o, __vue_is_functional_template__$o, __vue_module_identifier__$m, false, undefined, createInjectorSSR, undefined);
 
-var __vue_component__$C = __vue_component__$B;//
+var __vue_component__$E = __vue_component__$D;//
 //
 //
 //
@@ -37703,7 +37703,7 @@ var __vue_component__$C = __vue_component__$B;//
 //
 //
 //
-var script$l = {
+var script$n = {
   name: 'au-filters-resizable',
   props: {
     value: {
@@ -37760,10 +37760,10 @@ var script$l = {
     }
   }
 };/* script */
-var __vue_script__$l = script$l;
+var __vue_script__$n = script$n;
 /* template */
 
-var __vue_render__$l = function __vue_render__() {
+var __vue_render__$n = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -37783,10 +37783,10 @@ var __vue_render__$l = function __vue_render__() {
   }) + " data-v-35b7a966><span data-v-35b7a966>···</span> <div id=\"quick-filters-hidden\" data-v-35b7a966></div></div>")]);
 };
 
-var __vue_staticRenderFns__$l = [];
+var __vue_staticRenderFns__$n = [];
 /* style */
 
-var __vue_inject_styles__$l = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$n = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-35b7a966_0", {
     source: "#quick-filters[data-v-35b7a966]{display:flex;width:100%}#quick-filters-list[data-v-35b7a966]{display:flex}#quick-filters-hidden[data-v-35b7a966]{display:flex;flex-direction:column;align-items:flex-end;visibility:hidden;position:absolute;right:0;top:24px;cursor:default}.quick-filter-button[data-v-35b7a966],.quick-filter-item[data-v-35b7a966]{flex:0 0 auto;height:24px;padding:4px 8px 2px;margin:0 4px;font-size:14px;line-height:18px;border-radius:4px;background-color:#f0f4fb;white-space:nowrap;cursor:pointer}.quick-filter-button span[data-v-35b7a966]{writing-mode:vertical-rl;font-size:11px;letter-spacing:1px;line-height:8px;text-align:center;height:100%;display:inline-block}.quick-filter-item[data-v-35b7a966]:hover{color:#3f6ada}.quick-filter-item.active[data-v-35b7a966]{color:#fff;background-color:#3f6ada}.quick-filter-button[data-v-35b7a966]{position:relative}.quick-filter-button:hover #quick-filters-hidden[data-v-35b7a966]{visibility:visible;z-index:1}.quick-filter-button .quick-filter-item[data-v-35b7a966]{margin:4px 0}",
@@ -37797,21 +37797,21 @@ var __vue_inject_styles__$l = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$l = "data-v-35b7a966";
+var __vue_scope_id__$n = "data-v-35b7a966";
 /* module identifier */
 
-var __vue_module_identifier__$j = "data-v-35b7a966";
+var __vue_module_identifier__$l = "data-v-35b7a966";
 /* functional template */
 
-var __vue_is_functional_template__$l = false;
+var __vue_is_functional_template__$n = false;
 /* style inject shadow dom */
 
-var __vue_component__$z = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$l,
-  staticRenderFns: __vue_staticRenderFns__$l
-}, __vue_inject_styles__$l, __vue_script__$l, __vue_scope_id__$l, __vue_is_functional_template__$l, __vue_module_identifier__$j, false, undefined, createInjectorSSR, undefined);
+var __vue_component__$B = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$n,
+  staticRenderFns: __vue_staticRenderFns__$n
+}, __vue_inject_styles__$n, __vue_script__$n, __vue_scope_id__$n, __vue_is_functional_template__$n, __vue_module_identifier__$l, false, undefined, createInjectorSSR, undefined);
 
-var __vue_component__$A = __vue_component__$z;/**!
+var __vue_component__$C = __vue_component__$B;/**!
  * Sortable 1.10.2
  * @author	RubaXa   <trash@rubaxa.org>
  * @author	owenm    <owen23355@gmail.com>
@@ -43927,7 +43927,7 @@ if (typeof window !== "undefined" && "Vue" in window) {
 });
 
 var draggable = /*@__PURE__*/getDefaultExportFromCjs(vuedraggable_umd);//
-var script$k = {
+var script$m = {
   name: 'au-draggable-list',
   components: {
     draggable: draggable
@@ -43968,10 +43968,10 @@ var script$k = {
     }
   }
 };/* script */
-var __vue_script__$k = script$k;
+var __vue_script__$m = script$m;
 /* template */
 
-var __vue_render__$k = function __vue_render__() {
+var __vue_render__$m = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -44017,10 +44017,10 @@ var __vue_render__$k = function __vue_render__() {
   }), 0)], 1);
 };
 
-var __vue_staticRenderFns__$k = [];
+var __vue_staticRenderFns__$m = [];
 /* style */
 
-var __vue_inject_styles__$k = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$m = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-accb1920_0", {
     source: ".au-draggable-list[data-v-accb1920]{width:100%}.au-draggable-list-item[data-v-accb1920]{position:relative;display:flex;align-items:center;height:40px;padding:12px;font-size:12px;line-height:16px;font-weight:500;margin:0 0 4px;color:#dcddde;background-color:#fbfcfd;transition:color .15s linear;user-select:none;cursor:pointer}.au-draggable-list-item.active[data-v-accb1920]{color:inherit;background-color:#f8f9fb}.au-draggable-list-item.invisible[data-v-accb1920]{overflow:hidden;height:0;padding:0;margin:4px 0;border:4px solid #fbfcfd}.au-draggable-list-item.invisible.active[data-v-accb1920]{border-color:#f8f9fb}.au-draggable-list-item .icon-drag[data-v-accb1920]{position:absolute;left:-20px;cursor:move;opacity:0;transition:opacity .15s linear}.au-draggable-list-item[data-v-accb1920]:hover{color:#3f6ada}.au-draggable-list-item:hover .icon-drag[data-v-accb1920]{opacity:1}.au-draggable-list-item[data-v-accb1920]:hover:before{opacity:1}.au-draggable-item-title[data-v-accb1920]{margin-right:auto}",
@@ -44031,21 +44031,21 @@ var __vue_inject_styles__$k = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$k = "data-v-accb1920";
+var __vue_scope_id__$m = "data-v-accb1920";
 /* module identifier */
 
-var __vue_module_identifier__$i = "data-v-accb1920";
+var __vue_module_identifier__$k = "data-v-accb1920";
 /* functional template */
 
-var __vue_is_functional_template__$k = false;
+var __vue_is_functional_template__$m = false;
 /* style inject shadow dom */
 
-var __vue_component__$x = /*#__PURE__*/normalizeComponent$2({
-  render: __vue_render__$k,
-  staticRenderFns: __vue_staticRenderFns__$k
-}, __vue_inject_styles__$k, __vue_script__$k, __vue_scope_id__$k, __vue_is_functional_template__$k, __vue_module_identifier__$i, false, undefined, createInjectorSSR, undefined);
+var __vue_component__$z = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$m,
+  staticRenderFns: __vue_staticRenderFns__$m
+}, __vue_inject_styles__$m, __vue_script__$m, __vue_scope_id__$m, __vue_is_functional_template__$m, __vue_module_identifier__$k, false, undefined, createInjectorSSR, undefined);
 
-var __vue_component__$y = __vue_component__$x;// ::- Persistent data structure representing an ordered mapping from
+var __vue_component__$A = __vue_component__$z;// ::- Persistent data structure representing an ordered mapping from
 // strings to values, with some convenient update methods.
 function OrderedMap(content) {
   this.content = content;
@@ -57901,7 +57901,7 @@ var splitListItem$1 = /*#__PURE__*/Object.freeze({
   splitListItem: splitListItem
 });
 
-function findParentNodeClosestToPos($pos, predicate) {
+function findParentNodeClosestToPos$1($pos, predicate) {
     for (let i = $pos.depth; i > 0; i -= 1) {
         const node = $pos.node(i);
         if (predicate(node)) {
@@ -57915,8 +57915,8 @@ function findParentNodeClosestToPos($pos, predicate) {
     }
 }
 
-function findParentNode(predicate) {
-    return (selection) => findParentNodeClosestToPos(selection.$from, predicate);
+function findParentNode$1(predicate) {
+    return (selection) => findParentNodeClosestToPos$1(selection.$from, predicate);
 }
 
 function splitExtensions(extensions) {
@@ -57990,7 +57990,7 @@ const toggleList = (listTypeOrName, itemTypeOrName) => ({ editor, tr, state, dis
     if (!range) {
         return false;
     }
-    const parentList = findParentNode(node => isList(node.type.name, extensions))(selection);
+    const parentList = findParentNode$1(node => isList(node.type.name, extensions))(selection);
     if (range.depth >= 1 && parentList && range.depth - parentList.depth <= 1) {
         // remove list
         if (parentList.node.type === listType) {
@@ -59631,6 +59631,185 @@ class Mark$1 {
             ? extendedConfig.defaultOptions
             : extension.parent.options;
         return extension;
+    }
+}
+
+class NodeView {
+    constructor(component, props, options) {
+        this.isDragging = false;
+        this.component = component;
+        this.editor = props.editor;
+        this.options = {
+            stopEvent: null,
+            ignoreMutation: null,
+            ...options,
+        };
+        this.extension = props.extension;
+        this.node = props.node;
+        this.decorations = props.decorations;
+        this.getPos = props.getPos;
+        this.mount();
+    }
+    mount() {
+        // eslint-disable-next-line
+        return;
+    }
+    get dom() {
+        return null;
+    }
+    get contentDOM() {
+        return null;
+    }
+    onDragStart(event) {
+        var _a, _b, _c;
+        const { view } = this.editor;
+        const target = event.target;
+        // get the drag handle element
+        // `closest` is not available for text nodes so we may have to use its parent
+        const dragHandle = target.nodeType === 3
+            ? (_a = target.parentElement) === null || _a === void 0 ? void 0 : _a.closest('[data-drag-handle]')
+            : target.closest('[data-drag-handle]');
+        if (!this.dom
+            || ((_b = this.contentDOM) === null || _b === void 0 ? void 0 : _b.contains(target))
+            || !dragHandle) {
+            return;
+        }
+        let x = 0;
+        let y = 0;
+        // calculate offset for drag element if we use a different drag handle element
+        if (this.dom !== dragHandle) {
+            const domBox = this.dom.getBoundingClientRect();
+            const handleBox = dragHandle.getBoundingClientRect();
+            x = handleBox.x - domBox.x + event.offsetX;
+            y = handleBox.y - domBox.y + event.offsetY;
+        }
+        (_c = event.dataTransfer) === null || _c === void 0 ? void 0 : _c.setDragImage(this.dom, x, y);
+        // we need to tell ProseMirror that we want to move the whole node
+        // so we create a NodeSelection
+        const selection = NodeSelection$1.create(view.state.doc, this.getPos());
+        const transaction = view.state.tr.setSelection(selection);
+        view.dispatch(transaction);
+    }
+    stopEvent(event) {
+        var _a;
+        if (!this.dom) {
+            return false;
+        }
+        if (typeof this.options.stopEvent === 'function') {
+            return this.options.stopEvent({ event });
+        }
+        const target = event.target;
+        const isInElement = this.dom.contains(target) && !((_a = this.contentDOM) === null || _a === void 0 ? void 0 : _a.contains(target));
+        // any event from child nodes should be handled by ProseMirror
+        if (!isInElement) {
+            return false;
+        }
+        const isInput = ['INPUT', 'BUTTON', 'SELECT', 'TEXTAREA'].includes(target.tagName)
+            || target.isContentEditable;
+        // any input event within node views should be ignored by ProseMirror
+        if (isInput) {
+            return true;
+        }
+        const { isEditable } = this.editor;
+        const { isDragging } = this;
+        const isDraggable = !!this.node.type.spec.draggable;
+        const isSelectable = NodeSelection$1.isSelectable(this.node);
+        const isCopyEvent = event.type === 'copy';
+        const isPasteEvent = event.type === 'paste';
+        const isCutEvent = event.type === 'cut';
+        const isClickEvent = event.type === 'mousedown';
+        const isDragEvent = event.type.startsWith('drag') || event.type === 'drop';
+        // ProseMirror tries to drag selectable nodes
+        // even if `draggable` is set to `false`
+        // this fix prevents that
+        if (!isDraggable && isSelectable && isDragEvent) {
+            event.preventDefault();
+        }
+        if (isDraggable && isDragEvent && !isDragging) {
+            event.preventDefault();
+            return false;
+        }
+        // we have to store that dragging started
+        if (isDraggable && isEditable && !isDragging && isClickEvent) {
+            const dragHandle = target.closest('[data-drag-handle]');
+            const isValidDragHandle = dragHandle
+                && (this.dom === dragHandle || (this.dom.contains(dragHandle)));
+            if (isValidDragHandle) {
+                this.isDragging = true;
+                document.addEventListener('dragend', () => {
+                    this.isDragging = false;
+                }, { once: true });
+                document.addEventListener('mouseup', () => {
+                    this.isDragging = false;
+                }, { once: true });
+            }
+        }
+        // these events are handled by prosemirror
+        if (isDragging
+            || isCopyEvent
+            || isPasteEvent
+            || isCutEvent
+            || (isClickEvent && isSelectable)) {
+            return false;
+        }
+        return true;
+    }
+    ignoreMutation(mutation) {
+        if (!this.dom || !this.contentDOM) {
+            return true;
+        }
+        if (typeof this.options.ignoreMutation === 'function') {
+            return this.options.ignoreMutation({ mutation });
+        }
+        // a leaf/atom node is like a black box for ProseMirror
+        // and should be fully handled by the node view
+        if (this.node.isLeaf || this.node.isAtom) {
+            return true;
+        }
+        // ProseMirror should handle any selections
+        if (mutation.type === 'selection') {
+            return false;
+        }
+        // try to prevent a bug on iOS that will break node views on enter
+        // this is because ProseMirror can’t preventDispatch on enter
+        // this will lead to a re-render of the node view on enter
+        // see: https://github.com/ueberdosis/tiptap/issues/1214
+        if (this.dom.contains(mutation.target) && mutation.type === 'childList' && isiOS()) {
+            const changedNodes = [
+                ...Array.from(mutation.addedNodes),
+                ...Array.from(mutation.removedNodes),
+            ];
+            // we’ll check if every changed node is contentEditable
+            // to make sure it’s probably mutated by ProseMirror
+            if (changedNodes.every(node => node.isContentEditable)) {
+                return false;
+            }
+        }
+        // we will allow mutation contentDOM with attributes
+        // so we can for example adding classes within our node view
+        if (this.contentDOM === mutation.target && mutation.type === 'attributes') {
+            return true;
+        }
+        // ProseMirror should handle any changes within contentDOM
+        if (this.contentDOM.contains(mutation.target)) {
+            return false;
+        }
+        return true;
+    }
+    updateAttributes(attributes) {
+        this.editor.commands.command(({ tr }) => {
+            const pos = this.getPos();
+            tr.setNodeMarkup(pos, undefined, {
+                ...this.node.attrs,
+                ...attributes,
+            });
+            return true;
+        });
+    }
+    deleteNode() {
+        const from = this.getPos();
+        const to = from + this.node.nodeSize;
+        this.editor.commands.deleteRange({ from, to });
     }
 }
 
@@ -63282,6 +63461,182 @@ const EditorContent = {
         newElement.append(...editor.options.element.childNodes);
         editor.setOptions({
             element: newElement,
+        });
+    },
+};
+
+class VueRenderer {
+    constructor(component, props) {
+        const Component = Vue__default['default'].extend(component);
+        this.ref = new Component(props).$mount();
+    }
+    get element() {
+        return this.ref.$el;
+    }
+    updateProps(props = {}) {
+        if (!this.ref.$props) {
+            return;
+        }
+        // prevents `Avoid mutating a prop directly` error message
+        const originalSilent = Vue__default['default'].config.silent;
+        Vue__default['default'].config.silent = true;
+        Object
+            .entries(props)
+            .forEach(([key, value]) => {
+            this.ref.$props[key] = value;
+        });
+        Vue__default['default'].config.silent = originalSilent;
+    }
+    destroy() {
+        this.ref.$destroy();
+    }
+}
+class VueNodeView extends NodeView {
+    mount() {
+        const props = {
+            editor: this.editor,
+            node: this.node,
+            decorations: this.decorations,
+            selected: false,
+            extension: this.extension,
+            getPos: () => this.getPos(),
+            updateAttributes: (attributes = {}) => this.updateAttributes(attributes),
+            deleteNode: () => this.deleteNode(),
+        };
+        const onDragStart = this.onDragStart.bind(this);
+        this.decorationClasses = Vue__default['default'].observable({
+            value: this.getDecorationClasses(),
+        });
+        const Component = Vue__default['default']
+            .extend(this.component)
+            .extend({
+            props: Object.keys(props),
+            provide: () => {
+                return {
+                    onDragStart,
+                    decorationClasses: this.decorationClasses,
+                };
+            },
+        });
+        this.renderer = new VueRenderer(Component, {
+            parent: this.editor.contentComponent,
+            propsData: props,
+        });
+    }
+    get dom() {
+        if (!this.renderer.element.hasAttribute('data-node-view-wrapper')) {
+            throw Error('Please use the NodeViewWrapper component for your node view.');
+        }
+        return this.renderer.element;
+    }
+    get contentDOM() {
+        if (this.node.isLeaf) {
+            return null;
+        }
+        const contentElement = this.dom.querySelector('[data-node-view-content]');
+        return contentElement || this.dom;
+    }
+    update(node, decorations) {
+        const updateProps = (props) => {
+            this.decorationClasses.value = this.getDecorationClasses();
+            this.renderer.updateProps(props);
+        };
+        if (typeof this.options.update === 'function') {
+            const oldNode = this.node;
+            const oldDecorations = this.decorations;
+            this.node = node;
+            this.decorations = decorations;
+            return this.options.update({
+                oldNode,
+                oldDecorations,
+                newNode: node,
+                newDecorations: decorations,
+                updateProps: () => updateProps({ node, decorations }),
+            });
+        }
+        if (node.type !== this.node.type) {
+            return false;
+        }
+        if (node === this.node && this.decorations === decorations) {
+            return true;
+        }
+        this.node = node;
+        this.decorations = decorations;
+        updateProps({ node, decorations });
+        return true;
+    }
+    selectNode() {
+        this.renderer.updateProps({
+            selected: true,
+        });
+    }
+    deselectNode() {
+        this.renderer.updateProps({
+            selected: false,
+        });
+    }
+    getDecorationClasses() {
+        return this.decorations
+            // @ts-ignore
+            .map(item => item.type.attrs.class)
+            .flat()
+            .join(' ');
+    }
+    destroy() {
+        this.renderer.destroy();
+    }
+}
+function VueNodeViewRenderer(component, options) {
+    return (props) => {
+        // try to get the parent component
+        // this is important for vue devtools to show the component hierarchy correctly
+        // maybe it’s `undefined` because <editor-content> isn’t rendered yet
+        if (!props.editor.contentComponent) {
+            return {};
+        }
+        return new VueNodeView(component, props, options);
+    };
+}
+
+const NodeViewWrapper = {
+    props: {
+        as: {
+            type: String,
+            default: 'div',
+        },
+    },
+    inject: ['onDragStart', 'decorationClasses'],
+    render(createElement) {
+        return createElement(this.as, {
+            class: this.decorationClasses.value,
+            style: {
+                whiteSpace: 'normal',
+            },
+            attrs: {
+                'data-node-view-wrapper': '',
+            },
+            on: {
+                dragstart: this.onDragStart,
+            },
+        }, this.$slots.default);
+    },
+};
+
+const NodeViewContent = {
+    props: {
+        as: {
+            type: String,
+            default: 'div',
+        },
+    },
+    render(createElement) {
+        return createElement(this.as, {
+            style: {
+                whiteSpace: 'pre-wrap',
+            },
+            attrs: {
+                'data-node-view-content': '',
+            },
         });
     },
 };const inputRegex$6 = /^\s*>\s$/gm;
@@ -72623,7 +72978,7 @@ const deleteTableWhenAllCellsSelected = ({ editor }) => {
         return false;
     }
     let cellCount = 0;
-    const table = findParentNodeClosestToPos(selection.ranges[0].$from, node => {
+    const table = findParentNodeClosestToPos$1(selection.ranges[0].$from, node => {
         return node.type.name === 'table';
     });
     table === null || table === void 0 ? void 0 : table.node.descendants(node => {
@@ -72943,8 +73298,865 @@ const Table = Node$2.create({
     renderHTML({ HTMLAttributes }) {
         return ['th', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
     },
-});//
-var script$j = {
+});// (nodeType: union<NodeType, [NodeType]>) → boolean
+// Checks if the type a given `node` equals to a given `nodeType`.
+var equalNodeType = function equalNodeType(nodeType, node) {
+  return Array.isArray(nodeType) && nodeType.indexOf(node.type) > -1 || node.type === nodeType;
+};
+
+// :: (predicate: (node: ProseMirrorNode) → boolean) → (selection: Selection) → ?{pos: number, start: number, depth: number, node: ProseMirrorNode}
+// Iterates over parent nodes, returning the closest node and its start position `predicate` returns truthy for. `start` points to the start position of the node, `pos` points directly before the node.
+//
+// ```javascript
+// const predicate = node => node.type === schema.nodes.blockquote;
+// const parent = findParentNode(predicate)(selection);
+// ```
+var findParentNode = function findParentNode(predicate) {
+  return function (_ref) {
+    var $from = _ref.$from;
+    return findParentNodeClosestToPos($from, predicate);
+  };
+};
+
+// :: ($pos: ResolvedPos, predicate: (node: ProseMirrorNode) → boolean) → ?{pos: number, start: number, depth: number, node: ProseMirrorNode}
+// Iterates over parent nodes starting from the given `$pos`, returning the closest node and its start position `predicate` returns truthy for. `start` points to the start position of the node, `pos` points directly before the node.
+//
+// ```javascript
+// const predicate = node => node.type === schema.nodes.blockquote;
+// const parent = findParentNodeClosestToPos(state.doc.resolve(5), predicate);
+// ```
+var findParentNodeClosestToPos = function findParentNodeClosestToPos($pos, predicate) {
+  for (var i = $pos.depth; i > 0; i--) {
+    var node = $pos.node(i);
+    if (predicate(node)) {
+      return {
+        pos: i > 0 ? $pos.before(i) : 0,
+        start: $pos.start(i),
+        depth: i,
+        node: node
+      };
+    }
+  }
+};
+
+// :: (nodeType: union<NodeType, [NodeType]>) → (selection: Selection) → ?{pos: number, start: number, depth: number, node: ProseMirrorNode}
+// Iterates over parent nodes, returning closest node of a given `nodeType`. `start` points to the start position of the node, `pos` points directly before the node.
+//
+// ```javascript
+// const parent = findParentNodeOfType(schema.nodes.paragraph)(selection);
+// ```
+var findParentNodeOfType = function findParentNodeOfType(nodeType) {
+  return function (selection) {
+    return findParentNode(function (node) {
+      return equalNodeType(nodeType, node);
+    })(selection);
+  };
+};
+var findParentNodeOfType_1 = findParentNodeOfType;//
+var script$l = {
+  name: 'editor-information-panel',
+  data: function data() {
+    return {
+      info: 'content',
+      showPopover: null,
+      isDelete: false,
+      tooltipId: null,
+      showId: null,
+      iconTypes: {
+        info: {
+          icon: 'mdi-information',
+          color: 'rgb(0, 82, 204)'
+        },
+        note: {
+          icon: 'mdi-text-box',
+          color: 'rgb(82, 67, 170)'
+        },
+        success: {
+          icon: 'mdi-check-circle',
+          color: 'rgb(0, 135, 90)'
+        },
+        warning: {
+          icon: 'mdi-alert',
+          color: 'rgb(255, 153, 31)'
+        },
+        cross: {
+          icon: 'mdi-close-circle',
+          color: 'rgb(222, 53, 11)'
+        }
+      }
+    };
+  },
+  components: {
+    NodeViewWrapper: NodeViewWrapper,
+    NodeViewContent: NodeViewContent,
+    VPopover: VPopover
+  },
+  directives: {
+    clickaway: directive_1
+  },
+  props: {
+    node: Object,
+    editor: Object,
+    getPos: Function,
+    updateAttributes: Function
+  },
+  computed: {
+    infoText: {
+      get: function get() {
+        return this.node.attrs.text;
+      },
+      set: function set(text) {
+        this.updateAttributes({
+          text: text
+        });
+      }
+    },
+    infoType: {
+      get: function get() {
+        return this.node.attrs.type;
+      },
+      set: function set(type) {
+        this.updateAttributes({
+          type: type
+        });
+      }
+    }
+  },
+  created: function created() {
+    this.tooltipId = uniqueId_1('tooltip');
+  },
+  methods: {
+    onDropdownClickaway: function onDropdownClickaway() {
+      this.showPopover = false;
+      this.showId = null;
+      return null;
+    },
+    getIcon: function getIcon(type) {
+      if (type === 'cross') {
+        return 'cross';
+      }
+
+      return "editor-".concat(type);
+    },
+    passType: function passType(type) {
+      this.infoType = type;
+    },
+    changeFocus: function changeFocus(id) {
+      this.showPopover = true;
+      this.showId = id;
+    },
+    disableFocus: function disableFocus() {
+      this.showPopover = false;
+      this.showId = null;
+    },
+    deleteItem: function deleteItem() {
+      var tr = this.editor.view.state.tr;
+      var pos = this.getPos();
+      tr.delete(pos, pos + this.node.nodeSize);
+      this.editor.view.dispatch(tr);
+    },
+    deleteStatus: function deleteStatus() {
+      this.isDelete = !this.isDelete;
+    }
+  }
+};/* script */
+var __vue_script__$l = script$l;
+/* template */
+
+var __vue_render__$l = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c('node-view-wrapper', {
+    class: ['editor-information-panel', "editor-information-panel--" + _vm.infoType, {
+      'editor-information-panel--focused': _vm.showPopover,
+      'editor-information-panel--delete': _vm.isDelete
+    }],
+    attrs: {
+      "id": "editor-information-panel",
+      "data-type": _vm.infoType,
+      "data-id": _vm.tooltipId
+    }
+  }, [_c('v-popover', {
+    directives: [{
+      name: "clickaway",
+      rawName: "v-clickaway",
+      value: _vm.onDropdownClickaway,
+      expression: "onDropdownClickaway"
+    }],
+    staticClass: "editor-information-panel__content",
+    attrs: {
+      "popoverInnerClass": "editor-information-panel__popover",
+      "popover-arrow-class": "none",
+      "trigger": "manual",
+      "auto-hide": false,
+      "open": _vm.showId === _vm.tooltipId,
+      "placement": "bottom",
+      "offset": "0"
+    },
+    scopedSlots: _vm._u([{
+      key: "popover",
+      fn: function fn() {
+        return [_c('div', {
+          staticClass: "editor-information-panel__popover"
+        }, [_vm._l(_vm.iconTypes, function (item, key) {
+          return _c('div', {
+            key: "icon-" + key,
+            class: ['icon-item', {
+              active: _vm.infoType === key
+            }],
+            on: {
+              "click": function click($event) {
+                return _vm.passType(key);
+              }
+            }
+          }, [_c('span', {
+            staticClass: "icon-tooltip"
+          }, [_vm._v(_vm._s(key))]), _vm._v(" "), _c('au-icon', {
+            attrs: {
+              "icon": _vm.iconTypes[key].icon,
+              "color": _vm.iconTypes[key].color,
+              "size": 22
+            }
+          })], 1);
+        }), _vm._v(" "), _c('div', {
+          staticClass: "icon-item delete separator",
+          on: {
+            "click": _vm.deleteItem,
+            "mouseenter": _vm.deleteStatus,
+            "mouseleave": _vm.deleteStatus
+          }
+        }, [_c('span', {
+          staticClass: "icon-tooltip"
+        }, [_vm._v("delete")]), _vm._v(" "), _c('au-icon', {
+          attrs: {
+            "icon": "mdi-trash-can",
+            "size": 18
+          }
+        })], 1)], 2)];
+      },
+      proxy: true
+    }])
+  }, [_c('au-icon', {
+    attrs: {
+      "icon": _vm.iconTypes[_vm.infoType].icon,
+      "color": _vm.iconTypes[_vm.infoType].color,
+      "size": 22
+    }
+  }), _vm._v(" "), _c('node-view-content', {
+    ref: "content",
+    staticClass: "editor-information-panel__text",
+    nativeOn: {
+      "click": function click($event) {
+        return _vm.changeFocus(_vm.tooltipId);
+      }
+    }
+  })], 1)], 1);
+};
+
+var __vue_staticRenderFns__$l = [];
+/* style */
+
+var __vue_inject_styles__$l = function __vue_inject_styles__(inject) {
+  if (!inject) return;
+  inject("data-v-1468fbcd_0", {
+    source: ".editor-information-panel{display:flex;align-items:center;width:100%;padding:5px 10px;margin:5px 0;background:#deebff;transition:box-shadow .2s ease-in-out;cursor:pointer}.editor-information-panel:hover{box-shadow:inset 0 0 0 2px rgba(136,162,212,.77)}.comment-info .editor-information-panel,.incident-item__description .editor-information-panel,.page__description .editor-information-panel,.table-striped__invert .editor-information-panel{cursor:default}.comment-info .editor-information-panel:hover,.incident-item__description .editor-information-panel:hover,.page__description .editor-information-panel:hover,.table-striped__invert .editor-information-panel:hover{box-shadow:unset}.page__description .editor-information-panel p{margin-bottom:0}.incident-item__description .editor-information-panel p{margin-bottom:0}.editor-information-panel__text{padding-left:15px;padding-top:3px;padding-bottom:3px}.editor-information-panel__text p{line-height:1;margin-top:4px!important;margin-bottom:4px!important}.comment-content .editor-information-panel__text p{margin-bottom:0}.editor-information-panel--focused .editor-information-panel__text p{cursor:text}.comment-content .editor-information-panel__text,.incident-item__description .editor-information-panel__text,.page__description .editor-information-panel__text,.table-striped__invert .editor-information-panel__text{padding-left:30px}.editor-information-panel--focused{cursor:default;box-shadow:inset 0 0 0 2px rgba(136,162,212,.77)}.editor-information-panel--delete{cursor:default;box-shadow:inset 0 0 0 2px #ff2c2c}.editor-information-panel--info{background:#deebff}.editor-information-panel--note{background:#eae6ff}.editor-information-panel--success{background:#e3fcef}.editor-information-panel--warning{background:#fffae6}.editor-information-panel--cross{background:#ffebe6}.editor-information-panel__content{display:flex;width:100%}.editor-information-panel__content .trigger{display:flex!important;justify-content:center;align-items:center}.editor-information-panel__content div{width:100%}.editor-information-panel__popover{display:flex;justify-content:space-between;align-items:center;border-radius:4px;box-shadow:0 0 1px rgba(9,30,66,.11),0 4px 8px -2px rgba(9,30,66,.15);background:#fff}.icon-item{position:relative;display:flex;align-items:center;justify-content:center;margin-right:3px;padding:5px;border-radius:4px;cursor:pointer;transition:background .2s ease-in-out}.icon-item.separator:before{position:absolute;content:\"\";display:block;left:-4px;background:#9f9f9f;width:1px;height:80%}.icon-item.active{background:#b4dabb}.icon-item.active .icon{fill:#fff}.icon-item.delete{margin-left:6px}.icon-item.delete:hover{background:#ff2c2c}.icon-item:hover{background:#b4dabb}.icon-item:hover .icon-tooltip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(-30px)}.icon-item:last-child{margin-right:0}.icon-tooltip{position:absolute;white-space:nowrap;left:50%;transform:translateX(-50%) translateY(-44px);opacity:0;visibility:hidden;transition:transform .35s ease-in-out,opacity .2s ease-in-out,visibility .2s ease-in-out}",
+    map: undefined,
+    media: undefined
+  });
+};
+/* scoped */
+
+
+var __vue_scope_id__$l = undefined;
+/* module identifier */
+
+var __vue_module_identifier__$j = "data-v-1468fbcd";
+/* functional template */
+
+var __vue_is_functional_template__$l = false;
+/* style inject shadow dom */
+
+var __vue_component__$y = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$l,
+  staticRenderFns: __vue_staticRenderFns__$l
+}, __vue_inject_styles__$l, __vue_script__$l, __vue_scope_id__$l, __vue_is_functional_template__$l, __vue_module_identifier__$j, false, undefined, createInjectorSSR, undefined);
+
+var InfoPanelComponent = __vue_component__$y;// eslint-disable-next-line import/no-extraneous-dependencies
+var InfoPanel = Node$2.create({
+  name: 'info_panel',
+  content: 'paragraph+',
+  group: 'block',
+  draggable: true,
+  addAttributes: function addAttributes() {
+    return {
+      type: {
+        default: 'success'
+      }
+    };
+  },
+  parseHTML: function parseHTML() {
+    return [{
+      tag: 'div[data-type]',
+      getAttrs: function getAttrs(dom) {
+        var type = dom.getAttribute('data-type') || 'success';
+        return {
+          type: type
+        };
+      }
+    }];
+  },
+  renderHTML: function renderHTML(_ref) {
+    var HTMLAttributes = _ref.HTMLAttributes;
+    return ['div', {
+      type: HTMLAttributes.type,
+      'data-type': HTMLAttributes.type,
+      class: "editor-information-panel editor-information-panel--".concat(HTMLAttributes.type)
+    }, ['div', {
+      class: 'editor-information-panel__text'
+    }, 0]];
+  },
+  addCommands: function addCommands() {
+    return {
+      toggleInfoPanel: function toggleInfoPanel() {
+        return function (_ref2) {
+          var commands = _ref2.commands;
+          commands.toggleWrap('info_panel');
+        };
+      }
+    };
+  },
+  addProseMirrorPlugins: function addProseMirrorPlugins() {
+    var _this = this;
+
+    return [new Plugin({
+      props: {
+        // eslint-disable-next-line consistent-return
+        handleKeyDown: function handleKeyDown(view, event) {
+          var _view$state = view.state,
+              selection = _view$state.selection,
+              schema = _view$state.schema;
+          var nodeTypes = [schema.nodes.info_panel, schema.nodes.blockquote];
+          var parent = findParentNodeOfType_1(nodeTypes)(selection);
+
+          if (parent !== undefined) {
+            // splitBlock create new line with paragraph
+            // liftEmptyBlock move cursor out of block
+            if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+              _this.editor.commands.splitBlock();
+
+              _this.editor.commands.liftEmptyBlock();
+
+              return true;
+            }
+
+            if (event.key === 'Enter') {
+              return _this.editor.commands.splitBlock();
+            }
+          }
+        }
+      }
+    })];
+  },
+  addNodeView: function addNodeView() {
+    return VueNodeViewRenderer(InfoPanelComponent);
+  }
+});/** Used to match property names within property paths. */
+var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
+    reIsPlainProp = /^\w*$/;
+
+/**
+ * Checks if `value` is a property name and not a property path.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @param {Object} [object] The object to query keys on.
+ * @returns {boolean} Returns `true` if `value` is a property name, else `false`.
+ */
+function isKey(value, object) {
+  if (isArray_1(value)) {
+    return false;
+  }
+  var type = typeof value;
+  if (type == 'number' || type == 'symbol' || type == 'boolean' ||
+      value == null || isSymbol_1(value)) {
+    return true;
+  }
+  return reIsPlainProp.test(value) || !reIsDeepProp.test(value) ||
+    (object != null && value in Object(object));
+}
+
+var _isKey = isKey;/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a function that memoizes the result of `func`. If `resolver` is
+ * provided, it determines the cache key for storing the result based on the
+ * arguments provided to the memoized function. By default, the first argument
+ * provided to the memoized function is used as the map cache key. The `func`
+ * is invoked with the `this` binding of the memoized function.
+ *
+ * **Note:** The cache is exposed as the `cache` property on the memoized
+ * function. Its creation may be customized by replacing the `_.memoize.Cache`
+ * constructor with one whose instances implement the
+ * [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
+ * method interface of `clear`, `delete`, `get`, `has`, and `set`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to have its output memoized.
+ * @param {Function} [resolver] The function to resolve the cache key.
+ * @returns {Function} Returns the new memoized function.
+ * @example
+ *
+ * var object = { 'a': 1, 'b': 2 };
+ * var other = { 'c': 3, 'd': 4 };
+ *
+ * var values = _.memoize(_.values);
+ * values(object);
+ * // => [1, 2]
+ *
+ * values(other);
+ * // => [3, 4]
+ *
+ * object.a = 2;
+ * values(object);
+ * // => [1, 2]
+ *
+ * // Modify the result cache.
+ * values.cache.set(object, ['a', 'b']);
+ * values(object);
+ * // => ['a', 'b']
+ *
+ * // Replace `_.memoize.Cache`.
+ * _.memoize.Cache = WeakMap;
+ */
+function memoize(func, resolver) {
+  if (typeof func != 'function' || (resolver != null && typeof resolver != 'function')) {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  var memoized = function() {
+    var args = arguments,
+        key = resolver ? resolver.apply(this, args) : args[0],
+        cache = memoized.cache;
+
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    var result = func.apply(this, args);
+    memoized.cache = cache.set(key, result) || cache;
+    return result;
+  };
+  memoized.cache = new (memoize.Cache || _MapCache);
+  return memoized;
+}
+
+// Expose `MapCache`.
+memoize.Cache = _MapCache;
+
+var memoize_1 = memoize;/** Used as the maximum memoize cache size. */
+var MAX_MEMOIZE_SIZE = 500;
+
+/**
+ * A specialized version of `_.memoize` which clears the memoized function's
+ * cache when it exceeds `MAX_MEMOIZE_SIZE`.
+ *
+ * @private
+ * @param {Function} func The function to have its output memoized.
+ * @returns {Function} Returns the new memoized function.
+ */
+function memoizeCapped(func) {
+  var result = memoize_1(func, function(key) {
+    if (cache.size === MAX_MEMOIZE_SIZE) {
+      cache.clear();
+    }
+    return key;
+  });
+
+  var cache = result.cache;
+  return result;
+}
+
+var _memoizeCapped = memoizeCapped;/** Used to match property names within property paths. */
+var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
+
+/** Used to match backslashes in property paths. */
+var reEscapeChar = /\\(\\)?/g;
+
+/**
+ * Converts `string` to a property path array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the property path array.
+ */
+var stringToPath = _memoizeCapped(function(string) {
+  var result = [];
+  if (string.charCodeAt(0) === 46 /* . */) {
+    result.push('');
+  }
+  string.replace(rePropName, function(match, number, quote, subString) {
+    result.push(quote ? subString.replace(reEscapeChar, '$1') : (number || match));
+  });
+  return result;
+});
+
+var _stringToPath = stringToPath;/**
+ * Casts `value` to a path array if it's not one.
+ *
+ * @private
+ * @param {*} value The value to inspect.
+ * @param {Object} [object] The object to query keys on.
+ * @returns {Array} Returns the cast property path array.
+ */
+function castPath(value, object) {
+  if (isArray_1(value)) {
+    return value;
+  }
+  return _isKey(value, object) ? [value] : _stringToPath(toString_1(value));
+}
+
+var _castPath = castPath;/** Used as references for various `Number` constants. */
+var INFINITY = 1 / 0;
+
+/**
+ * Converts `value` to a string key if it's not a string or symbol.
+ *
+ * @private
+ * @param {*} value The value to inspect.
+ * @returns {string|symbol} Returns the key.
+ */
+function toKey(value) {
+  if (typeof value == 'string' || isSymbol_1(value)) {
+    return value;
+  }
+  var result = (value + '');
+  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+}
+
+var _toKey = toKey;/**
+ * The base implementation of `_.get` without support for default values.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path of the property to get.
+ * @returns {*} Returns the resolved value.
+ */
+function baseGet(object, path) {
+  path = _castPath(path, object);
+
+  var index = 0,
+      length = path.length;
+
+  while (object != null && index < length) {
+    object = object[_toKey(path[index++])];
+  }
+  return (index && index == length) ? object : undefined;
+}
+
+var _baseGet = baseGet;/**
+ * Gets the value at `path` of `object`. If the resolved value is
+ * `undefined`, the `defaultValue` is returned in its place.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.7.0
+ * @category Object
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path of the property to get.
+ * @param {*} [defaultValue] The value returned for `undefined` resolved values.
+ * @returns {*} Returns the resolved value.
+ * @example
+ *
+ * var object = { 'a': [{ 'b': { 'c': 3 } }] };
+ *
+ * _.get(object, 'a[0].b.c');
+ * // => 3
+ *
+ * _.get(object, ['a', '0', 'b', 'c']);
+ * // => 3
+ *
+ * _.get(object, 'a.b.c', 'default');
+ * // => 'default'
+ */
+function get(object, path, defaultValue) {
+  var result = object == null ? undefined : _baseGet(object, path);
+  return result === undefined ? defaultValue : result;
+}
+
+var get_1 = get;//
+var script$k = {
+  name: 'info-status',
+  components: {
+    NodeViewWrapper: NodeViewWrapper,
+    VPopover: VPopover
+  },
+  data: function data() {
+    return {
+      status: '',
+      showForm: false,
+      showId: null,
+      tooltipId: null,
+      inputFocus: false,
+      colors: ['default', 'red', 'blue', 'yellow', 'purple', 'green']
+    };
+  },
+  directives: {
+    clickaway: directive_1
+  },
+  props: {
+    node: Object,
+    editor: Object,
+    view: Object,
+    getPos: Function,
+    updateAttributes: Function,
+    selected: Boolean
+  },
+  created: function created() {
+    this.tooltipId = uniqueId_1('infoStatus');
+  },
+  computed: {
+    textUpdate: function textUpdate() {
+      return this.node.attrs.text ? this.node.attrs.text : 'Введите статус';
+    },
+    inputValue: function inputValue() {
+      return this.node.attrs.text ? this.node.attrs.text : '';
+    },
+    statusType: {
+      get: function get() {
+        return get_1(this.node.attrs, 'type');
+      },
+      set: function set(type) {
+        this.updateAttributes({
+          type: type
+        });
+      }
+    },
+    statusText: {
+      get: function get() {
+        return this.node.attrs.text;
+      },
+      set: function set(text) {
+        this.updateAttributes({
+          text: text
+        });
+      }
+    }
+  },
+  methods: {
+    onDropdownClickaway: function onDropdownClickaway(e) {
+      var popover = document.querySelectorAll('.info-status__popover'); // checking for popover, or its closing
+      // because popover removing from dom with delay, checking containing with loop
+
+      if (popover) {
+        // eslint-disable-next-line no-const-assign,no-plusplus
+        for (var i = 0; i < popover.length; i++) {
+          if (popover[i].contains(e.target)) {
+            this.showPopover = true;
+            return null;
+          }
+        }
+      }
+
+      this.showForm = false;
+      this.showId = null;
+      return null;
+    },
+    changeType: function changeType(type) {
+      this.statusType = type;
+    },
+    changeFocus: function changeFocus(id) {
+      this.showForm = true;
+      this.showId = id;
+    },
+    changeText: function changeText(text) {
+      this.statusText = text;
+    }
+  }
+};/* script */
+var __vue_script__$k = script$k;
+/* template */
+
+var __vue_render__$k = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c('node-view-wrapper', {
+    staticClass: "info-status",
+    attrs: {
+      "as": "span",
+      "draggable": "true",
+      "data-type-status": _vm.statusType,
+      "text": _vm.statusText
+    }
+  }, [_c('v-popover', {
+    directives: [{
+      name: "clickaway",
+      rawName: "v-clickaway",
+      value: _vm.onDropdownClickaway,
+      expression: "onDropdownClickaway"
+    }],
+    class: ['info-status__content', "info-status__content--" + _vm.statusType],
+    attrs: {
+      "popoverInnerClass": "info-status__popover",
+      "popover-arrow-class": "none",
+      "trigger": "manual",
+      "auto-hide": false,
+      "open": _vm.showId === _vm.tooltipId,
+      "placement": "bottom",
+      "offset": "0"
+    }
+  }, [_c('span', {
+    staticClass: "info-status__text",
+    attrs: {
+      "data-type-status": _vm.statusType
+    },
+    on: {
+      "click": function click($event) {
+        $event.stopPropagation();
+        return _vm.changeFocus(_vm.tooltipId);
+      }
+    }
+  }, [_vm._v("\n      " + _vm._s(_vm.textUpdate) + "\n    ")]), _vm._v(" "), _c('div', {
+    staticClass: "info-status__form",
+    attrs: {
+      "slot": "popover"
+    },
+    slot: "popover"
+  }, [_c('au-input', {
+    staticClass: "info-status__form-input",
+    attrs: {
+      "value": _vm.inputValue,
+      "placeholder": "Введите статус",
+      "small": "",
+      "full-width": ""
+    },
+    on: {
+      "input": _vm.changeText
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "info-status__form-color"
+  }, _vm._l(_vm.colors, function (item, key) {
+    return _c('div', {
+      key: key,
+      class: ['info-status__form-color__item', "info-status__form-color__item--" + item, {
+        'active': item === _vm.statusType
+      }],
+      on: {
+        "click": function click($event) {
+          return _vm.changeType(item);
+        }
+      }
+    }, [item === _vm.statusType ? _c('au-icon', {
+      attrs: {
+        "icon": "mdi-check",
+        "color": "#666",
+        "size": 22
+      }
+    }) : _vm._e()], 1);
+  }), 0)], 1)])], 1);
+};
+
+var __vue_staticRenderFns__$k = [];
+/* style */
+
+var __vue_inject_styles__$k = function __vue_inject_styles__(inject) {
+  if (!inject) return;
+  inject("data-v-39dafa22_0", {
+    source: ".tooltip{outline:unset}.tooltip .wrapper{overflow:visible;margin:8px 0}.info-status{position:relative;display:inline-block;border-radius:4px;padding:4px 4px 4px 0}.editor-information-panel .info-status{padding:4px 12px 4px 0}.info-status__content{display:inline-block;margin:0 5px;line-height:1;border-radius:4px;cursor:pointer;transition:box-shadow .15s ease-in-out}.incident-item__description .info-status__content:hover{cursor:default;box-shadow:unset}.incident-item__description .info-status__content p{cursor:text;margin-bottom:0}.comment-content .info-status__content:hover,.page__description .info-status__content:hover{cursor:default;box-shadow:unset}.comment-content .info-status__content p,.page__description .info-status__content p{cursor:text;margin-bottom:0}.info-status__content:hover{box-shadow:0 0 1px 1px rgba(136,162,212,.77)}.info-status__content.open{box-shadow:0 0 1px 1px rgba(136,162,212,.77)}.info-status__text{display:inline-flex;padding:4px 6px;max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#000}.info-status__text.hidden{position:absolute;font-size:0}.info-status__form{padding:0 8px}.info-status.has-focus .info-status__form{opacity:1;visibility:visible}.info-status__form-input{box-shadow:0 0 0 1px rgba(20,20,20,.15)}.info-status__form-color{display:flex;justify-content:space-between;margin-top:8px}.info-status__form-color__item{width:24px;height:24px;border-radius:4px;margin-right:7px;cursor:pointer;transition:filter .1s ease-in-out,transform .15s ease-in-out}.info-status__form-color__item.active{filter:brightness(115%);transform:scale(1.08)}.info-status__form-color__item.active:hover{filter:brightness(115%);transform:scale(1.08)}.info-status__form-color__item:hover{filter:brightness(105%);transform:scale(1.08)}.info-status__form-color__item:last-child{margin-right:0}.info-status__content--default,.info-status__form-color__item--default{background-color:#dfe1e6;border:1px solid #505f79;color:#505f79}.info-status__content--blue,.info-status__form-color__item--blue{background-color:#deebff;border:1px solid #0052cc;color:#0052cc}.info-status__content--yellow,.info-status__form-color__item--yellow{background-color:#fff0b3;border:1px solid #ff991f;color:#ff991f}.info-status__content--red,.info-status__form-color__item--red{background-color:#ffebe6;border:1px solid #de350b;color:#de350b}.info-status__content--purple,.info-status__form-color__item--purple{background-color:#eae6ff;border:1px solid #5243aa;color:#5243aa}.info-status__content--green,.info-status__form-color__item--green{background-color:#e3fcef;border:1px solid #00875a;color:#00875a}",
+    map: undefined,
+    media: undefined
+  });
+};
+/* scoped */
+
+
+var __vue_scope_id__$k = undefined;
+/* module identifier */
+
+var __vue_module_identifier__$i = "data-v-39dafa22";
+/* functional template */
+
+var __vue_is_functional_template__$k = false;
+/* style inject shadow dom */
+
+var __vue_component__$x = /*#__PURE__*/normalizeComponent$2({
+  render: __vue_render__$k,
+  staticRenderFns: __vue_staticRenderFns__$k
+}, __vue_inject_styles__$k, __vue_script__$k, __vue_scope_id__$k, __vue_is_functional_template__$k, __vue_module_identifier__$i, false, undefined, createInjectorSSR, undefined);
+
+var InfoStatusComponent = __vue_component__$x;var InfoStatus = Node$2.create({
+  name: 'info_status',
+  group: 'inline',
+  inline: true,
+  selectable: false,
+  draggable: true,
+  addAttributes: function addAttributes() {
+    return {
+      type: {
+        default: 'default'
+      },
+      text: {
+        default: ''
+      }
+    };
+  },
+  parseHTML: function parseHTML() {
+    return [{
+      tag: 'span[data-type-status]',
+      preserveWhitespace: 'full',
+      getAttrs: function getAttrs(dom) {
+        var type = dom.getAttribute('type') || null;
+        var text = dom.getAttribute('text') || null;
+        return {
+          type: type,
+          text: text
+        };
+      }
+    }];
+  },
+  renderHTML: function renderHTML(_ref) {
+    var HTMLAttributes = _ref.HTMLAttributes;
+    return ['span', {
+      'data-type-status': HTMLAttributes.type,
+      type: HTMLAttributes.type,
+      class: "info-status__content info-status__content--".concat(HTMLAttributes.type),
+      draggable: true,
+      text: HTMLAttributes.text
+    }, ['span', {
+      class: 'info-status__text',
+      ref: 'content'
+    }, HTMLAttributes.text]];
+  },
+  addCommands: function addCommands() {
+    var _this = this;
+
+    return {
+      toggleInfoStatus: function toggleInfoStatus() {
+        return function (_ref2) {
+          var commands = _ref2.commands;
+          // return (attrs) => setInlineBlockType(type, attrs);
+          // commands.setNode('info_status');
+          commands.insertContent([{
+            type: _this.name,
+            text: 'text'
+          }]);
+        };
+      }
+    };
+  },
+  addNodeView: function addNodeView() {
+    return VueNodeViewRenderer(InfoStatusComponent);
+  }
+});var script$j = {
   name: 'au-editor',
   components: {
     EditorContent: EditorContent
@@ -72965,6 +74177,12 @@ var script$j = {
     extendSchema: {
       type: Object,
       default: function _default() {}
+    },
+    extensions: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
     }
   },
   data: function data() {
@@ -72985,7 +74203,7 @@ var script$j = {
 
     var self = this;
     this.editor = new Editor({
-      extensions: [StarterKit, Image, Link, Underline, Subscript, Superscript, Highlight, Table, TableRow, TableCell, TableHeader],
+      extensions: [StarterKit, Image, Link, Underline, Subscript, Superscript, Highlight, Table, TableRow, TableCell, TableHeader].concat(_toConsumableArray$1(this.extensions), [InfoPanel, InfoStatus]),
       content: this.value,
       onUpdate: function onUpdate() {
         self.$emit('input', _this.editor.getHTML());
@@ -73032,8 +74250,8 @@ var __vue_staticRenderFns__$j = [];
 
 var __vue_inject_styles__$j = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-147bff09_0", {
-    source: ".au-editor[data-v-147bff09]{width:100%;border:1px solid #ddd;border-radius:4px;background-color:#fafafa}.au-editor-tiptap[data-v-147bff09]{width:100%;padding:0 12px}[data-v-147bff09] .au-editor-tiptap>div{outline:0!important;min-height:160px}[data-v-147bff09] .au-editor-tiptap b,[data-v-147bff09] .au-editor-tiptap strong{font-weight:500}[data-v-147bff09] .au-editor-tiptap em,[data-v-147bff09] .au-editor-tiptap i{font-style:italic}[data-v-147bff09] .au-editor-tiptap ol li,[data-v-147bff09] .au-editor-tiptap ul li{margin-left:24px}[data-v-147bff09] .au-editor-tiptap p{margin:12px 0}[data-v-147bff09] .au-editor-tiptap a{text-decoration:underline;cursor:pointer}[data-v-147bff09] .au-editor-tiptap a:hover{color:#1e90ff}[data-v-147bff09] .au-editor-tiptap h1,[data-v-147bff09] .au-editor-tiptap h2,[data-v-147bff09] .au-editor-tiptap h3,[data-v-147bff09] .au-editor-tiptap h4,[data-v-147bff09] .au-editor-tiptap h5{padding:0;margin:9px 0;font-weight:500}[data-v-147bff09] .au-editor-tiptap h1{font-size:26px}[data-v-147bff09] .au-editor-tiptap h2{font-size:22px}[data-v-147bff09] .au-editor-tiptap h3{font-size:20px}[data-v-147bff09] .au-editor-tiptap h4{font-size:18px}[data-v-147bff09] .au-editor-tiptap h5{font-size:22px}[data-v-147bff09] .au-editor-tiptap table{border-collapse:collapse;table-layout:fixed;margin:12px 0;overflow:hidden}[data-v-147bff09] .au-editor-tiptap table p{margin:0;padding:0}[data-v-147bff09] .au-editor-tiptap table td,[data-v-147bff09] .au-editor-tiptap table th{min-width:1em;border:1px solid #ced4da;padding:4px 6px;vertical-align:top;box-sizing:border-box;position:relative}[data-v-147bff09] .au-editor-tiptap table td>*,[data-v-147bff09] .au-editor-tiptap table th>*{margin-bottom:0}[data-v-147bff09] .au-editor-tiptap table th{font-weight:700;text-align:left;background-color:#f1f3f5}[data-v-147bff09] .au-editor-tiptap table .selectedCell:after{z-index:2;position:absolute;content:\"\";left:0;right:0;top:0;bottom:0;background:rgba(200,200,255,.4);pointer-events:none}[data-v-147bff09] .au-editor-tiptap table .column-resize-handle{position:absolute;right:-2px;top:0;bottom:-2px;width:4px;background-color:#adf;pointer-events:none}",
+  inject("data-v-62783c79_0", {
+    source: ".au-editor[data-v-62783c79]{width:100%;border:1px solid #ddd;border-radius:4px;background-color:#fafafa}.au-editor-tiptap[data-v-62783c79]{width:100%;padding:0 12px}[data-v-62783c79] .au-editor-tiptap>div{outline:0!important;min-height:160px}[data-v-62783c79] .au-editor-tiptap b,[data-v-62783c79] .au-editor-tiptap strong{font-weight:500}[data-v-62783c79] .au-editor-tiptap em,[data-v-62783c79] .au-editor-tiptap i{font-style:italic}[data-v-62783c79] .au-editor-tiptap ol li,[data-v-62783c79] .au-editor-tiptap ul li{margin-left:24px}[data-v-62783c79] .au-editor-tiptap p{margin:12px 0}[data-v-62783c79] .au-editor-tiptap a{text-decoration:underline;cursor:pointer}[data-v-62783c79] .au-editor-tiptap a:hover{color:#1e90ff}[data-v-62783c79] .au-editor-tiptap h1,[data-v-62783c79] .au-editor-tiptap h2,[data-v-62783c79] .au-editor-tiptap h3,[data-v-62783c79] .au-editor-tiptap h4,[data-v-62783c79] .au-editor-tiptap h5{padding:0;margin:9px 0;font-weight:500}[data-v-62783c79] .au-editor-tiptap h1{font-size:26px}[data-v-62783c79] .au-editor-tiptap h2{font-size:22px}[data-v-62783c79] .au-editor-tiptap h3{font-size:20px}[data-v-62783c79] .au-editor-tiptap h4{font-size:18px}[data-v-62783c79] .au-editor-tiptap h5{font-size:22px}[data-v-62783c79] .au-editor-tiptap table{border-collapse:collapse;table-layout:fixed;margin:12px 0;overflow:hidden}[data-v-62783c79] .au-editor-tiptap table p{margin:0;padding:0}[data-v-62783c79] .au-editor-tiptap table td,[data-v-62783c79] .au-editor-tiptap table th{min-width:1em;border:1px solid #ced4da;padding:4px 6px;vertical-align:top;box-sizing:border-box;position:relative}[data-v-62783c79] .au-editor-tiptap table td>*,[data-v-62783c79] .au-editor-tiptap table th>*{margin-bottom:0}[data-v-62783c79] .au-editor-tiptap table th{font-weight:700;text-align:left;background-color:#f1f3f5}[data-v-62783c79] .au-editor-tiptap table .selectedCell:after{z-index:2;position:absolute;content:\"\";left:0;right:0;top:0;bottom:0;background:rgba(200,200,255,.4);pointer-events:none}[data-v-62783c79] .au-editor-tiptap table .column-resize-handle{position:absolute;right:-2px;top:0;bottom:-2px;width:4px;background-color:#adf;pointer-events:none}",
     map: undefined,
     media: undefined
   });
@@ -73041,10 +74259,10 @@ var __vue_inject_styles__$j = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$j = "data-v-147bff09";
+var __vue_scope_id__$j = "data-v-62783c79";
 /* module identifier */
 
-var __vue_module_identifier__$h = "data-v-147bff09";
+var __vue_module_identifier__$h = "data-v-62783c79";
 /* functional template */
 
 var __vue_is_functional_template__$j = false;
@@ -73056,6 +74274,13 @@ var __vue_component__$w = /*#__PURE__*/normalizeComponent$2({
 }, __vue_inject_styles__$j, __vue_script__$j, __vue_scope_id__$j, __vue_is_functional_template__$j, __vue_module_identifier__$h, false, undefined, createInjectorSSR, undefined);
 
 var AuEditor = __vue_component__$w;//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -73145,12 +74370,10 @@ var script$i = {
           title: 'Заголовки',
           children: [{
             name: 'paragraph',
-            icon: 'format-paragraph',
             command: 'setParagraph',
             title: 'Параграф'
           }, {
             name: 'heading',
-            icon: 'format-header-1',
             command: 'toggleHeading',
             arg: {
               level: 1
@@ -73158,7 +74381,6 @@ var script$i = {
             title: 'Заголовок 1 уровня'
           }, {
             name: 'heading',
-            icon: 'format-header-2',
             command: 'toggleHeading',
             arg: {
               level: 2
@@ -73166,7 +74388,6 @@ var script$i = {
             title: 'Заголовок 2 уровня'
           }, {
             name: 'heading',
-            icon: 'format-header-3',
             command: 'toggleHeading',
             arg: {
               level: 3
@@ -73174,7 +74395,6 @@ var script$i = {
             title: 'Заголовок 3 уровня'
           }, {
             name: 'heading',
-            icon: 'format-header-4',
             command: 'toggleHeading',
             arg: {
               level: 4
@@ -73306,6 +74526,22 @@ var script$i = {
             command: 'toggleHeaderCell',
             title: 'Сделать ячейку заголовком'
           }]
+        },
+        customBlocks: {
+          icon: 'plus-thick',
+          command: null,
+          title: 'Дополнительно',
+          children: [{
+            name: 'info_panel',
+            command: 'toggleInfoPanel',
+            title: 'Выноска',
+            isCustom: true
+          }, {
+            name: 'info_status',
+            command: 'toggleInfoStatus',
+            title: 'Статус',
+            isCustom: true
+          }]
         }
       }, this.extendSchema), {}, {
         // Иконки справа
@@ -73327,6 +74563,9 @@ var script$i = {
     },
     isDisabled: function isDisabled(command) {
       var arg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var isCustom = arguments.length > 2 ? arguments[2] : undefined;
+      if (isCustom) return false;
+      if (!command) return false;
       return !this.editor.can()[command](arg);
     }
   }
@@ -73363,6 +74602,12 @@ var __vue_render__$i = function __vue_render__() {
         "size": _vm.iconSize,
         "color": _vm.iconColor
       }
+    }), _vm._v(" "), _c('au-icon', {
+      attrs: {
+        "icon": "mdi-chevron-down",
+        "size": 12,
+        "color": _vm.iconColor
+      }
     }), _vm._v(" "), _c('div', {
       staticClass: "toolbar-children"
     }, _vm._l(item.children, function (subitem) {
@@ -73370,24 +74615,27 @@ var __vue_render__$i = function __vue_render__() {
         key: subitem.icon,
         staticClass: "toolbar-item",
         class: {
-          'is-active': _vm.editor.isActive(subitem.name, subitem.arg)
+          'is-active': subitem.isCustom ? false : _vm.editor.isActive(subitem.name, subitem.arg),
+          'is-text': !subitem.icon
         },
         attrs: {
           "title": subitem.title || '',
-          "disabled": subitem.command ? _vm.isDisabled(subitem.command, subitem.arg) : false
+          "disabled": _vm.isDisabled(subitem.command, subitem.arg, subitem.isCustom)
         },
         on: {
           "click": function click($event) {
             return _vm.runCommand(subitem.command, subitem.arg);
           }
         }
-      }, [_c('au-icon', {
+      }, [subitem.icon ? _c('au-icon', {
         attrs: {
           "icon": "mdi-" + subitem.icon,
           "size": _vm.iconSize,
           "color": _vm.iconColor
         }
-      })], 1);
+      }) : _c('div', {
+        staticClass: "toolbar-item-title"
+      }, [_vm._v(_vm._s(subitem.title))])], 1);
     }), 0)], 1) : _c('div', {
       key: item.icon,
       class: ['toolbar-item', {
@@ -73416,12 +74664,12 @@ var __vue_staticRenderFns__$i = [];
 
 var __vue_inject_styles__$i = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-eef86f54_0", {
-    source: ".toolbar-item{display:flex;flex:0 0 auto;align-items:center;justify-content:center;width:32px;height:32px;padding:8px;margin:2px 2px 2px 0;border-radius:4px;cursor:pointer;user-select:none;transition:background-color .15s linear}.toolbar-item:hover{background-color:#3f6ada}.toolbar-item:hover>.au-icon{background-color:#fff!important}.toolbar-item.is-active{background-color:#3f6ada}.toolbar-item.is-active>.au-icon{background-color:#fff!important}.toolbar-item[disabled]{background-color:#fff;pointer-events:none}.toolbar-item[disabled]>.au-icon{background-color:#aaa!important}",
+  inject("data-v-2a97f38a_0", {
+    source: ".toolbar-item{display:flex;flex:0 0 auto;align-items:center;justify-content:center;width:32px;height:32px;padding:8px;margin:2px 2px 2px 0;border-radius:4px;cursor:pointer;user-select:none;transition:background-color .15s linear}.toolbar-item:hover{background-color:#3f6ada}.toolbar-item:hover>.au-icon{background-color:#fff!important}.toolbar-item.is-active{background-color:#3f6ada}.toolbar-item.is-active>.au-icon{background-color:#fff!important}.toolbar-item.is-active.is-text{color:#fff}.toolbar-item.is-text{width:auto;display:block}.toolbar-item.is-text:hover{color:#fff}.toolbar-item.is-text[disabled]{color:#999}.toolbar-item[disabled]{background-color:#fff;pointer-events:none}.toolbar-item[disabled]>.au-icon{background-color:#aaa!important}.toolbar-item-title{text-align:left}",
     map: undefined,
     media: undefined
-  }), inject("data-v-eef86f54_1", {
-    source: ".au-editor-toolbar[data-v-eef86f54]{display:flex;flex-wrap:wrap;margin-bottom:4px;padding:0 0 0 3px;background-color:#fff;border:1px solid #ddd;border-radius:4px}.au-editor .au-editor-toolbar[data-v-eef86f54]{border-width:0 0 1px 0;border-radius:4px 4px 0 0}.toolbar-item.undo[data-v-eef86f54]{margin-left:auto}.toolbar-children[data-v-eef86f54]{position:absolute;z-index:2;top:31px;left:0;display:none;flex-wrap:wrap;width:144px;padding:2px 0 2px 4px;background-color:#fff;border-radius:5px;box-shadow:0 0 2px 2px #ddd;cursor:default}.format-pilcrow .toolbar-children[data-v-eef86f54]{width:178px}.toolbar-parent[data-v-eef86f54]{position:relative}.toolbar-parent:hover .toolbar-children[data-v-eef86f54]{display:flex}",
+  }), inject("data-v-2a97f38a_1", {
+    source: ".au-editor-toolbar[data-v-2a97f38a]{display:flex;flex-wrap:wrap;margin-bottom:4px;padding:0 0 0 3px;background-color:#fff;border:1px solid #ddd;border-radius:4px}.au-editor .au-editor-toolbar[data-v-2a97f38a]{border-width:0 0 1px 0;border-radius:4px 4px 0 0}.toolbar-item.undo[data-v-2a97f38a]{margin-left:auto}.toolbar-parent[data-v-2a97f38a]{position:relative;width:42px;padding:8px 6px 8px 8px}.toolbar-parent:hover .toolbar-children[data-v-2a97f38a]{display:block}.toolbar-children[data-v-2a97f38a]{position:absolute;z-index:2;top:31px;left:0;display:none;flex-wrap:wrap;padding:2px 0 2px 4px;background-color:#fff;border-radius:5px;box-shadow:0 0 2px 2px #ddd;cursor:default}.table .toolbar-children[data-v-2a97f38a]{width:144px}.format-pilcrow .toolbar-children[data-v-2a97f38a]{width:178px}.table:hover .toolbar-children[data-v-2a97f38a]{display:flex}",
     map: undefined,
     media: undefined
   });
@@ -73429,10 +74677,10 @@ var __vue_inject_styles__$i = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$i = "data-v-eef86f54";
+var __vue_scope_id__$i = "data-v-2a97f38a";
 /* module identifier */
 
-var __vue_module_identifier__$g = "data-v-eef86f54";
+var __vue_module_identifier__$g = "data-v-2a97f38a";
 /* functional template */
 
 var __vue_is_functional_template__$i = false;
@@ -73612,8 +74860,8 @@ var __vue_staticRenderFns__$h = [];
 
 var __vue_inject_styles__$h = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-922254d6_0", {
-    source: ".au-editor-link[data-v-922254d6]{font-size:inherit}.au-editor-link-popover[data-v-922254d6]{display:flex;align-items:flex-end;width:480px;padding:10px 16px}.au-editor-link-popover .au-button[data-v-922254d6]{margin-left:12px}",
+  inject("data-v-2f9dcae6_0", {
+    source: ".au-editor-link-popover[data-v-2f9dcae6]{display:flex;align-items:flex-end;width:480px;padding:10px 16px}.au-editor-link-popover .au-button[data-v-2f9dcae6]{margin-left:12px}",
     map: undefined,
     media: undefined
   });
@@ -73621,10 +74869,10 @@ var __vue_inject_styles__$h = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$h = "data-v-922254d6";
+var __vue_scope_id__$h = "data-v-2f9dcae6";
 /* module identifier */
 
-var __vue_module_identifier__$f = "data-v-922254d6";
+var __vue_module_identifier__$f = "data-v-2f9dcae6";
 /* functional template */
 
 var __vue_is_functional_template__$h = false;
@@ -78412,7 +79660,7 @@ var __vue_component__ = /*#__PURE__*/normalizeComponent$2({
 }, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, createInjectorSSR, undefined);
 
 var __vue_component__$1 = __vue_component__;// Интерактивные элементы и их части
-var components$1=/*#__PURE__*/Object.freeze({__proto__:null,AuIcon: AuIcon,AuButton: __vue_component__$W,AuCheckbox: __vue_component__$U,AuSwitch: __vue_component__$S,AuInput: __vue_component__$Q,AuRangeSlider: __vue_component__$O,AuDatePicker: __vue_component__$M,AuDate: __vue_component__$K,AuSelect: __vue_component__$I,AuDropdownButton: __vue_component__$G,AuDropdownContentButton: __vue_component__$C,AuFiltersResizable: __vue_component__$A,AuDraggableList: __vue_component__$y,AuEditor: AuEditor,AuEditorToolbar: __vue_component__$v,AuEditorLink: __vue_component__$t,AuBreadcrumbs: __vue_component__$r,AuSpinner: AuSpinner,AuTabs: AuTabs,AuTabItem: __vue_component__$o,AuTable: __vue_component__$m,AuPagination: __vue_component__$k,AuPopover: __vue_component__$i,AuTooltip: __vue_component__$g,AuSidePopup: __vue_component__$e,AuModal: __vue_component__$c,AuPercentBar: __vue_component__$a,AuChart: __vue_component__$8,AuTree: __vue_component__$5,AuAlerts: __vue_component__$3,AuColorPicker: __vue_component__$1});var install = function installAtlasUiKit(Vue) {
+var components$1=/*#__PURE__*/Object.freeze({__proto__:null,AuIcon: AuIcon,AuButton: __vue_component__$Y,AuCheckbox: __vue_component__$W,AuSwitch: __vue_component__$U,AuInput: __vue_component__$S,AuRangeSlider: __vue_component__$Q,AuDatePicker: __vue_component__$O,AuDate: __vue_component__$M,AuSelect: __vue_component__$K,AuDropdownButton: __vue_component__$I,AuDropdownContentButton: __vue_component__$E,AuFiltersResizable: __vue_component__$C,AuDraggableList: __vue_component__$A,AuEditor: AuEditor,AuEditorToolbar: __vue_component__$v,AuEditorLink: __vue_component__$t,AuBreadcrumbs: __vue_component__$r,AuSpinner: AuSpinner,AuTabs: AuTabs,AuTabItem: __vue_component__$o,AuTable: __vue_component__$m,AuPagination: __vue_component__$k,AuPopover: __vue_component__$i,AuTooltip: __vue_component__$g,AuSidePopup: __vue_component__$e,AuModal: __vue_component__$c,AuPercentBar: __vue_component__$a,AuChart: __vue_component__$8,AuTree: __vue_component__$5,AuAlerts: __vue_component__$3,AuColorPicker: __vue_component__$1});var install = function installAtlasUiKit(Vue) {
   Object.entries(components$1).forEach(function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
         componentName = _ref2[0],
@@ -78421,7 +79669,7 @@ var components$1=/*#__PURE__*/Object.freeze({__proto__:null,AuIcon: AuIcon,AuBut
     Vue.component(componentName, component);
   });
 }; // Create module definition for Vue.use()
-var components=/*#__PURE__*/Object.freeze({__proto__:null,'default': install,AuIcon: AuIcon,AuButton: __vue_component__$W,AuCheckbox: __vue_component__$U,AuSwitch: __vue_component__$S,AuInput: __vue_component__$Q,AuRangeSlider: __vue_component__$O,AuDatePicker: __vue_component__$M,AuDate: __vue_component__$K,AuSelect: __vue_component__$I,AuDropdownButton: __vue_component__$G,AuDropdownContentButton: __vue_component__$C,AuFiltersResizable: __vue_component__$A,AuDraggableList: __vue_component__$y,AuEditor: AuEditor,AuEditorToolbar: __vue_component__$v,AuEditorLink: __vue_component__$t,AuBreadcrumbs: __vue_component__$r,AuSpinner: AuSpinner,AuTabs: AuTabs,AuTabItem: __vue_component__$o,AuTable: __vue_component__$m,AuPagination: __vue_component__$k,AuPopover: __vue_component__$i,AuTooltip: __vue_component__$g,AuSidePopup: __vue_component__$e,AuModal: __vue_component__$c,AuPercentBar: __vue_component__$a,AuChart: __vue_component__$8,AuTree: __vue_component__$5,AuAlerts: __vue_component__$3,AuColorPicker: __vue_component__$1});// only expose one global var, with component exports exposed as properties of
+var components=/*#__PURE__*/Object.freeze({__proto__:null,'default': install,AuIcon: AuIcon,AuButton: __vue_component__$Y,AuCheckbox: __vue_component__$W,AuSwitch: __vue_component__$U,AuInput: __vue_component__$S,AuRangeSlider: __vue_component__$Q,AuDatePicker: __vue_component__$O,AuDate: __vue_component__$M,AuSelect: __vue_component__$K,AuDropdownButton: __vue_component__$I,AuDropdownContentButton: __vue_component__$E,AuFiltersResizable: __vue_component__$C,AuDraggableList: __vue_component__$A,AuEditor: AuEditor,AuEditorToolbar: __vue_component__$v,AuEditorLink: __vue_component__$t,AuBreadcrumbs: __vue_component__$r,AuSpinner: AuSpinner,AuTabs: AuTabs,AuTabItem: __vue_component__$o,AuTable: __vue_component__$m,AuPagination: __vue_component__$k,AuPopover: __vue_component__$i,AuTooltip: __vue_component__$g,AuSidePopup: __vue_component__$e,AuModal: __vue_component__$c,AuPercentBar: __vue_component__$a,AuChart: __vue_component__$8,AuTree: __vue_component__$5,AuAlerts: __vue_component__$3,AuColorPicker: __vue_component__$1});// only expose one global var, with component exports exposed as properties of
 // that global var (eg. plugin.component)
 
 Object.entries(components).forEach(function (_ref) {
