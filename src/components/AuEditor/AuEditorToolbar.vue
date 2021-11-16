@@ -20,9 +20,9 @@
       v-else-if="item.children"
       :key="key"
       class="toolbar-item toolbar-parent"
-      :class="[item.icon]"
+      :class="`group-${key}`"
     >
-      <au-icon :icon="`mdi-${item.icon}`" :size="iconSize" :color="iconColor"/>
+      <au-icon :icon="item.icon" :size="iconSize" :color="iconColor"/>
 
       <au-icon icon="mdi-chevron-down" :size="12" :color="iconColor"/>
 
@@ -39,7 +39,7 @@
           :disabled="isDisabled(subitem.command, subitem.arg, subitem.isCustom)"
           @click="runCommand(subitem.command, subitem.arg)"
         >
-          <au-icon v-if="subitem.icon" :icon="`mdi-${subitem.icon}`" :size="iconSize" :color="iconColor"/>
+          <au-icon v-if="subitem.icon" :icon="subitem.icon" :size="iconSize" :color="iconColor"/>
 
           <div v-else class="toolbar-item-title">{{ subitem.title }}</div>
         </div>
@@ -54,7 +54,7 @@
       :title="item.title || ''"
       @click="runCommand(item.command, item.arg)"
     >
-      <au-icon :icon="`mdi-${item.icon}`" :size="iconSize" :color="iconColor"/>
+      <au-icon :icon="item.icon" :size="iconSize" :color="iconColor"/>
     </div>
   </template>
 </div>
@@ -95,7 +95,7 @@ export default {
     defaultSchema() {
       return {
         pilcrow: {
-          icon: 'format-pilcrow',
+          icon: 'mdi-format-pilcrow',
           command: null,
           title: 'Заголовки',
           children: [
@@ -131,133 +131,138 @@ export default {
           ],
         },
         bold: {
-          icon: 'format-bold',
+          icon: 'mdi-format-bold',
           command: 'toggleBold',
           title: 'Полужирный',
         },
         italic: {
-          icon: 'format-italic',
+          icon: 'mdi-format-italic',
           command: 'toggleItalic',
           title: 'Курсивный',
         },
         strike: {
-          icon: 'format-strikethrough',
+          icon: 'mdi-format-strikethrough',
           command: 'toggleStrike',
           title: 'Зачеркнутый',
         },
         underline: {
-          icon: 'format-underline',
+          icon: 'mdi-format-underline',
           command: 'toggleUnderline',
           title: 'Подчеркнутый',
         },
         subscript: {
-          icon: 'format-subscript',
+          icon: 'mdi-format-subscript',
           command: 'toggleSubscript',
           title: 'Подстрочный',
         },
         superscript: {
-          icon: 'format-superscript',
+          icon: 'mdi-format-superscript',
           command: 'toggleSuperscript',
           title: 'Надстрочный',
         },
         highlight: {
-          icon: 'format-color-highlight',
+          icon: 'mdi-format-color-highlight',
           command: 'toggleHighlight',
           title: 'Выделение',
           arg: { },
         },
         clearNodes: {
-          icon: 'format-clear',
+          icon: 'mdi-format-clear',
           command: 'unsetAllMarks',
           title: 'Очистить форматирование',
         },
+        blockquote: {
+          icon: 'mdi-format-quote-close',
+          command: 'toggleBlockquote',
+          title: 'Цитата',
+        },
         bulletList: {
-          icon: 'format-list-bulleted',
+          icon: 'mdi-format-list-bulleted',
           command: 'toggleBulletList',
           title: 'Маркированый список',
         },
         orderedList: {
-          icon: 'format-list-numbered',
+          icon: 'mdi-format-list-numbered',
           command: 'toggleOrderedList',
           title: 'Нумерованый список',
         },
         linkCustom: {
-          icon: 'link',
+          icon: 'mdi-link',
           component: 'au-editor-link',
           title: 'Ссылка',
         },
         tables: {
-          icon: 'table',
+          icon: 'mdi-table',
           command: null,
           title: 'Таблицы',
           children: [
             {
               name: 'table-insert',
-              icon: 'table-large-plus',
+              icon: 'mdi-table-large-plus',
               command: 'insertTable',
               arg: { rows: 3, cols: 3, withHeaderRow: true },
               title: 'Вставить таблицу',
             },
             {
               name: 'table-remove',
-              icon: 'table-large-remove',
+              icon: 'mdi-table-large-remove',
               command: 'deleteTable',
               title: 'Удалить таблицу',
             },
             {
               name: 'table-merge',
-              icon: 'table-merge-cells',
+              icon: 'mdi-table-merge-cells',
               command: 'mergeCells',
               title: 'Объединить ячейки',
             },
             {
               name: 'table-split',
-              icon: 'table-split-cell',
+              icon: 'mdi-table-split-cell',
               command: 'splitCell',
               title: 'Разделить ячейку',
             },
             // Столбцы и строки - add
             {
               name: 'table-add-column-before',
-              icon: 'table-column-plus-before',
+              icon: 'mdi-table-column-plus-before',
               command: 'addColumnBefore',
               title: 'Вставить столбец слева',
             },
             {
               name: 'table-add-column-after',
-              icon: 'table-column-plus-after',
+              icon: 'mdi-table-column-plus-after',
               command: 'addColumnAfter',
               title: 'Вставить столбец справа',
             },
             {
               name: 'table-add-row-before',
-              icon: 'table-row-plus-before',
+              icon: 'mdi-table-row-plus-before',
               command: 'addRowBefore',
               title: 'Вставить строку сверху',
             },
             {
               name: 'table-add-row-after',
-              icon: 'table-row-plus-after',
+              icon: 'mdi-table-row-plus-after',
               command: 'addRowAfter',
               title: 'Вставить строку снизу',
             },
             // Столбцы и строки - delete
             {
               name: 'table-delete-column',
-              icon: 'table-column-remove',
+              icon: 'mdi-table-column-remove',
               command: 'deleteColumn',
               title: 'Удалить столбец',
             },
             {
               name: 'table-delete-row',
-              icon: 'table-row-remove',
+              icon: 'mdi-table-row-remove',
               command: 'deleteRow',
               title: 'Удалить строку',
             },
             // Заголовки
             {
               name: 'table-cell-heading',
-              icon: 'page-layout-header-footer',
+              icon: 'mdi-page-layout-header-footer',
               command: 'toggleHeaderCell',
               title: 'Сделать ячейку заголовком',
             },
@@ -265,7 +270,7 @@ export default {
         },
 
         customBlocks: {
-          icon: 'plus-thick',
+          icon: 'mdi-plus-thick',
           command: null,
           title: 'Дополнительно',
           children: [
@@ -289,11 +294,11 @@ export default {
 
         // Иконки справа
         undo: {
-          icon: 'undo',
+          icon: 'mdi-undo',
           command: 'undo',
         },
         redo: {
-          icon: 'redo',
+          icon: 'mdi-redo',
           command: 'redo',
         },
       };
@@ -423,15 +428,15 @@ export default {
   cursor: default;
 }
 
-.table .toolbar-children {
+.group-tables .toolbar-children {
   width: 144px;
 }
 
-.format-pilcrow .toolbar-children {
+.group-pilcrow .toolbar-children {
   width: 178px;
 }
 
-.table:hover .toolbar-children {
+.group-tables:hover .toolbar-children {
   display: flex;
 }
 

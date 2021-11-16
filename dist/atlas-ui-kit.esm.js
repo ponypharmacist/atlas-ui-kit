@@ -920,45 +920,18 @@ const __vue_component__$T = /*#__PURE__*/normalizeComponent$2({
 
 var __vue_component__$U = __vue_component__$T;
 
-function _typeof$3(obj) {
-  "@babel/helpers - typeof";
-
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof$3 = function (obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof$3 = function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof$3(obj);
-}
-
-function _defineProperty$3(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
 function ownKeys$3(object, enumerableOnly) {
   var keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    });
+
+    if (enumerableOnly) {
+      symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+    }
+
     keys.push.apply(keys, symbols);
   }
 
@@ -985,12 +958,43 @@ function _objectSpread2(target) {
   return target;
 }
 
+function _typeof$4(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof$4 = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof$4 = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof$4(obj);
+}
+
+function _defineProperty$3(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
 var placeholderChar = '_';
 var strFunction = 'function';
 
-var emptyArray = [];
+var emptyArray$1 = [];
 function convertMaskToPlaceholder() {
-  var mask = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : emptyArray;
+  var mask = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : emptyArray$1;
   var placeholderChar$1 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : placeholderChar;
 
   if (!isArray$1(mask)) {
@@ -1024,15 +1028,15 @@ function processCaretTraps(mask) {
   };
 }
 
-var emptyArray$1 = [];
+var emptyArray = [];
 var emptyString = '';
 function conformToMask() {
   var rawValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : emptyString;
-  var mask = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : emptyArray$1;
+  var mask = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : emptyArray;
   var config = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
   if (!isArray$1(mask)) {
-    if (_typeof$3(mask) === strFunction) {
+    if (_typeof$4(mask) === strFunction) {
       mask = mask(rawValue, config);
       mask = processCaretTraps(mask).maskWithoutCaretTraps;
     } else {
@@ -1206,12 +1210,12 @@ var charRegexp = function charRegexp(char) {
   return new RegExp("/[".concat(escapeIfNeeded(char), "]/"));
 };
 
-var isRegexp = function isRegexp(entity) {
+var isRegexp$1 = function isRegexp(entity) {
   return entity instanceof RegExp;
 };
 
 var castToRegexp = function castToRegexp(char) {
-  return isRegexp(char) ? char : charRegexp(char);
+  return isRegexp$1(char) ? char : charRegexp(char);
 };
 
 function maskToRegExpMask(mask) {
@@ -1269,9 +1273,25 @@ var isFunction$2 = function isFunction(val) {
 var isString = function isString(val) {
   return typeof val === 'string';
 };
-var isRegexp$1 = function isRegexp(val) {
+var isRegexp = function isRegexp(val) {
   return val instanceof RegExp;
 };
+
+function parseMask(inputMask, maskReplacers) {
+  if (Array.isArray(inputMask)) {
+    return arrayMaskToRegExpMask(inputMask, maskReplacers);
+  }
+
+  if (isFunction$2(inputMask)) {
+    return inputMask;
+  }
+
+  if (isString(inputMask) && inputMask.length > 0) {
+    return stringMaskToRegExpMask(inputMask, maskReplacers);
+  }
+
+  return inputMask;
+}
 
 function createOptions() {
   var elementOptions = new Map();
@@ -1299,7 +1319,25 @@ function createOptions() {
   };
 }
 
-var options = createOptions();
+function extendMaskReplacers(maskReplacers) {
+  var baseMaskReplacers = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultMaskReplacers;
+
+  if (maskReplacers === null || Array.isArray(maskReplacers) || _typeof$4(maskReplacers) !== 'object') {
+    return baseMaskReplacers;
+  }
+
+  return Object.keys(maskReplacers).reduce(function (extendedMaskReplacers, key) {
+    var value = maskReplacers[key];
+
+    if (value !== null && !(value instanceof RegExp)) {
+      return extendedMaskReplacers;
+    }
+
+    return _objectSpread2(_objectSpread2({}, extendedMaskReplacers), {}, _defineProperty$3({}, key, value));
+  }, baseMaskReplacers);
+}
+
+var options$1 = createOptions();
 
 function triggerInputUpdate(el) {
   trigger(el, 'input');
@@ -1309,7 +1347,7 @@ function updateValue(el) {
   var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
   var value = el.value;
 
-  var _options$get = options.get(el),
+  var _options$get = options$1.get(el),
       previousValue = _options$get.previousValue,
       mask = _options$get.mask;
 
@@ -1327,51 +1365,22 @@ function updateValue(el) {
     triggerInputUpdate(el);
   }
 
-  options.partiallyUpdate(el, {
+  options$1.partiallyUpdate(el, {
     previousValue: value
   });
 }
 
 function updateMask(el, inputMask, maskReplacers) {
-  var mask;
-
-  if (Array.isArray(inputMask)) {
-    mask = arrayMaskToRegExpMask(inputMask, maskReplacers);
-  } else if (isFunction$2(inputMask)) {
-    mask = inputMask;
-  } else if (isString(inputMask) && inputMask.length > 0) {
-    mask = stringMaskToRegExpMask(inputMask, maskReplacers);
-  } else {
-    mask = inputMask;
-  }
-
-  options.partiallyUpdate(el, {
+  var mask = parseMask(inputMask, maskReplacers);
+  options$1.partiallyUpdate(el, {
     mask: mask
   });
-}
-
-function extendMaskReplacers(maskReplacers) {
-  var baseMaskReplacers = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultMaskReplacers;
-
-  if (maskReplacers === null || Array.isArray(maskReplacers) || _typeof$3(maskReplacers) !== 'object') {
-    return baseMaskReplacers;
-  }
-
-  return Object.keys(maskReplacers).reduce(function (extendedMaskReplacers, key) {
-    var value = maskReplacers[key];
-
-    if (value !== null && !(value instanceof RegExp)) {
-      return extendedMaskReplacers;
-    }
-
-    return _objectSpread2(_objectSpread2({}, extendedMaskReplacers), {}, _defineProperty$3({}, key, value));
-  }, baseMaskReplacers);
 }
 
 function maskToString(mask) {
   var maskArray = Array.isArray(mask) ? mask : [mask];
   var filteredMaskArray = maskArray.filter(function (part) {
-    return isString(part) || isRegexp$1(part);
+    return isString(part) || isRegexp(part);
   });
   return filteredMaskArray.toString();
 }
@@ -1400,11 +1409,28 @@ function createDirective() {
     },
     unbind: function unbind(el) {
       el = queryInputElementInside(el);
-      options.remove(el);
+      options$1.remove(el);
     }
   };
 }
 var directive$2 = createDirective();
+
+function createFilter() {
+  var filterOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var instanceMaskReplacers = extendMaskReplacers(filterOptions && filterOptions.placeholders);
+  return function (value, inputMask) {
+    if (!isString(value) && !Number.isFinite(value)) return value;
+    var mask = parseMask(inputMask, instanceMaskReplacers);
+
+    var _conformToMask = conformToMask("".concat(value), mask, {
+      guide: false
+    }),
+        conformedValue = _conformToMask.conformedValue;
+
+    return conformedValue;
+  };
+}
+createFilter();
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -2100,7 +2126,7 @@ var vueSliderComponent_umd_min = createCommonjsModule(function (module, exports)
   * vue-class-component v7.0.1
   * (c) 2015-present Evan You
   * @license MIT
-  */function n(t){return t&&"object"===typeof t&&"default"in t?t["default"]:t}Object.defineProperty(e,"__esModule",{value:!0});var o=n(r("8bbf")),i="undefined"!==typeof Reflect&&Reflect.defineMetadata&&Reflect.getOwnMetadataKeys;function a(t,e){s(t,e),Object.getOwnPropertyNames(e.prototype).forEach((function(r){s(t.prototype,e.prototype,r);})),Object.getOwnPropertyNames(e).forEach((function(r){s(t,e,r);}));}function s(t,e,r){var n=r?Reflect.getOwnMetadataKeys(e,r):Reflect.getOwnMetadataKeys(e);n.forEach((function(n){var o=r?Reflect.getOwnMetadata(n,e,r):Reflect.getOwnMetadata(n,e);r?Reflect.defineMetadata(n,o,t,r):Reflect.defineMetadata(n,o,t);}));}var u={__proto__:[]},c=u instanceof Array;function l(t){return function(e,r,n){var o="function"===typeof e?e:e.constructor;o.__decorators__||(o.__decorators__=[]),"number"!==typeof n&&(n=void 0),o.__decorators__.push((function(e){return t(e,r,n)}));}}function f(){for(var t=[],e=0;e<arguments.length;e++)t[e]=arguments[e];return o.extend({mixins:t})}function d(t){var e=typeof t;return null==t||"object"!==e&&"function"!==e}function h(t,e){var r=e.prototype._init;e.prototype._init=function(){var e=this,r=Object.getOwnPropertyNames(t);if(t.$options.props)for(var n in t.$options.props)t.hasOwnProperty(n)||r.push(n);r.forEach((function(r){"_"!==r.charAt(0)&&Object.defineProperty(e,r,{get:function(){return t[r]},set:function(e){t[r]=e;},configurable:!0});}));};var n=new e;e.prototype._init=r;var o={};return Object.keys(n).forEach((function(t){void 0!==n[t]&&(o[t]=n[t]);})),o}var p=["data","beforeCreate","created","beforeMount","mounted","beforeDestroy","destroyed","beforeUpdate","updated","activated","deactivated","render","errorCaptured","serverPrefetch"];function y(t,e){void 0===e&&(e={}),e.name=e.name||t._componentTag||t.name;var r=t.prototype;Object.getOwnPropertyNames(r).forEach((function(t){if("constructor"!==t)if(p.indexOf(t)>-1)e[t]=r[t];else {var n=Object.getOwnPropertyDescriptor(r,t);void 0!==n.value?"function"===typeof n.value?(e.methods||(e.methods={}))[t]=n.value:(e.mixins||(e.mixins=[])).push({data:function(){var e;return e={},e[t]=n.value,e}}):(n.get||n.set)&&((e.computed||(e.computed={}))[t]={get:n.get,set:n.set});}})),(e.mixins||(e.mixins=[])).push({data:function(){return h(this,t)}});var n=t.__decorators__;n&&(n.forEach((function(t){return t(e)})),delete t.__decorators__);var s=Object.getPrototypeOf(t.prototype),u=s instanceof o?s.constructor:o,c=u.extend(e);return v(c,t,u),i&&a(c,t),c}function v(t,e,r){Object.getOwnPropertyNames(e).forEach((function(n){if("prototype"!==n){var o=Object.getOwnPropertyDescriptor(t,n);if(!o||o.configurable){var i=Object.getOwnPropertyDescriptor(e,n);if(!c){if("cid"===n)return;var a=Object.getOwnPropertyDescriptor(r,n);if(!d(i.value)&&a&&a.value===i.value)return}Object.defineProperty(t,n,i);}}}));}function m(t){return "function"===typeof t?y(t):function(e){return y(e,t)}}m.registerHooks=function(t){p.push.apply(p,t);},e.default=m,e.createDecorator=l,e.mixins=f;},8875:function(t,e,r){var n,o,i;(function(r,a){o=[],n=a,i="function"===typeof n?n.apply(e,o):n,void 0===i||(t.exports=i);})("undefined"!==typeof self&&self,(function(){function t(){var e=Object.getOwnPropertyDescriptor(document,"currentScript");if(!e&&"currentScript"in document&&document.currentScript)return document.currentScript;if(e&&e.get!==t&&document.currentScript)return document.currentScript;try{throw new Error}catch(h){var r,n,o,i=/.*at [^(]*\((.*):(.+):(.+)\)$/gi,a=/@([^@]*):(\d+):(\d+)\s*$/gi,s=i.exec(h.stack)||a.exec(h.stack),u=s&&s[1]||!1,c=s&&s[2]||!1,l=document.location.href.replace(document.location.hash,""),f=document.getElementsByTagName("script");u===l&&(r=document.documentElement.outerHTML,n=new RegExp("(?:[^\\n]+?\\n){0,"+(c-2)+"}[^<]*<script>([\\d\\D]*?)<\\/script>[\\d\\D]*","i"),o=r.replace(n,"$1").trim());for(var d=0;d<f.length;d++){if("interactive"===f[d].readyState)return f[d];if(f[d].src===u)return f[d];if(u===l&&f[d].innerHTML&&f[d].innerHTML.trim()===o)return f[d]}return null}}return t}));},"8bbf":function(e,r){e.exports=t;},fb15:function(t,e,r){if(r.r(e),r.d(e,"ERROR_TYPE",(function(){return J})),r.d(e,"VueSliderMark",(function(){return F})),r.d(e,"VueSliderDot",(function(){return j})),"undefined"!==typeof window){var n=window.document.currentScript,o=r("8875");n=o(),"currentScript"in document||Object.defineProperty(document,"currentScript",{get:o});var i=n&&n.src.match(/(.+\/)[^/]+\.js(\?.*)?$/);i&&(r.p=i[1]);}var a=r("2638"),s=r.n(a);function u(t,e,r,n){var o,i=arguments.length,a=i<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,r):n;if("object"===typeof Reflect&&"function"===typeof Reflect.decorate)a=Reflect.decorate(t,e,r,n);else for(var s=t.length-1;s>=0;s--)(o=t[s])&&(a=(i<3?o(a):i>3?o(e,r,a):o(e,r))||a);return i>3&&a&&Object.defineProperty(e,r,a),a}var c=r("8bbf"),l=r.n(c),f=r("65d9"),d=r.n(f);function h(t,e){return void 0===e&&(e={}),Object(f["createDecorator"])((function(r,n){(r.props||(r.props={}))[n]=e,r.model={prop:n,event:t||n};}))}function p(t){return void 0===t&&(t={}),Object(f["createDecorator"])((function(e,r){(e.props||(e.props={}))[r]=t;}))}function y(t,e){void 0===e&&(e={});var r=e.deep,n=void 0!==r&&r,o=e.immediate,i=void 0!==o&&o;return Object(f["createDecorator"])((function(e,r){"object"!==typeof e.watch&&(e.watch=Object.create(null));var o=e.watch;"object"!==typeof o[t]||Array.isArray(o[t])?"undefined"===typeof o[t]&&(o[t]=[]):o[t]=[o[t]],o[t].push({handler:r,deep:n,immediate:i});}))}r("4ed8");function v(t){return v="function"===typeof Symbol&&"symbol"===typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"===typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},v(t)}function m(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function b(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n);}}function g(t,e,r){return e&&b(t.prototype,e),r&&b(t,r),t}function k(t,e){if("function"!==typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function");t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,writable:!0,configurable:!0}}),e&&O(t,e);}function O(t,e){return O=Object.setPrototypeOf||function(t,e){return t.__proto__=e,t},O(t,e)}function S(t){var e=D();return function(){var r,n=w(t);if(e){var o=w(this).constructor;r=Reflect.construct(n,arguments,o);}else r=n.apply(this,arguments);return x(this,r)}}function x(t,e){return !e||"object"!==v(e)&&"function"!==typeof e?P(t):e}function P(t){if(void 0===t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t}function D(){if("undefined"===typeof Reflect||!Reflect.construct)return !1;if(Reflect.construct.sham)return !1;if("function"===typeof Proxy)return !0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(t){return !1}}function w(t){return w=Object.setPrototypeOf?Object.getPrototypeOf:function(t){return t.__proto__||Object.getPrototypeOf(t)},w(t)}var R=function(){var t=function(t){k(r,t);var e=S(r);function r(){return m(this,r),e.apply(this,arguments)}return g(r,[{key:"dragStart",value:function(t){if(this.disabled)return !1;this.$emit("drag-start");}},{key:"render",value:function(){var t=arguments[0];return t("div",{ref:"dot",class:this.dotClasses,attrs:{"aria-valuetext":this.tooltipValue},on:{mousedown:this.dragStart,touchstart:this.dragStart}},[this.$slots.dot||t("div",{class:this.handleClasses,style:this.dotStyle}),"none"!==this.tooltip?t("div",{class:this.tooltipClasses},[this.$slots.tooltip||t("div",{class:this.tooltipInnerClasses,style:this.tooltipStyle},[t("span",{class:"vue-slider-dot-tooltip-text"},[this.tooltipValue])])]):null])}},{key:"dotClasses",get:function(){return ["vue-slider-dot",{"vue-slider-dot-hover":"hover"===this.tooltip||"active"===this.tooltip,"vue-slider-dot-disabled":this.disabled,"vue-slider-dot-focus":this.focus}]}},{key:"handleClasses",get:function(){return ["vue-slider-dot-handle",{"vue-slider-dot-handle-disabled":this.disabled,"vue-slider-dot-handle-focus":this.focus}]}},{key:"tooltipClasses",get:function(){return ["vue-slider-dot-tooltip",["vue-slider-dot-tooltip-".concat(this.tooltipPlacement)],{"vue-slider-dot-tooltip-show":this.showTooltip}]}},{key:"tooltipInnerClasses",get:function(){return ["vue-slider-dot-tooltip-inner",["vue-slider-dot-tooltip-inner-".concat(this.tooltipPlacement)],{"vue-slider-dot-tooltip-inner-disabled":this.disabled,"vue-slider-dot-tooltip-inner-focus":this.focus}]}},{key:"showTooltip",get:function(){switch(this.tooltip){case"always":return !0;case"none":return !1;case"focus":case"active":return !!this.focus;default:return !1}}},{key:"tooltipValue",get:function(){return this.tooltipFormatter?"string"===typeof this.tooltipFormatter?this.tooltipFormatter.replace(/\{value\}/,String(this.value)):this.tooltipFormatter(this.value):this.value}}]),r}(l.a);return u([p({default:0})],t.prototype,"value",void 0),u([p()],t.prototype,"tooltip",void 0),u([p()],t.prototype,"dotStyle",void 0),u([p()],t.prototype,"tooltipStyle",void 0),u([p({type:String,validator:function(t){return ["top","right","bottom","left"].indexOf(t)>-1},required:!0})],t.prototype,"tooltipPlacement",void 0),u([p({type:[String,Function]})],t.prototype,"tooltipFormatter",void 0),u([p({type:Boolean,default:!1})],t.prototype,"focus",void 0),u([p({default:!1})],t.prototype,"disabled",void 0),t=u([d.a],t),t}(),j=R;r("556c");function E(t){return E="function"===typeof Symbol&&"symbol"===typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"===typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},E(t)}function A(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function V(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n);}}function _(t,e,r){return e&&V(t.prototype,e),r&&V(t,r),t}function M(t,e){if("function"!==typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function");t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,writable:!0,configurable:!0}}),e&&I(t,e);}function I(t,e){return I=Object.setPrototypeOf||function(t,e){return t.__proto__=e,t},I(t,e)}function L(t){var e=B();return function(){var r,n=N(t);if(e){var o=N(this).constructor;r=Reflect.construct(n,arguments,o);}else r=n.apply(this,arguments);return C(this,r)}}function C(t,e){return !e||"object"!==E(e)&&"function"!==typeof e?T(t):e}function T(t){if(void 0===t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t}function B(){if("undefined"===typeof Reflect||!Reflect.construct)return !1;if(Reflect.construct.sham)return !1;if("function"===typeof Proxy)return !0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(t){return !1}}function N(t){return N=Object.setPrototypeOf?Object.getPrototypeOf:function(t){return t.__proto__||Object.getPrototypeOf(t)},N(t)}var H,z=function(){var t=function(t){M(r,t);var e=L(r);function r(){return A(this,r),e.apply(this,arguments)}return _(r,[{key:"labelClickHandle",value:function(t){t.stopPropagation(),this.$emit("pressLabel",this.mark.pos);}},{key:"render",value:function(){var t=arguments[0],e=this.mark;return t("div",{class:this.marksClasses},[this.$slots.step||t("div",{class:this.stepClasses,style:[this.stepStyle,e.style,e.active?this.stepActiveStyle:null,e.active?e.activeStyle:null]}),this.hideLabel?null:this.$slots.label||t("div",{class:this.labelClasses,style:[this.labelStyle,e.labelStyle,e.active?this.labelActiveStyle:null,e.active?e.labelActiveStyle:null],on:{click:this.labelClickHandle}},[e.label])])}},{key:"marksClasses",get:function(){return ["vue-slider-mark",{"vue-slider-mark-active":this.mark.active}]}},{key:"stepClasses",get:function(){return ["vue-slider-mark-step",{"vue-slider-mark-step-active":this.mark.active}]}},{key:"labelClasses",get:function(){return ["vue-slider-mark-label",{"vue-slider-mark-label-active":this.mark.active}]}}]),r}(l.a);return u([p({required:!0})],t.prototype,"mark",void 0),u([p(Boolean)],t.prototype,"hideLabel",void 0),u([p()],t.prototype,"stepStyle",void 0),u([p()],t.prototype,"stepActiveStyle",void 0),u([p()],t.prototype,"labelStyle",void 0),u([p()],t.prototype,"labelActiveStyle",void 0),t=u([d.a],t),t}(),F=z,$=function(t){return "number"===typeof t?"".concat(t,"px"):t},U=function(t){var e=document.documentElement,r=document.body,n=t.getBoundingClientRect(),o={y:n.top+(window.pageYOffset||e.scrollTop)-(e.clientTop||r.clientTop||0),x:n.left+(window.pageXOffset||e.scrollLeft)-(e.clientLeft||r.clientLeft||0)};return o},W=function(t,e,r){var n="targetTouches"in t?t.targetTouches[0]:t,o=U(e),i={x:n.pageX-o.x,y:n.pageY-o.y};return {x:r?e.offsetWidth-i.x:i.x,y:r?e.offsetHeight-i.y:i.y}};(function(t){t[t["PAGE_UP"]=33]="PAGE_UP",t[t["PAGE_DOWN"]=34]="PAGE_DOWN",t[t["END"]=35]="END",t[t["HOME"]=36]="HOME",t[t["LEFT"]=37]="LEFT",t[t["UP"]=38]="UP",t[t["RIGHT"]=39]="RIGHT",t[t["DOWN"]=40]="DOWN";})(H||(H={}));var G=function(t,e){if(e.hook){var r=e.hook(t);if("function"===typeof r)return r;if(!r)return null}switch(t.keyCode){case H.UP:return function(t){return "ttb"===e.direction?t-1:t+1};case H.RIGHT:return function(t){return "rtl"===e.direction?t-1:t+1};case H.DOWN:return function(t){return "ttb"===e.direction?t+1:t-1};case H.LEFT:return function(t){return "rtl"===e.direction?t+1:t-1};case H.END:return function(){return e.max};case H.HOME:return function(){return e.min};case H.PAGE_UP:return function(t){return t+10};case H.PAGE_DOWN:return function(t){return t-10};default:return null}};function K(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function q(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n);}}function X(t,e,r){return e&&q(t.prototype,e),r&&q(t,r),t}var Y,J,Q=function(){function t(e){K(this,t),this.num=e;}return X(t,[{key:"decimal",value:function(t,e){var r=this.num,n=this.getDecimalLen(r),o=this.getDecimalLen(t),i=0;switch(e){case"+":i=this.getExponent(n,o),this.num=(this.safeRoundUp(r,i)+this.safeRoundUp(t,i))/i;break;case"-":i=this.getExponent(n,o),this.num=(this.safeRoundUp(r,i)-this.safeRoundUp(t,i))/i;break;case"*":this.num=this.safeRoundUp(this.safeRoundUp(r,this.getExponent(n)),this.safeRoundUp(t,this.getExponent(o)))/this.getExponent(n+o);break;case"/":i=this.getExponent(n,o),this.num=this.safeRoundUp(r,i)/this.safeRoundUp(t,i);break;case"%":i=this.getExponent(n,o),this.num=this.safeRoundUp(r,i)%this.safeRoundUp(t,i)/i;break}return this}},{key:"plus",value:function(t){return this.decimal(t,"+")}},{key:"minus",value:function(t){return this.decimal(t,"-")}},{key:"multiply",value:function(t){return this.decimal(t,"*")}},{key:"divide",value:function(t){return this.decimal(t,"/")}},{key:"remainder",value:function(t){return this.decimal(t,"%")}},{key:"toNumber",value:function(){return this.num}},{key:"getDecimalLen",value:function(t){var e="".concat(t).split("e");return ("".concat(e[0]).split(".")[1]||"").length-(e[1]?+e[1]:0)}},{key:"getExponent",value:function(t,e){return Math.pow(10,void 0!==e?Math.max(t,e):t)}},{key:"safeRoundUp",value:function(t,e){return Math.round(t*e)}}]),t}();function Z(t,e){var r=Object.keys(t);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(t);e&&(n=n.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),r.push.apply(r,n);}return r}function tt(t){for(var e=1;e<arguments.length;e++){var r=null!=arguments[e]?arguments[e]:{};e%2?Z(Object(r),!0).forEach((function(e){pt(t,e,r[e]);})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(r)):Z(Object(r)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(r,e));}));}return t}function et(t,e){return ot(t)||nt(t,e)||st(t,e)||rt()}function rt(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function nt(t,e){if("undefined"!==typeof Symbol&&Symbol.iterator in Object(t)){var r=[],n=!0,o=!1,i=void 0;try{for(var a,s=t[Symbol.iterator]();!(n=(a=s.next()).done);n=!0)if(r.push(a.value),e&&r.length===e)break}catch(u){o=!0,i=u;}finally{try{n||null==s["return"]||s["return"]();}finally{if(o)throw i}}return r}}function ot(t){if(Array.isArray(t))return t}function it(t){return ct(t)||ut(t)||st(t)||at()}function at(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function st(t,e){if(t){if("string"===typeof t)return lt(t,e);var r=Object.prototype.toString.call(t).slice(8,-1);return "Object"===r&&t.constructor&&(r=t.constructor.name),"Map"===r||"Set"===r?Array.from(t):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?lt(t,e):void 0}}function ut(t){if("undefined"!==typeof Symbol&&Symbol.iterator in Object(t))return Array.from(t)}function ct(t){if(Array.isArray(t))return lt(t)}function lt(t,e){(null==e||e>t.length)&&(e=t.length);for(var r=0,n=new Array(e);r<e;r++)n[r]=t[r];return n}function ft(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function dt(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n);}}function ht(t,e,r){return e&&dt(t.prototype,e),r&&dt(t,r),t}function pt(t,e,r){return e in t?Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):t[e]=r,t}(function(t){t[t["VALUE"]=1]="VALUE",t[t["INTERVAL"]=2]="INTERVAL",t[t["MIN"]=3]="MIN",t[t["MAX"]=4]="MAX",t[t["ORDER"]=5]="ORDER";})(J||(J={}));var yt=(Y={},pt(Y,J.VALUE,'The type of the "value" is illegal'),pt(Y,J.INTERVAL,'The prop "interval" is invalid, "(max - min)" must be divisible by "interval"'),pt(Y,J.MIN,'The "value" must be greater than or equal to the "min".'),pt(Y,J.MAX,'The "value" must be less than or equal to the "max".'),pt(Y,J.ORDER,'When "order" is false, the parameters "minRange", "maxRange", "fixed", "enabled" are invalid.'),Y),vt=function(){function t(e){ft(this,t),this.dotsPos=[],this.dotsValue=[],this.cacheRangeDir={},this.data=e.data,this.max=e.max,this.min=e.min,this.interval=e.interval,this.order=e.order,this.marks=e.marks,this.included=e.included,this.process=e.process,this.adsorb=e.adsorb,this.dotOptions=e.dotOptions,this.onError=e.onError,this.order?(this.minRange=e.minRange||0,this.maxRange=e.maxRange||0,this.enableCross=e.enableCross,this.fixed=e.fixed):((e.minRange||e.maxRange||!e.enableCross||e.fixed)&&this.emitError(J.ORDER),this.minRange=0,this.maxRange=0,this.enableCross=!0,this.fixed=!1),this.setValue(e.value);}return ht(t,[{key:"setValue",value:function(t){var e=this;this.setDotsValue(Array.isArray(t)?this.order?it(t).sort((function(t,r){return e.getIndexByValue(t)-e.getIndexByValue(r)})):it(t):[t],!0);}},{key:"setDotsValue",value:function(t,e){this.dotsValue=t,e&&this.syncDotsPos();}},{key:"setDotsPos",value:function(t){var e=this,r=this.order?it(t).sort((function(t,e){return t-e})):t;this.dotsPos=r,this.setDotsValue(r.map((function(t){return e.getValueByPos(t)})),this.adsorb);}},{key:"getValueByPos",value:function(t){var e=this.parsePos(t);if(this.included){var r=100;this.markList.forEach((function(n){var o=Math.abs(n.pos-t);o<r&&(r=o,e=n.value);}));}return e}},{key:"syncDotsPos",value:function(){var t=this;this.dotsPos=this.dotsValue.map((function(e){return t.parseValue(e)}));}},{key:"getRecentDot",value:function(t){var e=this.dotsPos.map((function(e){return Math.abs(e-t)}));return e.indexOf(Math.min.apply(Math,it(e)))}},{key:"getIndexByValue",value:function(t){return this.data?this.data.indexOf(t):new Q(+t).minus(this.min).divide(this.interval).toNumber()}},{key:"getValueByIndex",value:function(t){return t<0?t=0:t>this.total&&(t=this.total),this.data?this.data[t]:new Q(t).multiply(this.interval).plus(this.min).toNumber()}},{key:"setDotPos",value:function(t,e){t=this.getValidPos(t,e).pos;var r=t-this.dotsPos[e];if(r){var n=new Array(this.dotsPos.length);this.fixed?n=this.getFixedChangePosArr(r,e):this.minRange||this.maxRange?n=this.getLimitRangeChangePosArr(t,r,e):n[e]=r,this.setDotsPos(this.dotsPos.map((function(t,e){return t+(n[e]||0)})));}}},{key:"getFixedChangePosArr",value:function(t,e){var r=this;return this.dotsPos.forEach((function(n,o){if(o!==e){var i=r.getValidPos(n+t,o),a=i.pos,s=i.inRange;s||(t=Math.min(Math.abs(a-n),Math.abs(t))*(t<0?-1:1));}})),this.dotsPos.map((function(e){return t}))}},{key:"getLimitRangeChangePosArr",value:function(t,e,r){var n=this,o=[{index:r,changePos:e}],i=e;return [this.minRange,this.maxRange].forEach((function(a,s){if(!a)return !1;var u=0===s,c=e>0,l=0;l=u?c?1:-1:c?-1:1;var f=function(t,e){var r=Math.abs(t-e);return u?r<n.minRangeDir:r>n.maxRangeDir},d=r+l,h=n.dotsPos[d],p=t;while(n.isPos(h)&&f(h,p)){var y=n.getValidPos(h+i,d),v=y.pos;o.push({index:d,changePos:v-h}),d+=l,p=v,h=n.dotsPos[d];}})),this.dotsPos.map((function(t,e){var r=o.filter((function(t){return t.index===e}));return r.length?r[0].changePos:0}))}},{key:"isPos",value:function(t){return "number"===typeof t}},{key:"getValidPos",value:function(t,e){var r=this.valuePosRange[e],n=!0;return t<r[0]?(t=r[0],n=!1):t>r[1]&&(t=r[1],n=!1),{pos:t,inRange:n}}},{key:"parseValue",value:function(t){if(this.data)t=this.data.indexOf(t);else if("number"===typeof t||"string"===typeof t){if(t=+t,t<this.min)return this.emitError(J.MIN),0;if(t>this.max)return this.emitError(J.MAX),0;if("number"!==typeof t||t!==t)return this.emitError(J.VALUE),0;t=new Q(t).minus(this.min).divide(this.interval).toNumber();}var e=new Q(t).multiply(this.gap).toNumber();return e<0?0:e>100?100:e}},{key:"parsePos",value:function(t){var e=Math.round(t/this.gap);return this.getValueByIndex(e)}},{key:"isActiveByPos",value:function(t){return this.processArray.some((function(e){var r=et(e,2),n=r[0],o=r[1];return t>=n&&t<=o}))}},{key:"getValues",value:function(){if(this.data)return this.data;for(var t=[],e=0;e<=this.total;e++)t.push(new Q(e).multiply(this.interval).plus(this.min).toNumber());return t}},{key:"getRangeDir",value:function(t){return t?new Q(t).divide(new Q(this.data?this.data.length-1:this.max).minus(this.data?0:this.min).toNumber()).multiply(100).toNumber():100}},{key:"emitError",value:function(t){this.onError&&this.onError(t,yt[t]);}},{key:"getDotRange",value:function(t,e,r){if(!this.dotOptions)return r;var n=Array.isArray(this.dotOptions)?this.dotOptions[t]:this.dotOptions;return n&&void 0!==n[e]?this.parseValue(n[e]):r}},{key:"markList",get:function(){var t=this;if(!this.marks)return [];var e=function(e,r){var n=t.parseValue(e);return tt({pos:n,value:e,label:e,active:t.isActiveByPos(n)},r)};return !0===this.marks?this.getValues().map((function(t){return e(t)})):"[object Object]"===Object.prototype.toString.call(this.marks)?Object.keys(this.marks).sort((function(t,e){return +t-+e})).map((function(r){var n=t.marks[r];return e(r,"string"!==typeof n?n:{label:n})})):Array.isArray(this.marks)?this.marks.map((function(t){return e(t)})):"function"===typeof this.marks?this.getValues().map((function(e){return {value:e,result:t.marks(e)}})).filter((function(t){var e=t.result;return !!e})).map((function(t){var r=t.value,n=t.result;return e(r,n)})):[]}},{key:"processArray",get:function(){if(this.process){if("function"===typeof this.process)return this.process(this.dotsPos);if(1===this.dotsPos.length)return [[0,this.dotsPos[0]]];if(this.dotsPos.length>1)return [[Math.min.apply(Math,it(this.dotsPos)),Math.max.apply(Math,it(this.dotsPos))]]}return []}},{key:"total",get:function(){var t=0;return t=this.data?this.data.length-1:new Q(this.max).minus(this.min).divide(this.interval).toNumber(),t-Math.floor(t)!==0?(this.emitError(J.INTERVAL),0):t}},{key:"gap",get:function(){return 100/this.total}},{key:"minRangeDir",get:function(){return this.cacheRangeDir[this.minRange]?this.cacheRangeDir[this.minRange]:this.cacheRangeDir[this.minRange]=this.getRangeDir(this.minRange)}},{key:"maxRangeDir",get:function(){return this.cacheRangeDir[this.maxRange]?this.cacheRangeDir[this.maxRange]:this.cacheRangeDir[this.maxRange]=this.getRangeDir(this.maxRange)}},{key:"valuePosRange",get:function(){var t=this,e=this.dotsPos,r=[];return e.forEach((function(n,o){r.push([Math.max(t.minRange?t.minRangeDir*o:0,t.enableCross?0:e[o-1]||0,t.getDotRange(o,"min",0)),Math.min(t.minRange?100-t.minRangeDir*(e.length-1-o):100,t.enableCross?100:e[o+1]||100,t.getDotRange(o,"max",100))]);})),r}},{key:"dotsIndex",get:function(){var t=this;return this.dotsValue.map((function(e){return t.getIndexByValue(e)}))}}]),t}();function mt(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function bt(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n);}}function gt(t,e,r){return e&&bt(t.prototype,e),r&&bt(t,r),t}var kt=function(){function t(e){mt(this,t),this.states=0,this.map=e;}return gt(t,[{key:"add",value:function(t){this.states|=t;}},{key:"delete",value:function(t){this.states&=~t;}},{key:"toggle",value:function(t){this.has(t)?this.delete(t):this.add(t);}},{key:"has",value:function(t){return !!(this.states&t)}}]),t}();r("4abb");function Ot(t,e){return Pt(t)||xt(t,e)||At(t,e)||St()}function St(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function xt(t,e){if("undefined"!==typeof Symbol&&Symbol.iterator in Object(t)){var r=[],n=!0,o=!1,i=void 0;try{for(var a,s=t[Symbol.iterator]();!(n=(a=s.next()).done);n=!0)if(r.push(a.value),e&&r.length===e)break}catch(u){o=!0,i=u;}finally{try{n||null==s["return"]||s["return"]();}finally{if(o)throw i}}return r}}function Pt(t){if(Array.isArray(t))return t}function Dt(t,e){var r=Object.keys(t);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(t);e&&(n=n.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),r.push.apply(r,n);}return r}function wt(t){for(var e=1;e<arguments.length;e++){var r=null!=arguments[e]?arguments[e]:{};e%2?Dt(Object(r),!0).forEach((function(e){Rt(t,e,r[e]);})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(r)):Dt(Object(r)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(r,e));}));}return t}function Rt(t,e,r){return e in t?Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):t[e]=r,t}function jt(t){return _t(t)||Vt(t)||At(t)||Et()}function Et(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function At(t,e){if(t){if("string"===typeof t)return Mt(t,e);var r=Object.prototype.toString.call(t).slice(8,-1);return "Object"===r&&t.constructor&&(r=t.constructor.name),"Map"===r||"Set"===r?Array.from(t):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?Mt(t,e):void 0}}function Vt(t){if("undefined"!==typeof Symbol&&Symbol.iterator in Object(t))return Array.from(t)}function _t(t){if(Array.isArray(t))return Mt(t)}function Mt(t,e){(null==e||e>t.length)&&(e=t.length);for(var r=0,n=new Array(e);r<e;r++)n[r]=t[r];return n}function It(t){return It="function"===typeof Symbol&&"symbol"===typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"===typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},It(t)}function Lt(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function Ct(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n);}}function Tt(t,e,r){return e&&Ct(t.prototype,e),r&&Ct(t,r),t}function Bt(t,e){if("function"!==typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function");t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,writable:!0,configurable:!0}}),e&&Nt(t,e);}function Nt(t,e){return Nt=Object.setPrototypeOf||function(t,e){return t.__proto__=e,t},Nt(t,e)}function Ht(t){var e=$t();return function(){var r,n=Ut(t);if(e){var o=Ut(this).constructor;r=Reflect.construct(n,arguments,o);}else r=n.apply(this,arguments);return zt(this,r)}}function zt(t,e){return !e||"object"!==It(e)&&"function"!==typeof e?Ft(t):e}function Ft(t){if(void 0===t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t}function $t(){if("undefined"===typeof Reflect||!Reflect.construct)return !1;if(Reflect.construct.sham)return !1;if("function"===typeof Proxy)return !0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(t){return !1}}function Ut(t){return Ut=Object.setPrototypeOf?Object.getPrototypeOf:function(t){return t.__proto__||Object.getPrototypeOf(t)},Ut(t)}var Wt={None:0,Drag:2,Focus:4},Gt=4,Kt=function(){var t=function(t){Bt(r,t);var e=Ht(r);function r(){var t;return Lt(this,r),t=e.apply(this,arguments),t.states=new kt(Wt),t.scale=1,t.focusDotIndex=0,t}return Tt(r,[{key:"isObjectData",value:function(t){return !!t&&"[object Object]"===Object.prototype.toString.call(t)}},{key:"isObjectArrayData",value:function(t){return !!t&&Array.isArray(t)&&t.length>0&&"object"===It(t[0])}},{key:"onValueChanged",value:function(){this.control&&!this.states.has(Wt.Drag)&&this.isNotSync&&(this.control.setValue(this.value),this.syncValueByPos());}},{key:"created",value:function(){this.initControl();}},{key:"mounted",value:function(){this.bindEvent();}},{key:"beforeDestroy",value:function(){this.unbindEvent();}},{key:"bindEvent",value:function(){document.addEventListener("touchmove",this.dragMove,{passive:!1}),document.addEventListener("touchend",this.dragEnd,{passive:!1}),document.addEventListener("mousedown",this.blurHandle),document.addEventListener("mousemove",this.dragMove,{passive:!1}),document.addEventListener("mouseup",this.dragEnd),document.addEventListener("mouseleave",this.dragEnd),document.addEventListener("keydown",this.keydownHandle);}},{key:"unbindEvent",value:function(){document.removeEventListener("touchmove",this.dragMove),document.removeEventListener("touchend",this.dragEnd),document.removeEventListener("mousedown",this.blurHandle),document.removeEventListener("mousemove",this.dragMove),document.removeEventListener("mouseup",this.dragEnd),document.removeEventListener("mouseleave",this.dragEnd),document.removeEventListener("keydown",this.keydownHandle);}},{key:"setScale",value:function(){var t=new Q(Math.floor(this.isHorizontal?this.$refs.rail.offsetWidth:this.$refs.rail.offsetHeight));void 0!==this.zoom&&t.multiply(this.zoom),t.divide(100),this.scale=t.toNumber();}},{key:"initControl",value:function(){var t=this;this.control=new vt({value:this.value,data:this.sliderData,enableCross:this.enableCross,fixed:this.fixed,max:this.max,min:this.min,interval:this.interval,minRange:this.minRange,maxRange:this.maxRange,order:this.order,marks:this.sliderMarks,included:this.included,process:this.process,adsorb:this.adsorb,dotOptions:this.dotOptions,onError:this.emitError}),this.syncValueByPos(),["data","enableCross","fixed","max","min","interval","minRange","maxRange","order","marks","process","adsorb","included","dotOptions"].forEach((function(e){t.$watch(e,(function(r){if("data"===e&&Array.isArray(t.control.data)&&Array.isArray(r)&&t.control.data.length===r.length&&r.every((function(e,r){return e===t.control.data[r]})))return !1;switch(e){case"data":case"dataLabel":case"dataValue":t.control.data=t.sliderData;break;case"mark":t.control.marks=t.sliderMarks;break;default:t.control[e]=r;}["data","max","min","interval"].indexOf(e)>-1&&t.control.syncDotsPos();}));}));}},{key:"syncValueByPos",value:function(){var t=this.control.dotsValue;this.isDiff(t,Array.isArray(this.value)?this.value:[this.value])&&this.$emit("change",1===t.length?t[0]:jt(t),this.focusDotIndex);}},{key:"isDiff",value:function(t,e){return t.length!==e.length||t.some((function(t,r){return t!==e[r]}))}},{key:"emitError",value:function(t,e){this.silent||console.error("[VueSlider error]: ".concat(e)),this.$emit("error",t,e);}},{key:"dragStartOnProcess",value:function(t){if(this.dragOnClick){this.setScale();var e=this.getPosByEvent(t),r=this.control.getRecentDot(e);if(this.dots[r].disabled)return;this.dragStart(r),this.control.setDotPos(e,this.focusDotIndex),this.lazy||this.syncValueByPos();}}},{key:"dragStart",value:function(t){this.focusDotIndex=t,this.setScale(),this.states.add(Wt.Drag),this.states.add(Wt.Focus),this.$emit("drag-start",this.focusDotIndex);}},{key:"dragMove",value:function(t){if(!this.states.has(Wt.Drag))return !1;t.preventDefault();var e=this.getPosByEvent(t);this.isCrossDot(e),this.control.setDotPos(e,this.focusDotIndex),this.lazy||this.syncValueByPos();var r=this.control.dotsValue;this.$emit("dragging",1===r.length?r[0]:jt(r),this.focusDotIndex);}},{key:"isCrossDot",value:function(t){if(this.canSort){var e=this.focusDotIndex,r=t;if(r>this.dragRange[1]?(r=this.dragRange[1],this.focusDotIndex++):r<this.dragRange[0]&&(r=this.dragRange[0],this.focusDotIndex--),e!==this.focusDotIndex){var n=this.$refs["dot-".concat(this.focusDotIndex)];n&&n.$el&&n.$el.focus(),this.control.setDotPos(r,e);}}}},{key:"dragEnd",value:function(t){var e=this;if(!this.states.has(Wt.Drag))return !1;setTimeout((function(){e.lazy&&e.syncValueByPos(),e.included&&e.isNotSync?e.control.setValue(e.value):e.control.syncDotsPos(),e.states.delete(Wt.Drag),e.useKeyboard&&!("targetTouches"in t)||e.states.delete(Wt.Focus),e.$emit("drag-end",e.focusDotIndex);}));}},{key:"blurHandle",value:function(t){if(!this.states.has(Wt.Focus)||!this.$refs.container||this.$refs.container.contains(t.target))return !1;this.states.delete(Wt.Focus);}},{key:"clickHandle",value:function(t){if(!this.clickable||this.disabled)return !1;if(!this.states.has(Wt.Drag)){this.setScale();var e=this.getPosByEvent(t);this.setValueByPos(e);}}},{key:"focus",value:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:0;this.states.add(Wt.Focus),this.focusDotIndex=t;}},{key:"blur",value:function(){this.states.delete(Wt.Focus);}},{key:"getValue",value:function(){var t=this.control.dotsValue;return 1===t.length?t[0]:t}},{key:"getIndex",value:function(){var t=this.control.dotsIndex;return 1===t.length?t[0]:t}},{key:"setValue",value:function(t){this.control.setValue(Array.isArray(t)?jt(t):[t]),this.syncValueByPos();}},{key:"setIndex",value:function(t){var e=this,r=Array.isArray(t)?t.map((function(t){return e.control.getValueByIndex(t)})):this.control.getValueByIndex(t);this.setValue(r);}},{key:"setValueByPos",value:function(t){var e=this,r=this.control.getRecentDot(t);if(this.disabled||this.dots[r].disabled)return !1;this.focusDotIndex=r,this.control.setDotPos(t,r),this.syncValueByPos(),this.useKeyboard&&this.states.add(Wt.Focus),setTimeout((function(){e.included&&e.isNotSync?e.control.setValue(e.value):e.control.syncDotsPos();}));}},{key:"keydownHandle",value:function(t){var e=this;if(!this.useKeyboard||!this.states.has(Wt.Focus))return !1;var r=this.included&&this.marks,n=G(t,{direction:this.direction,max:r?this.control.markList.length-1:this.control.total,min:0,hook:this.keydownHook});if(n){t.preventDefault();var o=-1,i=0;r?(this.control.markList.some((function(t,r){return t.value===e.control.dotsValue[e.focusDotIndex]&&(o=n(r),!0)})),o<0?o=0:o>this.control.markList.length-1&&(o=this.control.markList.length-1),i=this.control.markList[o].pos):(o=n(this.control.getIndexByValue(this.control.dotsValue[this.focusDotIndex])),i=this.control.parseValue(this.control.getValueByIndex(o))),this.isCrossDot(i),this.control.setDotPos(i,this.focusDotIndex),this.syncValueByPos();}}},{key:"getPosByEvent",value:function(t){return W(t,this.$refs.rail,this.isReverse)[this.isHorizontal?"x":"y"]/this.scale}},{key:"renderSlot",value:function(t,e,r,n){var o=this.$createElement,i=this.$scopedSlots[t];return i?n?i(e):o("template",{slot:t},[i(e)]):r}},{key:"render",value:function(){var t=this,e=arguments[0];return e("div",s()([{ref:"container",class:this.containerClasses,style:this.containerStyles,on:{click:this.clickHandle,touchstart:this.dragStartOnProcess,mousedown:this.dragStartOnProcess}},this.$attrs]),[e("div",{ref:"rail",class:"vue-slider-rail",style:this.railStyle},[this.processArray.map((function(r,n){return t.renderSlot("process",r,e("div",{class:"vue-slider-process",key:"process-".concat(n),style:r.style}),!0)})),this.sliderMarks?e("div",{class:"vue-slider-marks"},[this.control.markList.map((function(r,n){var o;return t.renderSlot("mark",r,e("vue-slider-mark",{key:"mark-".concat(n),attrs:{mark:r,hideLabel:t.hideLabel,stepStyle:t.stepStyle,stepActiveStyle:t.stepActiveStyle,labelStyle:t.labelStyle,labelActiveStyle:t.labelActiveStyle},style:(o={},Rt(o,t.isHorizontal?"height":"width","100%"),Rt(o,t.isHorizontal?"width":"height",t.tailSize),Rt(o,t.mainDirection,"".concat(r.pos,"%")),o),on:{pressLabel:function(e){return t.clickable&&t.setValueByPos(e)}}},[t.renderSlot("step",r,null),t.renderSlot("label",r,null)]),!0)}))]):null,this.dots.map((function(r,n){var o;return e("vue-slider-dot",{ref:"dot-".concat(n),key:"dot-".concat(n),attrs:wt({value:r.value,disabled:r.disabled,focus:r.focus,"dot-style":[r.style,r.disabled?r.disabledStyle:null,r.focus?r.focusStyle:null],tooltip:r.tooltip||t.tooltip,"tooltip-style":[t.tooltipStyle,r.tooltipStyle,r.disabled?r.tooltipDisabledStyle:null,r.focus?r.tooltipFocusStyle:null],"tooltip-formatter":Array.isArray(t.sliderTooltipFormatter)?t.sliderTooltipFormatter[n]:t.sliderTooltipFormatter,"tooltip-placement":t.tooltipDirections[n],role:"slider","aria-valuenow":r.value,"aria-valuemin":t.min,"aria-valuemax":t.max,"aria-orientation":t.isHorizontal?"horizontal":"vertical",tabindex:"0"},t.dotAttrs),style:[t.dotBaseStyle,(o={},Rt(o,t.mainDirection,"".concat(r.pos,"%")),Rt(o,"transition","".concat(t.mainDirection," ").concat(t.animateTime,"s")),o)],on:{"drag-start":function(){return t.dragStart(n)}},nativeOn:{focus:function(){return !r.disabled&&t.focus(n)},blur:function(){return t.blur()}}},[t.renderSlot("dot",r,null),t.renderSlot("tooltip",r,null)])})),this.renderSlot("default",{value:this.getValue()},null,!0)])])}},{key:"tailSize",get:function(){return $((this.isHorizontal?this.height:this.width)||Gt)}},{key:"containerClasses",get:function(){return ["vue-slider",["vue-slider-".concat(this.direction)],{"vue-slider-disabled":this.disabled}]}},{key:"containerStyles",get:function(){var t=Array.isArray(this.dotSize)?this.dotSize:[this.dotSize,this.dotSize],e=Ot(t,2),r=e[0],n=e[1],o=this.width?$(this.width):this.isHorizontal?"auto":$(Gt),i=this.height?$(this.height):this.isHorizontal?$(Gt):"auto";return {padding:this.contained?"".concat(n/2,"px ").concat(r/2,"px"):this.isHorizontal?"".concat(n/2,"px 0"):"0 ".concat(r/2,"px"),width:o,height:i}}},{key:"processArray",get:function(){var t=this;return this.control.processArray.map((function(e,r){var n,o=Ot(e,3),i=o[0],a=o[1],s=o[2];if(i>a){var u=[a,i];i=u[0],a=u[1];}var c=t.isHorizontal?"width":"height";return {start:i,end:a,index:r,style:wt(wt((n={},Rt(n,t.isHorizontal?"height":"width","100%"),Rt(n,t.isHorizontal?"top":"left",0),Rt(n,t.mainDirection,"".concat(i,"%")),Rt(n,c,"".concat(a-i,"%")),Rt(n,"transitionProperty","".concat(c,",").concat(t.mainDirection)),Rt(n,"transitionDuration","".concat(t.animateTime,"s")),n),t.processStyle),s)}}))}},{key:"dotBaseStyle",get:function(){var t,e=Array.isArray(this.dotSize)?this.dotSize:[this.dotSize,this.dotSize],r=Ot(e,2),n=r[0],o=r[1];return t=this.isHorizontal?Rt({transform:"translate(".concat(this.isReverse?"50%":"-50%",", -50%)"),WebkitTransform:"translate(".concat(this.isReverse?"50%":"-50%",", -50%)"),top:"50%"},"ltr"===this.direction?"left":"right","0"):Rt({transform:"translate(-50%, ".concat(this.isReverse?"50%":"-50%",")"),WebkitTransform:"translate(-50%, ".concat(this.isReverse?"50%":"-50%",")"),left:"50%"},"btt"===this.direction?"bottom":"top","0"),wt({width:"".concat(n,"px"),height:"".concat(o,"px")},t)}},{key:"mainDirection",get:function(){switch(this.direction){case"ltr":return "left";case"rtl":return "right";case"btt":return "bottom";case"ttb":return "top"}}},{key:"isHorizontal",get:function(){return "ltr"===this.direction||"rtl"===this.direction}},{key:"isReverse",get:function(){return "rtl"===this.direction||"btt"===this.direction}},{key:"tooltipDirections",get:function(){var t=this.tooltipPlacement||(this.isHorizontal?"top":"left");return Array.isArray(t)?t:this.dots.map((function(){return t}))}},{key:"dots",get:function(){var t=this;return this.control.dotsPos.map((function(e,r){return wt({pos:e,index:r,value:t.control.dotsValue[r],focus:t.states.has(Wt.Focus)&&t.focusDotIndex===r,disabled:t.disabled,style:t.dotStyle},(Array.isArray(t.dotOptions)?t.dotOptions[r]:t.dotOptions)||{})}))}},{key:"animateTime",get:function(){return this.states.has(Wt.Drag)?0:this.duration}},{key:"canSort",get:function(){return this.order&&!this.minRange&&!this.maxRange&&!this.fixed&&this.enableCross}},{key:"sliderData",get:function(){var t=this;return this.isObjectArrayData(this.data)?this.data.map((function(e){return e[t.dataValue]})):this.isObjectData(this.data)?Object.keys(this.data):this.data}},{key:"sliderMarks",get:function(){var t=this;return this.marks?this.marks:this.isObjectArrayData(this.data)?function(e){var r={label:e};return t.data.some((function(n){return n[t.dataValue]===e&&(r.label=n[t.dataLabel],!0)})),r}:this.isObjectData(this.data)?this.data:void 0}},{key:"sliderTooltipFormatter",get:function(){var t=this;if(this.tooltipFormatter)return this.tooltipFormatter;if(this.isObjectArrayData(this.data))return function(e){var r=""+e;return t.data.some((function(n){return n[t.dataValue]===e&&(r=n[t.dataLabel],!0)})),r};if(this.isObjectData(this.data)){var e=this.data;return function(t){return e[t]}}}},{key:"isNotSync",get:function(){var t=this.control.dotsValue;return Array.isArray(this.value)?this.value.length!==t.length||this.value.some((function(e,r){return e!==t[r]})):this.value!==t[0]}},{key:"dragRange",get:function(){var t=this.dots[this.focusDotIndex-1],e=this.dots[this.focusDotIndex+1];return [t?t.pos:-1/0,e?e.pos:1/0]}}]),r}(l.a);return u([h("change",{default:0})],t.prototype,"value",void 0),u([p({type:Boolean,default:!1})],t.prototype,"silent",void 0),u([p({default:"ltr",validator:function(t){return ["ltr","rtl","ttb","btt"].indexOf(t)>-1}})],t.prototype,"direction",void 0),u([p({type:[Number,String]})],t.prototype,"width",void 0),u([p({type:[Number,String]})],t.prototype,"height",void 0),u([p({default:14})],t.prototype,"dotSize",void 0),u([p({default:!1})],t.prototype,"contained",void 0),u([p({type:Number,default:0})],t.prototype,"min",void 0),u([p({type:Number,default:100})],t.prototype,"max",void 0),u([p({type:Number,default:1})],t.prototype,"interval",void 0),u([p({type:Boolean,default:!1})],t.prototype,"disabled",void 0),u([p({type:Boolean,default:!0})],t.prototype,"clickable",void 0),u([p({type:Boolean,default:!1})],t.prototype,"dragOnClick",void 0),u([p({type:Number,default:.5})],t.prototype,"duration",void 0),u([p({type:[Object,Array]})],t.prototype,"data",void 0),u([p({type:String,default:"value"})],t.prototype,"dataValue",void 0),u([p({type:String,default:"label"})],t.prototype,"dataLabel",void 0),u([p({type:Boolean,default:!1})],t.prototype,"lazy",void 0),u([p({type:String,validator:function(t){return ["none","always","focus","hover","active"].indexOf(t)>-1},default:"active"})],t.prototype,"tooltip",void 0),u([p({type:[String,Array],validator:function(t){return (Array.isArray(t)?t:[t]).every((function(t){return ["top","right","bottom","left"].indexOf(t)>-1}))}})],t.prototype,"tooltipPlacement",void 0),u([p({type:[String,Array,Function]})],t.prototype,"tooltipFormatter",void 0),u([p({type:Boolean,default:!0})],t.prototype,"useKeyboard",void 0),u([p(Function)],t.prototype,"keydownHook",void 0),u([p({type:Boolean,default:!0})],t.prototype,"enableCross",void 0),u([p({type:Boolean,default:!1})],t.prototype,"fixed",void 0),u([p({type:Boolean,default:!0})],t.prototype,"order",void 0),u([p(Number)],t.prototype,"minRange",void 0),u([p(Number)],t.prototype,"maxRange",void 0),u([p({type:[Boolean,Object,Array,Function],default:!1})],t.prototype,"marks",void 0),u([p({type:[Boolean,Function],default:!0})],t.prototype,"process",void 0),u([p({type:[Number]})],t.prototype,"zoom",void 0),u([p(Boolean)],t.prototype,"included",void 0),u([p(Boolean)],t.prototype,"adsorb",void 0),u([p(Boolean)],t.prototype,"hideLabel",void 0),u([p()],t.prototype,"dotOptions",void 0),u([p()],t.prototype,"dotAttrs",void 0),u([p()],t.prototype,"railStyle",void 0),u([p()],t.prototype,"processStyle",void 0),u([p()],t.prototype,"dotStyle",void 0),u([p()],t.prototype,"tooltipStyle",void 0),u([p()],t.prototype,"stepStyle",void 0),u([p()],t.prototype,"stepActiveStyle",void 0),u([p()],t.prototype,"labelStyle",void 0),u([p()],t.prototype,"labelActiveStyle",void 0),u([y("value")],t.prototype,"onValueChanged",null),t=u([d()({data:function(){return {control:null}},components:{VueSliderDot:j,VueSliderMark:F}})],t),t}(),qt=Kt;qt.VueSliderMark=F,qt.VueSliderDot=j;var Xt=qt;e["default"]=Xt;}})["default"]}));
+  */function n(t){return t&&"object"===typeof t&&"default"in t?t["default"]:t}Object.defineProperty(e,"__esModule",{value:!0});var o=n(r("8bbf")),i="undefined"!==typeof Reflect&&Reflect.defineMetadata&&Reflect.getOwnMetadataKeys;function a(t,e){s(t,e),Object.getOwnPropertyNames(e.prototype).forEach((function(r){s(t.prototype,e.prototype,r);})),Object.getOwnPropertyNames(e).forEach((function(r){s(t,e,r);}));}function s(t,e,r){var n=r?Reflect.getOwnMetadataKeys(e,r):Reflect.getOwnMetadataKeys(e);n.forEach((function(n){var o=r?Reflect.getOwnMetadata(n,e,r):Reflect.getOwnMetadata(n,e);r?Reflect.defineMetadata(n,o,t,r):Reflect.defineMetadata(n,o,t);}));}var u={__proto__:[]},c=u instanceof Array;function l(t){return function(e,r,n){var o="function"===typeof e?e:e.constructor;o.__decorators__||(o.__decorators__=[]),"number"!==typeof n&&(n=void 0),o.__decorators__.push((function(e){return t(e,r,n)}));}}function f(){for(var t=[],e=0;e<arguments.length;e++)t[e]=arguments[e];return o.extend({mixins:t})}function d(t){var e=typeof t;return null==t||"object"!==e&&"function"!==e}function h(t,e){var r=e.prototype._init;e.prototype._init=function(){var e=this,r=Object.getOwnPropertyNames(t);if(t.$options.props)for(var n in t.$options.props)t.hasOwnProperty(n)||r.push(n);r.forEach((function(r){"_"!==r.charAt(0)&&Object.defineProperty(e,r,{get:function(){return t[r]},set:function(e){t[r]=e;},configurable:!0});}));};var n=new e;e.prototype._init=r;var o={};return Object.keys(n).forEach((function(t){void 0!==n[t]&&(o[t]=n[t]);})),o}var p=["data","beforeCreate","created","beforeMount","mounted","beforeDestroy","destroyed","beforeUpdate","updated","activated","deactivated","render","errorCaptured","serverPrefetch"];function y(t,e){void 0===e&&(e={}),e.name=e.name||t._componentTag||t.name;var r=t.prototype;Object.getOwnPropertyNames(r).forEach((function(t){if("constructor"!==t)if(p.indexOf(t)>-1)e[t]=r[t];else {var n=Object.getOwnPropertyDescriptor(r,t);void 0!==n.value?"function"===typeof n.value?(e.methods||(e.methods={}))[t]=n.value:(e.mixins||(e.mixins=[])).push({data:function(){var e;return e={},e[t]=n.value,e}}):(n.get||n.set)&&((e.computed||(e.computed={}))[t]={get:n.get,set:n.set});}})),(e.mixins||(e.mixins=[])).push({data:function(){return h(this,t)}});var n=t.__decorators__;n&&(n.forEach((function(t){return t(e)})),delete t.__decorators__);var s=Object.getPrototypeOf(t.prototype),u=s instanceof o?s.constructor:o,c=u.extend(e);return v(c,t,u),i&&a(c,t),c}function v(t,e,r){Object.getOwnPropertyNames(e).forEach((function(n){if("prototype"!==n){var o=Object.getOwnPropertyDescriptor(t,n);if(!o||o.configurable){var i=Object.getOwnPropertyDescriptor(e,n);if(!c){if("cid"===n)return;var a=Object.getOwnPropertyDescriptor(r,n);if(!d(i.value)&&a&&a.value===i.value)return}Object.defineProperty(t,n,i);}}}));}function m(t){return "function"===typeof t?y(t):function(e){return y(e,t)}}m.registerHooks=function(t){p.push.apply(p,t);},e.default=m,e.createDecorator=l,e.mixins=f;},8875:function(t,e,r){var n,o,i;(function(r,a){o=[],n=a,i="function"===typeof n?n.apply(e,o):n,void 0===i||(t.exports=i);})("undefined"!==typeof self&&self,(function(){function t(){var e=Object.getOwnPropertyDescriptor(document,"currentScript");if(!e&&"currentScript"in document&&document.currentScript)return document.currentScript;if(e&&e.get!==t&&document.currentScript)return document.currentScript;try{throw new Error}catch(h){var r,n,o,i=/.*at [^(]*\((.*):(.+):(.+)\)$/gi,a=/@([^@]*):(\d+):(\d+)\s*$/gi,s=i.exec(h.stack)||a.exec(h.stack),u=s&&s[1]||!1,c=s&&s[2]||!1,l=document.location.href.replace(document.location.hash,""),f=document.getElementsByTagName("script");u===l&&(r=document.documentElement.outerHTML,n=new RegExp("(?:[^\\n]+?\\n){0,"+(c-2)+"}[^<]*<script>([\\d\\D]*?)<\\/script>[\\d\\D]*","i"),o=r.replace(n,"$1").trim());for(var d=0;d<f.length;d++){if("interactive"===f[d].readyState)return f[d];if(f[d].src===u)return f[d];if(u===l&&f[d].innerHTML&&f[d].innerHTML.trim()===o)return f[d]}return null}}return t}));},"8bbf":function(e,r){e.exports=t;},fb15:function(t,e,r){if(r.r(e),r.d(e,"ERROR_TYPE",(function(){return J})),r.d(e,"VueSliderMark",(function(){return F})),r.d(e,"VueSliderDot",(function(){return j})),"undefined"!==typeof window){var n=window.document.currentScript,o=r("8875");n=o(),"currentScript"in document||Object.defineProperty(document,"currentScript",{get:o});var i=n&&n.src.match(/(.+\/)[^/]+\.js(\?.*)?$/);i&&(r.p=i[1]);}var a=r("2638"),s=r.n(a);function u(t,e,r,n){var o,i=arguments.length,a=i<3?e:null===n?n=Object.getOwnPropertyDescriptor(e,r):n;if("object"===typeof Reflect&&"function"===typeof Reflect.decorate)a=Reflect.decorate(t,e,r,n);else for(var s=t.length-1;s>=0;s--)(o=t[s])&&(a=(i<3?o(a):i>3?o(e,r,a):o(e,r))||a);return i>3&&a&&Object.defineProperty(e,r,a),a}var c=r("8bbf"),l=r.n(c),f=r("65d9"),d=r.n(f);function h(t,e){return void 0===e&&(e={}),Object(f["createDecorator"])((function(r,n){(r.props||(r.props={}))[n]=e,r.model={prop:n,event:t||n};}))}function p(t){return void 0===t&&(t={}),Object(f["createDecorator"])((function(e,r){(e.props||(e.props={}))[r]=t;}))}function y(t,e){void 0===e&&(e={});var r=e.deep,n=void 0!==r&&r,o=e.immediate,i=void 0!==o&&o;return Object(f["createDecorator"])((function(e,r){"object"!==typeof e.watch&&(e.watch=Object.create(null));var o=e.watch;"object"!==typeof o[t]||Array.isArray(o[t])?"undefined"===typeof o[t]&&(o[t]=[]):o[t]=[o[t]],o[t].push({handler:r,deep:n,immediate:i});}))}r("4ed8");function v(t){return v="function"===typeof Symbol&&"symbol"===typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"===typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},v(t)}function m(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function b(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n);}}function g(t,e,r){return e&&b(t.prototype,e),r&&b(t,r),t}function k(t,e){if("function"!==typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function");t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,writable:!0,configurable:!0}}),e&&O(t,e);}function O(t,e){return O=Object.setPrototypeOf||function(t,e){return t.__proto__=e,t},O(t,e)}function S(t){var e=D();return function(){var r,n=w(t);if(e){var o=w(this).constructor;r=Reflect.construct(n,arguments,o);}else r=n.apply(this,arguments);return x(this,r)}}function x(t,e){return !e||"object"!==v(e)&&"function"!==typeof e?P(t):e}function P(t){if(void 0===t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t}function D(){if("undefined"===typeof Reflect||!Reflect.construct)return !1;if(Reflect.construct.sham)return !1;if("function"===typeof Proxy)return !0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(t){return !1}}function w(t){return w=Object.setPrototypeOf?Object.getPrototypeOf:function(t){return t.__proto__||Object.getPrototypeOf(t)},w(t)}var R=function(){var t=function(t){k(r,t);var e=S(r);function r(){return m(this,r),e.apply(this,arguments)}return g(r,[{key:"dragStart",value:function(t){if(this.disabled)return !1;this.$emit("drag-start");}},{key:"render",value:function(){var t=arguments[0];return t("div",{ref:"dot",class:this.dotClasses,attrs:{"aria-valuetext":this.tooltipValue},on:{mousedown:this.dragStart,touchstart:this.dragStart}},[this.$slots.dot||t("div",{class:this.handleClasses,style:this.dotStyle}),"none"!==this.tooltip?t("div",{class:this.tooltipClasses},[this.$slots.tooltip||t("div",{class:this.tooltipInnerClasses,style:this.tooltipStyle},[t("span",{class:"vue-slider-dot-tooltip-text"},[this.tooltipValue])])]):null])}},{key:"dotClasses",get:function(){return ["vue-slider-dot",{"vue-slider-dot-hover":"hover"===this.tooltip||"active"===this.tooltip,"vue-slider-dot-disabled":this.disabled,"vue-slider-dot-focus":this.focus}]}},{key:"handleClasses",get:function(){return ["vue-slider-dot-handle",{"vue-slider-dot-handle-disabled":this.disabled,"vue-slider-dot-handle-focus":this.focus}]}},{key:"tooltipClasses",get:function(){return ["vue-slider-dot-tooltip",["vue-slider-dot-tooltip-".concat(this.tooltipPlacement)],{"vue-slider-dot-tooltip-show":this.showTooltip}]}},{key:"tooltipInnerClasses",get:function(){return ["vue-slider-dot-tooltip-inner",["vue-slider-dot-tooltip-inner-".concat(this.tooltipPlacement)],{"vue-slider-dot-tooltip-inner-disabled":this.disabled,"vue-slider-dot-tooltip-inner-focus":this.focus}]}},{key:"showTooltip",get:function(){switch(this.tooltip){case"always":return !0;case"none":return !1;case"focus":case"active":return !!this.focus;default:return !1}}},{key:"tooltipValue",get:function(){return this.tooltipFormatter?"string"===typeof this.tooltipFormatter?this.tooltipFormatter.replace(/\{value\}/,String(this.value)):this.tooltipFormatter(this.value):this.value}}]),r}(l.a);return u([p({default:0})],t.prototype,"value",void 0),u([p()],t.prototype,"tooltip",void 0),u([p()],t.prototype,"dotStyle",void 0),u([p()],t.prototype,"tooltipStyle",void 0),u([p({type:String,validator:function(t){return ["top","right","bottom","left"].indexOf(t)>-1},required:!0})],t.prototype,"tooltipPlacement",void 0),u([p({type:[String,Function]})],t.prototype,"tooltipFormatter",void 0),u([p({type:Boolean,default:!1})],t.prototype,"focus",void 0),u([p({default:!1})],t.prototype,"disabled",void 0),t=u([d.a],t),t}(),j=R;r("556c");function E(t){return E="function"===typeof Symbol&&"symbol"===typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"===typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},E(t)}function A(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function V(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n);}}function _(t,e,r){return e&&V(t.prototype,e),r&&V(t,r),t}function M(t,e){if("function"!==typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function");t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,writable:!0,configurable:!0}}),e&&I(t,e);}function I(t,e){return I=Object.setPrototypeOf||function(t,e){return t.__proto__=e,t},I(t,e)}function L(t){var e=B();return function(){var r,n=N(t);if(e){var o=N(this).constructor;r=Reflect.construct(n,arguments,o);}else r=n.apply(this,arguments);return C(this,r)}}function C(t,e){return !e||"object"!==E(e)&&"function"!==typeof e?T(t):e}function T(t){if(void 0===t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t}function B(){if("undefined"===typeof Reflect||!Reflect.construct)return !1;if(Reflect.construct.sham)return !1;if("function"===typeof Proxy)return !0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(t){return !1}}function N(t){return N=Object.setPrototypeOf?Object.getPrototypeOf:function(t){return t.__proto__||Object.getPrototypeOf(t)},N(t)}var H,z=function(){var t=function(t){M(r,t);var e=L(r);function r(){return A(this,r),e.apply(this,arguments)}return _(r,[{key:"labelClickHandle",value:function(t){t.stopPropagation(),this.$emit("pressLabel",this.mark.pos);}},{key:"render",value:function(){var t=arguments[0],e=this.mark;return t("div",{class:this.marksClasses},[this.$slots.step||t("div",{class:this.stepClasses,style:[this.stepStyle,e.style,e.active?this.stepActiveStyle:null,e.active?e.activeStyle:null]}),this.hideLabel?null:this.$slots.label||t("div",{class:this.labelClasses,style:[this.labelStyle,e.labelStyle,e.active?this.labelActiveStyle:null,e.active?e.labelActiveStyle:null],on:{click:this.labelClickHandle}},[e.label])])}},{key:"marksClasses",get:function(){return ["vue-slider-mark",{"vue-slider-mark-active":this.mark.active}]}},{key:"stepClasses",get:function(){return ["vue-slider-mark-step",{"vue-slider-mark-step-active":this.mark.active}]}},{key:"labelClasses",get:function(){return ["vue-slider-mark-label",{"vue-slider-mark-label-active":this.mark.active}]}}]),r}(l.a);return u([p({required:!0})],t.prototype,"mark",void 0),u([p(Boolean)],t.prototype,"hideLabel",void 0),u([p()],t.prototype,"stepStyle",void 0),u([p()],t.prototype,"stepActiveStyle",void 0),u([p()],t.prototype,"labelStyle",void 0),u([p()],t.prototype,"labelActiveStyle",void 0),t=u([d.a],t),t}(),F=z,$=function(t){return "number"===typeof t?"".concat(t,"px"):t},U=function(t){var e=document.documentElement,r=document.body,n=t.getBoundingClientRect(),o={y:n.top+(window.pageYOffset||e.scrollTop)-(e.clientTop||r.clientTop||0),x:n.left+(window.pageXOffset||e.scrollLeft)-(e.clientLeft||r.clientLeft||0)};return o},W=function(t,e,r){var n="targetTouches"in t?t.targetTouches[0]:t,o=U(e),i={x:n.pageX-o.x,y:n.pageY-o.y};return {x:r?e.offsetWidth-i.x:i.x,y:r?e.offsetHeight-i.y:i.y}};(function(t){t[t["PAGE_UP"]=33]="PAGE_UP",t[t["PAGE_DOWN"]=34]="PAGE_DOWN",t[t["END"]=35]="END",t[t["HOME"]=36]="HOME",t[t["LEFT"]=37]="LEFT",t[t["UP"]=38]="UP",t[t["RIGHT"]=39]="RIGHT",t[t["DOWN"]=40]="DOWN";})(H||(H={}));var G=function(t,e){if(e.hook){var r=e.hook(t);if("function"===typeof r)return r;if(!r)return null}switch(t.keyCode){case H.UP:return function(t){return "ttb"===e.direction?t-1:t+1};case H.RIGHT:return function(t){return "rtl"===e.direction?t-1:t+1};case H.DOWN:return function(t){return "ttb"===e.direction?t+1:t-1};case H.LEFT:return function(t){return "rtl"===e.direction?t+1:t-1};case H.END:return function(){return e.max};case H.HOME:return function(){return e.min};case H.PAGE_UP:return function(t){return t+10};case H.PAGE_DOWN:return function(t){return t-10};default:return null}};function K(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function q(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n);}}function X(t,e,r){return e&&q(t.prototype,e),r&&q(t,r),t}var Y,J,Q=function(){function t(e){K(this,t),this.num=e;}return X(t,[{key:"decimal",value:function(t,e){var r=this.num,n=this.getDecimalLen(r),o=this.getDecimalLen(t),i=0;switch(e){case"+":i=this.getExponent(n,o),this.num=(this.safeRoundUp(r,i)+this.safeRoundUp(t,i))/i;break;case"-":i=this.getExponent(n,o),this.num=(this.safeRoundUp(r,i)-this.safeRoundUp(t,i))/i;break;case"*":this.num=this.safeRoundUp(this.safeRoundUp(r,this.getExponent(n)),this.safeRoundUp(t,this.getExponent(o)))/this.getExponent(n+o);break;case"/":i=this.getExponent(n,o),this.num=this.safeRoundUp(r,i)/this.safeRoundUp(t,i);break;case"%":i=this.getExponent(n,o),this.num=this.safeRoundUp(r,i)%this.safeRoundUp(t,i)/i;break}return this}},{key:"plus",value:function(t){return this.decimal(t,"+")}},{key:"minus",value:function(t){return this.decimal(t,"-")}},{key:"multiply",value:function(t){return this.decimal(t,"*")}},{key:"divide",value:function(t){return this.decimal(t,"/")}},{key:"remainder",value:function(t){return this.decimal(t,"%")}},{key:"toNumber",value:function(){return this.num}},{key:"getDecimalLen",value:function(t){var e="".concat(t).split("e");return ("".concat(e[0]).split(".")[1]||"").length-(e[1]?+e[1]:0)}},{key:"getExponent",value:function(t,e){return Math.pow(10,void 0!==e?Math.max(t,e):t)}},{key:"safeRoundUp",value:function(t,e){return Math.round(t*e)}}]),t}();function Z(t,e){var r=Object.keys(t);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(t);e&&(n=n.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),r.push.apply(r,n);}return r}function tt(t){for(var e=1;e<arguments.length;e++){var r=null!=arguments[e]?arguments[e]:{};e%2?Z(Object(r),!0).forEach((function(e){pt(t,e,r[e]);})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(r)):Z(Object(r)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(r,e));}));}return t}function et(t,e){return ot(t)||nt(t,e)||st(t,e)||rt()}function rt(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function nt(t,e){if("undefined"!==typeof Symbol&&Symbol.iterator in Object(t)){var r=[],n=!0,o=!1,i=void 0;try{for(var a,s=t[Symbol.iterator]();!(n=(a=s.next()).done);n=!0)if(r.push(a.value),e&&r.length===e)break}catch(u){o=!0,i=u;}finally{try{n||null==s["return"]||s["return"]();}finally{if(o)throw i}}return r}}function ot(t){if(Array.isArray(t))return t}function it(t){return ct(t)||ut(t)||st(t)||at()}function at(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function st(t,e){if(t){if("string"===typeof t)return lt(t,e);var r=Object.prototype.toString.call(t).slice(8,-1);return "Object"===r&&t.constructor&&(r=t.constructor.name),"Map"===r||"Set"===r?Array.from(t):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?lt(t,e):void 0}}function ut(t){if("undefined"!==typeof Symbol&&Symbol.iterator in Object(t))return Array.from(t)}function ct(t){if(Array.isArray(t))return lt(t)}function lt(t,e){(null==e||e>t.length)&&(e=t.length);for(var r=0,n=new Array(e);r<e;r++)n[r]=t[r];return n}function ft(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function dt(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n);}}function ht(t,e,r){return e&&dt(t.prototype,e),r&&dt(t,r),t}function pt(t,e,r){return e in t?Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):t[e]=r,t}(function(t){t[t["VALUE"]=1]="VALUE",t[t["INTERVAL"]=2]="INTERVAL",t[t["MIN"]=3]="MIN",t[t["MAX"]=4]="MAX",t[t["ORDER"]=5]="ORDER";})(J||(J={}));var yt=(Y={},pt(Y,J.VALUE,'The type of the "value" is illegal'),pt(Y,J.INTERVAL,'The prop "interval" is invalid, "(max - min)" must be divisible by "interval"'),pt(Y,J.MIN,'The "value" must be greater than or equal to the "min".'),pt(Y,J.MAX,'The "value" must be less than or equal to the "max".'),pt(Y,J.ORDER,'When "order" is false, the parameters "minRange", "maxRange", "fixed", "enabled" are invalid.'),Y),vt=function(){function t(e){ft(this,t),this.dotsPos=[],this.dotsValue=[],this.cacheRangeDir={},this.data=e.data,this.max=e.max,this.min=e.min,this.interval=e.interval,this.order=e.order,this.marks=e.marks,this.included=e.included,this.process=e.process,this.adsorb=e.adsorb,this.dotOptions=e.dotOptions,this.onError=e.onError,this.order?(this.minRange=e.minRange||0,this.maxRange=e.maxRange||0,this.enableCross=e.enableCross,this.fixed=e.fixed):((e.minRange||e.maxRange||!e.enableCross||e.fixed)&&this.emitError(J.ORDER),this.minRange=0,this.maxRange=0,this.enableCross=!0,this.fixed=!1),this.setValue(e.value);}return ht(t,[{key:"setValue",value:function(t){var e=this;this.setDotsValue(Array.isArray(t)?this.order?it(t).sort((function(t,r){return e.getIndexByValue(t)-e.getIndexByValue(r)})):it(t):[t],!0);}},{key:"setDotsValue",value:function(t,e){this.dotsValue=t,e&&this.syncDotsPos();}},{key:"setDotsPos",value:function(t){var e=this,r=this.order?it(t).sort((function(t,e){return t-e})):t;this.dotsPos=r,this.setDotsValue(r.map((function(t){return e.getValueByPos(t)})),this.adsorb);}},{key:"getValueByPos",value:function(t){var e=this.parsePos(t);if(this.included){var r=100;this.markList.forEach((function(n){var o=Math.abs(n.pos-t);o<r&&(r=o,e=n.value);}));}return e}},{key:"syncDotsPos",value:function(){var t=this;this.dotsPos=this.dotsValue.map((function(e){return t.parseValue(e)}));}},{key:"getRecentDot",value:function(t){var e=this,r=this.dotsPos.filter((function(t,r){return !(e.getDotOption(r)&&e.getDotOption(r).disabled)})).map((function(e){return Math.abs(e-t)}));return r.indexOf(Math.min.apply(Math,it(r)))}},{key:"getIndexByValue",value:function(t){return this.data?this.data.indexOf(t):new Q(+t).minus(this.min).divide(this.interval).toNumber()}},{key:"getValueByIndex",value:function(t){return t<0?t=0:t>this.total&&(t=this.total),this.data?this.data[t]:new Q(t).multiply(this.interval).plus(this.min).toNumber()}},{key:"setDotPos",value:function(t,e){t=this.getValidPos(t,e).pos;var r=t-this.dotsPos[e];if(r){var n=new Array(this.dotsPos.length);this.fixed?n=this.getFixedChangePosArr(r,e):this.minRange||this.maxRange?n=this.getLimitRangeChangePosArr(t,r,e):n[e]=r,this.setDotsPos(this.dotsPos.map((function(t,e){return t+(n[e]||0)})));}}},{key:"getFixedChangePosArr",value:function(t,e){var r=this;return this.dotsPos.forEach((function(n,o){if(o!==e){var i=r.getValidPos(n+t,o),a=i.pos,s=i.inRange;s||(t=Math.min(Math.abs(a-n),Math.abs(t))*(t<0?-1:1));}})),this.dotsPos.map((function(e){return t}))}},{key:"getLimitRangeChangePosArr",value:function(t,e,r){var n=this,o=[{index:r,changePos:e}],i=e;return [this.minRange,this.maxRange].forEach((function(a,s){if(!a)return !1;var u=0===s,c=e>0,l=0;l=u?c?1:-1:c?-1:1;var f=function(t,e){var r=Math.abs(t-e);return u?r<n.minRangeDir:r>n.maxRangeDir},d=r+l,h=n.dotsPos[d],p=t;while(n.isPos(h)&&f(h,p)){var y=n.getValidPos(h+i,d),v=y.pos;o.push({index:d,changePos:v-h}),d+=l,p=v,h=n.dotsPos[d];}})),this.dotsPos.map((function(t,e){var r=o.filter((function(t){return t.index===e}));return r.length?r[0].changePos:0}))}},{key:"isPos",value:function(t){return "number"===typeof t}},{key:"getValidPos",value:function(t,e){var r=this.valuePosRange[e],n=!0;return t<r[0]?(t=r[0],n=!1):t>r[1]&&(t=r[1],n=!1),{pos:t,inRange:n}}},{key:"parseValue",value:function(t){if(this.data)t=this.data.indexOf(t);else if("number"===typeof t||"string"===typeof t){if(t=+t,t<this.min)return this.emitError(J.MIN),0;if(t>this.max)return this.emitError(J.MAX),0;if("number"!==typeof t||t!==t)return this.emitError(J.VALUE),0;t=new Q(t).minus(this.min).divide(this.interval).toNumber();}var e=new Q(t).multiply(this.gap).toNumber();return e<0?0:e>100?100:e}},{key:"parsePos",value:function(t){var e=Math.round(t/this.gap);return this.getValueByIndex(e)}},{key:"isActiveByPos",value:function(t){return this.processArray.some((function(e){var r=et(e,2),n=r[0],o=r[1];return t>=n&&t<=o}))}},{key:"getValues",value:function(){if(this.data)return this.data;for(var t=[],e=0;e<=this.total;e++)t.push(new Q(e).multiply(this.interval).plus(this.min).toNumber());return t}},{key:"getRangeDir",value:function(t){return t?new Q(t).divide(new Q(this.data?this.data.length-1:this.max).minus(this.data?0:this.min).toNumber()).multiply(100).toNumber():100}},{key:"emitError",value:function(t){this.onError&&this.onError(t,yt[t]);}},{key:"getDotOption",value:function(t){return Array.isArray(this.dotOptions)?this.dotOptions[t]:this.dotOptions}},{key:"getDotRange",value:function(t,e,r){if(!this.dotOptions)return r;var n=this.getDotOption(t);return n&&void 0!==n[e]?this.parseValue(n[e]):r}},{key:"markList",get:function(){var t=this;if(!this.marks)return [];var e=function(e,r){var n=t.parseValue(e);return tt({pos:n,value:e,label:e,active:t.isActiveByPos(n)},r)};return !0===this.marks?this.getValues().map((function(t){return e(t)})):"[object Object]"===Object.prototype.toString.call(this.marks)?Object.keys(this.marks).sort((function(t,e){return +t-+e})).map((function(r){var n=t.marks[r];return e(r,"string"!==typeof n?n:{label:n})})):Array.isArray(this.marks)?this.marks.map((function(t){return e(t)})):"function"===typeof this.marks?this.getValues().map((function(e){return {value:e,result:t.marks(e)}})).filter((function(t){var e=t.result;return !!e})).map((function(t){var r=t.value,n=t.result;return e(r,n)})):[]}},{key:"processArray",get:function(){if(this.process){if("function"===typeof this.process)return this.process(this.dotsPos);if(1===this.dotsPos.length)return [[0,this.dotsPos[0]]];if(this.dotsPos.length>1)return [[Math.min.apply(Math,it(this.dotsPos)),Math.max.apply(Math,it(this.dotsPos))]]}return []}},{key:"total",get:function(){var t=0;return t=this.data?this.data.length-1:new Q(this.max).minus(this.min).divide(this.interval).toNumber(),t-Math.floor(t)!==0?(this.emitError(J.INTERVAL),0):t}},{key:"gap",get:function(){return 100/this.total}},{key:"minRangeDir",get:function(){return this.cacheRangeDir[this.minRange]?this.cacheRangeDir[this.minRange]:this.cacheRangeDir[this.minRange]=this.getRangeDir(this.minRange)}},{key:"maxRangeDir",get:function(){return this.cacheRangeDir[this.maxRange]?this.cacheRangeDir[this.maxRange]:this.cacheRangeDir[this.maxRange]=this.getRangeDir(this.maxRange)}},{key:"valuePosRange",get:function(){var t=this,e=this.dotsPos,r=[];return e.forEach((function(n,o){r.push([Math.max(t.minRange?t.minRangeDir*o:0,t.enableCross?0:e[o-1]||0,t.getDotRange(o,"min",0)),Math.min(t.minRange?100-t.minRangeDir*(e.length-1-o):100,t.enableCross?100:e[o+1]||100,t.getDotRange(o,"max",100))]);})),r}},{key:"dotsIndex",get:function(){var t=this;return this.dotsValue.map((function(e){return t.getIndexByValue(e)}))}}]),t}();function mt(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function bt(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n);}}function gt(t,e,r){return e&&bt(t.prototype,e),r&&bt(t,r),t}var kt=function(){function t(e){mt(this,t),this.states=0,this.map=e;}return gt(t,[{key:"add",value:function(t){this.states|=t;}},{key:"delete",value:function(t){this.states&=~t;}},{key:"toggle",value:function(t){this.has(t)?this.delete(t):this.add(t);}},{key:"has",value:function(t){return !!(this.states&t)}}]),t}();r("4abb");function Ot(t,e){return Pt(t)||xt(t,e)||At(t,e)||St()}function St(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function xt(t,e){if("undefined"!==typeof Symbol&&Symbol.iterator in Object(t)){var r=[],n=!0,o=!1,i=void 0;try{for(var a,s=t[Symbol.iterator]();!(n=(a=s.next()).done);n=!0)if(r.push(a.value),e&&r.length===e)break}catch(u){o=!0,i=u;}finally{try{n||null==s["return"]||s["return"]();}finally{if(o)throw i}}return r}}function Pt(t){if(Array.isArray(t))return t}function Dt(t,e){var r=Object.keys(t);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(t);e&&(n=n.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),r.push.apply(r,n);}return r}function wt(t){for(var e=1;e<arguments.length;e++){var r=null!=arguments[e]?arguments[e]:{};e%2?Dt(Object(r),!0).forEach((function(e){Rt(t,e,r[e]);})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(r)):Dt(Object(r)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(r,e));}));}return t}function Rt(t,e,r){return e in t?Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}):t[e]=r,t}function jt(t){return _t(t)||Vt(t)||At(t)||Et()}function Et(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}function At(t,e){if(t){if("string"===typeof t)return Mt(t,e);var r=Object.prototype.toString.call(t).slice(8,-1);return "Object"===r&&t.constructor&&(r=t.constructor.name),"Map"===r||"Set"===r?Array.from(t):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?Mt(t,e):void 0}}function Vt(t){if("undefined"!==typeof Symbol&&Symbol.iterator in Object(t))return Array.from(t)}function _t(t){if(Array.isArray(t))return Mt(t)}function Mt(t,e){(null==e||e>t.length)&&(e=t.length);for(var r=0,n=new Array(e);r<e;r++)n[r]=t[r];return n}function It(t){return It="function"===typeof Symbol&&"symbol"===typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"===typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},It(t)}function Lt(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function Ct(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n);}}function Tt(t,e,r){return e&&Ct(t.prototype,e),r&&Ct(t,r),t}function Bt(t,e){if("function"!==typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function");t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,writable:!0,configurable:!0}}),e&&Nt(t,e);}function Nt(t,e){return Nt=Object.setPrototypeOf||function(t,e){return t.__proto__=e,t},Nt(t,e)}function Ht(t){var e=$t();return function(){var r,n=Ut(t);if(e){var o=Ut(this).constructor;r=Reflect.construct(n,arguments,o);}else r=n.apply(this,arguments);return zt(this,r)}}function zt(t,e){return !e||"object"!==It(e)&&"function"!==typeof e?Ft(t):e}function Ft(t){if(void 0===t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t}function $t(){if("undefined"===typeof Reflect||!Reflect.construct)return !1;if(Reflect.construct.sham)return !1;if("function"===typeof Proxy)return !0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(t){return !1}}function Ut(t){return Ut=Object.setPrototypeOf?Object.getPrototypeOf:function(t){return t.__proto__||Object.getPrototypeOf(t)},Ut(t)}var Wt={None:0,Drag:2,Focus:4},Gt=4,Kt=function(){var t=function(t){Bt(r,t);var e=Ht(r);function r(){var t;return Lt(this,r),t=e.apply(this,arguments),t.states=new kt(Wt),t.scale=1,t.focusDotIndex=0,t}return Tt(r,[{key:"isObjectData",value:function(t){return !!t&&"[object Object]"===Object.prototype.toString.call(t)}},{key:"isObjectArrayData",value:function(t){return !!t&&Array.isArray(t)&&t.length>0&&"object"===It(t[0])}},{key:"onValueChanged",value:function(){this.control&&!this.states.has(Wt.Drag)&&this.isNotSync&&(this.control.setValue(this.value),this.syncValueByPos());}},{key:"created",value:function(){this.initControl();}},{key:"mounted",value:function(){this.bindEvent();}},{key:"beforeDestroy",value:function(){this.unbindEvent();}},{key:"bindEvent",value:function(){document.addEventListener("touchmove",this.dragMove,{passive:!1}),document.addEventListener("touchend",this.dragEnd,{passive:!1}),document.addEventListener("mousedown",this.blurHandle),document.addEventListener("mousemove",this.dragMove,{passive:!1}),document.addEventListener("mouseup",this.dragEnd),document.addEventListener("mouseleave",this.dragEnd),document.addEventListener("keydown",this.keydownHandle);}},{key:"unbindEvent",value:function(){document.removeEventListener("touchmove",this.dragMove),document.removeEventListener("touchend",this.dragEnd),document.removeEventListener("mousedown",this.blurHandle),document.removeEventListener("mousemove",this.dragMove),document.removeEventListener("mouseup",this.dragEnd),document.removeEventListener("mouseleave",this.dragEnd),document.removeEventListener("keydown",this.keydownHandle);}},{key:"setScale",value:function(){var t=new Q(Math.floor(this.isHorizontal?this.$refs.rail.offsetWidth:this.$refs.rail.offsetHeight));void 0!==this.zoom&&t.multiply(this.zoom),t.divide(100),this.scale=t.toNumber();}},{key:"initControl",value:function(){var t=this;this.control=new vt({value:this.value,data:this.sliderData,enableCross:this.enableCross,fixed:this.fixed,max:this.max,min:this.min,interval:this.interval,minRange:this.minRange,maxRange:this.maxRange,order:this.order,marks:this.sliderMarks,included:this.included,process:this.process,adsorb:this.adsorb,dotOptions:this.dotOptions,onError:this.emitError}),this.syncValueByPos(),["data","enableCross","fixed","max","min","interval","minRange","maxRange","order","marks","process","adsorb","included","dotOptions"].forEach((function(e){t.$watch(e,(function(r){if("data"===e&&Array.isArray(t.control.data)&&Array.isArray(r)&&t.control.data.length===r.length&&r.every((function(e,r){return e===t.control.data[r]})))return !1;switch(e){case"data":case"dataLabel":case"dataValue":t.control.data=t.sliderData;break;case"mark":t.control.marks=t.sliderMarks;break;default:t.control[e]=r;}["data","max","min","interval"].indexOf(e)>-1&&t.control.syncDotsPos();}));}));}},{key:"syncValueByPos",value:function(){var t=this.control.dotsValue;this.isDiff(t,Array.isArray(this.value)?this.value:[this.value])&&this.$emit("change",1===t.length?t[0]:jt(t),this.focusDotIndex);}},{key:"isDiff",value:function(t,e){return t.length!==e.length||t.some((function(t,r){return t!==e[r]}))}},{key:"emitError",value:function(t,e){this.silent||console.error("[VueSlider error]: ".concat(e)),this.$emit("error",t,e);}},{key:"dragStartOnProcess",value:function(t){if(this.dragOnClick){this.setScale();var e=this.getPosByEvent(t),r=this.control.getRecentDot(e);if(this.dots[r].disabled)return;this.dragStart(r),this.control.setDotPos(e,this.focusDotIndex),this.lazy||this.syncValueByPos();}}},{key:"dragStart",value:function(t){this.focusDotIndex=t,this.setScale(),this.states.add(Wt.Drag),this.states.add(Wt.Focus),this.$emit("drag-start",this.focusDotIndex);}},{key:"dragMove",value:function(t){if(!this.states.has(Wt.Drag))return !1;t.preventDefault();var e=this.getPosByEvent(t);this.isCrossDot(e),this.control.setDotPos(e,this.focusDotIndex),this.lazy||this.syncValueByPos();var r=this.control.dotsValue;this.$emit("dragging",1===r.length?r[0]:jt(r),this.focusDotIndex);}},{key:"isCrossDot",value:function(t){if(this.canSort){var e=this.focusDotIndex,r=t;if(r>this.dragRange[1]?(r=this.dragRange[1],this.focusDotIndex++):r<this.dragRange[0]&&(r=this.dragRange[0],this.focusDotIndex--),e!==this.focusDotIndex){var n=this.$refs["dot-".concat(this.focusDotIndex)];n&&n.$el&&n.$el.focus(),this.control.setDotPos(r,e);}}}},{key:"dragEnd",value:function(t){var e=this;if(!this.states.has(Wt.Drag))return !1;setTimeout((function(){e.lazy&&e.syncValueByPos(),e.included&&e.isNotSync?e.control.setValue(e.value):e.control.syncDotsPos(),e.states.delete(Wt.Drag),e.useKeyboard&&!("targetTouches"in t)||e.states.delete(Wt.Focus),e.$emit("drag-end",e.focusDotIndex);}));}},{key:"blurHandle",value:function(t){if(!this.states.has(Wt.Focus)||!this.$refs.container||this.$refs.container.contains(t.target))return !1;this.states.delete(Wt.Focus);}},{key:"clickHandle",value:function(t){if(!this.clickable||this.disabled)return !1;if(!this.states.has(Wt.Drag)){this.setScale();var e=this.getPosByEvent(t);this.setValueByPos(e);}}},{key:"focus",value:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:0;this.states.add(Wt.Focus),this.focusDotIndex=t;}},{key:"blur",value:function(){this.states.delete(Wt.Focus);}},{key:"getValue",value:function(){var t=this.control.dotsValue;return 1===t.length?t[0]:t}},{key:"getIndex",value:function(){var t=this.control.dotsIndex;return 1===t.length?t[0]:t}},{key:"setValue",value:function(t){this.control.setValue(Array.isArray(t)?jt(t):[t]),this.syncValueByPos();}},{key:"setIndex",value:function(t){var e=this,r=Array.isArray(t)?t.map((function(t){return e.control.getValueByIndex(t)})):this.control.getValueByIndex(t);this.setValue(r);}},{key:"setValueByPos",value:function(t){var e=this,r=this.control.getRecentDot(t);if(this.disabled||this.dots[r].disabled)return !1;this.focusDotIndex=r,this.control.setDotPos(t,r),this.syncValueByPos(),this.useKeyboard&&this.states.add(Wt.Focus),setTimeout((function(){e.included&&e.isNotSync?e.control.setValue(e.value):e.control.syncDotsPos();}));}},{key:"keydownHandle",value:function(t){var e=this;if(!this.useKeyboard||!this.states.has(Wt.Focus))return !1;var r=this.included&&this.marks,n=G(t,{direction:this.direction,max:r?this.control.markList.length-1:this.control.total,min:0,hook:this.keydownHook});if(n){t.preventDefault();var o=-1,i=0;r?(this.control.markList.some((function(t,r){return t.value===e.control.dotsValue[e.focusDotIndex]&&(o=n(r),!0)})),o<0?o=0:o>this.control.markList.length-1&&(o=this.control.markList.length-1),i=this.control.markList[o].pos):(o=n(this.control.getIndexByValue(this.control.dotsValue[this.focusDotIndex])),i=this.control.parseValue(this.control.getValueByIndex(o))),this.isCrossDot(i),this.control.setDotPos(i,this.focusDotIndex),this.syncValueByPos();}}},{key:"getPosByEvent",value:function(t){return W(t,this.$refs.rail,this.isReverse)[this.isHorizontal?"x":"y"]/this.scale}},{key:"renderSlot",value:function(t,e,r,n){var o=this.$createElement,i=this.$scopedSlots[t];return i?n?i(e):o("template",{slot:t},[i(e)]):r}},{key:"render",value:function(){var t=this,e=arguments[0];return e("div",s()([{ref:"container",class:this.containerClasses,style:this.containerStyles,on:{click:this.clickHandle,touchstart:this.dragStartOnProcess,mousedown:this.dragStartOnProcess}},this.$attrs]),[e("div",{ref:"rail",class:"vue-slider-rail",style:this.railStyle},[this.processArray.map((function(r,n){return t.renderSlot("process",r,e("div",{class:"vue-slider-process",key:"process-".concat(n),style:r.style}),!0)})),this.sliderMarks?e("div",{class:"vue-slider-marks"},[this.control.markList.map((function(r,n){var o;return t.renderSlot("mark",r,e("vue-slider-mark",{key:"mark-".concat(n),attrs:{mark:r,hideLabel:t.hideLabel,stepStyle:t.stepStyle,stepActiveStyle:t.stepActiveStyle,labelStyle:t.labelStyle,labelActiveStyle:t.labelActiveStyle},style:(o={},Rt(o,t.isHorizontal?"height":"width","100%"),Rt(o,t.isHorizontal?"width":"height",t.tailSize),Rt(o,t.mainDirection,"".concat(r.pos,"%")),o),on:{pressLabel:function(e){return t.clickable&&t.setValueByPos(e)}}},[t.renderSlot("step",r,null),t.renderSlot("label",r,null)]),!0)}))]):null,this.dots.map((function(r,n){var o;return e("vue-slider-dot",{ref:"dot-".concat(n),key:"dot-".concat(n),attrs:wt({value:r.value,disabled:r.disabled,focus:r.focus,"dot-style":[r.style,r.disabled?r.disabledStyle:null,r.focus?r.focusStyle:null],tooltip:r.tooltip||t.tooltip,"tooltip-style":[t.tooltipStyle,r.tooltipStyle,r.disabled?r.tooltipDisabledStyle:null,r.focus?r.tooltipFocusStyle:null],"tooltip-formatter":Array.isArray(t.sliderTooltipFormatter)?t.sliderTooltipFormatter[n]:t.sliderTooltipFormatter,"tooltip-placement":t.tooltipDirections[n],role:"slider","aria-valuenow":r.value,"aria-valuemin":t.min,"aria-valuemax":t.max,"aria-orientation":t.isHorizontal?"horizontal":"vertical",tabindex:"0"},t.dotAttrs),style:[t.dotBaseStyle,(o={},Rt(o,t.mainDirection,"".concat(r.pos,"%")),Rt(o,"transition","".concat(t.mainDirection," ").concat(t.animateTime,"s")),o)],on:{"drag-start":function(){return t.dragStart(n)}},nativeOn:{focus:function(){return !r.disabled&&t.focus(n)},blur:function(){return t.blur()}}},[t.renderSlot("dot",r,null),t.renderSlot("tooltip",r,null)])})),this.renderSlot("default",{value:this.getValue()},null,!0)])])}},{key:"tailSize",get:function(){return $((this.isHorizontal?this.height:this.width)||Gt)}},{key:"containerClasses",get:function(){return ["vue-slider",["vue-slider-".concat(this.direction)],{"vue-slider-disabled":this.disabled}]}},{key:"containerStyles",get:function(){var t=Array.isArray(this.dotSize)?this.dotSize:[this.dotSize,this.dotSize],e=Ot(t,2),r=e[0],n=e[1],o=this.width?$(this.width):this.isHorizontal?"auto":$(Gt),i=this.height?$(this.height):this.isHorizontal?$(Gt):"auto";return {padding:this.contained?"".concat(n/2,"px ").concat(r/2,"px"):this.isHorizontal?"".concat(n/2,"px 0"):"0 ".concat(r/2,"px"),width:o,height:i}}},{key:"processArray",get:function(){var t=this;return this.control.processArray.map((function(e,r){var n,o=Ot(e,3),i=o[0],a=o[1],s=o[2];if(i>a){var u=[a,i];i=u[0],a=u[1];}var c=t.isHorizontal?"width":"height";return {start:i,end:a,index:r,style:wt(wt((n={},Rt(n,t.isHorizontal?"height":"width","100%"),Rt(n,t.isHorizontal?"top":"left",0),Rt(n,t.mainDirection,"".concat(i,"%")),Rt(n,c,"".concat(a-i,"%")),Rt(n,"transitionProperty","".concat(c,",").concat(t.mainDirection)),Rt(n,"transitionDuration","".concat(t.animateTime,"s")),n),t.processStyle),s)}}))}},{key:"dotBaseStyle",get:function(){var t,e=Array.isArray(this.dotSize)?this.dotSize:[this.dotSize,this.dotSize],r=Ot(e,2),n=r[0],o=r[1];return t=this.isHorizontal?Rt({transform:"translate(".concat(this.isReverse?"50%":"-50%",", -50%)"),"-WebkitTransform":"translate(".concat(this.isReverse?"50%":"-50%",", -50%)"),top:"50%"},"ltr"===this.direction?"left":"right","0"):Rt({transform:"translate(-50%, ".concat(this.isReverse?"50%":"-50%",")"),"-WebkitTransform":"translate(-50%, ".concat(this.isReverse?"50%":"-50%",")"),left:"50%"},"btt"===this.direction?"bottom":"top","0"),wt({width:"".concat(n,"px"),height:"".concat(o,"px")},t)}},{key:"mainDirection",get:function(){switch(this.direction){case"ltr":return "left";case"rtl":return "right";case"btt":return "bottom";case"ttb":return "top"}}},{key:"isHorizontal",get:function(){return "ltr"===this.direction||"rtl"===this.direction}},{key:"isReverse",get:function(){return "rtl"===this.direction||"btt"===this.direction}},{key:"tooltipDirections",get:function(){var t=this.tooltipPlacement||(this.isHorizontal?"top":"left");return Array.isArray(t)?t:this.dots.map((function(){return t}))}},{key:"dots",get:function(){var t=this;return this.control.dotsPos.map((function(e,r){return wt({pos:e,index:r,value:t.control.dotsValue[r],focus:t.states.has(Wt.Focus)&&t.focusDotIndex===r,disabled:t.disabled,style:t.dotStyle},(Array.isArray(t.dotOptions)?t.dotOptions[r]:t.dotOptions)||{})}))}},{key:"animateTime",get:function(){return this.states.has(Wt.Drag)?0:this.duration}},{key:"canSort",get:function(){return this.order&&!this.minRange&&!this.maxRange&&!this.fixed&&this.enableCross}},{key:"sliderData",get:function(){var t=this;return this.isObjectArrayData(this.data)?this.data.map((function(e){return e[t.dataValue]})):this.isObjectData(this.data)?Object.keys(this.data):this.data}},{key:"sliderMarks",get:function(){var t=this;return this.marks?this.marks:this.isObjectArrayData(this.data)?function(e){var r={label:e};return t.data.some((function(n){return n[t.dataValue]===e&&(r.label=n[t.dataLabel],!0)})),r}:this.isObjectData(this.data)?this.data:void 0}},{key:"sliderTooltipFormatter",get:function(){var t=this;if(this.tooltipFormatter)return this.tooltipFormatter;if(this.isObjectArrayData(this.data))return function(e){var r=""+e;return t.data.some((function(n){return n[t.dataValue]===e&&(r=n[t.dataLabel],!0)})),r};if(this.isObjectData(this.data)){var e=this.data;return function(t){return e[t]}}}},{key:"isNotSync",get:function(){var t=this.control.dotsValue;return Array.isArray(this.value)?this.value.length!==t.length||this.value.some((function(e,r){return e!==t[r]})):this.value!==t[0]}},{key:"dragRange",get:function(){var t=this.dots[this.focusDotIndex-1],e=this.dots[this.focusDotIndex+1];return [t?t.pos:-1/0,e?e.pos:1/0]}}]),r}(l.a);return u([h("change",{default:0})],t.prototype,"value",void 0),u([p({type:Boolean,default:!1})],t.prototype,"silent",void 0),u([p({default:"ltr",validator:function(t){return ["ltr","rtl","ttb","btt"].indexOf(t)>-1}})],t.prototype,"direction",void 0),u([p({type:[Number,String]})],t.prototype,"width",void 0),u([p({type:[Number,String]})],t.prototype,"height",void 0),u([p({default:14})],t.prototype,"dotSize",void 0),u([p({default:!1})],t.prototype,"contained",void 0),u([p({type:Number,default:0})],t.prototype,"min",void 0),u([p({type:Number,default:100})],t.prototype,"max",void 0),u([p({type:Number,default:1})],t.prototype,"interval",void 0),u([p({type:Boolean,default:!1})],t.prototype,"disabled",void 0),u([p({type:Boolean,default:!0})],t.prototype,"clickable",void 0),u([p({type:Boolean,default:!1})],t.prototype,"dragOnClick",void 0),u([p({type:Number,default:.5})],t.prototype,"duration",void 0),u([p({type:[Object,Array]})],t.prototype,"data",void 0),u([p({type:String,default:"value"})],t.prototype,"dataValue",void 0),u([p({type:String,default:"label"})],t.prototype,"dataLabel",void 0),u([p({type:Boolean,default:!1})],t.prototype,"lazy",void 0),u([p({type:String,validator:function(t){return ["none","always","focus","hover","active"].indexOf(t)>-1},default:"active"})],t.prototype,"tooltip",void 0),u([p({type:[String,Array],validator:function(t){return (Array.isArray(t)?t:[t]).every((function(t){return ["top","right","bottom","left"].indexOf(t)>-1}))}})],t.prototype,"tooltipPlacement",void 0),u([p({type:[String,Array,Function]})],t.prototype,"tooltipFormatter",void 0),u([p({type:Boolean,default:!0})],t.prototype,"useKeyboard",void 0),u([p(Function)],t.prototype,"keydownHook",void 0),u([p({type:Boolean,default:!0})],t.prototype,"enableCross",void 0),u([p({type:Boolean,default:!1})],t.prototype,"fixed",void 0),u([p({type:Boolean,default:!0})],t.prototype,"order",void 0),u([p(Number)],t.prototype,"minRange",void 0),u([p(Number)],t.prototype,"maxRange",void 0),u([p({type:[Boolean,Object,Array,Function],default:!1})],t.prototype,"marks",void 0),u([p({type:[Boolean,Function],default:!0})],t.prototype,"process",void 0),u([p({type:[Number]})],t.prototype,"zoom",void 0),u([p(Boolean)],t.prototype,"included",void 0),u([p(Boolean)],t.prototype,"adsorb",void 0),u([p(Boolean)],t.prototype,"hideLabel",void 0),u([p()],t.prototype,"dotOptions",void 0),u([p()],t.prototype,"dotAttrs",void 0),u([p()],t.prototype,"railStyle",void 0),u([p()],t.prototype,"processStyle",void 0),u([p()],t.prototype,"dotStyle",void 0),u([p()],t.prototype,"tooltipStyle",void 0),u([p()],t.prototype,"stepStyle",void 0),u([p()],t.prototype,"stepActiveStyle",void 0),u([p()],t.prototype,"labelStyle",void 0),u([p()],t.prototype,"labelActiveStyle",void 0),u([y("value")],t.prototype,"onValueChanged",null),t=u([d()({data:function(){return {control:null}},components:{VueSliderDot:j,VueSliderMark:F}})],t),t}(),qt=Kt;qt.VueSliderMark=F,qt.VueSliderDot=j;var Xt=qt;e["default"]=Xt;}})["default"]}));
 
 });
 
@@ -2781,6 +2807,20 @@ function set(object, path, value) {
 }
 
 module.exports = set;
+
+
+/***/ }),
+
+/***/ "0fb2":
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__("24fb");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".vc-popover-content-wrapper[data-v-39b30300]{--popover-horizontal-content-offset:8px;--popover-vertical-content-offset:10px;--popover-slide-translation:15px;--popover-transition-time:0.14s ease-in-out;--popover-caret-horizontal-offset:18px;--popover-caret-vertical-offset:8px;position:absolute;display:block;outline:none;z-index:10}.vc-popover-content-wrapper[data-v-39b30300]:not(.is-interactive){pointer-events:none}.vc-popover-content[data-v-39b30300]{position:relative;outline:none;z-index:10;box-shadow:var(--shadow-lg)}.vc-popover-content.direction-bottom[data-v-39b30300]{margin-top:var(--popover-vertical-content-offset)}.vc-popover-content.direction-top[data-v-39b30300]{margin-bottom:var(--popover-vertical-content-offset)}.vc-popover-content.direction-left[data-v-39b30300]{margin-right:var(--popover-horizontal-content-offset)}.vc-popover-content.direction-right[data-v-39b30300]{margin-left:var(--popover-horizontal-content-offset)}.vc-popover-caret[data-v-39b30300]{content:\"\";position:absolute;display:block;width:12px;height:12px;border-top:inherit;border-left:inherit;background-color:inherit;-webkit-user-select:none;user-select:none;z-index:-1}.vc-popover-caret.direction-bottom[data-v-39b30300]{top:0}.vc-popover-caret.direction-bottom.align-left[data-v-39b30300]{transform:translateY(-50%) rotate(45deg)}.vc-popover-caret.direction-bottom.align-center[data-v-39b30300]{transform:translateX(-50%) translateY(-50%) rotate(45deg)}.vc-popover-caret.direction-bottom.align-right[data-v-39b30300]{transform:translateY(-50%) rotate(45deg)}.vc-popover-caret.direction-top[data-v-39b30300]{top:100%}.vc-popover-caret.direction-top.align-left[data-v-39b30300]{transform:translateY(-50%) rotate(-135deg)}.vc-popover-caret.direction-top.align-center[data-v-39b30300]{transform:translateX(-50%) translateY(-50%) rotate(-135deg)}.vc-popover-caret.direction-top.align-right[data-v-39b30300]{transform:translateY(-50%) rotate(-135deg)}.vc-popover-caret.direction-left[data-v-39b30300]{left:100%}.vc-popover-caret.direction-left.align-top[data-v-39b30300]{transform:translateX(-50%) rotate(135deg)}.vc-popover-caret.direction-left.align-middle[data-v-39b30300]{transform:translateY(-50%) translateX(-50%) rotate(135deg)}.vc-popover-caret.direction-left.align-bottom[data-v-39b30300]{transform:translateX(-50%) rotate(135deg)}.vc-popover-caret.direction-right[data-v-39b30300]{left:0}.vc-popover-caret.direction-right.align-top[data-v-39b30300]{transform:translateX(-50%) rotate(-45deg)}.vc-popover-caret.direction-right.align-middle[data-v-39b30300]{transform:translateY(-50%) translateX(-50%) rotate(-45deg)}.vc-popover-caret.direction-right.align-bottom[data-v-39b30300]{transform:translateX(-50%) rotate(-45deg)}.vc-popover-caret.align-left[data-v-39b30300]{left:var(--popover-caret-horizontal-offset)}.vc-popover-caret.align-center[data-v-39b30300]{left:50%}.vc-popover-caret.align-right[data-v-39b30300]{right:var(--popover-caret-horizontal-offset)}.vc-popover-caret.align-top[data-v-39b30300]{top:var(--popover-caret-vertical-offset)}.vc-popover-caret.align-middle[data-v-39b30300]{top:50%}.vc-popover-caret.align-bottom[data-v-39b30300]{bottom:var(--popover-caret-vertical-offset)}.fade-enter-active[data-v-39b30300],.fade-leave-active[data-v-39b30300],.slide-fade-enter-active[data-v-39b30300],.slide-fade-leave-active[data-v-39b30300]{transition:all var(--popover-transition-time);pointer-events:none}.fade-enter[data-v-39b30300],.fade-leave-to[data-v-39b30300],.slide-fade-enter[data-v-39b30300],.slide-fade-leave-to[data-v-39b30300]{opacity:0}.slide-fade-enter.direction-bottom[data-v-39b30300],.slide-fade-leave-to.direction-bottom[data-v-39b30300]{transform:translateY(calc(var(--popover-slide-translation)*-1))}.slide-fade-enter.direction-top[data-v-39b30300],.slide-fade-leave-to.direction-top[data-v-39b30300]{transform:translateY(var(--popover-slide-translation))}.slide-fade-enter.direction-left[data-v-39b30300],.slide-fade-leave-to.direction-left[data-v-39b30300]{transform:translateX(var(--popover-slide-translation))}.slide-fade-enter.direction-right[data-v-39b30300],.slide-fade-leave-to.direction-right[data-v-39b30300]{transform:translateX(calc(var(--popover-slide-translation)*-1))}", ""]);
+// Exports
+module.exports = exports;
 
 
 /***/ }),
@@ -10099,17 +10139,12 @@ module.exports = hashGet;
 
 /***/ }),
 
-/***/ "bffb":
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__("24fb");
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, ".vc-popover-content-wrapper[data-v-05016e86]{--popover-horizontal-content-offset:8px;--popover-vertical-content-offset:10px;--popover-slide-translation:15px;--popover-transition-time:0.14s ease-in-out;--popover-caret-horizontal-offset:18px;--popover-caret-vertical-offset:8px;position:absolute;display:block;outline:none;z-index:10}.vc-popover-content-wrapper[data-v-05016e86]:not(.is-interactive){pointer-events:none}.vc-popover-content[data-v-05016e86]{position:relative;outline:none;z-index:10;box-shadow:var(--shadow-lg)}.vc-popover-content.direction-bottom[data-v-05016e86]{margin-top:var(--popover-vertical-content-offset)}.vc-popover-content.direction-top[data-v-05016e86]{margin-bottom:var(--popover-vertical-content-offset)}.vc-popover-content.direction-left[data-v-05016e86]{margin-right:var(--popover-horizontal-content-offset)}.vc-popover-content.direction-right[data-v-05016e86]{margin-left:var(--popover-horizontal-content-offset)}.vc-popover-caret[data-v-05016e86]{content:\"\";position:absolute;display:block;width:12px;height:12px;border-top:inherit;border-left:inherit;background-color:inherit;-webkit-user-select:none;user-select:none;z-index:-1}.vc-popover-caret.direction-bottom[data-v-05016e86]{top:0}.vc-popover-caret.direction-bottom.align-left[data-v-05016e86]{transform:translateY(-50%) rotate(45deg)}.vc-popover-caret.direction-bottom.align-center[data-v-05016e86]{transform:translateX(-50%) translateY(-50%) rotate(45deg)}.vc-popover-caret.direction-bottom.align-right[data-v-05016e86]{transform:translateY(-50%) rotate(45deg)}.vc-popover-caret.direction-top[data-v-05016e86]{top:100%}.vc-popover-caret.direction-top.align-left[data-v-05016e86]{transform:translateY(-50%) rotate(-135deg)}.vc-popover-caret.direction-top.align-center[data-v-05016e86]{transform:translateX(-50%) translateY(-50%) rotate(-135deg)}.vc-popover-caret.direction-top.align-right[data-v-05016e86]{transform:translateY(-50%) rotate(-135deg)}.vc-popover-caret.direction-left[data-v-05016e86]{left:100%}.vc-popover-caret.direction-left.align-top[data-v-05016e86]{transform:translateX(-50%) rotate(135deg)}.vc-popover-caret.direction-left.align-middle[data-v-05016e86]{transform:translateY(-50%) translateX(-50%) rotate(135deg)}.vc-popover-caret.direction-left.align-bottom[data-v-05016e86]{transform:translateX(-50%) rotate(135deg)}.vc-popover-caret.direction-right[data-v-05016e86]{left:0}.vc-popover-caret.direction-right.align-top[data-v-05016e86]{transform:translateX(-50%) rotate(-45deg)}.vc-popover-caret.direction-right.align-middle[data-v-05016e86]{transform:translateY(-50%) translateX(-50%) rotate(-45deg)}.vc-popover-caret.direction-right.align-bottom[data-v-05016e86]{transform:translateX(-50%) rotate(-45deg)}.vc-popover-caret.align-left[data-v-05016e86]{left:var(--popover-caret-horizontal-offset)}.vc-popover-caret.align-center[data-v-05016e86]{left:50%}.vc-popover-caret.align-right[data-v-05016e86]{right:var(--popover-caret-horizontal-offset)}.vc-popover-caret.align-top[data-v-05016e86]{top:var(--popover-caret-vertical-offset)}.vc-popover-caret.align-middle[data-v-05016e86]{top:50%}.vc-popover-caret.align-bottom[data-v-05016e86]{bottom:var(--popover-caret-vertical-offset)}.fade-enter-active[data-v-05016e86],.fade-leave-active[data-v-05016e86],.slide-fade-enter-active[data-v-05016e86],.slide-fade-leave-active[data-v-05016e86]{transition:all var(--popover-transition-time);pointer-events:none}.fade-enter[data-v-05016e86],.fade-leave-to[data-v-05016e86],.slide-fade-enter[data-v-05016e86],.slide-fade-leave-to[data-v-05016e86]{opacity:0}.slide-fade-enter.direction-bottom[data-v-05016e86],.slide-fade-leave-to.direction-bottom[data-v-05016e86]{transform:translateY(calc(var(--popover-slide-translation)*-1))}.slide-fade-enter.direction-top[data-v-05016e86],.slide-fade-leave-to.direction-top[data-v-05016e86]{transform:translateY(var(--popover-slide-translation))}.slide-fade-enter.direction-left[data-v-05016e86],.slide-fade-leave-to.direction-left[data-v-05016e86]{transform:translateX(var(--popover-slide-translation))}.slide-fade-enter.direction-right[data-v-05016e86],.slide-fade-leave-to.direction-right[data-v-05016e86]{transform:translateX(calc(var(--popover-slide-translation)*-1))}", ""]);
-// Exports
-module.exports = exports;
-
+/***/ "bdb3":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Popover_vue_vue_type_style_index_0_id_39b30300_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("e052");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Popover_vue_vue_type_style_index_0_id_39b30300_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Popover_vue_vue_type_style_index_0_id_39b30300_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ (_node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Popover_vue_vue_type_style_index_0_id_39b30300_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -10956,21 +10991,6 @@ module.exports = function (it, TAG, STATIC) {
 
 /***/ }),
 
-/***/ "d483":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("bffb");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("499e").default;
-add("e3b25692", content, true, {"sourceMap":false,"shadowMode":false});
-
-/***/ }),
-
 /***/ "d612":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11114,15 +11134,6 @@ var isSet = nodeIsSet ? baseUnary(nodeIsSet) : baseIsSet;
 
 module.exports = isSet;
 
-
-/***/ }),
-
-/***/ "d99e":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Popover_vue_vue_type_style_index_0_id_05016e86_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("d483");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Popover_vue_vue_type_style_index_0_id_05016e86_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Popover_vue_vue_type_style_index_0_id_05016e86_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
- /* unused harmony default export */ (_node_modules_vue_style_loader_index_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Popover_vue_vue_type_style_index_0_id_05016e86_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -11441,6 +11452,21 @@ function customDefaultsMerge(objValue, srcValue, key, object, source, stack) {
 
 module.exports = customDefaultsMerge;
 
+
+/***/ }),
+
+/***/ "e052":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("0fb2");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("499e").default;
+add("54fe3190", content, true, {"sourceMap":false,"shadowMode":false});
 
 /***/ }),
 
@@ -14784,137 +14810,7 @@ function helpers_hash(str) {
   return hashcode;
 }
 /* eslint-enable no-bitwise */
-// CONCATENATED MODULE: ./src/utils/touch.js
-
- // This function detects taps or clicks
-// Can't just rely on 'click' event because of oddities in mobile Safari
-
-const addTapOrClickHandler = function (element, handler) {
-  if (!element || !element.addEventListener || !isFunction_default()(handler)) {
-    return null;
-  } // State variables
-
-
-  let tap = false;
-  let disableClick = false;
-
-  const touchstart = function () {
-    return tap = true;
-  };
-
-  const touchmove = function () {
-    return tap = false;
-  };
-
-  const touchend = function (event) {
-    if (tap) {
-      // Reset state
-      tap = false; // Disable click so we don't call handler twice
-
-      disableClick = true;
-      handler(event);
-      return;
-    } // Make sure tap event hasn't disabled click
-
-
-    if (event.type === 'click' && !disableClick) {
-      handler(event);
-    } // Reset state
-
-
-    disableClick = false;
-  }; // Add event handlers
-
-
-  on(element, 'touchstart', touchstart, {
-    passive: true
-  });
-  on(element, 'touchmove', touchmove, {
-    passive: true
-  });
-  on(element, 'click', touchend, {
-    passive: true
-  });
-  on(element, 'touchend', touchend, {
-    passive: true
-  }); // Return function that removes event handlers
-
-  return function () {
-    off(element, 'touchstart', touchstart);
-    off(element, 'touchmove', touchmove);
-    off(element, 'click', touchend);
-    off(element, 'touchend', touchend);
-  };
-};
-const addHorizontalSwipeHandler = function (element, handler, {
-  maxSwipeTime,
-  minHorizontalSwipeDistance,
-  maxVerticalSwipeDistance
-}) {
-  if (!element || !element.addEventListener || !isFunction_default()(handler)) {
-    return null;
-  } // State variables
-
-
-  let startX = 0;
-  let startY = 0;
-  let startTime = null;
-  let isSwiping = false; // Touch start handler
-
-  function touchStart(e) {
-    const t = e.changedTouches[0];
-    startX = t.screenX;
-    startY = t.screenY;
-    startTime = new Date().getTime();
-    isSwiping = true;
-  } // Touch end handler
-
-
-  function touchEnd(e) {
-    if (!isSwiping) return;
-    isSwiping = false;
-    const t = e.changedTouches[0];
-    const deltaX = t.screenX - startX;
-    const deltaY = t.screenY - startY;
-    const deltaTime = new Date().getTime() - startTime;
-
-    if (deltaTime < maxSwipeTime) {
-      if (Math.abs(deltaX) >= minHorizontalSwipeDistance && Math.abs(deltaY) <= maxVerticalSwipeDistance) {
-        const arg = {
-          toLeft: false,
-          toRight: false
-        };
-
-        if (deltaX < 0) {
-          // Swipe to the left
-          arg.toLeft = true;
-        } else {
-          // Swipe to the right
-          arg.toRight = true;
-        }
-
-        handler(arg);
-      }
-    }
-  } // Add event handlers
-
-
-  on(element, 'touchstart', touchStart, {
-    passive: true
-  }); // on(element, 'touchmove', touchmove);
-
-  on(element, 'touchend', touchEnd, {
-    passive: true
-  }); // Return function that removes event handlers
-
-  return function () {
-    off(element, 'touchstart', touchStart); // off(element, 'touchmove', touchmove);
-
-    off(element, 'touchend', touchEnd);
-  };
-};
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Popover.vue?vue&type=script&lang=js&
-
 
 
 
@@ -15052,7 +14948,9 @@ const addHorizontalSwipeHandler = function (element, handler, {
   },
 
   beforeDestroy() {
+    this.destroyPopper();
     this.removeEvents();
+    this.popoverEl = null;
   },
 
   methods: {
@@ -15063,7 +14961,7 @@ const addHorizontalSwipeHandler = function (element, handler, {
       on(this.popoverEl, 'focusin', this.onFocusIn);
       on(this.popoverEl, 'focusout', this.onFocusOut);
       on(document, 'keydown', this.onDocumentKeydown);
-      this.removeDocHandler = addTapOrClickHandler(document, this.onDocumentClick);
+      on(document, 'click', this.onDocumentClick);
       on(document, 'show-popover', this.onDocumentShowPopover);
       on(document, 'hide-popover', this.onDocumentHidePopover);
       on(document, 'toggle-popover', this.onDocumentTogglePopover);
@@ -15077,7 +14975,7 @@ const addHorizontalSwipeHandler = function (element, handler, {
       off(this.popoverEl, 'focusin', this.onFocusIn);
       off(this.popoverEl, 'focusout', this.onFocusOut);
       off(document, 'keydown', this.onDocumentKeydown);
-      if (this.removeDocHandler) this.removeDocHandler();
+      off(document, 'click', this.onDocumentClick);
       off(document, 'show-popover', this.onDocumentShowPopover);
       off(document, 'hide-popover', this.onDocumentHidePopover);
       off(document, 'toggle-popover', this.onDocumentTogglePopover);
@@ -15299,8 +15197,8 @@ const addHorizontalSwipeHandler = function (element, handler, {
 });
 // CONCATENATED MODULE: ./src/components/Popover.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Popovervue_type_script_lang_js_ = (Popovervue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./src/components/Popover.vue?vue&type=style&index=0&id=05016e86&lang=postcss&scoped=true&
-__webpack_require__("d99e");
+// EXTERNAL MODULE: ./src/components/Popover.vue?vue&type=style&index=0&id=39b30300&lang=postcss&scoped=true&
+__webpack_require__("bdb3");
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
@@ -15417,13 +15315,13 @@ var component = normalizeComponent(
   staticRenderFns,
   false,
   null,
-  "05016e86",
+  "39b30300",
   null
   
 );
 
 /* harmony default export */ var Popover = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7729c689-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/PopoverRow.vue?vue&type=template&id=eb5afd1a&scoped=true&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"288c63ff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/PopoverRow.vue?vue&type=template&id=eb5afd1a&scoped=true&
 var PopoverRowvue_type_template_id_eb5afd1a_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vc-day-popover-row"},[(_vm.indicator)?_c('div',{staticClass:"vc-day-popover-row-indicator"},[_c('span',{class:_vm.indicator.class,style:(_vm.indicator.style)})]):_vm._e(),_c('div',{staticClass:"vc-day-popover-row-content"},[_vm._t("default",[_vm._v(_vm._s(_vm.attribute.popover ? _vm.attribute.popover.label : 'No content provided'))])],2)])};
 var PopoverRowvue_type_template_id_eb5afd1a_scoped_true_staticRenderFns = [];
 
@@ -19266,14 +19164,14 @@ var PopoverRow_component = normalizeComponent(
 );
 
 /* harmony default export */ var PopoverRow = (PopoverRow_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7729c689-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CalendarNav.vue?vue&type=template&id=9686ba66&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"288c63ff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CalendarNav.vue?vue&type=template&id=9686ba66&
 var CalendarNavvue_type_template_id_9686ba66_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vc-nav-container"},[_c('div',{staticClass:"vc-nav-header"},[_c('span',{staticClass:"vc-nav-arrow is-left",class:{ 'is-disabled': !_vm.prevItemsEnabled },attrs:{"role":"button","tabindex":_vm.prevItemsEnabled ? 0 : undefined},on:{"click":_vm.movePrev,"keydown":function (e) { return _vm.onSpaceOrEnter(e, _vm.movePrev); }}},[_vm._t("nav-left-button",[_c('svg-icon',{attrs:{"name":"left-arrow","width":"20px","height":"24px"}})])],2),_c('span',{staticClass:"vc-nav-title vc-grid-focus",style:({ whiteSpace: 'nowrap' }),attrs:{"role":"button","tabindex":"0"},on:{"click":_vm.toggleMode,"keydown":function (e) { return _vm.onSpaceOrEnter(e, _vm.toggleMode); }}},[_vm._v(" "+_vm._s(_vm.title)+" ")]),_c('span',{staticClass:"vc-nav-arrow is-right",class:{ 'is-disabled': !_vm.nextItemsEnabled },attrs:{"role":"button","tabindex":_vm.nextItemsEnabled ? 0 : undefined},on:{"click":_vm.moveNext,"keydown":function (e) { return _vm.onSpaceOrEnter(e, _vm.moveNext); }}},[_vm._t("nav-right-button",[_c('svg-icon',{attrs:{"name":"right-arrow","width":"20px","height":"24px"}})])],2)]),_c('div',{staticClass:"vc-nav-items"},_vm._l((_vm.activeItems),function(item){return _c('span',{key:item.label,class:_vm.getItemClasses(item),attrs:{"role":"button","data-id":item.id,"aria-label":item.ariaLabel,"tabindex":item.isDisabled ? undefined : 0},on:{"click":item.click,"keydown":function (e) { return _vm.onSpaceOrEnter(e, item.click); }}},[_vm._v(" "+_vm._s(item.label)+" ")])}),0)])};
 var CalendarNavvue_type_template_id_9686ba66_staticRenderFns = [];
 
 
 // CONCATENATED MODULE: ./src/components/CalendarNav.vue?vue&type=template&id=9686ba66&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7729c689-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SvgIcon.vue?vue&type=template&id=63f7b5ec&scoped=true&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"288c63ff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SvgIcon.vue?vue&type=template&id=63f7b5ec&scoped=true&
 var SvgIconvue_type_template_id_63f7b5ec_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',_vm._g({staticClass:"vc-svg-icon",attrs:{"width":_vm.width,"height":_vm.height,"viewBox":_vm.viewBox}},_vm.$listeners),[_c('path',{attrs:{"d":_vm.path}})])};
 var SvgIconvue_type_template_id_63f7b5ec_scoped_true_staticRenderFns = [];
 
@@ -20671,6 +20569,14 @@ class attributeStore_AttributeStore {
     this.refresh(attrs, true);
   }
 
+  destroy() {
+    this.theme = null;
+    this.locale = null;
+    this.map = {};
+    this.list = [];
+    this.pinAttr = null;
+  }
+
   refresh(attrs, reset) {
     var _this = this;
 
@@ -20724,6 +20630,76 @@ class attributeStore_AttributeStore {
   }
 
 }
+// CONCATENATED MODULE: ./src/utils/touch.js
+
+
+const addHorizontalSwipeHandler = function (element, handler, {
+  maxSwipeTime,
+  minHorizontalSwipeDistance,
+  maxVerticalSwipeDistance
+}) {
+  if (!element || !element.addEventListener || !isFunction_default()(handler)) {
+    return null;
+  } // State variables
+
+
+  let startX = 0;
+  let startY = 0;
+  let startTime = null;
+  let isSwiping = false; // Touch start handler
+
+  function touchStart(e) {
+    const t = e.changedTouches[0];
+    startX = t.screenX;
+    startY = t.screenY;
+    startTime = new Date().getTime();
+    isSwiping = true;
+  } // Touch end handler
+
+
+  function touchEnd(e) {
+    if (!isSwiping) return;
+    isSwiping = false;
+    const t = e.changedTouches[0];
+    const deltaX = t.screenX - startX;
+    const deltaY = t.screenY - startY;
+    const deltaTime = new Date().getTime() - startTime;
+
+    if (deltaTime < maxSwipeTime) {
+      if (Math.abs(deltaX) >= minHorizontalSwipeDistance && Math.abs(deltaY) <= maxVerticalSwipeDistance) {
+        const arg = {
+          toLeft: false,
+          toRight: false
+        };
+
+        if (deltaX < 0) {
+          // Swipe to the left
+          arg.toLeft = true;
+        } else {
+          // Swipe to the right
+          arg.toRight = true;
+        }
+
+        handler(arg);
+      }
+    }
+  } // Add event handlers
+
+
+  on(element, 'touchstart', touchStart, {
+    passive: true
+  }); // on(element, 'touchmove', touchmove);
+
+  on(element, 'touchend', touchEnd, {
+    passive: true
+  }); // Return function that removes event handlers
+
+  return function () {
+    off(element, 'touchstart', touchStart); // off(element, 'touchmove', touchmove);
+
+    off(element, 'touchend', touchEnd);
+  };
+};
 // EXTERNAL MODULE: ./src/styles/base.css
 __webpack_require__("3ee2");
 
@@ -21126,7 +21102,7 @@ __webpack_require__("3ee2");
 
     if (!this.disablePageSwipe) {
       // Add swipe handler to move to next and previous pages
-      const removeHandlers = addHorizontalSwipeHandler(this.$refs.container, function ({
+      this.removeHandlers = addHorizontalSwipeHandler(this.$refs.container, function ({
         toLeft,
         toRight
       }) {
@@ -21135,12 +21111,16 @@ __webpack_require__("3ee2");
         } else if (toRight) {
           _this2.movePrev();
         }
-      }, this.$defaults.touch); // Clean up on destroy
-
-      this.$once('beforeDestroy', function () {
-        return removeHandlers();
-      });
+      }, this.$defaults.touch);
     }
+  },
+
+  destroyed() {
+    this.pages = [];
+    this.store.destroy();
+    this.store = null;
+    this.sharedState = null;
+    if (this.removeHandlers) this.removeHandlers();
   },
 
   methods: {
@@ -21682,14 +21662,14 @@ var Calendar_component = normalizeComponent(
 );
 
 /* harmony default export */ var Calendar = (Calendar_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7729c689-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TimePicker.vue?vue&type=template&id=021f332c&scoped=true&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"288c63ff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TimePicker.vue?vue&type=template&id=021f332c&scoped=true&
 var TimePickervue_type_template_id_021f332c_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vc-time-picker",class:[{ 'vc-disabled': _vm.isDisabled, 'vc-bordered': _vm.showBorder }]},[_c('div',[_c('svg',{staticClass:"vc-time-icon",attrs:{"fill":"none","stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"2","viewBox":"0 0 24 24","stroke":"currentColor"}},[_c('path',{attrs:{"d":"M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"}})])]),_c('div',{staticClass:"vc-date-time"},[(_vm.date)?_c('div',{staticClass:"vc-date"},[_c('span',{staticClass:"vc-weekday"},[_vm._v(" "+_vm._s(_vm.locale.format(_vm.date, 'WWW'))+" ")]),_c('span',{staticClass:"vc-month"},[_vm._v(" "+_vm._s(_vm.locale.format(_vm.date, 'MMM'))+" ")]),_c('span',{staticClass:"vc-day"},[_vm._v(" "+_vm._s(_vm.locale.format(_vm.date, 'D'))+" ")]),_c('span',{staticClass:"vc-year"},[_vm._v(" "+_vm._s(_vm.locale.format(_vm.date, 'YYYY'))+" ")])]):_vm._e(),_c('div',{staticClass:"vc-time"},[_c('time-select',{attrs:{"options":_vm.hourOptions},model:{value:(_vm.hours),callback:function ($$v) {_vm.hours=_vm._n($$v);},expression:"hours"}}),_c('span',{staticStyle:{"margin":"0 4px"}},[_vm._v(":")]),_c('time-select',{attrs:{"options":_vm.minuteOptions},model:{value:(_vm.minutes),callback:function ($$v) {_vm.minutes=_vm._n($$v);},expression:"minutes"}}),(!_vm.is24hr)?_c('div',{staticClass:"vc-am-pm",class:{ 'vc-disabled': !(_vm.hours >= 0) }},[_c('button',{class:{ active: _vm.isAM },attrs:{"type":"button"},on:{"click":function($event){$event.preventDefault();_vm.isAM = true;}}},[_vm._v(" AM ")]),_c('button',{class:{ active: !_vm.isAM },attrs:{"type":"button"},on:{"click":function($event){$event.preventDefault();_vm.isAM = false;}}},[_vm._v(" PM ")])]):_vm._e()],1)])])};
 var TimePickervue_type_template_id_021f332c_scoped_true_staticRenderFns = [];
 
 
 // CONCATENATED MODULE: ./src/components/TimePicker.vue?vue&type=template&id=021f332c&scoped=true&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7729c689-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TimeSelect.vue?vue&type=template&id=14bdabaf&scoped=true&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"288c63ff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/TimeSelect.vue?vue&type=template&id=14bdabaf&scoped=true&
 var TimeSelectvue_type_template_id_14bdabaf_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vc-select"},[_c('select',_vm._b({on:{"change":function($event){return _vm.$emit('input', $event.target.value)}}},'select',_vm.$attrs,false),_vm._l((_vm.options),function(option){return _c('option',{key:option.value,attrs:{"disabled":option.disabled},domProps:{"value":option.value}},[_vm._v(_vm._s(option.label))])}),0),_c('div',{staticClass:"vc-select-arrow"},[_c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 20 20"}},[_c('path',{attrs:{"d":"M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"}})])])])};
 var TimeSelectvue_type_template_id_14bdabaf_scoped_true_staticRenderFns = [];
 
@@ -22119,7 +22099,6 @@ var TimePicker_component = normalizeComponent(
 
 
 
-
 const _dateConfig = {
   type: 'auto',
   mask: 'iso',
@@ -22524,23 +22503,15 @@ const RANGE_PRIORITY = {
   },
 
   mounted() {
-    var _this3 = this;
-
     // Handle escape key presses
     on(document, 'keydown', this.onDocumentKeyDown); // Clear drag on background click
 
-    const offTapOrClickHandler = addTapOrClickHandler(document, function (e) {
-      if (document.body.contains(e.target) && !elementContains(_this3.$el, e.target)) {
-        _this3.dragValue = null;
+    on(document, 'click', this.onDocumentClick);
+  },
 
-        _this3.formatInput();
-      }
-    }); // Clean up handlers
-
-    this.$once('beforeDestroy', function () {
-      off(document, 'keydown', _this3.onDocumentKeyDown);
-      offTapOrClickHandler();
-    });
+  destroyed() {
+    off(document, 'keydown', this.onDocumentKeyDown);
+    off(document, 'click', this.onDocumentClick);
   },
 
   methods: {
@@ -22553,7 +22524,7 @@ const RANGE_PRIORITY = {
     },
 
     refreshDateParts() {
-      var _this4 = this;
+      var _this3 = this;
 
       const value = this.dragValue || this.value_;
       const dateParts = [];
@@ -22577,7 +22548,7 @@ const RANGE_PRIORITY = {
       }
 
       this.$nextTick(function () {
-        return _this4.dateParts = dateParts;
+        return _this3.dateParts = dateParts;
       });
     },
 
@@ -22585,6 +22556,13 @@ const RANGE_PRIORITY = {
       // Clear drag on escape keydown
       if (this.dragValue && e.key === 'Escape') {
         this.dragValue = null;
+      }
+    },
+
+    onDocumentClick(e) {
+      if (document.body.contains(e.target) && !elementContains(this.$el, e.target)) {
+        this.dragValue = null;
+        this.formatInput();
       }
     },
 
@@ -22657,7 +22635,7 @@ const RANGE_PRIORITY = {
     },
 
     onTimeInput(parts, isStart) {
-      var _this5 = this;
+      var _this4 = this;
 
       let value = null;
 
@@ -22676,29 +22654,29 @@ const RANGE_PRIORITY = {
         patch: PATCH.TIME,
         rangePriority: isStart ? RANGE_PRIORITY.START : RANGE_PRIORITY.END
       }).then(function () {
-        return _this5.adjustPageRange(isStart);
+        return _this4.adjustPageRange(isStart);
       });
     },
 
     onInputInput(isStart) {
-      var _this6 = this;
+      var _this5 = this;
 
       return function (e) {
-        if (!_this6.updateOnInput_) return;
+        if (!_this5.updateOnInput_) return;
 
-        _this6.onInputUpdate(e.target.value, isStart, {
+        _this5.onInputUpdate(e.target.value, isStart, {
           formatInput: false,
           hidePopover: false,
-          debounce: _this6.inputDebounce_
+          debounce: _this5.inputDebounce_
         });
       };
     },
 
     onInputChange(isStart) {
-      var _this7 = this;
+      var _this6 = this;
 
       return function (e) {
-        _this7.onInputUpdate(e.target.value, isStart, {
+        _this6.onInputUpdate(e.target.value, isStart, {
           formatInput: true,
           hidePopover: false
         });
@@ -22706,7 +22684,7 @@ const RANGE_PRIORITY = {
     },
 
     onInputUpdate(inputValue, isStart, opts) {
-      var _this8 = this;
+      var _this7 = this;
 
       this.inputValues.splice(isStart ? 0 : 1, 1, inputValue);
       const value = this.isRange ? {
@@ -22722,7 +22700,7 @@ const RANGE_PRIORITY = {
         patch: this.inputMaskPatch,
         rangePriority: isStart ? RANGE_PRIORITY.START : RANGE_PRIORITY.END
       }).then(function () {
-        return _this8.adjustPageRange(isStart);
+        return _this7.adjustPageRange(isStart);
       });
     },
 
@@ -22740,7 +22718,7 @@ const RANGE_PRIORITY = {
     },
 
     updateValue(value, opts = {}) {
-      var _this9 = this;
+      var _this8 = this;
 
       clearTimeout(this.updateTimeout);
       return new Promise(function (resolve) {
@@ -22750,15 +22728,15 @@ const RANGE_PRIORITY = {
         } = opts;
 
         if (debounce > 0) {
-          _this9.updateTimeout = setTimeout(function () {
-            _this9.forceUpdateValue(value, args);
+          _this8.updateTimeout = setTimeout(function () {
+            _this8.forceUpdateValue(value, args);
 
-            resolve(_this9.value_);
+            resolve(_this8.value_);
           }, debounce);
         } else {
-          _this9.forceUpdateValue(value, args);
+          _this8.forceUpdateValue(value, args);
 
-          resolve(_this9.value_);
+          resolve(_this8.value_);
         }
       });
     },
@@ -22774,7 +22752,7 @@ const RANGE_PRIORITY = {
       isDragging = this.isDragging,
       rangePriority = RANGE_PRIORITY.BOTH
     } = {}) {
-      var _this10 = this;
+      var _this9 = this;
 
       // 1. Normalization
       let normalizedValue = this.normalizeValue(value, config, patch, rangePriority); // Reset to previous value if it was cleared but is required
@@ -22823,7 +22801,7 @@ const RANGE_PRIORITY = {
         this.watchValue = false;
         this.$emit(event, denormalizedValue);
         this.$nextTick(function () {
-          return _this10.watchValue = true;
+          return _this9.watchValue = true;
         });
       } // 5. Hide popover if needed
 
@@ -22945,20 +22923,20 @@ const RANGE_PRIORITY = {
     },
 
     formatInput() {
-      var _this11 = this;
+      var _this10 = this;
 
       this.$nextTick(function () {
         const opts = {
           type: 'string',
-          mask: _this11.inputMask
+          mask: _this10.inputMask
         };
 
-        const value = _this11.denormalizeValue(_this11.dragValue || _this11.value_, opts);
+        const value = _this10.denormalizeValue(_this10.dragValue || _this10.value_, opts);
 
-        if (_this11.isRange) {
-          _this11.inputValues = [value && value.start, value && value.end];
+        if (_this10.isRange) {
+          _this10.inputValues = [value && value.start, value && value.end];
         } else {
-          _this11.inputValues = [value, ''];
+          _this10.inputValues = [value, ''];
         }
       });
     },
@@ -22993,12 +22971,12 @@ const RANGE_PRIORITY = {
     },
 
     adjustPageRange(isStart) {
-      var _this12 = this;
+      var _this11 = this;
 
       this.$nextTick(function () {
-        const calendar = _this12.$refs.calendar;
+        const calendar = _this11.$refs.calendar;
 
-        const page = _this12.getPageForValue(isStart);
+        const page = _this11.getPageForValue(isStart);
 
         const position = isStart ? 1 : -1;
 
@@ -29998,20 +29976,20 @@ const __vue_component__$H = /*#__PURE__*/normalizeComponent$2({
 
 var __vue_component__$I = __vue_component__$H;
 
-function _typeof$2(obj) {
+function _typeof$3(obj) {
   "@babel/helpers - typeof";
 
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof$2 = function _typeof(obj) {
+    _typeof$3 = function _typeof(obj) {
       return typeof obj;
     };
   } else {
-    _typeof$2 = function _typeof(obj) {
+    _typeof$3 = function _typeof(obj) {
       return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     };
   }
 
-  return _typeof$2(obj);
+  return _typeof$3(obj);
 }
 
 function _defineProperty$2(obj, key, value) {
@@ -30890,7 +30868,7 @@ function getPopperOffsets(popper, referenceOffsets, placement) {
  * @argument value
  * @returns index or -1
  */
-function find$1(arr, check) {
+function find$2(arr, check) {
   // use native find if supported
   if (Array.prototype.find) {
     return arr.find(check);
@@ -30918,7 +30896,7 @@ function findIndex(arr, prop, value) {
   }
 
   // use `find` + `indexOf` if `findIndex` isn't supported
-  var match = find$1(arr, function (obj) {
+  var match = find$2(arr, function (obj) {
     return obj[prop] === value;
   });
   return arr.indexOf(match);
@@ -31335,7 +31313,7 @@ function computeStyle(data, options) {
 
   // Remove this legacy support in Popper.js v2
 
-  var legacyGpuAccelerationOption = find$1(data.instance.modifiers, function (modifier) {
+  var legacyGpuAccelerationOption = find$2(data.instance.modifiers, function (modifier) {
     return modifier.name === 'applyStyle';
   }).gpuAcceleration;
   if (legacyGpuAccelerationOption !== undefined) {
@@ -31430,7 +31408,7 @@ function computeStyle(data, options) {
  * @returns {Boolean}
  */
 function isModifierRequired(modifiers, requestingName, requestedName) {
-  var requesting = find$1(modifiers, function (_ref) {
+  var requesting = find$2(modifiers, function (_ref) {
     var name = _ref.name;
     return name === requestingName;
   });
@@ -31811,7 +31789,7 @@ function parseOffset(offset, popperOffsets, referenceOffsets, basePlacement) {
 
   // Detect if the offset string contains a pair of values or a single one
   // they could be separated by comma or space
-  var divider = fragments.indexOf(find$1(fragments, function (frag) {
+  var divider = fragments.indexOf(find$2(fragments, function (frag) {
     return frag.search(/,|\s/) !== -1;
   }));
 
@@ -32022,7 +32000,7 @@ function hide$2(data) {
   }
 
   var refRect = data.offsets.reference;
-  var bound = find$1(data.instance.modifiers, function (modifier) {
+  var bound = find$2(data.instance.modifiers, function (modifier) {
     return modifier.name === 'preventOverflow';
   }).boundaries;
 
@@ -32946,12 +32924,12 @@ var _stackHas = stackHas;
  * _.isObject(null);
  * // => false
  */
-function isObject$1(value) {
+function isObject$2(value) {
   var type = typeof value;
   return value != null && (type == 'object' || type == 'function');
 }
 
-var isObject_1 = isObject$1;
+var isObject_1 = isObject$2;
 
 /** `Object#toString` result references. */
 var asyncTag = '[object AsyncFunction]',
@@ -36782,7 +36760,7 @@ function getOptions(options) {
   };
 
   if (result.offset) {
-    var typeofOffset = _typeof$2(result.offset);
+    var typeofOffset = _typeof$3(result.offset);
 
     var offset = result.offset; // One value -> switch
 
@@ -36819,7 +36797,7 @@ function getPlacement(value, modifiers) {
   return placement;
 }
 function getContent(value) {
-  var type = _typeof$2(value);
+  var type = _typeof$3(value);
 
   if (type === 'string') {
     return value;
@@ -36836,7 +36814,7 @@ function createTooltip(el, value) {
 
   var opts = _objectSpread$1({
     title: content
-  }, getOptions(_objectSpread$1(_objectSpread$1({}, _typeof$2(value) === 'object' ? value : {}), {}, {
+  }, getOptions(_objectSpread$1(_objectSpread$1({}, _typeof$3(value) === 'object' ? value : {}), {}, {
     placement: getPlacement(value, modifiers)
   })));
 
@@ -37425,7 +37403,7 @@ var script$p = {
       return container;
     },
     $_getOffset: function $_getOffset() {
-      var typeofOffset = _typeof$2(this.offset);
+      var typeofOffset = _typeof$3(this.offset);
 
       var offset = this.offset; // One value -> switch
 
@@ -38195,18 +38173,18 @@ var __vue_component__$C = __vue_component__$B;
  * @author	owenm    <owen23355@gmail.com>
  * @license MIT
  */
-function _typeof$1(obj) {
+function _typeof$2(obj) {
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof$1 = function (obj) {
+    _typeof$2 = function (obj) {
       return typeof obj;
     };
   } else {
-    _typeof$1 = function (obj) {
+    _typeof$2 = function (obj) {
       return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     };
   }
 
-  return _typeof$1(obj);
+  return _typeof$2(obj);
 }
 
 function _defineProperty(obj, key, value) {
@@ -38457,7 +38435,7 @@ function matrix(el, selfOnly) {
   return matrixFn && new matrixFn(appliedTransforms);
 }
 
-function find(ctx, tagName, iterator) {
+function find$1(ctx, tagName, iterator) {
   if (ctx) {
     var list = ctx.getElementsByTagName(tagName),
         i = 0,
@@ -38965,15 +38943,15 @@ function calculateRealTime(animatingRect, fromRect, toRect, options) {
 }
 
 var plugins = [];
-var defaults = {
+var defaults$1 = {
   initializeByDefault: true
 };
 var PluginManager = {
   mount: function mount(plugin) {
     // Set default static properties
-    for (var option in defaults) {
-      if (defaults.hasOwnProperty(option) && !(option in plugin)) {
-        plugin[option] = defaults[option];
+    for (var option in defaults$1) {
+      if (defaults$1.hasOwnProperty(option) && !(option in plugin)) {
+        plugin[option] = defaults$1[option];
       }
     }
 
@@ -39295,7 +39273,7 @@ _detectNearestEmptySortable = function _detectNearestEmptySortable(x, y) {
   var group = {};
   var originalGroup = options.group;
 
-  if (!originalGroup || _typeof$1(originalGroup) != 'object') {
+  if (!originalGroup || _typeof$2(originalGroup) != 'object') {
     originalGroup = {
       name: originalGroup
     };
@@ -39643,7 +39621,7 @@ Sortable.prototype =
 
 
       options.ignore.split(',').forEach(function (criteria) {
-        find(dragEl, criteria.trim(), _disableDraggable);
+        find$1(dragEl, criteria.trim(), _disableDraggable);
       });
       on(ownerDocument, 'dragover', nearestEmptyInsertDetectEvent);
       on(ownerDocument, 'mousemove', nearestEmptyInsertDetectEvent);
@@ -40806,7 +40784,7 @@ Sortable.utils = {
   on: on,
   off: off,
   css: css,
-  find: find,
+  find: find$1,
   is: function is(el, selector) {
     return !!closest(el, selector, el, false);
   },
@@ -44663,7 +44641,7 @@ Fragment$1.prototype.descendants = function descendants (f) {
   this.nodesBetween(0, this.size, f);
 };
 
-// :: (number, number, ?string, ?string) → string
+// :: (number, number, ?string, ?string | ?(leafNode: Node) -> string) → string
 // Extract the text between `from` and `to`. See the same method on
 // [`Node`](#model.Node.textBetween).
 Fragment$1.prototype.textBetween = function textBetween (from, to, blockSeparator, leafText) {
@@ -44673,7 +44651,7 @@ Fragment$1.prototype.textBetween = function textBetween (from, to, blockSeparato
       text += node.text.slice(Math.max(from, pos) - pos, to - pos);
       separated = !blockSeparator;
     } else if (node.isLeaf && leafText) {
-      text += leafText;
+      text += typeof leafText === 'function' ? leafText(node): leafText;
       separated = !blockSeparator;
     } else if (!separated && node.isBlock) {
       text += blockSeparator;
@@ -45652,7 +45630,7 @@ Node$3.prototype.descendants = function descendants (f) {
 // children.
 prototypeAccessors$3$2.textContent.get = function () { return this.textBetween(0, this.content.size, "") };
 
-// :: (number, number, ?string, ?string) → string
+// :: (number, number, ?string, ?string | ?(leafNode: Node) -> string) → string
 // Get all text between positions `from` and `to`. When
 // `blockSeparator` is given, it will be inserted whenever a new
 // block node is started. When `leafText` is given, it'll be
@@ -51314,7 +51292,7 @@ var macBaseKeymap = {
 for (var key$2 in pcBaseKeymap) { macBaseKeymap[key$2] = pcBaseKeymap[key$2]; }
 
 // declare global: os, navigator
-typeof navigator != "undefined" ? /Mac/.test(navigator.platform)
+typeof navigator != "undefined" ? /Mac|iP(hone|[oa]d)/.test(navigator.platform)
           : typeof os != "undefined" ? os.platform() == "darwin" : false;
 
 // :: (NodeType, ?Object) → (state: EditorState, dispatch: ?(tr: Transaction)) → bool
@@ -51455,175 +51433,6 @@ function sinkListItem$2(itemType) {
   }
 }
 
-// ::- Input rules are regular expressions describing a piece of text
-// that, when typed, causes something to happen. This might be
-// changing two dashes into an emdash, wrapping a paragraph starting
-// with `"> "` into a blockquote, or something entirely different.
-var InputRule = function InputRule(match, handler) {
-  this.match = match;
-  this.handler = typeof handler == "string" ? stringHandler(handler) : handler;
-};
-
-function stringHandler(string) {
-  return function(state, match, start, end) {
-    var insert = string;
-    if (match[1]) {
-      var offset = match[0].lastIndexOf(match[1]);
-      insert += match[0].slice(offset + match[1].length);
-      start += offset;
-      var cutOff = start - end;
-      if (cutOff > 0) {
-        insert = match[0].slice(offset - cutOff, offset) + insert;
-        start = end;
-      }
-    }
-    return state.tr.insertText(insert, start, end)
-  }
-}
-
-var MAX_MATCH = 500;
-
-// :: (config: {rules: [InputRule]}) → Plugin
-// Create an input rules plugin. When enabled, it will cause text
-// input that matches any of the given rules to trigger the rule's
-// action.
-function inputRules(ref) {
-  var rules = ref.rules;
-
-  var plugin = new Plugin({
-    state: {
-      init: function init() { return null },
-      apply: function apply(tr, prev) {
-        var stored = tr.getMeta(this);
-        if (stored) { return stored }
-        return tr.selectionSet || tr.docChanged ? null : prev
-      }
-    },
-
-    props: {
-      handleTextInput: function handleTextInput(view, from, to, text) {
-        return run(view, from, to, text, rules, plugin)
-      },
-      handleDOMEvents: {
-        compositionend: function (view) {
-          setTimeout(function () {
-            var ref = view.state.selection;
-            var $cursor = ref.$cursor;
-            if ($cursor) { run(view, $cursor.pos, $cursor.pos, "", rules, plugin); }
-          });
-        }
-      }
-    },
-
-    isInputRules: true
-  });
-  return plugin
-}
-
-function run(view, from, to, text, rules, plugin) {
-  if (view.composing) { return false }
-  var state = view.state, $from = state.doc.resolve(from);
-  if ($from.parent.type.spec.code) { return false }
-  var textBefore = $from.parent.textBetween(Math.max(0, $from.parentOffset - MAX_MATCH), $from.parentOffset,
-                                            null, "\ufffc") + text;
-  for (var i = 0; i < rules.length; i++) {
-    var match = rules[i].match.exec(textBefore);
-    var tr = match && rules[i].handler(state, match, from - (match[0].length - text.length), to);
-    if (!tr) { continue }
-    view.dispatch(tr.setMeta(plugin, {transform: tr, from: from, to: to, text: text}));
-    return true
-  }
-  return false
-}
-
-// :: (EditorState, ?(Transaction)) → bool
-// This is a command that will undo an input rule, if applying such a
-// rule was the last thing that the user did.
-function undoInputRule$2(state, dispatch) {
-  var plugins = state.plugins;
-  for (var i = 0; i < plugins.length; i++) {
-    var plugin = plugins[i], undoable = (void 0);
-    if (plugin.spec.isInputRules && (undoable = plugin.getState(state))) {
-      if (dispatch) {
-        var tr = state.tr, toUndo = undoable.transform;
-        for (var j = toUndo.steps.length - 1; j >= 0; j--)
-          { tr.step(toUndo.steps[j].invert(toUndo.docs[j])); }
-        if (undoable.text) {
-          var marks = tr.doc.resolve(undoable.from).marks();
-          tr.replaceWith(undoable.from, undoable.to, state.schema.text(undoable.text, marks));
-        } else {
-          tr.delete(undoable.from, undoable.to);
-        }
-        dispatch(tr);
-      }
-      return true
-    }
-  }
-  return false
-}
-
-// :: InputRule Converts double dashes to an emdash.
-new InputRule(/--$/, "—");
-// :: InputRule Converts three dots to an ellipsis character.
-new InputRule(/\.\.\.$/, "…");
-// :: InputRule “Smart” opening double quotes.
-new InputRule(/(?:^|[\s\{\[\(\<'"\u2018\u201C])(")$/, "“");
-// :: InputRule “Smart” closing double quotes.
-new InputRule(/"$/, "”");
-// :: InputRule “Smart” opening single quotes.
-new InputRule(/(?:^|[\s\{\[\(\<'"\u2018\u201C])(')$/, "‘");
-// :: InputRule “Smart” closing single quotes.
-new InputRule(/'$/, "’");
-
-// :: (RegExp, NodeType, ?union<Object, ([string]) → ?Object>, ?([string], Node) → bool) → InputRule
-// Build an input rule for automatically wrapping a textblock when a
-// given string is typed. The `regexp` argument is
-// directly passed through to the `InputRule` constructor. You'll
-// probably want the regexp to start with `^`, so that the pattern can
-// only occur at the start of a textblock.
-//
-// `nodeType` is the type of node to wrap in. If it needs attributes,
-// you can either pass them directly, or pass a function that will
-// compute them from the regular expression match.
-//
-// By default, if there's a node with the same type above the newly
-// wrapped node, the rule will try to [join](#transform.Transform.join) those
-// two nodes. You can pass a join predicate, which takes a regular
-// expression match and the node before the wrapped node, and can
-// return a boolean to indicate whether a join should happen.
-function wrappingInputRule(regexp, nodeType, getAttrs, joinPredicate) {
-  return new InputRule(regexp, function (state, match, start, end) {
-    var attrs = getAttrs instanceof Function ? getAttrs(match) : getAttrs;
-    var tr = state.tr.delete(start, end);
-    var $start = tr.doc.resolve(start), range = $start.blockRange(), wrapping = range && findWrapping(range, nodeType, attrs);
-    if (!wrapping) { return null }
-    tr.wrap(range, wrapping);
-    var before = tr.doc.resolve(start - 1).nodeBefore;
-    if (before && before.type == nodeType && canJoin(tr.doc, start - 1) &&
-        (!joinPredicate || joinPredicate(match, before)))
-      { tr.join(start - 1); }
-    return tr
-  })
-}
-
-// :: (RegExp, NodeType, ?union<Object, ([string]) → ?Object>) → InputRule
-// Build an input rule that changes the type of a textblock when the
-// matched text is typed into it. You'll usually want to start your
-// regexp with `^` to that it is only matched at the start of a
-// textblock. The optional `getAttrs` parameter can be used to compute
-// the new node's attributes, and works the same as in the
-// `wrappingInputRule` function.
-function textblockTypeInputRule(regexp, nodeType, getAttrs) {
-  return new InputRule(regexp, function (state, match, start, end) {
-    var $start = state.doc.resolve(start);
-    var attrs = getAttrs instanceof Function ? getAttrs(match) : getAttrs;
-    if (!$start.node(-1).canReplaceWith($start.index(-1), $start.indexAfter(-1), nodeType)) { return null }
-    return state.tr
-      .delete(start, end)
-      .setBlockType(start, start, nodeType, attrs)
-  })
-}
-
 var result = {};
 
 if (typeof navigator != "undefined" && typeof document != "undefined") {
@@ -51631,7 +51440,6 @@ if (typeof navigator != "undefined" && typeof document != "undefined") {
   var ie_upto10 = /MSIE \d/.test(navigator.userAgent);
   var ie_11up = /Trident\/(?:[7-9]|\d{2,})\..*rv:(\d+)/.exec(navigator.userAgent);
 
-  result.mac = /Mac/.test(navigator.platform);
   var ie$1 = result.ie = !!(ie_upto10 || ie_11up || ie_edge);
   result.ie_version = ie_upto10 ? document.documentMode || 6 : ie_11up ? +ie_11up[1] : ie_edge ? +ie_edge[1] : null;
   result.gecko = !ie$1 && /gecko\/(\d+)/i.test(navigator.userAgent);
@@ -51642,6 +51450,7 @@ if (typeof navigator != "undefined" && typeof document != "undefined") {
   // Is true for both iOS and iPadOS for convenience
   result.safari = !ie$1 && /Apple Computer/.test(navigator.vendor);
   result.ios = result.safari && (/Mobile\/\w+/.test(navigator.userAgent) || navigator.maxTouchPoints > 2);
+  result.mac = result.ios || /Mac/.test(navigator.platform);
   result.android = /Android \d/.test(navigator.userAgent);
   result.webkit = "webkitFontSmoothing" in document.documentElement.style;
   result.webkit_version = result.webkit && +(/\bAppleWebKit\/(\d+)/.exec(navigator.userAgent) || [0, 0])[1];
@@ -52743,6 +52552,11 @@ var WidgetViewDesc = /*@__PURE__*/(function (ViewDesc) {
     return mutation.type != "selection" || this.widget.spec.ignoreSelection
   };
 
+  WidgetViewDesc.prototype.destroy = function destroy () {
+    this.widget.type.destroy(this.dom);
+    ViewDesc.prototype.destroy.call(this);
+  };
+
   prototypeAccessors$1.domAtom.get = function () { return true };
 
   Object.defineProperties( WidgetViewDesc.prototype, prototypeAccessors$1 );
@@ -53318,6 +53132,8 @@ function patchAttributes(dom, prev, cur) {
       { dom.classList.remove(prevList[i]); } }
     for (var i$1 = 0; i$1 < curList.length; i$1++) { if (prevList.indexOf(curList[i$1]) == -1)
       { dom.classList.add(curList[i$1]); } }
+    if (dom.classList.length == 0)
+      { dom.removeAttribute("class"); }
   }
   if (prev.style != cur.style) {
     if (prev.style) {
@@ -53425,12 +53241,14 @@ ViewTreeUpdater.prototype.syncToMarks = function syncToMarks (marks, inline, vie
 ViewTreeUpdater.prototype.findNodeMatch = function findNodeMatch (node, outerDeco, innerDeco, index) {
   var children = this.top.children, found = -1;
   if (index >= this.preMatch.index) {
-    for (var i = this.index; i < children.length; i++) { if (children[i].matchesNode(node, outerDeco, innerDeco)) {
-      found = i;
-      break
-    } }
+    for (var i = this.index; i < children.length; i++) {
+      if (this.preMatch.matched.get(children[i]) == index) {
+        if (children[i].matchesNode(node, outerDeco, innerDeco)) { found = i; }
+        break
+      }
+    }
   } else {
-    for (var i$1 = this.index, e = Math.min(children.length, i$1 + 1); i$1 < e; i$1++) {
+    for (var i$1 = this.index, e = Math.min(children.length, i$1 + 5); i$1 < e; i$1++) {
       var child = children[i$1];
       if (child.matchesNode(node, outerDeco, innerDeco) && !this.preMatch.matched.has(child)) {
         found = i$1;
@@ -54573,7 +54391,7 @@ function parseFromClipboard(view, text, html, plainText, $context) {
       var schema = ref.schema;
       var serializer = DOMSerializer.fromSchema(schema);
       dom = document.createElement("div");
-      text.trim().split(/(?:\r\n?|\n)+/).forEach(function (block) {
+      text.split(/(?:\r\n?|\n)+/).forEach(function (block) {
         var p = dom.appendChild(document.createElement("p"));
         if (block) { p.appendChild(serializer.serializeNode(schema.text(block, marks))); }
       });
@@ -54588,12 +54406,27 @@ function parseFromClipboard(view, text, html, plainText, $context) {
   var sliceData = contextNode && /^(\d+) (\d+) (.*)/.exec(contextNode.getAttribute("data-pm-slice"));
   if (!slice) {
     var parser = view.someProp("clipboardParser") || view.someProp("domParser") || DOMParser.fromSchema(view.state.schema);
-    slice = parser.parseSlice(dom, {preserveWhitespace: !!(asText || sliceData), context: $context});
+    slice = parser.parseSlice(dom, {
+      preserveWhitespace: !!(asText || sliceData),
+      context: $context,
+      ruleFromNode: function ruleFromNode(dom) {
+        if (dom.nodeName == "BR" && !dom.nextSibling) { return {ignore: true} }
+      }
+    });
   }
-  if (sliceData)
-    { slice = addContext(closeSlice(slice, +sliceData[1], +sliceData[2]), sliceData[3]); }
-  else // HTML wasn't created by ProseMirror. Make sure top-level siblings are coherent
-    { slice = Slice$1.maxOpen(normalizeSiblings(slice.content, $context), false); }
+  if (sliceData) {
+    slice = addContext(closeSlice(slice, +sliceData[1], +sliceData[2]), sliceData[3]);
+  } else { // HTML wasn't created by ProseMirror. Make sure top-level siblings are coherent
+    slice = Slice$1.maxOpen(normalizeSiblings(slice.content, $context), true);
+    if (slice.openStart || slice.openEnd) {
+      var openStart = 0, openEnd = 0;
+      for (var node = slice.content.firstChild; openStart < slice.openStart && !node.type.spec.isolating;
+           openStart++, node = node.firstChild) {}
+      for (var node$1 = slice.content.lastChild; openEnd < slice.openEnd && !node$1.type.spec.isolating;
+           openEnd++, node$1 = node$1.lastChild) {}
+      slice = closeSlice(slice, openStart, openEnd);
+    }
+  }
 
   view.someProp("transformPasted", function (f) { slice = f(slice); });
   return slice
@@ -55734,6 +55567,10 @@ WidgetType.prototype.eq = function eq (other) {
       this.toDOM == other.toDOM && compareObjs(this.spec, other.spec)))
 };
 
+WidgetType.prototype.destroy = function destroy (node) {
+  if (this.spec.destroy) { this.spec.destroy(node); }
+};
+
 var InlineType = function InlineType(attrs, spec) {
   this.spec = spec || noSpec;
   this.attrs = attrs;
@@ -55861,6 +55698,10 @@ Decoration.prototype.map = function map (mapping, offset, oldOffset) {
 //   key are interchangeable—if widgets differ in, for example,
 //   the behavior of some event handler, they should get
 //   different keys.
+//
+//   destroy:: ?(node: dom.Node)
+//   Called when the widget decoration is removed as a result of
+//   mapping
 Decoration.widget = function widget (pos, toDOM, spec) {
   return new Decoration(pos, pos, new WidgetType(toDOM, spec))
 };
@@ -56456,7 +56297,7 @@ var EditorView = function EditorView(place, props) {
   this.updatePluginViews();
 };
 
-var prototypeAccessors$2$2 = { props: { configurable: true },root: { configurable: true } };
+var prototypeAccessors$2$2 = { props: { configurable: true },root: { configurable: true },isDestroyed: { configurable: true } };
 
 // composing:: boolean
 // Holds `true` when a
@@ -56766,6 +56607,14 @@ EditorView.prototype.destroy = function destroy () {
   this.docView = null;
 };
 
+// :: boolean
+// This is true when the view has been
+// [destroyed](#view.EditorView.destroy) (and thus should not be
+// used anymore).
+prototypeAccessors$2$2.isDestroyed.get = function () {
+  return this.docView == null
+};
+
 // Used for testing.
 EditorView.prototype.dispatchEvent = function dispatchEvent$1 (event) {
   return dispatchEvent(this, event)
@@ -56798,6 +56647,9 @@ function computeDocDeco(view) {
     if (value) { for (var attr in value) {
       if (attr == "class")
         { attrs.class += " " + value[attr]; }
+      if (attr == "style") {
+        attrs.style = (attrs.style ? attrs.style + ";" : "") + value[attr];
+      }
       else if (!attrs[attr] && attr != "contenteditable" && attr != "nodeName")
         { attrs[attr] = String(value[attr]); }
     } }
@@ -56977,7 +56829,7 @@ function keyName(event) {
 
 // declare global: navigator
 
-var mac$1 = typeof navigator != "undefined" ? /Mac/.test(navigator.platform) : false;
+var mac$1 = typeof navigator != "undefined" ? /Mac|iP(hone|[oa]d)/.test(navigator.platform) : false;
 
 function normalizeKeyName$1(name) {
   var parts = name.split(/-(?!$)/), result = parts[parts.length - 1];
@@ -57049,7 +56901,7 @@ function keymap(bindings) {
 
 // :: (Object) → (view: EditorView, event: dom.Event) → bool
 // Given a set of bindings (using the same format as
-// [`keymap`](#keymap.keymap), return a [keydown
+// [`keymap`](#keymap.keymap)), return a [keydown
 // handler](#view.EditorProps.handleKeyDown) that handles them.
 function keydownHandler(bindings) {
   var map = normalize(bindings);
@@ -57076,13 +56928,13 @@ function keydownHandler(bindings) {
 }
 
 // see: https://github.com/mesqueeb/is-what/blob/88d6e4ca92fb2baab6003c54e02eedf4e729e5ab/src/index.ts
-function getType(payload) {
-    return Object.prototype.toString.call(payload).slice(8, -1);
+function getType(value) {
+    return Object.prototype.toString.call(value).slice(8, -1);
 }
-function isPlainObject(payload) {
-    if (getType(payload) !== 'Object')
+function isPlainObject(value) {
+    if (getType(value) !== 'Object')
         return false;
-    return payload.constructor === Object && Object.getPrototypeOf(payload) === Object.prototype;
+    return value.constructor === Object && Object.getPrototypeOf(value) === Object.prototype;
 }
 
 function mergeDeep(target, source) {
@@ -57105,6 +56957,43 @@ function mergeDeep(target, source) {
     return output;
 }
 
+function isObject$1(value) {
+    return typeof value === 'function';
+}
+
+/**
+ * Optionally calls `value` as a function.
+ * Otherwise it is returned directly.
+ * @param value Function or any value.
+ * @param context Optional context to bind to function.
+ * @param props Optional props to pass to function.
+ */
+function callOrReturn(value, context = undefined, ...props) {
+    if (isObject$1(value)) {
+        if (context) {
+            return value.bind(context)(...props);
+        }
+        return value(...props);
+    }
+    return value;
+}
+
+function getExtensionField(extension, field, context) {
+    if (extension.config[field] === undefined && extension.parent) {
+        return getExtensionField(extension.parent, field, context);
+    }
+    if (typeof extension.config[field] === 'function') {
+        const value = extension.config[field].bind({
+            ...context,
+            parent: extension.parent
+                ? getExtensionField(extension.parent, field, context)
+                : null,
+        });
+        return value;
+    }
+    return extension.config[field];
+}
+
 class Extension {
     constructor(config = {}) {
         this.type = 'extension';
@@ -57120,7 +57009,20 @@ class Extension {
             ...config,
         };
         this.name = this.config.name;
+        if (config.defaultOptions) {
+            console.warn(`[tiptap warn]: BREAKING CHANGE: "defaultOptions" is deprecated. Please use "addOptions" instead. Found in extension: "${this.name}".`);
+        }
+        // TODO: remove `addOptions` fallback
         this.options = this.config.defaultOptions;
+        if (this.config.addOptions) {
+            this.options = callOrReturn(getExtensionField(this, 'addOptions', {
+                name: this.name,
+            }));
+        }
+        this.storage = callOrReturn(getExtensionField(this, 'addStorage', {
+            name: this.name,
+            options: this.options,
+        })) || {};
     }
     static create(config = {}) {
         return new Extension(config);
@@ -57130,6 +57032,10 @@ class Extension {
         // with different calls of `configure`
         const extension = this.extend();
         extension.options = mergeDeep(this.options, options);
+        extension.storage = callOrReturn(getExtensionField(extension, 'addStorage', {
+            name: extension.name,
+            options: extension.options,
+        }));
         return extension;
     }
     extend(extendedConfig = {}) {
@@ -57139,9 +57045,22 @@ class Extension {
         extension.name = extendedConfig.name
             ? extendedConfig.name
             : extension.parent.name;
+        if (extendedConfig.defaultOptions) {
+            console.warn(`[tiptap warn]: BREAKING CHANGE: "defaultOptions" is deprecated. Please use "addOptions" instead. Found in extension: "${extension.name}".`);
+        }
+        // TODO: remove `addOptions` fallback
         extension.options = extendedConfig.defaultOptions
             ? extendedConfig.defaultOptions
             : extension.parent.options;
+        if (extendedConfig.addOptions) {
+            extension.options = callOrReturn(getExtensionField(extension, 'addOptions', {
+                name: extension.name,
+            }));
+        }
+        extension.storage = callOrReturn(getExtensionField(extension, 'addStorage', {
+            name: extension.name,
+            options: extension.options,
+        }));
         return extension;
     }
 }
@@ -57469,19 +57388,19 @@ function minMax(value = 0, min = 0, max = 0) {
     return Math.min(Math.max(value, min), max);
 }
 
-function isClass(item) {
+function isClass(value) {
     var _a;
-    if (((_a = item.constructor) === null || _a === void 0 ? void 0 : _a.toString().substring(0, 5)) !== 'class') {
+    if (((_a = value.constructor) === null || _a === void 0 ? void 0 : _a.toString().substring(0, 5)) !== 'class') {
         return false;
     }
     return true;
 }
 
-function isObject(item) {
-    return (item
-        && typeof item === 'object'
-        && !Array.isArray(item)
-        && !isClass(item));
+function isObject(value) {
+    return (value
+        && typeof value === 'object'
+        && !Array.isArray(value)
+        && !isClass(value));
 }
 
 function isTextSelection(value) {
@@ -57645,24 +57564,58 @@ function selectionToInsertionEnd$1(tr, startLen, bias) {
     tr.setSelection(Selection$1.near(tr.doc.resolve(end), bias));
 }
 
+const isFragment = (nodeOrFragment) => {
+    return nodeOrFragment.toString().startsWith('<');
+};
 const insertContentAt = (position, value, options) => ({ tr, dispatch, editor }) => {
     if (dispatch) {
+        options = {
+            parseOptions: {},
+            updateSelection: true,
+            ...options,
+        };
         const content = createNodeFromContent(value, editor.schema, {
             parseOptions: {
                 preserveWhitespace: 'full',
+                ...options.parseOptions,
             },
-            ...(options || {}),
         });
         // don’t dispatch an empty fragment because this can lead to strange errors
         if (content.toString() === '<>') {
             return true;
         }
-        const { from, to } = typeof position === 'number'
+        let { from, to } = typeof position === 'number'
             ? { from: position, to: position }
             : position;
+        let isOnlyBlockContent = true;
+        const nodes = isFragment(content)
+            ? content
+            : [content];
+        nodes.forEach(node => {
+            isOnlyBlockContent = isOnlyBlockContent
+                ? node.isBlock
+                : false;
+        });
+        // check if we can replace the wrapping node by
+        // the newly inserted content
+        // example:
+        // replace an empty paragraph by an inserted image
+        // instead of inserting the image below the paragraph
+        if (from === to && isOnlyBlockContent) {
+            const { parent } = tr.doc.resolve(from);
+            const isEmptyTextBlock = parent.isTextblock
+                && !parent.type.spec.code
+                && !parent.childCount;
+            if (isEmptyTextBlock) {
+                from -= 1;
+                to += 1;
+            }
+        }
         tr.replaceWith(from, to, content);
         // set cursor at end of inserted content
-        selectionToInsertionEnd$1(tr, tr.steps.length - 1, 1);
+        if (options.updateSelection) {
+            selectionToInsertionEnd$1(tr, tr.steps.length - 1, -1);
+        }
     }
     return true;
 };
@@ -57994,6 +57947,9 @@ function getMarkAttributes(state, typeOrName) {
     const { from, to, empty } = state.selection;
     const marks = [];
     if (empty) {
+        if (state.storedMarks) {
+            marks.push(...state.storedMarks);
+        }
         marks.push(...state.selection.$head.marks());
     }
     else {
@@ -58344,39 +58300,6 @@ function splitExtensions(extensions) {
     };
 }
 
-/**
- * Optionally calls `value` as a function.
- * Otherwise it is returned directly.
- * @param value Function or any value.
- * @param context Optional context to bind to function.
- * @param props Optional props to pass to function.
- */
-function callOrReturn(value, context = undefined, ...props) {
-    if (typeof value === 'function') {
-        if (context) {
-            return value.bind(context)(...props);
-        }
-        return value(...props);
-    }
-    return value;
-}
-
-function getExtensionField(extension, field, context = {}) {
-    if (extension.config[field] === undefined && extension.parent) {
-        return getExtensionField(extension.parent, field, context);
-    }
-    if (typeof extension.config[field] === 'function') {
-        const value = extension.config[field].bind({
-            ...context,
-            parent: extension.parent
-                ? getExtensionField(extension.parent, field, context)
-                : null,
-        });
-        return value;
-    }
-    return extension.config[field];
-}
-
 function isList(name, extensions) {
     const { nodeExtensions } = splitExtensions(extensions);
     const extension = nodeExtensions.find(item => item.name === name);
@@ -58386,6 +58309,7 @@ function isList(name, extensions) {
     const context = {
         name: extension.name,
         options: extension.options,
+        storage: extension.storage,
     };
     const group = callOrReturn(getExtensionField(extension, 'group', context));
     if (typeof group !== 'string') {
@@ -58546,7 +58470,31 @@ var toggleWrap$1 = /*#__PURE__*/Object.freeze({
 });
 
 const undoInputRule = () => ({ state, dispatch }) => {
-    return undoInputRule$2(state, dispatch);
+    const plugins = state.plugins;
+    for (let i = 0; i < plugins.length; i += 1) {
+        const plugin = plugins[i];
+        let undoable;
+        // @ts-ignore
+        // eslint-disable-next-line
+        if (plugin.spec.isInputRules && (undoable = plugin.getState(state))) {
+            if (dispatch) {
+                const tr = state.tr;
+                const toUndo = undoable.transform;
+                for (let j = toUndo.steps.length - 1; j >= 0; j -= 1) {
+                    tr.step(toUndo.steps[j].invert(toUndo.docs[j]));
+                }
+                if (undoable.text) {
+                    const marks = tr.doc.resolve(undoable.from).marks();
+                    tr.replaceWith(undoable.from, undoable.to, state.schema.text(undoable.text, marks));
+                }
+                else {
+                    tr.delete(undoable.from, undoable.to);
+                }
+            }
+            return true;
+        }
+    }
+    return false;
 };
 
 var undoInputRule$1 = /*#__PURE__*/Object.freeze({
@@ -58886,12 +58834,6 @@ function isActive(state, name, attributes = {}) {
     return false;
 }
 
-function removeElement(element) {
-    if (element === null || element === void 0 ? void 0 : element.parentNode) {
-        element.parentNode.removeChild(element);
-    }
-}
-
 function getHTMLFromFragment(fragment, schema) {
     const documentFragment = DOMSerializer
         .fromSchema(schema)
@@ -58929,22 +58871,60 @@ function createStyleTag(style) {
     return styleNode;
 }
 
+function createChainableState(config) {
+    const { state, transaction } = config;
+    let { selection } = transaction;
+    let { doc } = transaction;
+    let { storedMarks } = transaction;
+    return {
+        ...state,
+        schema: state.schema,
+        plugins: state.plugins,
+        apply: state.apply.bind(state),
+        applyTransaction: state.applyTransaction.bind(state),
+        reconfigure: state.reconfigure.bind(state),
+        toJSON: state.toJSON.bind(state),
+        get storedMarks() {
+            return storedMarks;
+        },
+        get selection() {
+            return selection;
+        },
+        get doc() {
+            return doc;
+        },
+        get tr() {
+            selection = transaction.selection;
+            doc = transaction.doc;
+            storedMarks = transaction.storedMarks;
+            return transaction;
+        },
+    };
+}
+
 class CommandManager {
-    constructor(editor, commands) {
-        this.editor = editor;
-        this.commands = commands;
+    constructor(props) {
+        this.editor = props.editor;
+        this.rawCommands = this.editor.extensionManager.commands;
+        this.customState = props.state;
     }
-    createCommands() {
-        const { commands, editor } = this;
-        const { state, view } = editor;
+    get hasCustomState() {
+        return !!this.customState;
+    }
+    get state() {
+        return this.customState || this.editor.state;
+    }
+    get commands() {
+        const { rawCommands, editor, state } = this;
+        const { view } = editor;
         const { tr } = state;
         const props = this.buildProps(tr);
         return Object.fromEntries(Object
-            .entries(commands)
+            .entries(rawCommands)
             .map(([name, command]) => {
             const method = (...args) => {
                 const callback = command(...args)(props);
-                if (!tr.getMeta('preventDispatch')) {
+                if (!tr.getMeta('preventDispatch') && !this.hasCustomState) {
                     view.dispatch(tr);
                 }
                 return callback;
@@ -58952,20 +58932,29 @@ class CommandManager {
             return [name, method];
         }));
     }
+    get chain() {
+        return () => this.createChain();
+    }
+    get can() {
+        return () => this.createCan();
+    }
     createChain(startTr, shouldDispatch = true) {
-        const { commands, editor } = this;
-        const { state, view } = editor;
+        const { rawCommands, editor, state } = this;
+        const { view } = editor;
         const callbacks = [];
         const hasStartTransaction = !!startTr;
         const tr = startTr || state.tr;
         const run = () => {
-            if (!hasStartTransaction && shouldDispatch && !tr.getMeta('preventDispatch')) {
+            if (!hasStartTransaction
+                && shouldDispatch
+                && !tr.getMeta('preventDispatch')
+                && !this.hasCustomState) {
                 view.dispatch(tr);
             }
             return callbacks.every(callback => callback === true);
         };
         const chain = {
-            ...Object.fromEntries(Object.entries(commands).map(([name, command]) => {
+            ...Object.fromEntries(Object.entries(rawCommands).map(([name, command]) => {
                 const chainedCommand = (...args) => {
                     const props = this.buildProps(tr, shouldDispatch);
                     const callback = command(...args)(props);
@@ -58979,13 +58968,12 @@ class CommandManager {
         return chain;
     }
     createCan(startTr) {
-        const { commands, editor } = this;
-        const { state } = editor;
+        const { rawCommands, state } = this;
         const dispatch = undefined;
         const tr = startTr || state.tr;
         const props = this.buildProps(tr, dispatch);
         const formattedCommands = Object.fromEntries(Object
-            .entries(commands)
+            .entries(rawCommands)
             .map(([name, command]) => {
             return [name, (...args) => command(...args)({ ...props, dispatch })];
         }));
@@ -58995,8 +58983,8 @@ class CommandManager {
         };
     }
     buildProps(tr, shouldDispatch = true) {
-        const { editor, commands } = this;
-        const { state, view } = editor;
+        const { rawCommands, editor, state } = this;
+        const { view } = editor;
         if (state.storedMarks) {
             tr.setStoredMarks(state.storedMarks);
         }
@@ -59004,7 +58992,10 @@ class CommandManager {
             tr,
             editor,
             view,
-            state: this.chainableState(tr, state),
+            state: createChainableState({
+                state,
+                transaction: tr,
+            }),
             dispatch: shouldDispatch
                 ? () => undefined
                 : undefined,
@@ -59012,7 +59003,7 @@ class CommandManager {
             can: () => this.createCan(tr),
             get commands() {
                 return Object.fromEntries(Object
-                    .entries(commands)
+                    .entries(rawCommands)
                     .map(([name, command]) => {
                     return [name, (...args) => command(...args)(props)];
                 }));
@@ -59020,35 +59011,301 @@ class CommandManager {
         };
         return props;
     }
-    chainableState(tr, state) {
-        let { selection } = tr;
-        let { doc } = tr;
-        let { storedMarks } = tr;
-        return {
-            ...state,
-            schema: state.schema,
-            plugins: state.plugins,
-            apply: state.apply.bind(state),
-            applyTransaction: state.applyTransaction.bind(state),
-            reconfigure: state.reconfigure.bind(state),
-            toJSON: state.toJSON.bind(state),
-            get storedMarks() {
-                return storedMarks;
-            },
-            get selection() {
-                return selection;
-            },
-            get doc() {
-                return doc;
-            },
-            get tr() {
-                selection = tr.selection;
-                doc = tr.doc;
-                storedMarks = tr.storedMarks;
-                return tr;
-            },
-        };
+}
+
+class InputRule {
+    constructor(config) {
+        this.find = config.find;
+        this.handler = config.handler;
     }
+}
+const inputRuleMatcherHandler = (text, find) => {
+    if (isRegExp(find)) {
+        return find.exec(text);
+    }
+    const inputRuleMatch = find(text);
+    if (!inputRuleMatch) {
+        return null;
+    }
+    const result = [];
+    result.push(inputRuleMatch.text);
+    result.index = inputRuleMatch.index;
+    result.input = text;
+    result.data = inputRuleMatch.data;
+    if (inputRuleMatch.replaceWith) {
+        if (!inputRuleMatch.text.includes(inputRuleMatch.replaceWith)) {
+            console.warn('[tiptap warn]: "inputRuleMatch.replaceWith" must be part of "inputRuleMatch.text".');
+        }
+        result.push(inputRuleMatch.replaceWith);
+    }
+    return result;
+};
+function run$1$1(config) {
+    var _a;
+    const { editor, from, to, text, rules, plugin, } = config;
+    const { view } = editor;
+    if (view.composing) {
+        return false;
+    }
+    const $from = view.state.doc.resolve(from);
+    if (
+    // check for code node
+    $from.parent.type.spec.code
+        // check for code mark
+        || !!((_a = ($from.nodeBefore || $from.nodeAfter)) === null || _a === void 0 ? void 0 : _a.marks.find(mark => mark.type.spec.code))) {
+        return false;
+    }
+    let matched = false;
+    const maxMatch = 500;
+    const textBefore = $from.parent.textBetween(Math.max(0, $from.parentOffset - maxMatch), $from.parentOffset, undefined, '\ufffc') + text;
+    rules.forEach(rule => {
+        if (matched) {
+            return;
+        }
+        const match = inputRuleMatcherHandler(textBefore, rule.find);
+        if (!match) {
+            return;
+        }
+        const tr = view.state.tr;
+        const state = createChainableState({
+            state: view.state,
+            transaction: tr,
+        });
+        const range = {
+            from: from - (match[0].length - text.length),
+            to,
+        };
+        const { commands, chain, can } = new CommandManager({
+            editor,
+            state,
+        });
+        rule.handler({
+            state,
+            range,
+            match,
+            commands,
+            chain,
+            can,
+        });
+        // stop if there are no changes
+        if (!tr.steps.length) {
+            return;
+        }
+        // store transform as meta data
+        // so we can undo input rules within the `undoInputRules` command
+        tr.setMeta(plugin, {
+            transform: tr,
+            from,
+            to,
+            text,
+        });
+        view.dispatch(tr);
+        matched = true;
+    });
+    return matched;
+}
+/**
+ * Create an input rules plugin. When enabled, it will cause text
+ * input that matches any of the given rules to trigger the rule’s
+ * action.
+ */
+function inputRulesPlugin(props) {
+    const { editor, rules } = props;
+    const plugin = new Plugin({
+        state: {
+            init() {
+                return null;
+            },
+            apply(tr, prev) {
+                const stored = tr.getMeta(this);
+                if (stored) {
+                    return stored;
+                }
+                return tr.selectionSet || tr.docChanged
+                    ? null
+                    : prev;
+            },
+        },
+        props: {
+            handleTextInput(view, from, to, text) {
+                return run$1$1({
+                    editor,
+                    from,
+                    to,
+                    text,
+                    rules,
+                    plugin,
+                });
+            },
+            handleDOMEvents: {
+                compositionend: view => {
+                    setTimeout(() => {
+                        const { $cursor } = view.state.selection;
+                        if ($cursor) {
+                            run$1$1({
+                                editor,
+                                from: $cursor.pos,
+                                to: $cursor.pos,
+                                text: '',
+                                rules,
+                                plugin,
+                            });
+                        }
+                    });
+                    return false;
+                },
+            },
+            // add support for input rules to trigger on enter
+            // this is useful for example for code blocks
+            handleKeyDown(view, event) {
+                if (event.key !== 'Enter') {
+                    return false;
+                }
+                const { $cursor } = view.state.selection;
+                if ($cursor) {
+                    return run$1$1({
+                        editor,
+                        from: $cursor.pos,
+                        to: $cursor.pos,
+                        text: '\n',
+                        rules,
+                        plugin,
+                    });
+                }
+                return false;
+            },
+        },
+        // @ts-ignore
+        isInputRules: true,
+    });
+    return plugin;
+}
+
+function isNumber(value) {
+    return typeof value === 'number';
+}
+
+class PasteRule {
+    constructor(config) {
+        this.find = config.find;
+        this.handler = config.handler;
+    }
+}
+const pasteRuleMatcherHandler = (text, find) => {
+    if (isRegExp(find)) {
+        return [...text.matchAll(find)];
+    }
+    const matches = find(text);
+    if (!matches) {
+        return [];
+    }
+    return matches.map(pasteRuleMatch => {
+        const result = [];
+        result.push(pasteRuleMatch.text);
+        result.index = pasteRuleMatch.index;
+        result.input = text;
+        result.data = pasteRuleMatch.data;
+        if (pasteRuleMatch.replaceWith) {
+            if (!pasteRuleMatch.text.includes(pasteRuleMatch.replaceWith)) {
+                console.warn('[tiptap warn]: "pasteRuleMatch.replaceWith" must be part of "pasteRuleMatch.text".');
+            }
+            result.push(pasteRuleMatch.replaceWith);
+        }
+        return result;
+    });
+};
+function run$2(config) {
+    const { editor, state, from, to, rules, } = config;
+    const { commands, chain, can } = new CommandManager({
+        editor,
+        state,
+    });
+    state.doc.nodesBetween(from, to, (node, pos) => {
+        if (!node.isTextblock || node.type.spec.code) {
+            return;
+        }
+        const resolvedFrom = Math.max(from, pos);
+        const resolvedTo = Math.min(to, pos + node.content.size);
+        const textToMatch = node.textBetween(resolvedFrom - pos, resolvedTo - pos, undefined, '\ufffc');
+        rules.forEach(rule => {
+            const matches = pasteRuleMatcherHandler(textToMatch, rule.find);
+            matches.forEach(match => {
+                if (match.index === undefined) {
+                    return;
+                }
+                const start = resolvedFrom + match.index + 1;
+                const end = start + match[0].length;
+                const range = {
+                    from: state.tr.mapping.map(start),
+                    to: state.tr.mapping.map(end),
+                };
+                rule.handler({
+                    state,
+                    range,
+                    match,
+                    commands,
+                    chain,
+                    can,
+                });
+            });
+        });
+    });
+}
+/**
+ * Create an paste rules plugin. When enabled, it will cause pasted
+ * text that matches any of the given rules to trigger the rule’s
+ * action.
+ */
+function pasteRulesPlugin(props) {
+    const { editor, rules } = props;
+    let isProseMirrorHTML = false;
+    const plugin = new Plugin({
+        props: {
+            handlePaste: (view, event) => {
+                var _a;
+                const html = (_a = event.clipboardData) === null || _a === void 0 ? void 0 : _a.getData('text/html');
+                isProseMirrorHTML = !!(html === null || html === void 0 ? void 0 : html.includes('data-pm-slice'));
+                return false;
+            },
+        },
+        appendTransaction: (transactions, oldState, state) => {
+            const transaction = transactions[0];
+            // stop if there is not a paste event
+            if (!transaction.getMeta('paste') || isProseMirrorHTML) {
+                return;
+            }
+            // stop if there is no changed range
+            const { doc, before } = transaction;
+            const from = before.content.findDiffStart(doc.content);
+            const to = before.content.findDiffEnd(doc.content);
+            if (!isNumber(from) || !to || from === to.b) {
+                return;
+            }
+            // build a chainable state
+            // so we can use a single transaction for all paste rules
+            const tr = state.tr;
+            const chainableState = createChainableState({
+                state,
+                transaction: tr,
+            });
+            run$2({
+                editor,
+                state: chainableState,
+                from: Math.max(from - 1, 0),
+                to: to.b,
+                rules,
+                plugin,
+            });
+            // stop if there are no changes
+            if (!tr.steps.length) {
+                return;
+            }
+            return tr;
+        },
+        // @ts-ignore
+        isPasteRules: true,
+    });
+    return plugin;
 }
 
 /**
@@ -59070,6 +59327,7 @@ function getAttributesFromExtensions(extensions) {
         const context = {
             name: extension.name,
             options: extension.options,
+            storage: extension.storage,
         };
         const addGlobalAttributes = getExtensionField(extension, 'addGlobalAttributes', context);
         if (!addGlobalAttributes) {
@@ -59098,6 +59356,7 @@ function getAttributesFromExtensions(extensions) {
         const context = {
             name: extension.name,
             options: extension.options,
+            storage: extension.storage,
         };
         const addAttributes = getExtensionField(extension, 'addAttributes', context);
         if (!addAttributes) {
@@ -59160,15 +59419,15 @@ function getRenderedAttributes(nodeOrMark, extensionAttributes) {
         .reduce((attributes, attribute) => mergeAttributes(attributes, attribute), {});
 }
 
-function isEmptyObject(object = {}) {
-    return Object.keys(object).length === 0 && object.constructor === Object;
+function isEmptyObject(value = {}) {
+    return Object.keys(value).length === 0 && value.constructor === Object;
 }
 
 function fromString(value) {
     if (typeof value !== 'string') {
         return value;
     }
-    if (value.match(/^\d*(\.\d+)?$/)) {
+    if (value.match(/^[+-]?(?:\d*\.)?\d+$/)) {
         return Number(value);
     }
     if (value === 'true') {
@@ -59239,6 +59498,7 @@ function getSchemaByResolvedExtensions(extensions) {
         const context = {
             name: extension.name,
             options: extension.options,
+            storage: extension.storage,
         };
         const extraNodeFields = extensions.reduce((fields, e) => {
             const extendNodeSchema = getExtensionField(e, 'extendNodeSchema', context);
@@ -59287,6 +59547,7 @@ function getSchemaByResolvedExtensions(extensions) {
         const context = {
             name: extension.name,
             options: extension.options,
+            storage: extension.storage,
         };
         const extraMarkFields = extensions.reduce((fields, e) => {
             const extendMarkSchema = getExtensionField(e, 'extendMarkSchema', context);
@@ -59301,6 +59562,7 @@ function getSchemaByResolvedExtensions(extensions) {
             excludes: callOrReturn(getExtensionField(extension, 'excludes', context)),
             group: callOrReturn(getExtensionField(extension, 'group', context)),
             spanning: callOrReturn(getExtensionField(extension, 'spanning', context)),
+            code: callOrReturn(getExtensionField(extension, 'code', context)),
             attrs: Object.fromEntries(extensionAttributes.map(extensionAttribute => {
                 var _a;
                 return [extensionAttribute.name, { default: (_a = extensionAttribute === null || extensionAttribute === void 0 ? void 0 : extensionAttribute.attribute) === null || _a === void 0 ? void 0 : _a.default }];
@@ -59331,6 +59593,11 @@ function getSchemaTypeByName(name, schema) {
     return schema.nodes[name] || schema.marks[name] || null;
 }
 
+function findDuplicates(items) {
+    const filtered = items.filter((el, index) => items.indexOf(el) !== index);
+    return [...new Set(filtered)];
+}
+
 class ExtensionManager {
     constructor(extensions, editor) {
         this.splittableMarks = [];
@@ -59339,9 +59606,12 @@ class ExtensionManager {
         this.schema = getSchemaByResolvedExtensions(this.extensions);
         this.extensions.forEach(extension => {
             var _a;
+            // store extension storage in editor
+            this.editor.extensionStorage[extension.name] = extension.storage;
             const context = {
                 name: extension.name,
                 options: extension.options,
+                storage: extension.storage,
                 editor: this.editor,
                 type: getSchemaTypeByName(extension.name, this.schema),
             };
@@ -59386,7 +59656,12 @@ class ExtensionManager {
         });
     }
     static resolve(extensions) {
-        return ExtensionManager.sort(ExtensionManager.flatten(extensions));
+        const resolvedExtensions = ExtensionManager.sort(ExtensionManager.flatten(extensions));
+        const duplicatedNames = findDuplicates(resolvedExtensions.map(extension => extension.name));
+        if (duplicatedNames.length) {
+            console.warn(`[tiptap warn]: Duplicate extension names found: [${duplicatedNames.map(item => `'${item}'`).join(', ')}]. This can lead to issues.`);
+        }
+        return resolvedExtensions;
     }
     static flatten(extensions) {
         return extensions
@@ -59394,6 +59669,7 @@ class ExtensionManager {
             const context = {
                 name: extension.name,
                 options: extension.options,
+                storage: extension.storage,
             };
             const addExtensions = getExtensionField(extension, 'addExtensions', context);
             if (addExtensions) {
@@ -59426,6 +59702,7 @@ class ExtensionManager {
             const context = {
                 name: extension.name,
                 options: extension.options,
+                storage: extension.storage,
                 editor: this.editor,
                 type: getSchemaTypeByName(extension.name, this.schema),
             };
@@ -59440,17 +59717,22 @@ class ExtensionManager {
         }, {});
     }
     get plugins() {
+        const { editor } = this;
         // With ProseMirror, first plugins within an array are executed first.
         // In tiptap, we provide the ability to override plugins,
         // so it feels more natural to run plugins at the end of an array first.
         // That’s why we have to reverse the `extensions` array and sort again
         // based on the `priority` option.
-        return ExtensionManager.sort([...this.extensions].reverse())
+        const extensions = ExtensionManager.sort([...this.extensions].reverse());
+        const inputRules = [];
+        const pasteRules = [];
+        const allPlugins = extensions
             .map(extension => {
             const context = {
                 name: extension.name,
                 options: extension.options,
-                editor: this.editor,
+                storage: extension.storage,
+                editor,
                 type: getSchemaTypeByName(extension.name, this.schema),
             };
             const plugins = [];
@@ -59459,23 +59741,18 @@ class ExtensionManager {
                 const bindings = Object.fromEntries(Object
                     .entries(addKeyboardShortcuts())
                     .map(([shortcut, method]) => {
-                    return [shortcut, () => method({ editor: this.editor })];
+                    return [shortcut, () => method({ editor })];
                 }));
                 const keyMapPlugin = keymap(bindings);
                 plugins.push(keyMapPlugin);
             }
             const addInputRules = getExtensionField(extension, 'addInputRules', context);
-            if (this.editor.options.enableInputRules && addInputRules) {
-                const inputRules$1 = addInputRules();
-                const inputRulePlugins = inputRules$1.length
-                    ? [inputRules({ rules: inputRules$1 })]
-                    : [];
-                plugins.push(...inputRulePlugins);
+            if (editor.options.enableInputRules && addInputRules) {
+                inputRules.push(...addInputRules());
             }
             const addPasteRules = getExtensionField(extension, 'addPasteRules', context);
-            if (this.editor.options.enablePasteRules && addPasteRules) {
-                const pasteRulePlugins = addPasteRules();
-                plugins.push(...pasteRulePlugins);
+            if (editor.options.enablePasteRules && addPasteRules) {
+                pasteRules.push(...addPasteRules());
             }
             const addProseMirrorPlugins = getExtensionField(extension, 'addProseMirrorPlugins', context);
             if (addProseMirrorPlugins) {
@@ -59485,6 +59762,17 @@ class ExtensionManager {
             return plugins;
         })
             .flat();
+        return [
+            inputRulesPlugin({
+                editor,
+                rules: inputRules,
+            }),
+            pasteRulesPlugin({
+                editor,
+                rules: pasteRules,
+            }),
+            ...allPlugins,
+        ];
     }
     get attributes() {
         return getAttributesFromExtensions(this.extensions);
@@ -59499,6 +59787,7 @@ class ExtensionManager {
             const context = {
                 name: extension.name,
                 options: extension.options,
+                storage: extension.storage,
                 editor,
                 type: getNodeType(extension.name, this.schema),
             };
@@ -59586,6 +59875,8 @@ img.ProseMirror-separator {
   display: inline !important;
   border: none !important;
   margin: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
 }
 
 .ProseMirror-gapcursor {
@@ -59634,6 +59925,7 @@ class Editor$1 extends EventEmitter {
     constructor(options = {}) {
         super();
         this.isFocused = false;
+        this.extensionStorage = {};
         this.options = {
             element: document.createElement('div'),
             content: '',
@@ -59681,22 +59973,28 @@ class Editor$1 extends EventEmitter {
         }, 0);
     }
     /**
+     * Returns the editor storage.
+     */
+    get storage() {
+        return this.extensionStorage;
+    }
+    /**
      * An object of all registered commands.
      */
     get commands() {
-        return this.commandManager.createCommands();
+        return this.commandManager.commands;
     }
     /**
      * Create a command chain to call multiple commands at once.
      */
     chain() {
-        return this.commandManager.createChain();
+        return this.commandManager.chain();
     }
     /**
      * Check if a command or a command chain can be executed. Without executing it.
      */
     can() {
-        return this.commandManager.createCan();
+        return this.commandManager.can();
     }
     /**
      * Inject CSS styles.
@@ -59754,7 +60052,7 @@ class Editor$1 extends EventEmitter {
      * @param handlePlugins Control how to merge the plugin into the existing plugins.
      */
     registerPlugin(plugin, handlePlugins) {
-        const plugins = typeof handlePlugins === 'function'
+        const plugins = isObject$1(handlePlugins)
             ? handlePlugins(plugin, this.state.plugins)
             : [...this.state.plugins, plugin];
         const state = this.state.reconfigure({ plugins });
@@ -59795,7 +60093,9 @@ class Editor$1 extends EventEmitter {
      * Creates an command manager.
      */
     createCommandManager() {
-        this.commandManager = new CommandManager(this, this.extensionManager.commands);
+        this.commandManager = new CommandManager({
+            editor: this,
+        });
     }
     /**
      * Creates a ProseMirror schema.
@@ -59954,7 +60254,6 @@ class Editor$1 extends EventEmitter {
             this.view.destroy();
         }
         this.removeAllListeners();
-        removeElement(this.css);
     }
     /**
      * Check if the editor is already destroyed.
@@ -59981,7 +60280,20 @@ class Node$2 {
             ...config,
         };
         this.name = this.config.name;
+        if (config.defaultOptions) {
+            console.warn(`[tiptap warn]: BREAKING CHANGE: "defaultOptions" is deprecated. Please use "addOptions" instead. Found in extension: "${this.name}".`);
+        }
+        // TODO: remove `addOptions` fallback
         this.options = this.config.defaultOptions;
+        if (this.config.addOptions) {
+            this.options = callOrReturn(getExtensionField(this, 'addOptions', {
+                name: this.name,
+            }));
+        }
+        this.storage = callOrReturn(getExtensionField(this, 'addStorage', {
+            name: this.name,
+            options: this.options,
+        })) || {};
     }
     static create(config = {}) {
         return new Node$2(config);
@@ -59991,6 +60303,10 @@ class Node$2 {
         // with different calls of `configure`
         const extension = this.extend();
         extension.options = mergeDeep(this.options, options);
+        extension.storage = callOrReturn(getExtensionField(extension, 'addStorage', {
+            name: extension.name,
+            options: extension.options,
+        }));
         return extension;
     }
     extend(extendedConfig = {}) {
@@ -60000,9 +60316,22 @@ class Node$2 {
         extension.name = extendedConfig.name
             ? extendedConfig.name
             : extension.parent.name;
+        if (extendedConfig.defaultOptions) {
+            console.warn(`[tiptap warn]: BREAKING CHANGE: "defaultOptions" is deprecated. Please use "addOptions" instead. Found in extension: "${extension.name}".`);
+        }
+        // TODO: remove `addOptions` fallback
         extension.options = extendedConfig.defaultOptions
             ? extendedConfig.defaultOptions
             : extension.parent.options;
+        if (extendedConfig.addOptions) {
+            extension.options = callOrReturn(getExtensionField(extension, 'addOptions', {
+                name: extension.name,
+            }));
+        }
+        extension.storage = callOrReturn(getExtensionField(extension, 'addStorage', {
+            name: extension.name,
+            options: extension.options,
+        }));
         return extension;
     }
 }
@@ -60022,7 +60351,20 @@ class Mark$1 {
             ...config,
         };
         this.name = this.config.name;
+        if (config.defaultOptions) {
+            console.warn(`[tiptap warn]: BREAKING CHANGE: "defaultOptions" is deprecated. Please use "addOptions" instead. Found in extension: "${this.name}".`);
+        }
+        // TODO: remove `addOptions` fallback
         this.options = this.config.defaultOptions;
+        if (this.config.addOptions) {
+            this.options = callOrReturn(getExtensionField(this, 'addOptions', {
+                name: this.name,
+            }));
+        }
+        this.storage = callOrReturn(getExtensionField(this, 'addStorage', {
+            name: this.name,
+            options: this.options,
+        })) || {};
     }
     static create(config = {}) {
         return new Mark$1(config);
@@ -60032,6 +60374,10 @@ class Mark$1 {
         // with different calls of `configure`
         const extension = this.extend();
         extension.options = mergeDeep(this.options, options);
+        extension.storage = callOrReturn(getExtensionField(extension, 'addStorage', {
+            name: extension.name,
+            options: extension.options,
+        }));
         return extension;
     }
     extend(extendedConfig = {}) {
@@ -60041,9 +60387,22 @@ class Mark$1 {
         extension.name = extendedConfig.name
             ? extendedConfig.name
             : extension.parent.name;
+        if (extendedConfig.defaultOptions) {
+            console.warn(`[tiptap warn]: BREAKING CHANGE: "defaultOptions" is deprecated. Please use "addOptions" instead. Found in extension: "${extension.name}".`);
+        }
+        // TODO: remove `addOptions` fallback
         extension.options = extendedConfig.defaultOptions
             ? extendedConfig.defaultOptions
             : extension.parent.options;
+        if (extendedConfig.addOptions) {
+            extension.options = callOrReturn(getExtensionField(extension, 'addOptions', {
+                name: extension.name,
+            }));
+        }
+        extension.storage = callOrReturn(getExtensionField(extension, 'addStorage', {
+            name: extension.name,
+            options: extension.options,
+        }));
         return extension;
     }
 }
@@ -60118,10 +60477,11 @@ class NodeView {
         if (!isInElement) {
             return false;
         }
+        const isDropEvent = event.type === 'drop';
         const isInput = ['INPUT', 'BUTTON', 'SELECT', 'TEXTAREA'].includes(target.tagName)
             || target.isContentEditable;
         // any input event within node views should be ignored by ProseMirror
-        if (isInput) {
+        if (isInput && !isDropEvent) {
             return true;
         }
         const { isEditable } = this.editor;
@@ -60132,7 +60492,7 @@ class NodeView {
         const isPasteEvent = event.type === 'paste';
         const isCutEvent = event.type === 'cut';
         const isClickEvent = event.type === 'mousedown';
-        const isDragEvent = event.type.startsWith('drag') || event.type === 'drop';
+        const isDragEvent = event.type.startsWith('drag');
         // ProseMirror tries to drag selectable nodes
         // even if `draggable` is set to `false`
         // this fix prevents that
@@ -60160,6 +60520,7 @@ class NodeView {
         }
         // these events are handled by prosemirror
         if (isDragging
+            || isDropEvent
             || isCopyEvent
             || isPasteEvent
             || isCutEvent
@@ -60227,31 +60588,37 @@ class NodeView {
     }
 }
 
-function nodeInputRule (regexp, type, getAttributes) {
-    return new InputRule(regexp, (state, match, start, end) => {
-        const attributes = getAttributes instanceof Function
-            ? getAttributes(match)
-            : getAttributes;
-        const { tr } = state;
-        if (match[1]) {
-            const offset = match[0].lastIndexOf(match[1]);
-            let matchStart = start + offset;
-            if (matchStart > end) {
-                matchStart = end;
+/**
+ * Build an input rule that adds a node when the
+ * matched text is typed into it.
+ */
+function nodeInputRule(config) {
+    return new InputRule({
+        find: config.find,
+        handler: ({ state, range, match }) => {
+            const attributes = callOrReturn(config.getAttributes, undefined, match) || {};
+            const { tr } = state;
+            const start = range.from;
+            let end = range.to;
+            if (match[1]) {
+                const offset = match[0].lastIndexOf(match[1]);
+                let matchStart = start + offset;
+                if (matchStart > end) {
+                    matchStart = end;
+                }
+                else {
+                    end = matchStart + match[1].length;
+                }
+                // insert last typed character
+                const lastChar = match[0][match[0].length - 1];
+                tr.insertText(lastChar, start + match[0].length - 1);
+                // insert node from input rule
+                tr.replaceWith(matchStart, end, config.type.create(attributes));
             }
-            else {
-                end = matchStart + match[1].length;
+            else if (match[0]) {
+                tr.replaceWith(start, end, config.type.create(attributes));
             }
-            // insert last typed character
-            const lastChar = match[0][match[0].length - 1];
-            tr.insertText(lastChar, start + match[0].length - 1);
-            // insert node from input rule
-            tr.replaceWith(matchStart, end, type.create(attributes));
-        }
-        else if (match[0]) {
-            tr.replaceWith(start, end, type.create(attributes));
-        }
-        return tr;
+        },
     });
 }
 
@@ -60267,96 +60634,150 @@ function getMarksBetween(from, to, state) {
     return marks;
 }
 
-function markInputRule (regexp, markType, getAttributes) {
-    return new InputRule(regexp, (state, match, start, end) => {
-        const attributes = getAttributes instanceof Function
-            ? getAttributes(match)
-            : getAttributes;
-        const { tr } = state;
-        const captureGroup = match[match.length - 1];
-        const fullMatch = match[0];
-        let markEnd = end;
-        if (captureGroup) {
-            const startSpaces = fullMatch.search(/\S/);
-            const textStart = start + fullMatch.indexOf(captureGroup);
-            const textEnd = textStart + captureGroup.length;
-            const excludedMarks = getMarksBetween(start, end, state)
-                .filter(item => {
-                // TODO: PR to add excluded to MarkType
-                // @ts-ignore
-                const { excluded } = item.mark.type;
-                return excluded.find((type) => type.name === markType.name);
-            })
-                .filter(item => item.to > textStart);
-            if (excludedMarks.length) {
-                return null;
+/**
+ * Build an input rule that adds a mark when the
+ * matched text is typed into it.
+ */
+function markInputRule(config) {
+    return new InputRule({
+        find: config.find,
+        handler: ({ state, range, match }) => {
+            const attributes = callOrReturn(config.getAttributes, undefined, match);
+            if (attributes === false || attributes === null) {
+                return;
             }
-            if (textEnd < end) {
-                tr.delete(textEnd, end);
+            const { tr } = state;
+            const captureGroup = match[match.length - 1];
+            const fullMatch = match[0];
+            let markEnd = range.to;
+            if (captureGroup) {
+                const startSpaces = fullMatch.search(/\S/);
+                const textStart = range.from + fullMatch.indexOf(captureGroup);
+                const textEnd = textStart + captureGroup.length;
+                const excludedMarks = getMarksBetween(range.from, range.to, state)
+                    .filter(item => {
+                    // @ts-ignore
+                    const excluded = item.mark.type.excluded;
+                    return excluded.find(type => type === config.type && type !== item.mark.type);
+                })
+                    .filter(item => item.to > textStart);
+                if (excludedMarks.length) {
+                    return null;
+                }
+                if (textEnd < range.to) {
+                    tr.delete(textEnd, range.to);
+                }
+                if (textStart > range.from) {
+                    tr.delete(range.from + startSpaces, textStart);
+                }
+                markEnd = range.from + startSpaces + captureGroup.length;
+                tr.addMark(range.from + startSpaces, markEnd, config.type.create(attributes || {}));
+                tr.removeStoredMark(config.type);
             }
-            if (textStart > start) {
-                tr.delete(start + startSpaces, textStart);
-            }
-            markEnd = start + startSpaces + captureGroup.length;
-            tr.addMark(start + startSpaces, markEnd, markType.create(attributes));
-            tr.removeStoredMark(markType);
-        }
-        return tr;
+        },
     });
 }
 
-function markPasteRule (regexp, type, getAttributes) {
-    const handler = (fragment, parent) => {
-        const nodes = [];
-        fragment.forEach(child => {
-            if (child.isText && child.text) {
-                const { text } = child;
-                let pos = 0;
-                let match;
-                // eslint-disable-next-line
-                while ((match = regexp.exec(text)) !== null) {
-                    const outerMatch = Math.max(match.length - 2, 0);
-                    const innerMatch = Math.max(match.length - 1, 0);
-                    if (parent === null || parent === void 0 ? void 0 : parent.type.allowsMarkType(type)) {
-                        const start = match.index;
-                        const matchStart = start + match[0].indexOf(match[outerMatch]);
-                        const matchEnd = matchStart + match[outerMatch].length;
-                        const textStart = matchStart + match[outerMatch].lastIndexOf(match[innerMatch]);
-                        const textEnd = textStart + match[innerMatch].length;
-                        const attrs = getAttributes instanceof Function
-                            ? getAttributes(match)
-                            : getAttributes;
-                        if (!attrs && attrs !== undefined) {
-                            continue;
-                        }
-                        // adding text before markdown to nodes
-                        if (matchStart > 0) {
-                            nodes.push(child.cut(pos, matchStart));
-                        }
-                        // adding the markdown part to nodes
-                        nodes.push(child
-                            .cut(textStart, textEnd)
-                            .mark(type.create(attrs).addToSet(child.marks)));
-                        pos = matchEnd;
-                    }
-                }
-                // adding rest of text to nodes
-                if (pos < text.length) {
-                    nodes.push(child.cut(pos));
-                }
+/**
+ * Build an input rule that changes the type of a textblock when the
+ * matched text is typed into it. When using a regular expresion you’ll
+ * probably want the regexp to start with `^`, so that the pattern can
+ * only occur at the start of a textblock.
+ */
+function textblockTypeInputRule(config) {
+    return new InputRule({
+        find: config.find,
+        handler: ({ state, range, match }) => {
+            const $start = state.doc.resolve(range.from);
+            const attributes = callOrReturn(config.getAttributes, undefined, match) || {};
+            if (!$start.node(-1).canReplaceWith($start.index(-1), $start.indexAfter(-1), config.type)) {
+                return null;
             }
-            else {
-                nodes.push(child.copy(handler(child.content, child)));
+            state.tr
+                .delete(range.from, range.to)
+                .setBlockType(range.from, range.from, config.type, attributes);
+        },
+    });
+}
+
+/**
+ * Build an input rule for automatically wrapping a textblock when a
+ * given string is typed. When using a regular expresion you’ll
+ * probably want the regexp to start with `^`, so that the pattern can
+ * only occur at the start of a textblock.
+ *
+ * `type` is the type of node to wrap in.
+ *
+ * By default, if there’s a node with the same type above the newly
+ * wrapped node, the rule will try to join those
+ * two nodes. You can pass a join predicate, which takes a regular
+ * expression match and the node before the wrapped node, and can
+ * return a boolean to indicate whether a join should happen.
+ */
+function wrappingInputRule(config) {
+    return new InputRule({
+        find: config.find,
+        handler: ({ state, range, match }) => {
+            const attributes = callOrReturn(config.getAttributes, undefined, match) || {};
+            const tr = state.tr.delete(range.from, range.to);
+            const $start = tr.doc.resolve(range.from);
+            const blockRange = $start.blockRange();
+            const wrapping = blockRange && findWrapping(blockRange, config.type, attributes);
+            if (!wrapping) {
+                return null;
             }
-        });
-        return Fragment$1.fromArray(nodes);
-    };
-    return new Plugin({
-        key: new PluginKey('markPasteRule'),
-        props: {
-            transformPasted: slice => {
-                return new Slice$1(handler(slice.content), slice.openStart, slice.openEnd);
-            },
+            tr.wrap(blockRange, wrapping);
+            const before = tr.doc.resolve(range.from - 1).nodeBefore;
+            if (before
+                && before.type === config.type
+                && canJoin(tr.doc, range.from - 1)
+                && (!config.joinPredicate || config.joinPredicate(match, before))) {
+                tr.join(range.from - 1);
+            }
+        },
+    });
+}
+
+/**
+ * Build an paste rule that adds a mark when the
+ * matched text is pasted into it.
+ */
+function markPasteRule(config) {
+    return new PasteRule({
+        find: config.find,
+        handler: ({ state, range, match }) => {
+            const attributes = callOrReturn(config.getAttributes, undefined, match);
+            if (attributes === false || attributes === null) {
+                return;
+            }
+            const { tr } = state;
+            const captureGroup = match[match.length - 1];
+            const fullMatch = match[0];
+            let markEnd = range.to;
+            if (captureGroup) {
+                const startSpaces = fullMatch.search(/\S/);
+                const textStart = range.from + fullMatch.indexOf(captureGroup);
+                const textEnd = textStart + captureGroup.length;
+                const excludedMarks = getMarksBetween(range.from, range.to, state)
+                    .filter(item => {
+                    // @ts-ignore
+                    const excluded = item.mark.type.excluded;
+                    return excluded.find(type => type === config.type && type !== item.mark.type);
+                })
+                    .filter(item => item.to > textStart);
+                if (excludedMarks.length) {
+                    return null;
+                }
+                if (textEnd < range.to) {
+                    tr.delete(textEnd, range.to);
+                }
+                if (textStart > range.from) {
+                    tr.delete(range.from + startSpaces, textStart);
+                }
+                markEnd = range.from + startSpaces + captureGroup.length;
+                tr.addMark(range.from + startSpaces, markEnd, config.type.create(attributes || {}));
+                tr.removeStoredMark(config.type);
+            }
         },
     });
 }
@@ -60366,8 +60787,12 @@ function isNodeSelection(value) {
 }
 
 function posToDOMRect(view, from, to) {
-    const start = view.coordsAtPos(from);
-    const end = view.coordsAtPos(to, -1);
+    const minPos = 0;
+    const maxPos = view.state.doc.content.size;
+    const resolvedFrom = minMax(from, minPos, maxPos);
+    const resolvedEnd = minMax(to, minPos, maxPos);
+    const start = view.coordsAtPos(resolvedFrom);
+    const end = view.coordsAtPos(resolvedEnd, -1);
     const top = Math.min(start.top, end.top);
     const bottom = Math.max(start.bottom, end.bottom);
     const left = Math.min(start.left, end.left);
@@ -62131,7 +62556,7 @@ var createPopper = /*#__PURE__*/popperGenerator({
 }); // eslint-disable-next-line import/no-unused-modules
 
 /**!
-* tippy.js v6.3.2
+* tippy.js v6.3.7
 * (c) 2017-2021 atomiks
 * MIT License
 */
@@ -62261,7 +62686,7 @@ function getOwnerDocument(elementOrElements) {
       element = _normalizeToArray[0]; // Elements created via a <template> have an ownerDocument with no reference to the body
 
 
-  return (element == null ? void 0 : (_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body) ? element.ownerDocument : document;
+  return element != null && (_element$ownerDocumen = element.ownerDocument) != null && _element$ownerDocumen.body ? element.ownerDocument : document;
 }
 function isCursorOutsideInteractiveBorder(popperTreeData, event) {
   var clientX = event.clientX,
@@ -62306,13 +62731,13 @@ function actualContains(parent, child) {
   var target = child;
 
   while (target) {
-    var _ref2;
+    var _target$getRootNode;
 
     if (parent.contains(target)) {
       return true;
     }
 
-    target = (_ref2 = target.getRootNode == null ? void 0 : target.getRootNode()) == null ? void 0 : _ref2.host;
+    target = target.getRootNode == null ? void 0 : (_target$getRootNode = target.getRootNode()) == null ? void 0 : _target$getRootNode.host;
   }
 
   return false;
@@ -62436,7 +62861,7 @@ var defaultProps = Object.assign({
   touch: true,
   trigger: 'mouseenter focus',
   triggerTarget: null
-}, pluginProps, {}, renderProps);
+}, pluginProps, renderProps);
 var defaultKeys = Object.keys(defaultProps);
 var setDefaultProps = function setDefaultProps(partialProps) {
 
@@ -62459,7 +62884,7 @@ function getExtendedPassedProps(passedProps) {
 
     return acc;
   }, {});
-  return Object.assign({}, passedProps, {}, pluginProps);
+  return Object.assign({}, passedProps, pluginProps);
 }
 function getDataAttributeProps(reference, plugins) {
   var propKeys = plugins ? Object.keys(getExtendedPassedProps(Object.assign({}, defaultProps, {
@@ -62490,7 +62915,7 @@ function evaluateProps(reference, props) {
   var out = Object.assign({}, props, {
     content: invokeWithArgsOrReturn(props.content, [reference])
   }, props.ignoreAttributes ? {} : getDataAttributeProps(reference, props.plugins));
-  out.aria = Object.assign({}, defaultProps.aria, {}, out.aria);
+  out.aria = Object.assign({}, defaultProps.aria, out.aria);
   out.aria = {
     expanded: out.aria.expanded === 'auto' ? props.interactive : out.aria.expanded,
     content: out.aria.content === 'auto' ? props.interactive ? null : 'describedby' : out.aria.content
@@ -62628,7 +63053,7 @@ var mouseMoveListeners = []; // Used by `hideAll()`
 
 var mountedInstances = [];
 function createTippy(reference, passedProps) {
-  var props = evaluateProps(reference, Object.assign({}, defaultProps, {}, getExtendedPassedProps(removeUndefinedProps(passedProps)))); // ===========================================================================
+  var props = evaluateProps(reference, Object.assign({}, defaultProps, getExtendedPassedProps(removeUndefinedProps(passedProps)))); // ===========================================================================
   // 🔒 Private members
   // ===========================================================================
 
@@ -62725,10 +63150,9 @@ function createTippy(reference, passedProps) {
       instance.clearDelayTimeouts();
     }
   });
-  popper.addEventListener('mouseleave', function (event) {
+  popper.addEventListener('mouseleave', function () {
     if (instance.props.interactive && instance.props.trigger.indexOf('mouseenter') >= 0) {
       getDocument().addEventListener('mousemove', debouncedOnMouseMove);
-      debouncedOnMouseMove(event);
     }
   });
   return instance; // ===========================================================================
@@ -62748,7 +63172,7 @@ function createTippy(reference, passedProps) {
     var _instance$props$rende;
 
     // @ts-ignore
-    return !!((_instance$props$rende = instance.props.render) == null ? void 0 : _instance$props$rende.$$tippy);
+    return !!((_instance$props$rende = instance.props.render) != null && _instance$props$rende.$$tippy);
   }
 
   function getCurrentTarget() {
@@ -62775,8 +63199,12 @@ function createTippy(reference, passedProps) {
     return getValueAtIndexOrReturn(instance.props.delay, isShow ? 0 : 1, defaultProps.delay);
   }
 
-  function handleStyles() {
-    popper.style.pointerEvents = instance.props.interactive && instance.state.isVisible ? '' : 'none';
+  function handleStyles(fromHide) {
+    if (fromHide === void 0) {
+      fromHide = false;
+    }
+
+    popper.style.pointerEvents = instance.props.interactive && !fromHide ? '' : 'none';
     popper.style.zIndex = "" + instance.props.zIndex;
   }
 
@@ -62787,7 +63215,7 @@ function createTippy(reference, passedProps) {
 
     pluginsHooks.forEach(function (pluginHooks) {
       if (pluginHooks[hook]) {
-        pluginHooks[hook].apply(void 0, args);
+        pluginHooks[hook].apply(pluginHooks, args);
       }
     });
 
@@ -62862,7 +63290,9 @@ function createTippy(reference, passedProps) {
     } // Clicked on the event listeners target
 
 
-    if (actualContains(getCurrentTarget(), actualTarget)) {
+    if (normalizeToArray(instance.props.triggerTarget || reference).some(function (el) {
+      return actualContains(el, actualTarget);
+    })) {
       if (currentInput.isTouch) {
         return;
       }
@@ -63228,6 +63658,7 @@ function createTippy(reference, passedProps) {
       parentNode.appendChild(popper);
     }
 
+    instance.state.isMounted = true;
     createPopperInstance();
   }
 
@@ -63325,7 +63756,7 @@ function createTippy(reference, passedProps) {
     invokeHook('onBeforeUpdate', [instance, partialProps]);
     removeListeners();
     var prevProps = instance.props;
-    var nextProps = evaluateProps(reference, Object.assign({}, instance.props, {}, partialProps, {
+    var nextProps = evaluateProps(reference, Object.assign({}, prevProps, removeUndefinedProps(partialProps), {
       ignoreAttributes: true
     }));
     instance.props = nextProps;
@@ -63450,7 +63881,6 @@ function createTippy(reference, passedProps) {
       // popper has been positioned for the first time
 
       (_instance$popperInsta2 = instance.popperInstance) == null ? void 0 : _instance$popperInsta2.forceUpdate();
-      instance.state.isMounted = true;
       invokeHook('onMount', [instance]);
 
       if (instance.props.animation && getIsDefaultRenderFn()) {
@@ -63493,7 +63923,7 @@ function createTippy(reference, passedProps) {
 
     cleanupInteractiveMouseListeners();
     removeDocumentPress();
-    handleStyles();
+    handleStyles(true);
 
     if (getIsDefaultRenderFn()) {
       var _getDefaultTemplateCh4 = getDefaultTemplateChildren(),
@@ -63768,11 +64198,13 @@ const BubbleMenuPlugin = (options) => {
 
 Extension.create({
     name: 'bubbleMenu',
-    defaultOptions: {
-        element: null,
-        tippyOptions: {},
-        pluginKey: 'bubbleMenu',
-        shouldShow: null,
+    addOptions() {
+        return {
+            element: null,
+            tippyOptions: {},
+            pluginKey: 'bubbleMenu',
+            shouldShow: null,
+        };
     },
     addProseMirrorPlugins() {
         if (!this.options.element) {
@@ -63857,11 +64289,11 @@ class FloatingMenuView {
     }
     update(view, oldState) {
         var _a, _b;
-        const { state, composing } = view;
+        const { state } = view;
         const { doc, selection } = state;
         const { from, to } = selection;
         const isSame = oldState && oldState.doc.eq(doc) && oldState.selection.eq(selection);
-        if (composing || isSame) {
+        if (isSame) {
             return;
         }
         this.createTooltip();
@@ -63907,11 +64339,13 @@ const FloatingMenuPlugin = (options) => {
 
 Extension.create({
     name: 'floatingMenu',
-    defaultOptions: {
-        element: null,
-        tippyOptions: {},
-        pluginKey: 'floatingMenu',
-        shouldShow: null,
+    addOptions() {
+        return {
+            element: null,
+            tippyOptions: {},
+            pluginKey: 'floatingMenu',
+            shouldShow: null,
+        };
     },
     addProseMirrorPlugins() {
         if (!this.options.element) {
@@ -64166,11 +64600,13 @@ const NodeViewContent = {
     },
 };
 
-const inputRegex$6 = /^\s*>\s$/gm;
+const inputRegex$6 = /^\s*>\s$/;
 const Blockquote = Node$2.create({
     name: 'blockquote',
-    defaultOptions: {
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            HTMLAttributes: {},
+        };
     },
     content: 'block*',
     group: 'block',
@@ -64203,19 +64639,24 @@ const Blockquote = Node$2.create({
     },
     addInputRules() {
         return [
-            wrappingInputRule(inputRegex$6, this.type),
+            wrappingInputRule({
+                find: inputRegex$6,
+                type: this.type,
+            }),
         ];
     },
 });
 
-const starInputRegex$1 = /(?:^|\s)((?:\*\*)((?:[^*]+))(?:\*\*))$/gm;
-const starPasteRegex$1 = /(?:^|\s)((?:\*\*)((?:[^*]+))(?:\*\*))/gm;
-const underscoreInputRegex$1 = /(?:^|\s)((?:__)((?:[^__]+))(?:__))$/gm;
-const underscorePasteRegex$1 = /(?:^|\s)((?:__)((?:[^__]+))(?:__))/gm;
+const starInputRegex$1 = /(?:^|\s)((?:\*\*)((?:[^*]+))(?:\*\*))$/;
+const starPasteRegex$1 = /(?:^|\s)((?:\*\*)((?:[^*]+))(?:\*\*))/g;
+const underscoreInputRegex$1 = /(?:^|\s)((?:__)((?:[^__]+))(?:__))$/;
+const underscorePasteRegex$1 = /(?:^|\s)((?:__)((?:[^__]+))(?:__))/g;
 const Bold = Mark$1.create({
     name: 'bold',
-    defaultOptions: {
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            HTMLAttributes: {},
+        };
     },
     parseHTML() {
         return [
@@ -64255,14 +64696,26 @@ const Bold = Mark$1.create({
     },
     addInputRules() {
         return [
-            markInputRule(starInputRegex$1, this.type),
-            markInputRule(underscoreInputRegex$1, this.type),
+            markInputRule({
+                find: starInputRegex$1,
+                type: this.type,
+            }),
+            markInputRule({
+                find: underscoreInputRegex$1,
+                type: this.type,
+            }),
         ];
     },
     addPasteRules() {
         return [
-            markPasteRule(starPasteRegex$1, this.type),
-            markPasteRule(underscorePasteRegex$1, this.type),
+            markPasteRule({
+                find: starPasteRegex$1,
+                type: this.type,
+            }),
+            markPasteRule({
+                find: underscorePasteRegex$1,
+                type: this.type,
+            }),
         ];
     },
 });
@@ -64270,8 +64723,10 @@ const Bold = Mark$1.create({
 const inputRegex$5 = /^\s*([-+*])\s$/;
 const BulletList = Node$2.create({
     name: 'bulletList',
-    defaultOptions: {
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            HTMLAttributes: {},
+        };
     },
     group: 'block list',
     content: 'listItem+',
@@ -64297,19 +64752,25 @@ const BulletList = Node$2.create({
     },
     addInputRules() {
         return [
-            wrappingInputRule(inputRegex$5, this.type),
+            wrappingInputRule({
+                find: inputRegex$5,
+                type: this.type,
+            }),
         ];
     },
 });
 
-const inputRegex$4 = /(?:^|\s)((?:`)((?:[^`]+))(?:`))$/gm;
-const pasteRegex$3 = /(?:^|\s)((?:`)((?:[^`]+))(?:`))/gm;
+const inputRegex$4 = /(?:^|\s)((?:`)((?:[^`]+))(?:`))$/;
+const pasteRegex$2 = /(?:^|\s)((?:`)((?:[^`]+))(?:`))/g;
 const Code = Mark$1.create({
     name: 'code',
-    defaultOptions: {
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            HTMLAttributes: {},
+        };
     },
     excludes: '_',
+    code: true,
     parseHTML() {
         return [
             { tag: 'code' },
@@ -64338,23 +64799,31 @@ const Code = Mark$1.create({
     },
     addInputRules() {
         return [
-            markInputRule(inputRegex$4, this.type),
+            markInputRule({
+                find: inputRegex$4,
+                type: this.type,
+            }),
         ];
     },
     addPasteRules() {
         return [
-            markPasteRule(pasteRegex$3, this.type),
+            markPasteRule({
+                find: pasteRegex$2,
+                type: this.type,
+            }),
         ];
     },
 });
 
-const backtickInputRegex = /^```(?<language>[a-z]*)? $/;
-const tildeInputRegex = /^~~~(?<language>[a-z]*)? $/;
+const backtickInputRegex = /^```(?<language>[a-z]*)?[\s\n]$/;
+const tildeInputRegex = /^~~~(?<language>[a-z]*)?[\s\n]$/;
 const CodeBlock = Node$2.create({
     name: 'codeBlock',
-    defaultOptions: {
-        languageClassPrefix: 'language-',
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            languageClassPrefix: 'language-',
+            HTMLAttributes: {},
+        };
     },
     content: 'text*',
     marks: '',
@@ -64429,8 +64898,60 @@ const CodeBlock = Node$2.create({
     },
     addInputRules() {
         return [
-            textblockTypeInputRule(backtickInputRegex, this.type, ({ groups }) => groups),
-            textblockTypeInputRule(tildeInputRegex, this.type, ({ groups }) => groups),
+            textblockTypeInputRule({
+                find: backtickInputRegex,
+                type: this.type,
+                getAttributes: ({ groups }) => groups,
+            }),
+            textblockTypeInputRule({
+                find: tildeInputRegex,
+                type: this.type,
+                getAttributes: ({ groups }) => groups,
+            }),
+        ];
+    },
+    addProseMirrorPlugins() {
+        return [
+            // this plugin creates a code block for pasted content from VS Code
+            // we can also detect the copied code language
+            new Plugin({
+                key: new PluginKey('codeBlockVSCodeHandler'),
+                props: {
+                    handlePaste: (view, event) => {
+                        if (!event.clipboardData) {
+                            return false;
+                        }
+                        // don’t create a new code block within code blocks
+                        if (this.editor.isActive(this.type.name)) {
+                            return false;
+                        }
+                        const text = event.clipboardData.getData('text/plain');
+                        const vscode = event.clipboardData.getData('vscode-editor-data');
+                        const vscodeData = vscode
+                            ? JSON.parse(vscode)
+                            : undefined;
+                        const language = vscodeData === null || vscodeData === void 0 ? void 0 : vscodeData.mode;
+                        if (!text || !language) {
+                            return false;
+                        }
+                        const { tr } = view.state;
+                        // create an empty code block
+                        tr.replaceSelectionWith(this.type.create({ language }));
+                        // put cursor inside the newly created code block
+                        tr.setSelection(TextSelection$1.near(tr.doc.resolve(Math.max(0, tr.selection.from - 2))));
+                        // add text to code block
+                        // strip carriage return chars from text pasted as code
+                        // see: https://github.com/ProseMirror/prosemirror-view/commit/a50a6bcceb4ce52ac8fcc6162488d8875613aacd
+                        tr.insertText(text.replace(/\r\n?/g, '\n'));
+                        // store meta information
+                        // this is useful for other plugins that depends on the paste event
+                        // like the paste rule plugin
+                        tr.setMeta('paste', true);
+                        view.dispatch(tr);
+                        return true;
+                    },
+                },
+            }),
         ];
     },
 });
@@ -64445,6 +64966,11 @@ const Document = Node$2.create({
 // Create a plugin that, when added to a ProseMirror instance,
 // causes a decoration to show up at the drop position when something
 // is dragged over the editor.
+//
+// Nodes may add a `disableDropCursor` property to their spec to
+// control the showing of a drop cursor inside them. This may be a
+// boolean or a function, which will be called with a view and a
+// position, and should return a boolean.
 //
 //   options::- These options are supported:
 //
@@ -64559,7 +65085,12 @@ DropCursorView.prototype.scheduleRemoval = function scheduleRemoval (timeout) {
 DropCursorView.prototype.dragover = function dragover (event) {
   if (!this.editorView.editable) { return }
   var pos = this.editorView.posAtCoords({left: event.clientX, top: event.clientY});
-  if (pos) {
+
+  var node = pos && pos.inside >= 0 && this.editorView.state.doc.nodeAt(pos.inside);
+  var disableDropCursor = node && node.type.spec.disableDropCursor;
+  var disabled = typeof disableDropCursor == "function" ? disableDropCursor(this.editorView, pos) : disableDropCursor;
+
+  if (pos && !disabled) {
     var target = pos.pos;
     if (this.editorView.dragging && this.editorView.dragging.slice) {
       target = dropPoint(this.editorView.state.doc, target, this.editorView.dragging.slice);
@@ -64585,10 +65116,12 @@ DropCursorView.prototype.dragleave = function dragleave (event) {
 
 const Dropcursor = Extension.create({
     name: 'dropCursor',
-    defaultOptions: {
-        color: 'currentColor',
-        width: 1,
-        class: null,
+    addOptions() {
+        return {
+            color: 'currentColor',
+            width: 1,
+            class: null,
+        };
     },
     addProseMirrorPlugins() {
         return [
@@ -64800,6 +65333,7 @@ const Gapcursor = Extension.create({
         const context = {
             name: extension.name,
             options: extension.options,
+            storage: extension.storage,
         };
         return {
             allowGapCursor: (_a = callOrReturn(getExtensionField(extension, 'allowGapCursor', context))) !== null && _a !== void 0 ? _a : null,
@@ -64809,9 +65343,11 @@ const Gapcursor = Extension.create({
 
 const HardBreak = Node$2.create({
     name: 'hardBreak',
-    defaultOptions: {
-        keepMarks: true,
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            keepMarks: true,
+            HTMLAttributes: {},
+        };
     },
     inline: true,
     group: 'inline',
@@ -64833,10 +65369,14 @@ const HardBreak = Node$2.create({
                 return commands.first([
                     () => commands.exitCode(),
                     () => commands.command(() => {
+                        const { selection, storedMarks } = state;
+                        if (selection.$from.parent.type.spec.isolating) {
+                            return false;
+                        }
                         const { keepMarks } = this.options;
                         const { splittableMarks } = editor.extensionManager;
-                        const marks = state.storedMarks
-                            || (state.selection.$to.parentOffset && state.selection.$from.marks());
+                        const marks = storedMarks
+                            || (selection.$to.parentOffset && selection.$from.marks());
                         return chain()
                             .insertContent({ type: this.name })
                             .command(({ tr, dispatch }) => {
@@ -64863,9 +65403,11 @@ const HardBreak = Node$2.create({
 
 const Heading = Node$2.create({
     name: 'heading',
-    defaultOptions: {
-        levels: [1, 2, 3, 4, 5, 6],
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            levels: [1, 2, 3, 4, 5, 6],
+            HTMLAttributes: {},
+        };
     },
     content: 'inline*',
     group: 'block',
@@ -64918,7 +65460,13 @@ const Heading = Node$2.create({
     },
     addInputRules() {
         return this.options.levels.map(level => {
-            return textblockTypeInputRule(new RegExp(`^(#{1,${level}})\\s$`), this.type, { level });
+            return textblockTypeInputRule({
+                find: new RegExp(`^(#{1,${level}})\\s$`),
+                type: this.type,
+                getAttributes: {
+                    level,
+                },
+            });
         });
     },
 });
@@ -65561,9 +66109,11 @@ function redo(state, dispatch) {
 
 const History = Extension.create({
     name: 'history',
-    defaultOptions: {
-        depth: 100,
-        newGroupDelay: 500,
+    addOptions() {
+        return {
+            depth: 100,
+            newGroupDelay: 500,
+        };
     },
     addCommands() {
         return {
@@ -65594,8 +66144,10 @@ const History = Extension.create({
 
 const HorizontalRule = Node$2.create({
     name: 'horizontalRule',
-    defaultOptions: {
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            HTMLAttributes: {},
+        };
     },
     group: 'block',
     parseHTML() {
@@ -65610,31 +66162,19 @@ const HorizontalRule = Node$2.create({
         return {
             setHorizontalRule: () => ({ chain }) => {
                 return chain()
-                    // remove node before hr if it’s an empty text block
-                    .command(({ tr, dispatch }) => {
-                    const { selection } = tr;
-                    const { empty, $anchor } = selection;
-                    const isEmptyTextBlock = $anchor.parent.isTextblock
-                        && !$anchor.parent.type.spec.code
-                        && !$anchor.parent.textContent;
-                    if (!empty || !isEmptyTextBlock || !dispatch) {
-                        return true;
-                    }
-                    const from = $anchor.before();
-                    const to = $anchor.start();
-                    tr.deleteRange(from, to);
-                    tr.setSelection(TextSelection$1.create(tr.doc, from));
-                    return true;
-                })
                     .insertContent({ type: this.name })
-                    // add node after hr if it’s the end of the document
+                    // set cursor after horizontal rule
                     .command(({ tr, dispatch }) => {
                     var _a;
                     if (dispatch) {
                         const { parent, pos } = tr.selection.$from;
                         const posAfter = pos + 1;
                         const nodeAfter = tr.doc.nodeAt(posAfter);
-                        if (!nodeAfter) {
+                        if (nodeAfter) {
+                            tr.setSelection(TextSelection$1.create(tr.doc, posAfter));
+                        }
+                        else {
+                            // add node after horizontal rule if it’s the end of the document
                             const node = (_a = parent.type.contentMatch.defaultType) === null || _a === void 0 ? void 0 : _a.create();
                             if (node) {
                                 tr.insert(posAfter, node);
@@ -65651,19 +66191,24 @@ const HorizontalRule = Node$2.create({
     },
     addInputRules() {
         return [
-            nodeInputRule(/^(?:---|—-|___\s|\*\*\*\s)$/, this.type),
+            nodeInputRule({
+                find: /^(?:---|—-|___\s|\*\*\*\s)$/,
+                type: this.type,
+            }),
         ];
     },
 });
 
-const starInputRegex = /(?:^|\s)((?:\*)((?:[^*]+))(?:\*))$/gm;
-const starPasteRegex = /(?:^|\s)((?:\*)((?:[^*]+))(?:\*))/gm;
-const underscoreInputRegex = /(?:^|\s)((?:_)((?:[^_]+))(?:_))$/gm;
-const underscorePasteRegex = /(?:^|\s)((?:_)((?:[^_]+))(?:_))/gm;
+const starInputRegex = /(?:^|\s)((?:\*)((?:[^*]+))(?:\*))$/;
+const starPasteRegex = /(?:^|\s)((?:\*)((?:[^*]+))(?:\*))/g;
+const underscoreInputRegex = /(?:^|\s)((?:_)((?:[^_]+))(?:_))$/;
+const underscorePasteRegex = /(?:^|\s)((?:_)((?:[^_]+))(?:_))/g;
 const Italic = Mark$1.create({
     name: 'italic',
-    defaultOptions: {
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            HTMLAttributes: {},
+        };
     },
     parseHTML() {
         return [
@@ -65702,22 +66247,36 @@ const Italic = Mark$1.create({
     },
     addInputRules() {
         return [
-            markInputRule(starInputRegex, this.type),
-            markInputRule(underscoreInputRegex, this.type),
+            markInputRule({
+                find: starInputRegex,
+                type: this.type,
+            }),
+            markInputRule({
+                find: underscoreInputRegex,
+                type: this.type,
+            }),
         ];
     },
     addPasteRules() {
         return [
-            markPasteRule(starPasteRegex, this.type),
-            markPasteRule(underscorePasteRegex, this.type),
+            markPasteRule({
+                find: starPasteRegex,
+                type: this.type,
+            }),
+            markPasteRule({
+                find: underscorePasteRegex,
+                type: this.type,
+            }),
         ];
     },
 });
 
 const ListItem = Node$2.create({
     name: 'listItem',
-    defaultOptions: {
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            HTMLAttributes: {},
+        };
     },
     content: 'paragraph block*',
     defining: true,
@@ -65743,8 +66302,10 @@ const ListItem = Node$2.create({
 const inputRegex$3 = /^(\d+)\.\s$/;
 const OrderedList = Node$2.create({
     name: 'orderedList',
-    defaultOptions: {
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            HTMLAttributes: {},
+        };
     },
     group: 'block list',
     content: 'listItem+',
@@ -65787,7 +66348,12 @@ const OrderedList = Node$2.create({
     },
     addInputRules() {
         return [
-            wrappingInputRule(inputRegex$3, this.type, match => ({ start: +match[1] }), (match, node) => node.childCount + node.attrs.start === +match[1]),
+            wrappingInputRule({
+                find: inputRegex$3,
+                type: this.type,
+                getAttributes: match => ({ start: +match[1] }),
+                joinPredicate: (match, node) => node.childCount + node.attrs.start === +match[1],
+            }),
         ];
     },
 });
@@ -65795,8 +66361,10 @@ const OrderedList = Node$2.create({
 const Paragraph = Node$2.create({
     name: 'paragraph',
     priority: 1000,
-    defaultOptions: {
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            HTMLAttributes: {},
+        };
     },
     group: 'block',
     content: 'inline*',
@@ -65822,12 +66390,14 @@ const Paragraph = Node$2.create({
     },
 });
 
-const inputRegex$2 = /(?:^|\s)((?:~~)((?:[^~]+))(?:~~))$/gm;
-const pasteRegex$2 = /(?:^|\s)((?:~~)((?:[^~]+))(?:~~))/gm;
+const inputRegex$2 = /(?:^|\s)((?:~~)((?:[^~]+))(?:~~))$/;
+const pasteRegex$1 = /(?:^|\s)((?:~~)((?:[^~]+))(?:~~))/g;
 const Strike = Mark$1.create({
     name: 'strike',
-    defaultOptions: {
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            HTMLAttributes: {},
+        };
     },
     parseHTML() {
         return [
@@ -65870,17 +66440,23 @@ const Strike = Mark$1.create({
     },
     addInputRules() {
         return [
-            markInputRule(inputRegex$2, this.type),
+            markInputRule({
+                find: inputRegex$2,
+                type: this.type,
+            }),
         ];
     },
     addPasteRules() {
         return [
-            markPasteRule(pasteRegex$2, this.type),
+            markPasteRule({
+                find: pasteRegex$1,
+                type: this.type,
+            }),
         ];
     },
 });
 
-const Text = Node$2.create({
+const Text$1 = Node$2.create({
     name: 'text',
     group: 'inline',
 });
@@ -65942,18 +66518,20 @@ const StarterKit = Extension.create({
             extensions.push(Strike.configure((_s = this.options) === null || _s === void 0 ? void 0 : _s.strike));
         }
         if (this.options.text !== false) {
-            extensions.push(Text.configure((_t = this.options) === null || _t === void 0 ? void 0 : _t.text));
+            extensions.push(Text$1.configure((_t = this.options) === null || _t === void 0 ? void 0 : _t.text));
         }
         return extensions;
     },
 });
 
-const inputRegex$1 = /!\[(.+|:?)]\((\S+)(?:(?:\s+)["'](\S+)["'])?\)/;
+const inputRegex$1 = /(!\[(.+|:?)]\((\S+)(?:(?:\s+)["'](\S+)["'])?\))/;
 const Image = Node$2.create({
     name: 'image',
-    defaultOptions: {
-        inline: false,
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            inline: false,
+            HTMLAttributes: {},
+        };
     },
     inline() {
         return this.options.inline;
@@ -65997,33 +66575,3015 @@ const Image = Node$2.create({
     },
     addInputRules() {
         return [
-            nodeInputRule(inputRegex$1, this.type, match => {
-                const [, alt, src, title] = match;
-                return { src, alt, title };
+            nodeInputRule({
+                find: inputRegex$1,
+                type: this.type,
+                getAttributes: match => {
+                    const [, , alt, src, title] = match;
+                    return { src, alt, title };
+                },
             }),
         ];
     },
 });
 
 /**
- * A regex that matches any string that contains a link
+ * Finite State Machine generation utilities
  */
-const pasteRegex$1 = /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z]{2,}\b(?:[-a-zA-Z0-9@:%._+~#=?!&/]*)(?:[-a-zA-Z0-9@:%._+~#=?!&/]*)/gi;
+
 /**
- * A regex that matches an url
+ * Define a basic state machine state. j is the list of character transitions,
+ * jr is the list of regex-match transitions, jd is the default state to
+ * transition to t is the accepting token type, if any. If this is the terminal
+ * state, then it does not emit a token.
+ * @param {string|class} token to emit
  */
-const pasteRegexExact = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z]{2,}\b(?:[-a-zA-Z0-9@:%._+~#=?!&/]*)(?:[-a-zA-Z0-9@:%._+~#=?!&/]*)$/gi;
+function State(token) {
+  this.j = {}; // IMPLEMENTATION 1
+  // this.j = []; // IMPLEMENTATION 2
+
+  this.jr = [];
+  this.jd = null;
+  this.t = token;
+}
+/**
+ * Take the transition from this state to the next one on the given input.
+ * If this state does not exist deterministically, will create it.
+ *
+ * @param {string} input character or token to transition on
+ * @param {string|class} [token] token or multi-token to emit when reaching
+ * this state
+ */
+
+State.prototype = {
+  /**
+   * @param {State} state
+   */
+  accepts: function accepts() {
+    return !!this.t;
+  },
+
+  /**
+   * Short for "take transition", this is a method for building/working with
+   * state machines.
+   *
+   * If a state already exists for the given input, returns it.
+   *
+   * If a token is specified, that state will emit that token when reached by
+   * the linkify engine.
+   *
+   * If no state exists, it will be initialized with some default transitions
+   * that resemble existing default transitions.
+   *
+   * If a state is given for the second argument, that state will be
+   * transitioned to on the given input regardless of what that input
+   * previously did.
+   *
+   * @param {string} input character or token to transition on
+   * @param {Token|State} tokenOrState transition to a matching state
+   * @returns State taken after the given input
+   */
+  tt: function tt(input, tokenOrState) {
+    if (tokenOrState && tokenOrState.j) {
+      // State, default a basic transition
+      this.j[input] = tokenOrState;
+      return tokenOrState;
+    } // See if there's a direct state transition (not regex or default)
+
+
+    var token = tokenOrState;
+    var nextState = this.j[input];
+
+    if (nextState) {
+      if (token) {
+        nextState.t = token;
+      } // overrwites previous token
+
+
+      return nextState;
+    } // Create a new state for this input
+
+
+    nextState = makeState(); // Take the transition using the usual default mechanisms
+
+    var templateState = takeT(this, input);
+
+    if (templateState) {
+      // Some default state transition, make a prime state based on this one
+      Object.assign(nextState.j, templateState.j);
+      nextState.jr.append(templateState.jr);
+      nextState.jr = templateState.jd;
+      nextState.t = token || templateState.t;
+    } else {
+      nextState.t = token;
+    }
+
+    this.j[input] = nextState;
+    return nextState;
+  }
+};
+/**
+ * Utility function to create state without using new keyword (reduced file size
+ * when minified)
+ */
+
+var makeState = function makeState() {
+  return new State();
+};
+/**
+ * Similar to previous except it is an accepting state that emits a token
+ * @param {Token} token
+ */
+
+var makeAcceptingState = function makeAcceptingState(token) {
+  return new State(token);
+};
+/**
+ * Create a transition from startState to nextState via the given character
+ * @param {State} startState transition from thie starting state
+ * @param {Token} input via this input character or other concrete token type
+ * @param {State} nextState to this next state
+ */
+
+var makeT = function makeT(startState, input, nextState) {
+  // IMPLEMENTATION 1: Add to object (fast)
+  if (!startState.j[input]) {
+    startState.j[input] = nextState;
+  } // IMPLEMENTATION 2: Add to array (slower)
+  // startState.j.push([input, nextState]);
+
+};
+/**
+ *
+ * @param {State} startState stransition from this starting state
+ * @param {RegExp} regex Regular expression to match on input
+ * @param {State} nextState transition to this next state if there's are regex match
+ */
+
+var makeRegexT = function makeRegexT(startState, regex, nextState) {
+  startState.jr.push([regex, nextState]);
+};
+/**
+ * Follow the transition from the given character to the next state
+ * @param {State} state
+ * @param {Token} input character or other concrete token type to transition
+ * @returns {?State} the next state, if any
+ */
+
+var takeT = function takeT(state, input) {
+  // IMPLEMENTATION 1: Object key lookup (faster)
+  var nextState = state.j[input];
+
+  if (nextState) {
+    return nextState;
+  } // IMPLEMENTATION 2: List lookup (slower)
+  // Loop through all the state transitions and see if there's a match
+  // for (let i = 0; i < state.j.length; i++) {
+  //	const val = state.j[i][0];
+  //	const nextState = state.j[i][1];
+  // 	if (input === val) { return nextState; }
+  // }
+
+
+  for (var i = 0; i < state.jr.length; i++) {
+    var regex = state.jr[i][0];
+    var _nextState = state.jr[i][1];
+
+    if (regex.test(input)) {
+      return _nextState;
+    }
+  } // Nowhere left to jump! Return default, if any
+
+
+  return state.jd;
+};
+/**
+ * Similar to makeT, but takes a list of characters that all transition to the
+ * same nextState startState
+ * @param {State} startState
+ * @param {Array} chars
+ * @param {State} nextState
+ */
+
+var makeMultiT = function makeMultiT(startState, chars, nextState) {
+  for (var i = 0; i < chars.length; i++) {
+    makeT(startState, chars[i], nextState);
+  }
+};
+/**
+ * Set up a list of multiple transitions at once. transitions is a list of
+ * tuples, where the first element is the transitions character and the second
+ * is the state to transition to
+ * @param {State} startState
+ * @param {Array} transitions
+ */
+
+var makeBatchT = function makeBatchT(startState, transitions) {
+  for (var i = 0; i < transitions.length; i++) {
+    var input = transitions[i][0];
+    var nextState = transitions[i][1];
+    makeT(startState, input, nextState);
+  }
+};
+/**
+ * For state machines that transition on characters only; given a non-empty
+ * target string, generates states (if required) for each consecutive substring
+ * of characters starting from the beginning of the string. The final state will
+ * have a special value, as specified in options. All other "in between"
+ * substrings will have a default end state.
+ *
+ * This turns the state machine into a Trie-like data structure (rather than a
+ * intelligently-designed DFA).
+ * @param {State} state
+ * @param {string} str
+ * @param {Token} endStateFactory
+ * @param {Token} defaultStateFactory
+ */
+
+var makeChainT = function makeChainT(state, str, endState, defaultStateFactory) {
+  var i = 0,
+      len = str.length,
+      nextState; // Find the next state without a jump to the next character
+
+  while (i < len && (nextState = state.j[str[i]])) {
+    state = nextState;
+    i++;
+  }
+
+  if (i >= len) {
+    return [];
+  } // no new tokens were added
+
+
+  while (i < len - 1) {
+    nextState = defaultStateFactory();
+    makeT(state, str[i], nextState);
+    state = nextState;
+    i++;
+  }
+
+  makeT(state, str[len - 1], endState);
+};
+
+/******************************************************************************
+	Text Tokens
+	Tokens composed of strings
+******************************************************************************/
+// A valid web domain token
+var DOMAIN = 'DOMAIN';
+var LOCALHOST = 'LOCALHOST'; // special case of domain
+// Valid top-level domain (see tlds.js)
+
+var TLD = 'TLD'; // Any sequence of digits 0-9
+
+var NUM = 'NUM'; // A web URL protocol. Supported types include
+// - `http:`
+// - `https:`
+// - `ftp:`
+// - `ftps:`
+// - user-defined custom protocols
+
+var PROTOCOL = 'PROTOCOL'; // Start of the email URI protocol
+
+var MAILTO = 'MAILTO'; // mailto:
+// Any number of consecutive whitespace characters that are not newline
+
+var WS = 'WS'; // New line (unix style)
+
+var NL = 'NL'; // \n
+// Opening/closing bracket classes
+
+var OPENBRACE = 'OPENBRACE'; // {
+
+var OPENBRACKET = 'OPENBRACKET'; // [
+
+var OPENANGLEBRACKET = 'OPENANGLEBRACKET'; // <
+
+var OPENPAREN = 'OPENPAREN'; // (
+
+var CLOSEBRACE = 'CLOSEBRACE'; // }
+
+var CLOSEBRACKET = 'CLOSEBRACKET'; // ]
+
+var CLOSEANGLEBRACKET = 'CLOSEANGLEBRACKET'; // >
+
+var CLOSEPAREN = 'CLOSEPAREN'; // )
+// Various symbols
+
+var AMPERSAND = 'AMPERSAND'; // &
+
+var APOSTROPHE = 'APOSTROPHE'; // '
+
+var ASTERISK = 'ASTERISK'; // *
+
+var AT = 'AT'; // @
+
+var BACKSLASH = 'BACKSLASH'; // \
+
+var BACKTICK = 'BACKTICK'; // `
+
+var CARET = 'CARET'; // ^
+
+var COLON = 'COLON'; // :
+
+var COMMA = 'COMMA'; // ,
+
+var DOLLAR = 'DOLLAR'; // $
+
+var DOT = 'DOT'; // .
+
+var EQUALS = 'EQUALS'; // =
+
+var EXCLAMATION = 'EXCLAMATION'; // !
+
+var HYPHEN = 'HYPHEN'; // -
+
+var PERCENT = 'PERCENT'; // %
+
+var PIPE = 'PIPE'; // |
+
+var PLUS = 'PLUS'; // +
+
+var POUND = 'POUND'; // #
+
+var QUERY = 'QUERY'; // ?
+
+var QUOTE = 'QUOTE'; // "
+
+var SEMI = 'SEMI'; // ;
+
+var SLASH = 'SLASH'; // /
+
+var TILDE = 'TILDE'; // ~
+
+var UNDERSCORE = 'UNDERSCORE'; // _
+// Default token - anything that is not one of the above
+
+var SYM = 'SYM';
+
+var text = /*#__PURE__*/Object.freeze({
+	__proto__: null,
+	DOMAIN: DOMAIN,
+	LOCALHOST: LOCALHOST,
+	TLD: TLD,
+	NUM: NUM,
+	PROTOCOL: PROTOCOL,
+	MAILTO: MAILTO,
+	WS: WS,
+	NL: NL,
+	OPENBRACE: OPENBRACE,
+	OPENBRACKET: OPENBRACKET,
+	OPENANGLEBRACKET: OPENANGLEBRACKET,
+	OPENPAREN: OPENPAREN,
+	CLOSEBRACE: CLOSEBRACE,
+	CLOSEBRACKET: CLOSEBRACKET,
+	CLOSEANGLEBRACKET: CLOSEANGLEBRACKET,
+	CLOSEPAREN: CLOSEPAREN,
+	AMPERSAND: AMPERSAND,
+	APOSTROPHE: APOSTROPHE,
+	ASTERISK: ASTERISK,
+	AT: AT,
+	BACKSLASH: BACKSLASH,
+	BACKTICK: BACKTICK,
+	CARET: CARET,
+	COLON: COLON,
+	COMMA: COMMA,
+	DOLLAR: DOLLAR,
+	DOT: DOT,
+	EQUALS: EQUALS,
+	EXCLAMATION: EXCLAMATION,
+	HYPHEN: HYPHEN,
+	PERCENT: PERCENT,
+	PIPE: PIPE,
+	PLUS: PLUS,
+	POUND: POUND,
+	QUERY: QUERY,
+	QUOTE: QUOTE,
+	SEMI: SEMI,
+	SLASH: SLASH,
+	TILDE: TILDE,
+	UNDERSCORE: UNDERSCORE,
+	SYM: SYM
+});
+
+// NOTE: punycode versions of IDNs are not included here because these will not
+// be as commonly used without the http prefix anyway and linkify will already
+// force-encode those.
+// To be updated with the values in this list
+// http://data.iana.org/TLD/tlds-alpha-by-domain.txt
+// Version 2021022800, Last Updated Sun Feb 28 07:07:01 2021 UTC
+var tlds = 'aaa \
+aarp \
+abarth \
+abb \
+abbott \
+abbvie \
+abc \
+able \
+abogado \
+abudhabi \
+ac \
+academy \
+accenture \
+accountant \
+accountants \
+aco \
+actor \
+ad \
+adac \
+ads \
+adult \
+ae \
+aeg \
+aero \
+aetna \
+af \
+afamilycompany \
+afl \
+africa \
+ag \
+agakhan \
+agency \
+ai \
+aig \
+airbus \
+airforce \
+airtel \
+akdn \
+al \
+alfaromeo \
+alibaba \
+alipay \
+allfinanz \
+allstate \
+ally \
+alsace \
+alstom \
+am \
+amazon \
+americanexpress \
+americanfamily \
+amex \
+amfam \
+amica \
+amsterdam \
+analytics \
+android \
+anquan \
+anz \
+ao \
+aol \
+apartments \
+app \
+apple \
+aq \
+aquarelle \
+ar \
+arab \
+aramco \
+archi \
+army \
+arpa \
+art \
+arte \
+as \
+asda \
+asia \
+associates \
+at \
+athleta \
+attorney \
+au \
+auction \
+audi \
+audible \
+audio \
+auspost \
+author \
+auto \
+autos \
+avianca \
+aw \
+aws \
+ax \
+axa \
+az \
+azure \
+ba \
+baby \
+baidu \
+banamex \
+bananarepublic \
+band \
+bank \
+bar \
+barcelona \
+barclaycard \
+barclays \
+barefoot \
+bargains \
+baseball \
+basketball \
+bauhaus \
+bayern \
+bb \
+bbc \
+bbt \
+bbva \
+bcg \
+bcn \
+bd \
+be \
+beats \
+beauty \
+beer \
+bentley \
+berlin \
+best \
+bestbuy \
+bet \
+bf \
+bg \
+bh \
+bharti \
+bi \
+bible \
+bid \
+bike \
+bing \
+bingo \
+bio \
+biz \
+bj \
+black \
+blackfriday \
+blockbuster \
+blog \
+bloomberg \
+blue \
+bm \
+bms \
+bmw \
+bn \
+bnpparibas \
+bo \
+boats \
+boehringer \
+bofa \
+bom \
+bond \
+boo \
+book \
+booking \
+bosch \
+bostik \
+boston \
+bot \
+boutique \
+box \
+br \
+bradesco \
+bridgestone \
+broadway \
+broker \
+brother \
+brussels \
+bs \
+bt \
+budapest \
+bugatti \
+build \
+builders \
+business \
+buy \
+buzz \
+bv \
+bw \
+by \
+bz \
+bzh \
+ca \
+cab \
+cafe \
+cal \
+call \
+calvinklein \
+cam \
+camera \
+camp \
+cancerresearch \
+canon \
+capetown \
+capital \
+capitalone \
+car \
+caravan \
+cards \
+care \
+career \
+careers \
+cars \
+casa \
+case \
+cash \
+casino \
+cat \
+catering \
+catholic \
+cba \
+cbn \
+cbre \
+cbs \
+cc \
+cd \
+center \
+ceo \
+cern \
+cf \
+cfa \
+cfd \
+cg \
+ch \
+chanel \
+channel \
+charity \
+chase \
+chat \
+cheap \
+chintai \
+christmas \
+chrome \
+church \
+ci \
+cipriani \
+circle \
+cisco \
+citadel \
+citi \
+citic \
+city \
+cityeats \
+ck \
+cl \
+claims \
+cleaning \
+click \
+clinic \
+clinique \
+clothing \
+cloud \
+club \
+clubmed \
+cm \
+cn \
+co \
+coach \
+codes \
+coffee \
+college \
+cologne \
+com \
+comcast \
+commbank \
+community \
+company \
+compare \
+computer \
+comsec \
+condos \
+construction \
+consulting \
+contact \
+contractors \
+cooking \
+cookingchannel \
+cool \
+coop \
+corsica \
+country \
+coupon \
+coupons \
+courses \
+cpa \
+cr \
+credit \
+creditcard \
+creditunion \
+cricket \
+crown \
+crs \
+cruise \
+cruises \
+csc \
+cu \
+cuisinella \
+cv \
+cw \
+cx \
+cy \
+cymru \
+cyou \
+cz \
+dabur \
+dad \
+dance \
+data \
+date \
+dating \
+datsun \
+day \
+dclk \
+dds \
+de \
+deal \
+dealer \
+deals \
+degree \
+delivery \
+dell \
+deloitte \
+delta \
+democrat \
+dental \
+dentist \
+desi \
+design \
+dev \
+dhl \
+diamonds \
+diet \
+digital \
+direct \
+directory \
+discount \
+discover \
+dish \
+diy \
+dj \
+dk \
+dm \
+dnp \
+do \
+docs \
+doctor \
+dog \
+domains \
+dot \
+download \
+drive \
+dtv \
+dubai \
+duck \
+dunlop \
+dupont \
+durban \
+dvag \
+dvr \
+dz \
+earth \
+eat \
+ec \
+eco \
+edeka \
+edu \
+education \
+ee \
+eg \
+email \
+emerck \
+energy \
+engineer \
+engineering \
+enterprises \
+epson \
+equipment \
+er \
+ericsson \
+erni \
+es \
+esq \
+estate \
+et \
+etisalat \
+eu \
+eurovision \
+eus \
+events \
+exchange \
+expert \
+exposed \
+express \
+extraspace \
+fage \
+fail \
+fairwinds \
+faith \
+family \
+fan \
+fans \
+farm \
+farmers \
+fashion \
+fast \
+fedex \
+feedback \
+ferrari \
+ferrero \
+fi \
+fiat \
+fidelity \
+fido \
+film \
+final \
+finance \
+financial \
+fire \
+firestone \
+firmdale \
+fish \
+fishing \
+fit \
+fitness \
+fj \
+fk \
+flickr \
+flights \
+flir \
+florist \
+flowers \
+fly \
+fm \
+fo \
+foo \
+food \
+foodnetwork \
+football \
+ford \
+forex \
+forsale \
+forum \
+foundation \
+fox \
+fr \
+free \
+fresenius \
+frl \
+frogans \
+frontdoor \
+frontier \
+ftr \
+fujitsu \
+fujixerox \
+fun \
+fund \
+furniture \
+futbol \
+fyi \
+ga \
+gal \
+gallery \
+gallo \
+gallup \
+game \
+games \
+gap \
+garden \
+gay \
+gb \
+gbiz \
+gd \
+gdn \
+ge \
+gea \
+gent \
+genting \
+george \
+gf \
+gg \
+ggee \
+gh \
+gi \
+gift \
+gifts \
+gives \
+giving \
+gl \
+glade \
+glass \
+gle \
+global \
+globo \
+gm \
+gmail \
+gmbh \
+gmo \
+gmx \
+gn \
+godaddy \
+gold \
+goldpoint \
+golf \
+goo \
+goodyear \
+goog \
+google \
+gop \
+got \
+gov \
+gp \
+gq \
+gr \
+grainger \
+graphics \
+gratis \
+green \
+gripe \
+grocery \
+group \
+gs \
+gt \
+gu \
+guardian \
+gucci \
+guge \
+guide \
+guitars \
+guru \
+gw \
+gy \
+hair \
+hamburg \
+hangout \
+haus \
+hbo \
+hdfc \
+hdfcbank \
+health \
+healthcare \
+help \
+helsinki \
+here \
+hermes \
+hgtv \
+hiphop \
+hisamitsu \
+hitachi \
+hiv \
+hk \
+hkt \
+hm \
+hn \
+hockey \
+holdings \
+holiday \
+homedepot \
+homegoods \
+homes \
+homesense \
+honda \
+horse \
+hospital \
+host \
+hosting \
+hot \
+hoteles \
+hotels \
+hotmail \
+house \
+how \
+hr \
+hsbc \
+ht \
+hu \
+hughes \
+hyatt \
+hyundai \
+ibm \
+icbc \
+ice \
+icu \
+id \
+ie \
+ieee \
+ifm \
+ikano \
+il \
+im \
+imamat \
+imdb \
+immo \
+immobilien \
+in \
+inc \
+industries \
+infiniti \
+info \
+ing \
+ink \
+institute \
+insurance \
+insure \
+int \
+international \
+intuit \
+investments \
+io \
+ipiranga \
+iq \
+ir \
+irish \
+is \
+ismaili \
+ist \
+istanbul \
+it \
+itau \
+itv \
+iveco \
+jaguar \
+java \
+jcb \
+je \
+jeep \
+jetzt \
+jewelry \
+jio \
+jll \
+jm \
+jmp \
+jnj \
+jo \
+jobs \
+joburg \
+jot \
+joy \
+jp \
+jpmorgan \
+jprs \
+juegos \
+juniper \
+kaufen \
+kddi \
+ke \
+kerryhotels \
+kerrylogistics \
+kerryproperties \
+kfh \
+kg \
+kh \
+ki \
+kia \
+kim \
+kinder \
+kindle \
+kitchen \
+kiwi \
+km \
+kn \
+koeln \
+komatsu \
+kosher \
+kp \
+kpmg \
+kpn \
+kr \
+krd \
+kred \
+kuokgroup \
+kw \
+ky \
+kyoto \
+kz \
+la \
+lacaixa \
+lamborghini \
+lamer \
+lancaster \
+lancia \
+land \
+landrover \
+lanxess \
+lasalle \
+lat \
+latino \
+latrobe \
+law \
+lawyer \
+lb \
+lc \
+lds \
+lease \
+leclerc \
+lefrak \
+legal \
+lego \
+lexus \
+lgbt \
+li \
+lidl \
+life \
+lifeinsurance \
+lifestyle \
+lighting \
+like \
+lilly \
+limited \
+limo \
+lincoln \
+linde \
+link \
+lipsy \
+live \
+living \
+lixil \
+lk \
+llc \
+llp \
+loan \
+loans \
+locker \
+locus \
+loft \
+lol \
+london \
+lotte \
+lotto \
+love \
+lpl \
+lplfinancial \
+lr \
+ls \
+lt \
+ltd \
+ltda \
+lu \
+lundbeck \
+luxe \
+luxury \
+lv \
+ly \
+ma \
+macys \
+madrid \
+maif \
+maison \
+makeup \
+man \
+management \
+mango \
+map \
+market \
+marketing \
+markets \
+marriott \
+marshalls \
+maserati \
+mattel \
+mba \
+mc \
+mckinsey \
+md \
+me \
+med \
+media \
+meet \
+melbourne \
+meme \
+memorial \
+men \
+menu \
+merckmsd \
+mg \
+mh \
+miami \
+microsoft \
+mil \
+mini \
+mint \
+mit \
+mitsubishi \
+mk \
+ml \
+mlb \
+mls \
+mm \
+mma \
+mn \
+mo \
+mobi \
+mobile \
+moda \
+moe \
+moi \
+mom \
+monash \
+money \
+monster \
+mormon \
+mortgage \
+moscow \
+moto \
+motorcycles \
+mov \
+movie \
+mp \
+mq \
+mr \
+ms \
+msd \
+mt \
+mtn \
+mtr \
+mu \
+museum \
+mutual \
+mv \
+mw \
+mx \
+my \
+mz \
+na \
+nab \
+nagoya \
+name \
+nationwide \
+natura \
+navy \
+nba \
+nc \
+ne \
+nec \
+net \
+netbank \
+netflix \
+network \
+neustar \
+new \
+news \
+next \
+nextdirect \
+nexus \
+nf \
+nfl \
+ng \
+ngo \
+nhk \
+ni \
+nico \
+nike \
+nikon \
+ninja \
+nissan \
+nissay \
+nl \
+no \
+nokia \
+northwesternmutual \
+norton \
+now \
+nowruz \
+nowtv \
+np \
+nr \
+nra \
+nrw \
+ntt \
+nu \
+nyc \
+nz \
+obi \
+observer \
+off \
+office \
+okinawa \
+olayan \
+olayangroup \
+oldnavy \
+ollo \
+om \
+omega \
+one \
+ong \
+onl \
+online \
+onyourside \
+ooo \
+open \
+oracle \
+orange \
+org \
+organic \
+origins \
+osaka \
+otsuka \
+ott \
+ovh \
+pa \
+page \
+panasonic \
+paris \
+pars \
+partners \
+parts \
+party \
+passagens \
+pay \
+pccw \
+pe \
+pet \
+pf \
+pfizer \
+pg \
+ph \
+pharmacy \
+phd \
+philips \
+phone \
+photo \
+photography \
+photos \
+physio \
+pics \
+pictet \
+pictures \
+pid \
+pin \
+ping \
+pink \
+pioneer \
+pizza \
+pk \
+pl \
+place \
+play \
+playstation \
+plumbing \
+plus \
+pm \
+pn \
+pnc \
+pohl \
+poker \
+politie \
+porn \
+post \
+pr \
+pramerica \
+praxi \
+press \
+prime \
+pro \
+prod \
+productions \
+prof \
+progressive \
+promo \
+properties \
+property \
+protection \
+pru \
+prudential \
+ps \
+pt \
+pub \
+pw \
+pwc \
+py \
+qa \
+qpon \
+quebec \
+quest \
+qvc \
+racing \
+radio \
+raid \
+re \
+read \
+realestate \
+realtor \
+realty \
+recipes \
+red \
+redstone \
+redumbrella \
+rehab \
+reise \
+reisen \
+reit \
+reliance \
+ren \
+rent \
+rentals \
+repair \
+report \
+republican \
+rest \
+restaurant \
+review \
+reviews \
+rexroth \
+rich \
+richardli \
+ricoh \
+ril \
+rio \
+rip \
+rmit \
+ro \
+rocher \
+rocks \
+rodeo \
+rogers \
+room \
+rs \
+rsvp \
+ru \
+rugby \
+ruhr \
+run \
+rw \
+rwe \
+ryukyu \
+sa \
+saarland \
+safe \
+safety \
+sakura \
+sale \
+salon \
+samsclub \
+samsung \
+sandvik \
+sandvikcoromant \
+sanofi \
+sap \
+sarl \
+sas \
+save \
+saxo \
+sb \
+sbi \
+sbs \
+sc \
+sca \
+scb \
+schaeffler \
+schmidt \
+scholarships \
+school \
+schule \
+schwarz \
+science \
+scjohnson \
+scot \
+sd \
+se \
+search \
+seat \
+secure \
+security \
+seek \
+select \
+sener \
+services \
+ses \
+seven \
+sew \
+sex \
+sexy \
+sfr \
+sg \
+sh \
+shangrila \
+sharp \
+shaw \
+shell \
+shia \
+shiksha \
+shoes \
+shop \
+shopping \
+shouji \
+show \
+showtime \
+si \
+silk \
+sina \
+singles \
+site \
+sj \
+sk \
+ski \
+skin \
+sky \
+skype \
+sl \
+sling \
+sm \
+smart \
+smile \
+sn \
+sncf \
+so \
+soccer \
+social \
+softbank \
+software \
+sohu \
+solar \
+solutions \
+song \
+sony \
+soy \
+spa \
+space \
+sport \
+spot \
+spreadbetting \
+sr \
+srl \
+ss \
+st \
+stada \
+staples \
+star \
+statebank \
+statefarm \
+stc \
+stcgroup \
+stockholm \
+storage \
+store \
+stream \
+studio \
+study \
+style \
+su \
+sucks \
+supplies \
+supply \
+support \
+surf \
+surgery \
+suzuki \
+sv \
+swatch \
+swiftcover \
+swiss \
+sx \
+sy \
+sydney \
+systems \
+sz \
+tab \
+taipei \
+talk \
+taobao \
+target \
+tatamotors \
+tatar \
+tattoo \
+tax \
+taxi \
+tc \
+tci \
+td \
+tdk \
+team \
+tech \
+technology \
+tel \
+temasek \
+tennis \
+teva \
+tf \
+tg \
+th \
+thd \
+theater \
+theatre \
+tiaa \
+tickets \
+tienda \
+tiffany \
+tips \
+tires \
+tirol \
+tj \
+tjmaxx \
+tjx \
+tk \
+tkmaxx \
+tl \
+tm \
+tmall \
+tn \
+to \
+today \
+tokyo \
+tools \
+top \
+toray \
+toshiba \
+total \
+tours \
+town \
+toyota \
+toys \
+tr \
+trade \
+trading \
+training \
+travel \
+travelchannel \
+travelers \
+travelersinsurance \
+trust \
+trv \
+tt \
+tube \
+tui \
+tunes \
+tushu \
+tv \
+tvs \
+tw \
+tz \
+ua \
+ubank \
+ubs \
+ug \
+uk \
+unicom \
+university \
+uno \
+uol \
+ups \
+us \
+uy \
+uz \
+va \
+vacations \
+vana \
+vanguard \
+vc \
+ve \
+vegas \
+ventures \
+verisign \
+versicherung \
+vet \
+vg \
+vi \
+viajes \
+video \
+vig \
+viking \
+villas \
+vin \
+vip \
+virgin \
+visa \
+vision \
+viva \
+vivo \
+vlaanderen \
+vn \
+vodka \
+volkswagen \
+volvo \
+vote \
+voting \
+voto \
+voyage \
+vu \
+vuelos \
+wales \
+walmart \
+walter \
+wang \
+wanggou \
+watch \
+watches \
+weather \
+weatherchannel \
+webcam \
+weber \
+website \
+wed \
+wedding \
+weibo \
+weir \
+wf \
+whoswho \
+wien \
+wiki \
+williamhill \
+win \
+windows \
+wine \
+winners \
+wme \
+wolterskluwer \
+woodside \
+work \
+works \
+world \
+wow \
+ws \
+wtc \
+wtf \
+xbox \
+xerox \
+xfinity \
+xihuan \
+xin \
+xxx \
+xyz \
+yachts \
+yahoo \
+yamaxun \
+yandex \
+ye \
+yodobashi \
+yoga \
+yokohama \
+you \
+youtube \
+yt \
+yun \
+za \
+zappos \
+zara \
+zero \
+zip \
+zm \
+zone \
+zuerich \
+zw \
+vermögensberater-ctb \
+vermögensberatung-pwb \
+ελ \
+ευ \
+бг \
+бел \
+дети \
+ею \
+католик \
+ком \
+қаз \
+мкд \
+мон \
+москва \
+онлайн \
+орг \
+рус \
+рф \
+сайт \
+срб \
+укр \
+გე \
+հայ \
+ישראל \
+קום \
+ابوظبي \
+اتصالات \
+ارامكو \
+الاردن \
+البحرين \
+الجزائر \
+السعودية \
+العليان \
+المغرب \
+امارات \
+ایران \
+بارت \
+بازار \
+بھارت \
+بيتك \
+پاکستان \
+ڀارت \
+تونس \
+سودان \
+سورية \
+شبكة \
+عراق \
+عرب \
+عمان \
+فلسطين \
+قطر \
+كاثوليك \
+كوم \
+مصر \
+مليسيا \
+موريتانيا \
+موقع \
+همراه \
+कॉम \
+नेट \
+भारत \
+भारतम् \
+भारोत \
+संगठन \
+বাংলা \
+ভারত \
+ভাৰত \
+ਭਾਰਤ \
+ભારત \
+ଭାରତ \
+இந்தியா \
+இலங்கை \
+சிங்கப்பூர் \
+భారత్ \
+ಭಾರತ \
+ഭാരതം \
+ලංකා \
+คอม \
+ไทย \
+ລາວ \
+닷넷 \
+닷컴 \
+삼성 \
+한국 \
+アマゾン \
+グーグル \
+クラウド \
+コム \
+ストア \
+セール \
+ファッション \
+ポイント \
+みんな \
+世界 \
+中信 \
+中国 \
+中國 \
+中文网 \
+亚马逊 \
+企业 \
+佛山 \
+信息 \
+健康 \
+八卦 \
+公司 \
+公益 \
+台湾 \
+台灣 \
+商城 \
+商店 \
+商标 \
+嘉里 \
+嘉里大酒店 \
+在线 \
+大众汽车 \
+大拿 \
+天主教 \
+娱乐 \
+家電 \
+广东 \
+微博 \
+慈善 \
+我爱你 \
+手机 \
+招聘 \
+政务 \
+政府 \
+新加坡 \
+新闻 \
+时尚 \
+書籍 \
+机构 \
+淡马锡 \
+游戏 \
+澳門 \
+点看 \
+移动 \
+组织机构 \
+网址 \
+网店 \
+网站 \
+网络 \
+联通 \
+诺基亚 \
+谷歌 \
+购物 \
+通販 \
+集团 \
+電訊盈科 \
+飞利浦 \
+食品 \
+餐厅 \
+香格里拉 \
+香港'.split(' ');
+
+/**
+	The scanner provides an interface that takes a string of text as input, and
+	outputs an array of tokens instances that can be used for easy URL parsing.
+
+	@module linkify
+	@submodule scanner
+	@main scanner
+*/
+
+var LETTER = /(?:[A-Za-z\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0560-\u0588\u05D0-\u05EA\u05EF-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u0860-\u086A\u08A0-\u08B4\u08B6-\u08C7\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u09FC\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0AF9\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58-\u0C5A\u0C60\u0C61\u0C80\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D04-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D54-\u0D56\u0D5F-\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E86-\u0E8A\u0E8C-\u0EA3\u0EA5\u0EA7-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F5\u13F8-\u13FD\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16F1-\u16F8\u1700-\u170C\u170E-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1878\u1880-\u1884\u1887-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19B0-\u19C9\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4B\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1C80-\u1C88\u1C90-\u1CBA\u1CBD-\u1CBF\u1CE9-\u1CEC\u1CEE-\u1CF3\u1CF5\u1CF6\u1CFA\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2119-\u211D\u2124\u2126\u2128\u212A-\u212D\u212F-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2183\u2184\u2C00-\u2C2E\u2C30-\u2C5E\u2C60-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u2E2F\u3005\u3006\u3031-\u3035\u303B\u303C\u3041-\u3096\u309D-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312F\u3131-\u318E\u31A0-\u31BF\u31F0-\u31FF\u3400-\u4DBF\u4E00-\u9FFC\uA000-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6E5\uA717-\uA71F\uA722-\uA788\uA78B-\uA7BF\uA7C2-\uA7CA\uA7F5-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA8FD\uA8FE\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB69\uAB70-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC]|\uD800[\uDC00-\uDC0B\uDC0D-\uDC26\uDC28-\uDC3A\uDC3C\uDC3D\uDC3F-\uDC4D\uDC50-\uDC5D\uDC80-\uDCFA\uDE80-\uDE9C\uDEA0-\uDED0\uDF00-\uDF1F\uDF2D-\uDF40\uDF42-\uDF49\uDF50-\uDF75\uDF80-\uDF9D\uDFA0-\uDFC3\uDFC8-\uDFCF]|\uD801[\uDC00-\uDC9D\uDCB0-\uDCD3\uDCD8-\uDCFB\uDD00-\uDD27\uDD30-\uDD63\uDE00-\uDF36\uDF40-\uDF55\uDF60-\uDF67]|\uD802[\uDC00-\uDC05\uDC08\uDC0A-\uDC35\uDC37\uDC38\uDC3C\uDC3F-\uDC55\uDC60-\uDC76\uDC80-\uDC9E\uDCE0-\uDCF2\uDCF4\uDCF5\uDD00-\uDD15\uDD20-\uDD39\uDD80-\uDDB7\uDDBE\uDDBF\uDE00\uDE10-\uDE13\uDE15-\uDE17\uDE19-\uDE35\uDE60-\uDE7C\uDE80-\uDE9C\uDEC0-\uDEC7\uDEC9-\uDEE4\uDF00-\uDF35\uDF40-\uDF55\uDF60-\uDF72\uDF80-\uDF91]|\uD803[\uDC00-\uDC48\uDC80-\uDCB2\uDCC0-\uDCF2\uDD00-\uDD23\uDE80-\uDEA9\uDEB0\uDEB1\uDF00-\uDF1C\uDF27\uDF30-\uDF45\uDFB0-\uDFC4\uDFE0-\uDFF6]|\uD804[\uDC03-\uDC37\uDC83-\uDCAF\uDCD0-\uDCE8\uDD03-\uDD26\uDD44\uDD47\uDD50-\uDD72\uDD76\uDD83-\uDDB2\uDDC1-\uDDC4\uDDDA\uDDDC\uDE00-\uDE11\uDE13-\uDE2B\uDE80-\uDE86\uDE88\uDE8A-\uDE8D\uDE8F-\uDE9D\uDE9F-\uDEA8\uDEB0-\uDEDE\uDF05-\uDF0C\uDF0F\uDF10\uDF13-\uDF28\uDF2A-\uDF30\uDF32\uDF33\uDF35-\uDF39\uDF3D\uDF50\uDF5D-\uDF61]|\uD805[\uDC00-\uDC34\uDC47-\uDC4A\uDC5F-\uDC61\uDC80-\uDCAF\uDCC4\uDCC5\uDCC7\uDD80-\uDDAE\uDDD8-\uDDDB\uDE00-\uDE2F\uDE44\uDE80-\uDEAA\uDEB8\uDF00-\uDF1A]|\uD806[\uDC00-\uDC2B\uDCA0-\uDCDF\uDCFF-\uDD06\uDD09\uDD0C-\uDD13\uDD15\uDD16\uDD18-\uDD2F\uDD3F\uDD41\uDDA0-\uDDA7\uDDAA-\uDDD0\uDDE1\uDDE3\uDE00\uDE0B-\uDE32\uDE3A\uDE50\uDE5C-\uDE89\uDE9D\uDEC0-\uDEF8]|\uD807[\uDC00-\uDC08\uDC0A-\uDC2E\uDC40\uDC72-\uDC8F\uDD00-\uDD06\uDD08\uDD09\uDD0B-\uDD30\uDD46\uDD60-\uDD65\uDD67\uDD68\uDD6A-\uDD89\uDD98\uDEE0-\uDEF2\uDFB0]|\uD808[\uDC00-\uDF99]|\uD809[\uDC80-\uDD43]|[\uD80C\uD81C-\uD820\uD822\uD840-\uD868\uD86A-\uD86C\uD86F-\uD872\uD874-\uD879\uD880-\uD883][\uDC00-\uDFFF]|\uD80D[\uDC00-\uDC2E]|\uD811[\uDC00-\uDE46]|\uD81A[\uDC00-\uDE38\uDE40-\uDE5E\uDED0-\uDEED\uDF00-\uDF2F\uDF40-\uDF43\uDF63-\uDF77\uDF7D-\uDF8F]|\uD81B[\uDE40-\uDE7F\uDF00-\uDF4A\uDF50\uDF93-\uDF9F\uDFE0\uDFE1\uDFE3]|\uD821[\uDC00-\uDFF7]|\uD823[\uDC00-\uDCD5\uDD00-\uDD08]|\uD82C[\uDC00-\uDD1E\uDD50-\uDD52\uDD64-\uDD67\uDD70-\uDEFB]|\uD82F[\uDC00-\uDC6A\uDC70-\uDC7C\uDC80-\uDC88\uDC90-\uDC99]|\uD835[\uDC00-\uDC54\uDC56-\uDC9C\uDC9E\uDC9F\uDCA2\uDCA5\uDCA6\uDCA9-\uDCAC\uDCAE-\uDCB9\uDCBB\uDCBD-\uDCC3\uDCC5-\uDD05\uDD07-\uDD0A\uDD0D-\uDD14\uDD16-\uDD1C\uDD1E-\uDD39\uDD3B-\uDD3E\uDD40-\uDD44\uDD46\uDD4A-\uDD50\uDD52-\uDEA5\uDEA8-\uDEC0\uDEC2-\uDEDA\uDEDC-\uDEFA\uDEFC-\uDF14\uDF16-\uDF34\uDF36-\uDF4E\uDF50-\uDF6E\uDF70-\uDF88\uDF8A-\uDFA8\uDFAA-\uDFC2\uDFC4-\uDFCB]|\uD838[\uDD00-\uDD2C\uDD37-\uDD3D\uDD4E\uDEC0-\uDEEB]|\uD83A[\uDC00-\uDCC4\uDD00-\uDD43\uDD4B]|\uD83B[\uDE00-\uDE03\uDE05-\uDE1F\uDE21\uDE22\uDE24\uDE27\uDE29-\uDE32\uDE34-\uDE37\uDE39\uDE3B\uDE42\uDE47\uDE49\uDE4B\uDE4D-\uDE4F\uDE51\uDE52\uDE54\uDE57\uDE59\uDE5B\uDE5D\uDE5F\uDE61\uDE62\uDE64\uDE67-\uDE6A\uDE6C-\uDE72\uDE74-\uDE77\uDE79-\uDE7C\uDE7E\uDE80-\uDE89\uDE8B-\uDE9B\uDEA1-\uDEA3\uDEA5-\uDEA9\uDEAB-\uDEBB]|\uD869[\uDC00-\uDEDD\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF34\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D\uDC20-\uDFFF]|\uD873[\uDC00-\uDEA1\uDEB0-\uDFFF]|\uD87A[\uDC00-\uDFE0]|\uD87E[\uDC00-\uDE1D]|\uD884[\uDC00-\uDF4A])/; // Any Unicode character with letter data type
+
+var EMOJI = /(?:[#\*0-9\xA9\xAE\u203C\u2049\u2122\u2139\u2194-\u2199\u21A9\u21AA\u231A\u231B\u2328\u23CF\u23E9-\u23F3\u23F8-\u23FA\u24C2\u25AA\u25AB\u25B6\u25C0\u25FB-\u25FE\u2600-\u2604\u260E\u2611\u2614\u2615\u2618\u261D\u2620\u2622\u2623\u2626\u262A\u262E\u262F\u2638-\u263A\u2640\u2642\u2648-\u2653\u265F\u2660\u2663\u2665\u2666\u2668\u267B\u267E\u267F\u2692-\u2697\u2699\u269B\u269C\u26A0\u26A1\u26A7\u26AA\u26AB\u26B0\u26B1\u26BD\u26BE\u26C4\u26C5\u26C8\u26CE\u26CF\u26D1\u26D3\u26D4\u26E9\u26EA\u26F0-\u26F5\u26F7-\u26FA\u26FD\u2702\u2705\u2708-\u270D\u270F\u2712\u2714\u2716\u271D\u2721\u2728\u2733\u2734\u2744\u2747\u274C\u274E\u2753-\u2755\u2757\u2763\u2764\u2795-\u2797\u27A1\u27B0\u27BF\u2934\u2935\u2B05-\u2B07\u2B1B\u2B1C\u2B50\u2B55\u3030\u303D\u3297\u3299]|\uD83C[\uDC04\uDCCF\uDD70\uDD71\uDD7E\uDD7F\uDD8E\uDD91-\uDD9A\uDDE6-\uDDFF\uDE01\uDE02\uDE1A\uDE2F\uDE32-\uDE3A\uDE50\uDE51\uDF00-\uDF21\uDF24-\uDF93\uDF96\uDF97\uDF99-\uDF9B\uDF9E-\uDFF0\uDFF3-\uDFF5\uDFF7-\uDFFF]|\uD83D[\uDC00-\uDCFD\uDCFF-\uDD3D\uDD49-\uDD4E\uDD50-\uDD67\uDD6F\uDD70\uDD73-\uDD7A\uDD87\uDD8A-\uDD8D\uDD90\uDD95\uDD96\uDDA4\uDDA5\uDDA8\uDDB1\uDDB2\uDDBC\uDDC2-\uDDC4\uDDD1-\uDDD3\uDDDC-\uDDDE\uDDE1\uDDE3\uDDE8\uDDEF\uDDF3\uDDFA-\uDE4F\uDE80-\uDEC5\uDECB-\uDED2\uDED5-\uDED7\uDEE0-\uDEE5\uDEE9\uDEEB\uDEEC\uDEF0\uDEF3-\uDEFC\uDFE0-\uDFEB]|\uD83E[\uDD0C-\uDD3A\uDD3C-\uDD45\uDD47-\uDD78\uDD7A-\uDDCB\uDDCD-\uDDFF\uDE70-\uDE74\uDE78-\uDE7A\uDE80-\uDE86\uDE90-\uDEA8\uDEB0-\uDEB6\uDEC0-\uDEC2\uDED0-\uDED6])/; // Any Unicode emoji character
+
+var EMOJI_VARIATION = /\uFE0F/; // Variation selector, follows heart and others
+
+var DIGIT = /\d/;
+var SPACE = /\s/;
+/**
+ * Initialize the scanner character-based state machine for the given start state
+ * @return {State} scanner starting state
+ */
+
+function init$2() {
+  var customProtocols = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  // Frequently used states
+  var S_START = makeState();
+  var S_NUM = makeAcceptingState(NUM);
+  var S_DOMAIN = makeAcceptingState(DOMAIN);
+  var S_DOMAIN_HYPHEN = makeState(); // domain followed by 1 or more hyphen characters
+
+  var S_WS = makeAcceptingState(WS);
+  var DOMAIN_REGEX_TRANSITIONS = [[DIGIT, S_DOMAIN], [LETTER, S_DOMAIN], [EMOJI, S_DOMAIN], [EMOJI_VARIATION, S_DOMAIN]]; // Create a state which emits a domain token
+
+  var makeDomainState = function makeDomainState() {
+    var state = makeAcceptingState(DOMAIN);
+    state.j = {
+      '-': S_DOMAIN_HYPHEN
+    };
+    state.jr = [].concat(DOMAIN_REGEX_TRANSITIONS);
+    return state;
+  }; // Create a state which does not emit a domain state but the usual alphanumeric
+  // transitions are domains
+
+
+  var makeNearDomainState = function makeNearDomainState(token) {
+    var state = makeDomainState();
+    state.t = token;
+    return state;
+  }; // States for special URL symbols that accept immediately after start
+
+
+  makeBatchT(S_START, [["'", makeAcceptingState(APOSTROPHE)], ['{', makeAcceptingState(OPENBRACE)], ['[', makeAcceptingState(OPENBRACKET)], ['<', makeAcceptingState(OPENANGLEBRACKET)], ['(', makeAcceptingState(OPENPAREN)], ['}', makeAcceptingState(CLOSEBRACE)], [']', makeAcceptingState(CLOSEBRACKET)], ['>', makeAcceptingState(CLOSEANGLEBRACKET)], [')', makeAcceptingState(CLOSEPAREN)], ['&', makeAcceptingState(AMPERSAND)], ['*', makeAcceptingState(ASTERISK)], ['@', makeAcceptingState(AT)], ['`', makeAcceptingState(BACKTICK)], ['^', makeAcceptingState(CARET)], [':', makeAcceptingState(COLON)], [',', makeAcceptingState(COMMA)], ['$', makeAcceptingState(DOLLAR)], ['.', makeAcceptingState(DOT)], ['=', makeAcceptingState(EQUALS)], ['!', makeAcceptingState(EXCLAMATION)], ['-', makeAcceptingState(HYPHEN)], ['%', makeAcceptingState(PERCENT)], ['|', makeAcceptingState(PIPE)], ['+', makeAcceptingState(PLUS)], ['#', makeAcceptingState(POUND)], ['?', makeAcceptingState(QUERY)], ['"', makeAcceptingState(QUOTE)], ['/', makeAcceptingState(SLASH)], [';', makeAcceptingState(SEMI)], ['~', makeAcceptingState(TILDE)], ['_', makeAcceptingState(UNDERSCORE)], ['\\', makeAcceptingState(BACKSLASH)]]); // Whitespace jumps
+  // Tokens of only non-newline whitespace are arbitrarily long
+
+  makeT(S_START, '\n', makeAcceptingState(NL));
+  makeRegexT(S_START, SPACE, S_WS); // If any whitespace except newline, more whitespace!
+
+  makeT(S_WS, '\n', makeState()); // non-accepting state
+
+  makeRegexT(S_WS, SPACE, S_WS); // Generates states for top-level domains
+  // Note that this is most accurate when tlds are in alphabetical order
+
+  for (var i = 0; i < tlds.length; i++) {
+    makeChainT(S_START, tlds[i], makeNearDomainState(TLD), makeDomainState);
+  } // Collect the states generated by different protocls
+
+
+  var S_PROTOCOL_FILE = makeDomainState();
+  var S_PROTOCOL_FTP = makeDomainState();
+  var S_PROTOCOL_HTTP = makeDomainState();
+  var S_MAILTO = makeDomainState();
+  makeChainT(S_START, 'file', S_PROTOCOL_FILE, makeDomainState);
+  makeChainT(S_START, 'ftp', S_PROTOCOL_FTP, makeDomainState);
+  makeChainT(S_START, 'http', S_PROTOCOL_HTTP, makeDomainState);
+  makeChainT(S_START, 'mailto', S_MAILTO, makeDomainState); // Protocol states
+
+  var S_PROTOCOL_SECURE = makeDomainState();
+  var S_FULL_PROTOCOL = makeAcceptingState(PROTOCOL); // Full protocol ends with COLON
+
+  var S_FULL_MAILTO = makeAcceptingState(MAILTO); // Mailto ends with COLON
+  // Secure protocols (end with 's')
+
+  makeT(S_PROTOCOL_FTP, 's', S_PROTOCOL_SECURE);
+  makeT(S_PROTOCOL_FTP, ':', S_FULL_PROTOCOL);
+  makeT(S_PROTOCOL_HTTP, 's', S_PROTOCOL_SECURE);
+  makeT(S_PROTOCOL_HTTP, ':', S_FULL_PROTOCOL); // Become protocol tokens after a COLON
+
+  makeT(S_PROTOCOL_FILE, ':', S_FULL_PROTOCOL);
+  makeT(S_PROTOCOL_SECURE, ':', S_FULL_PROTOCOL);
+  makeT(S_MAILTO, ':', S_FULL_MAILTO); // Register custom protocols
+
+  var S_CUSTOM_PROTOCOL = makeDomainState();
+
+  for (var _i = 0; _i < customProtocols.length; _i++) {
+    makeChainT(S_START, customProtocols[_i], S_CUSTOM_PROTOCOL, makeDomainState);
+  }
+
+  makeT(S_CUSTOM_PROTOCOL, ':', S_FULL_PROTOCOL); // Localhost
+
+  makeChainT(S_START, 'localhost', makeNearDomainState(LOCALHOST), makeDomainState); // Everything else
+  // DOMAINs make more DOMAINs
+  // Number and character transitions
+
+  makeRegexT(S_START, DIGIT, S_NUM);
+  makeRegexT(S_START, LETTER, S_DOMAIN);
+  makeRegexT(S_START, EMOJI, S_DOMAIN);
+  makeRegexT(S_START, EMOJI_VARIATION, S_DOMAIN);
+  makeRegexT(S_NUM, DIGIT, S_NUM);
+  makeRegexT(S_NUM, LETTER, S_DOMAIN); // number becomes DOMAIN
+
+  makeRegexT(S_NUM, EMOJI, S_DOMAIN); // number becomes DOMAIN
+
+  makeRegexT(S_NUM, EMOJI_VARIATION, S_DOMAIN); // number becomes DOMAIN
+
+  makeT(S_NUM, '-', S_DOMAIN_HYPHEN); // Default domain transitions
+
+  makeT(S_DOMAIN, '-', S_DOMAIN_HYPHEN);
+  makeT(S_DOMAIN_HYPHEN, '-', S_DOMAIN_HYPHEN);
+  makeRegexT(S_DOMAIN, DIGIT, S_DOMAIN);
+  makeRegexT(S_DOMAIN, LETTER, S_DOMAIN);
+  makeRegexT(S_DOMAIN, EMOJI, S_DOMAIN);
+  makeRegexT(S_DOMAIN, EMOJI_VARIATION, S_DOMAIN);
+  makeRegexT(S_DOMAIN_HYPHEN, DIGIT, S_DOMAIN);
+  makeRegexT(S_DOMAIN_HYPHEN, LETTER, S_DOMAIN);
+  makeRegexT(S_DOMAIN_HYPHEN, EMOJI, S_DOMAIN);
+  makeRegexT(S_DOMAIN_HYPHEN, EMOJI_VARIATION, S_DOMAIN); // Set default transition for start state (some symbol)
+
+  S_START.jd = makeAcceptingState(SYM);
+  return S_START;
+}
+/**
+	Given a string, returns an array of TOKEN instances representing the
+	composition of that string.
+
+	@method run
+	@param {State} start scanner starting state
+	@param {string} str input string to scan
+	@return {{t: string, v: string, s: number, l: number}[]} list of tokens, each with a type and value
+*/
+
+function run$1(start, str) {
+  // State machine is not case sensitive, so input is tokenized in lowercased
+  // form (still returns the regular case though) Uses selective `toLowerCase`
+  // is used because lowercasing the entire string causes the length and
+  // character position to vary in some non-English strings with V8-based
+  // runtimes.
+  var iterable = stringToArray(str.replace(/[A-Z]/g, function (c) {
+    return c.toLowerCase();
+  }));
+  var charCount = iterable.length; // <= len if there are emojis, etc
+
+  var tokens = []; // return value
+  // cursor through the string itself, accounting for characters that have
+  // width with length 2 such as emojis
+
+  var cursor = 0; // Cursor through the array-representation of the string
+
+  var charCursor = 0; // Tokenize the string
+
+  while (charCursor < charCount) {
+    var state = start;
+    var nextState = null;
+    var tokenLength = 0;
+    var latestAccepting = null;
+    var sinceAccepts = -1;
+    var charsSinceAccepts = -1;
+
+    while (charCursor < charCount && (nextState = takeT(state, iterable[charCursor]))) {
+      state = nextState; // Keep track of the latest accepting state
+
+      if (state.accepts()) {
+        sinceAccepts = 0;
+        charsSinceAccepts = 0;
+        latestAccepting = state;
+      } else if (sinceAccepts >= 0) {
+        sinceAccepts += iterable[charCursor].length;
+        charsSinceAccepts++;
+      }
+
+      tokenLength += iterable[charCursor].length;
+      cursor += iterable[charCursor].length;
+      charCursor++;
+    } // Roll back to the latest accepting state
+
+
+    cursor -= sinceAccepts;
+    charCursor -= charsSinceAccepts;
+    tokenLength -= sinceAccepts; // No more jumps, just make a new token from the last accepting one
+    // TODO: If possible, don't output v, instead output range where values ocur
+
+    tokens.push({
+      t: latestAccepting.t,
+      // token type/name
+      v: str.substr(cursor - tokenLength, tokenLength),
+      // string value
+      s: cursor - tokenLength,
+      // start index
+      e: cursor // end index (excluding)
+
+    });
+  }
+
+  return tokens;
+}
+/**
+ * Convert a String to an Array of characters, taking into account that some
+ * characters like emojis take up two string indexes.
+ *
+ * Adapted from core-js (MIT license)
+ * https://github.com/zloirock/core-js/blob/2d69cf5f99ab3ea3463c395df81e5a15b68f49d9/packages/core-js/internals/string-multibyte.js
+ *
+ * @function stringToArray
+ * @param {string} str
+ * @returns {string[]}
+ */
+
+function stringToArray(str) {
+  var result = [];
+  var len = str.length;
+  var index = 0;
+
+  while (index < len) {
+    var first = str.charCodeAt(index);
+    var second = void 0;
+    var char = first < 0xd800 || first > 0xdbff || index + 1 === len || (second = str.charCodeAt(index + 1)) < 0xdc00 || second > 0xdfff ? str[index] // single character
+    : str.slice(index, index + 2); // two-index characters
+
+    result.push(char);
+    index += char.length;
+  }
+
+  return result;
+}
+
+function _typeof$1(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof$1 = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof$1 = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof$1(obj);
+}
+
+/**
+ * @property {string} defaultProtocol
+ * @property {{[string]: (event) => void}]} [events]
+ */
+var defaults = {
+  defaultProtocol: 'http',
+  events: null,
+  format: noop,
+  formatHref: noop,
+  nl2br: false,
+  tagName: 'a',
+  target: null,
+  rel: null,
+  validate: true,
+  truncate: 0,
+  className: null,
+  attributes: null,
+  ignoreTags: []
+};
+/**
+ * @class Options
+ * @param {Object} [opts] Set option properties besides the defaults
+ */
+
+function Options(opts) {
+  opts = opts || {};
+  this.defaultProtocol = 'defaultProtocol' in opts ? opts.defaultProtocol : defaults.defaultProtocol;
+  this.events = 'events' in opts ? opts.events : defaults.events;
+  this.format = 'format' in opts ? opts.format : defaults.format;
+  this.formatHref = 'formatHref' in opts ? opts.formatHref : defaults.formatHref;
+  this.nl2br = 'nl2br' in opts ? opts.nl2br : defaults.nl2br;
+  this.tagName = 'tagName' in opts ? opts.tagName : defaults.tagName;
+  this.target = 'target' in opts ? opts.target : defaults.target;
+  this.rel = 'rel' in opts ? opts.rel : defaults.rel;
+  this.validate = 'validate' in opts ? opts.validate : defaults.validate;
+  this.truncate = 'truncate' in opts ? opts.truncate : defaults.truncate;
+  this.className = 'className' in opts ? opts.className : defaults.className;
+  this.attributes = opts.attributes || defaults.attributes;
+  this.ignoreTags = []; // Make all tags names upper case
+
+  var ignoredTags = 'ignoreTags' in opts ? opts.ignoreTags : defaults.ignoreTags;
+
+  for (var i = 0; i < ignoredTags.length; i++) {
+    this.ignoreTags.push(ignoredTags[i].toUpperCase());
+  }
+}
+Options.prototype = {
+  /**
+   * Given the token, return all options for how it should be displayed
+   */
+  resolve: function resolve(token) {
+    var href = token.toHref(this.defaultProtocol);
+    return {
+      formatted: this.get('format', token.toString(), token),
+      formattedHref: this.get('formatHref', href, token),
+      tagName: this.get('tagName', href, token),
+      className: this.get('className', href, token),
+      target: this.get('target', href, token),
+      rel: this.get('rel', href, token),
+      events: this.getObject('events', href, token),
+      attributes: this.getObject('attributes', href, token),
+      truncate: this.get('truncate', href, token)
+    };
+  },
+
+  /**
+   * Returns true or false based on whether a token should be displayed as a
+   * link based on the user options. By default,
+   */
+  check: function check(token) {
+    return this.get('validate', token.toString(), token);
+  },
+  // Private methods
+
+  /**
+   * Resolve an option's value based on the value of the option and the given
+   * params.
+   * @param {string} key Name of option to use
+   * @param operator will be passed to the target option if it's method
+   * @param {MultiToken} token The token from linkify.tokenize
+   */
+  get: function get(key, operator, token) {
+    var option = this[key];
+
+    if (!option) {
+      return option;
+    }
+
+    var optionValue;
+
+    switch (_typeof$1(option)) {
+      case 'function':
+        return option(operator, token.t);
+
+      case 'object':
+        optionValue = token.t in option ? option[token.t] : defaults[key];
+        return typeof optionValue === 'function' ? optionValue(operator, token.t) : optionValue;
+    }
+
+    return option;
+  },
+  getObject: function getObject(key, operator, token) {
+    var option = this[key];
+    return typeof option === 'function' ? option(operator, token.t) : option;
+  }
+};
+
+function noop(val) {
+  return val;
+}
+
+var options = /*#__PURE__*/Object.freeze({
+	__proto__: null,
+	defaults: defaults,
+	Options: Options
+});
+
+/******************************************************************************
+	Multi-Tokens
+	Tokens composed of arrays of TextTokens
+******************************************************************************/
+
+function inherits(parent, child) {
+  var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var extended = Object.create(parent.prototype);
+
+  for (var p in props) {
+    extended[p] = props[p];
+  }
+
+  extended.constructor = child;
+  child.prototype = extended;
+  return child;
+}
+/**
+	Abstract class used for manufacturing tokens of text tokens. That is rather
+	than the value for a token being a small string of text, it's value an array
+	of text tokens.
+
+	Used for grouping together URLs, emails, hashtags, and other potential
+	creations.
+
+	@class MultiToken
+	@param {string} value
+	@param {{t: string, v: string, s: number, e: number}[]} tokens
+	@abstract
+*/
+
+
+function MultiToken() {}
+MultiToken.prototype = {
+  /**
+  	String representing the type for this token
+  	@property t
+  	@default 'token'
+  */
+  t: 'token',
+
+  /**
+  	Is this multitoken a link?
+  	@property isLink
+  	@default false
+  */
+  isLink: false,
+
+  /**
+  	Return the string this token represents.
+  	@method toString
+  	@return {string}
+  */
+  toString: function toString() {
+    return this.v;
+  },
+
+  /**
+  	What should the value for this token be in the `href` HTML attribute?
+  	Returns the `.toString` value by default.
+  		@method toHref
+  	@return {string}
+  */
+  toHref: function toHref() {
+    return this.toString();
+  },
+
+  /**
+   * The start index of this token in the original input string
+   * @returns {number}
+   */
+  startIndex: function startIndex() {
+    return this.tk[0].s;
+  },
+
+  /**
+   * The end index of this token in the original input string (up to this
+   * index but not including it)
+   * @returns {number}
+   */
+  endIndex: function endIndex() {
+    return this.tk[this.tk.length - 1].e;
+  },
+
+  /**
+  	Returns a hash of relevant values for this token, which includes keys
+  	* type - Kind of token ('url', 'email', etc.)
+  	* value - Original text
+  	* href - The value that should be added to the anchor tag's href
+  		attribute
+  		@method toObject
+  	@param {string} [protocol] `'http'` by default
+  */
+  toObject: function toObject() {
+    var protocol = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaults.defaultProtocol;
+    return {
+      type: this.t,
+      value: this.v,
+      isLink: this.isLink,
+      href: this.toHref(protocol),
+      start: this.startIndex(),
+      end: this.endIndex()
+    };
+  }
+}; // Base token
+/**
+ * Create a new token that can be emitted by the parser state machine
+ * @param {string} type readable type of the token
+ * @param {object} props properties to assign or override, including isLink = true or false
+ * @returns {(value: string, tokens: {t: string, v: string, s: number, e: number}) => MultiToken} new token class
+ */
+
+function createTokenClass(type, props) {
+  function Token(value, tokens) {
+    this.t = type;
+    this.v = value;
+    this.tk = tokens;
+  }
+
+  inherits(MultiToken, Token, props);
+  return Token;
+}
+/**
+	Represents an arbitrarily mailto email address with the prefix included
+	@class MailtoEmail
+	@extends MultiToken
+*/
+
+var MailtoEmail = createTokenClass('email', {
+  isLink: true
+});
+/**
+	Represents a list of tokens making up a valid email address
+	@class Email
+	@extends MultiToken
+*/
+
+var Email = createTokenClass('email', {
+  isLink: true,
+  toHref: function toHref() {
+    return 'mailto:' + this.toString();
+  }
+});
+/**
+	Represents some plain text
+	@class Text
+	@extends MultiToken
+*/
+
+var Text = createTokenClass('text');
+/**
+	Multi-linebreak token - represents a line break
+	@class Nl
+	@extends MultiToken
+*/
+
+var Nl = createTokenClass('nl');
+/**
+	Represents a list of text tokens making up a valid URL
+	@class Url
+	@extends MultiToken
+*/
+
+var Url = createTokenClass('url', {
+  isLink: true,
+
+  /**
+  	Lowercases relevant parts of the domain and adds the protocol if
+  	required. Note that this will not escape unsafe HTML characters in the
+  	URL.
+  		@method href
+  	@param {string} protocol
+  	@return {string}
+  */
+  toHref: function toHref() {
+    var protocol = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaults.defaultProtocol;
+    var tokens = this.tk;
+    var hasProtocol = false;
+    var hasSlashSlash = false;
+    var result = [];
+    var i = 0; // Make the first part of the domain lowercase
+    // Lowercase protocol
+
+    while (tokens[i].t === PROTOCOL) {
+      hasProtocol = true;
+      result.push(tokens[i].v);
+      i++;
+    } // Skip slash-slash
+
+
+    while (tokens[i].t === SLASH) {
+      hasSlashSlash = true;
+      result.push(tokens[i].v);
+      i++;
+    } // Continue pushing characters
+
+
+    for (; i < tokens.length; i++) {
+      result.push(tokens[i].v);
+    }
+
+    result = result.join('');
+
+    if (!(hasProtocol || hasSlashSlash)) {
+      result = "".concat(protocol, "://").concat(result);
+    }
+
+    return result;
+  },
+  hasProtocol: function hasProtocol() {
+    return this.tk[0].t === PROTOCOL;
+  }
+});
+
+var multi = /*#__PURE__*/Object.freeze({
+	__proto__: null,
+	MultiToken: MultiToken,
+	Base: MultiToken,
+	createTokenClass: createTokenClass,
+	MailtoEmail: MailtoEmail,
+	Email: Email,
+	Text: Text,
+	Nl: Nl,
+	Url: Url
+});
+
+/**
+	Not exactly parser, more like the second-stage scanner (although we can
+	theoretically hotswap the code here with a real parser in the future... but
+	for a little URL-finding utility abstract syntax trees may be a little
+	overkill).
+
+	URL format: http://en.wikipedia.org/wiki/URI_scheme
+	Email format: http://en.wikipedia.org/wiki/Email_address (links to RFC in
+	reference)
+
+	@module linkify
+	@submodule parser
+	@main run
+*/
+/**
+ * Generate the parser multi token-based state machine
+ * @returns {State} the starting state
+ */
+
+function init$1() {
+  // The universal starting state.
+  var S_START = makeState(); // Intermediate states for URLs. Note that domains that begin with a protocol
+  // are treated slighly differently from those that don't.
+
+  var S_PROTOCOL = makeState(); // e.g., 'http:'
+
+  var S_MAILTO = makeState(); // 'mailto:'
+
+  var S_PROTOCOL_SLASH = makeState(); // e.g., 'http:/''
+
+  var S_PROTOCOL_SLASH_SLASH = makeState(); // e.g.,'http://'
+
+  var S_DOMAIN = makeState(); // parsed string ends with a potential domain name (A)
+
+  var S_DOMAIN_DOT = makeState(); // (A) domain followed by DOT
+
+  var S_TLD = makeAcceptingState(Url); // (A) Simplest possible URL with no query string
+
+  var S_TLD_COLON = makeState(); // (A) URL followed by colon (potential port number here)
+
+  var S_TLD_PORT = makeAcceptingState(Url); // TLD followed by a port number
+
+  var S_URL = makeAcceptingState(Url); // Long URL with optional port and maybe query string
+
+  var S_URL_NON_ACCEPTING = makeState(); // URL followed by some symbols (will not be part of the final URL)
+
+  var S_URL_OPENBRACE = makeState(); // URL followed by {
+
+  var S_URL_OPENBRACKET = makeState(); // URL followed by [
+
+  var S_URL_OPENANGLEBRACKET = makeState(); // URL followed by <
+
+  var S_URL_OPENPAREN = makeState(); // URL followed by (
+
+  var S_URL_OPENBRACE_Q = makeAcceptingState(Url); // URL followed by { and some symbols that the URL can end it
+
+  var S_URL_OPENBRACKET_Q = makeAcceptingState(Url); // URL followed by [ and some symbols that the URL can end it
+
+  var S_URL_OPENANGLEBRACKET_Q = makeAcceptingState(Url); // URL followed by < and some symbols that the URL can end it
+
+  var S_URL_OPENPAREN_Q = makeAcceptingState(Url); // URL followed by ( and some symbols that the URL can end it
+
+  var S_URL_OPENBRACE_SYMS = makeState(); // S_URL_OPENBRACE_Q followed by some symbols it cannot end it
+
+  var S_URL_OPENBRACKET_SYMS = makeState(); // S_URL_OPENBRACKET_Q followed by some symbols it cannot end it
+
+  var S_URL_OPENANGLEBRACKET_SYMS = makeState(); // S_URL_OPENANGLEBRACKET_Q followed by some symbols it cannot end it
+
+  var S_URL_OPENPAREN_SYMS = makeState(); // S_URL_OPENPAREN_Q followed by some symbols it cannot end it
+
+  var S_EMAIL_DOMAIN = makeState(); // parsed string starts with local email info + @ with a potential domain name (C)
+
+  var S_EMAIL_DOMAIN_DOT = makeState(); // (C) domain followed by DOT
+
+  var S_EMAIL = makeAcceptingState(Email); // (C) Possible email address (could have more tlds)
+
+  var S_EMAIL_COLON = makeState(); // (C) URL followed by colon (potential port number here)
+
+  var S_EMAIL_PORT = makeAcceptingState(Email); // (C) Email address with a port
+
+  var S_MAILTO_EMAIL = makeAcceptingState(MailtoEmail); // Email that begins with the mailto prefix (D)
+
+  var S_MAILTO_EMAIL_NON_ACCEPTING = makeState(); // (D) Followed by some non-query string chars
+
+  var S_LOCALPART = makeState(); // Local part of the email address
+
+  var S_LOCALPART_AT = makeState(); // Local part of the email address plus @
+
+  var S_LOCALPART_DOT = makeState(); // Local part of the email address plus '.' (localpart cannot end in .)
+
+  var S_NL = makeAcceptingState(Nl); // single new line
+  // Make path from start to protocol (with '//')
+
+  makeT(S_START, NL, S_NL);
+  makeT(S_START, PROTOCOL, S_PROTOCOL);
+  makeT(S_START, MAILTO, S_MAILTO);
+  makeT(S_PROTOCOL, SLASH, S_PROTOCOL_SLASH);
+  makeT(S_PROTOCOL_SLASH, SLASH, S_PROTOCOL_SLASH_SLASH); // The very first potential domain name
+
+  makeT(S_START, TLD, S_DOMAIN);
+  makeT(S_START, DOMAIN, S_DOMAIN);
+  makeT(S_START, LOCALHOST, S_TLD);
+  makeT(S_START, NUM, S_DOMAIN); // Force URL for protocol followed by anything sane
+
+  makeT(S_PROTOCOL_SLASH_SLASH, TLD, S_URL);
+  makeT(S_PROTOCOL_SLASH_SLASH, DOMAIN, S_URL);
+  makeT(S_PROTOCOL_SLASH_SLASH, NUM, S_URL);
+  makeT(S_PROTOCOL_SLASH_SLASH, LOCALHOST, S_URL); // Account for dots and hyphens
+  // hyphens are usually parts of domain names
+
+  makeT(S_DOMAIN, DOT, S_DOMAIN_DOT);
+  makeT(S_EMAIL_DOMAIN, DOT, S_EMAIL_DOMAIN_DOT); // Hyphen can jump back to a domain name
+  // After the first domain and a dot, we can find either a URL or another domain
+
+  makeT(S_DOMAIN_DOT, TLD, S_TLD);
+  makeT(S_DOMAIN_DOT, DOMAIN, S_DOMAIN);
+  makeT(S_DOMAIN_DOT, NUM, S_DOMAIN);
+  makeT(S_DOMAIN_DOT, LOCALHOST, S_DOMAIN);
+  makeT(S_EMAIL_DOMAIN_DOT, TLD, S_EMAIL);
+  makeT(S_EMAIL_DOMAIN_DOT, DOMAIN, S_EMAIL_DOMAIN);
+  makeT(S_EMAIL_DOMAIN_DOT, NUM, S_EMAIL_DOMAIN);
+  makeT(S_EMAIL_DOMAIN_DOT, LOCALHOST, S_EMAIL_DOMAIN); // S_TLD accepts! But the URL could be longer, try to find a match greedily
+  // The `run` function should be able to "rollback" to the accepting state
+
+  makeT(S_TLD, DOT, S_DOMAIN_DOT);
+  makeT(S_EMAIL, DOT, S_EMAIL_DOMAIN_DOT); // Become real URLs after `SLASH` or `COLON NUM SLASH`
+  // Here PSS and non-PSS converge
+
+  makeT(S_TLD, COLON, S_TLD_COLON);
+  makeT(S_TLD, SLASH, S_URL);
+  makeT(S_TLD_COLON, NUM, S_TLD_PORT);
+  makeT(S_TLD_PORT, SLASH, S_URL);
+  makeT(S_EMAIL, COLON, S_EMAIL_COLON);
+  makeT(S_EMAIL_COLON, NUM, S_EMAIL_PORT); // Types of characters the URL can definitely end in
+
+  var qsAccepting = [AMPERSAND, ASTERISK, AT, BACKSLASH, BACKTICK, CARET, DOLLAR, DOMAIN, EQUALS, HYPHEN, LOCALHOST, NUM, PERCENT, PIPE, PLUS, POUND, PROTOCOL, SLASH, SYM, TILDE, TLD, UNDERSCORE]; // Types of tokens that can follow a URL and be part of the query string
+  // but cannot be the very last characters
+  // Characters that cannot appear in the URL at all should be excluded
+
+  var qsNonAccepting = [APOSTROPHE, CLOSEANGLEBRACKET, CLOSEBRACE, CLOSEBRACKET, CLOSEPAREN, COLON, COMMA, DOT, EXCLAMATION, OPENANGLEBRACKET, OPENBRACE, OPENBRACKET, OPENPAREN, QUERY, QUOTE, SEMI]; // These states are responsible primarily for determining whether or not to
+  // include the final round bracket.
+  // URL, followed by an opening bracket
+
+  makeT(S_URL, OPENBRACE, S_URL_OPENBRACE);
+  makeT(S_URL, OPENBRACKET, S_URL_OPENBRACKET);
+  makeT(S_URL, OPENANGLEBRACKET, S_URL_OPENANGLEBRACKET);
+  makeT(S_URL, OPENPAREN, S_URL_OPENPAREN); // URL with extra symbols at the end, followed by an opening bracket
+
+  makeT(S_URL_NON_ACCEPTING, OPENBRACE, S_URL_OPENBRACE);
+  makeT(S_URL_NON_ACCEPTING, OPENBRACKET, S_URL_OPENBRACKET);
+  makeT(S_URL_NON_ACCEPTING, OPENANGLEBRACKET, S_URL_OPENANGLEBRACKET);
+  makeT(S_URL_NON_ACCEPTING, OPENPAREN, S_URL_OPENPAREN); // Closing bracket component. This character WILL be included in the URL
+
+  makeT(S_URL_OPENBRACE, CLOSEBRACE, S_URL);
+  makeT(S_URL_OPENBRACKET, CLOSEBRACKET, S_URL);
+  makeT(S_URL_OPENANGLEBRACKET, CLOSEANGLEBRACKET, S_URL);
+  makeT(S_URL_OPENPAREN, CLOSEPAREN, S_URL);
+  makeT(S_URL_OPENBRACE_Q, CLOSEBRACE, S_URL);
+  makeT(S_URL_OPENBRACKET_Q, CLOSEBRACKET, S_URL);
+  makeT(S_URL_OPENANGLEBRACKET_Q, CLOSEANGLEBRACKET, S_URL);
+  makeT(S_URL_OPENPAREN_Q, CLOSEPAREN, S_URL);
+  makeT(S_URL_OPENBRACE_SYMS, CLOSEBRACE, S_URL);
+  makeT(S_URL_OPENBRACKET_SYMS, CLOSEBRACKET, S_URL);
+  makeT(S_URL_OPENANGLEBRACKET_SYMS, CLOSEANGLEBRACKET, S_URL);
+  makeT(S_URL_OPENPAREN_SYMS, CLOSEPAREN, S_URL); // URL that beings with an opening bracket, followed by a symbols.
+  // Note that the final state can still be `S_URL_OPENBRACE_Q` (if the URL only
+  // has a single opening bracket for some reason).
+
+  makeMultiT(S_URL_OPENBRACE, qsAccepting, S_URL_OPENBRACE_Q);
+  makeMultiT(S_URL_OPENBRACKET, qsAccepting, S_URL_OPENBRACKET_Q);
+  makeMultiT(S_URL_OPENANGLEBRACKET, qsAccepting, S_URL_OPENANGLEBRACKET_Q);
+  makeMultiT(S_URL_OPENPAREN, qsAccepting, S_URL_OPENPAREN_Q);
+  makeMultiT(S_URL_OPENBRACE, qsNonAccepting, S_URL_OPENBRACE_SYMS);
+  makeMultiT(S_URL_OPENBRACKET, qsNonAccepting, S_URL_OPENBRACKET_SYMS);
+  makeMultiT(S_URL_OPENANGLEBRACKET, qsNonAccepting, S_URL_OPENANGLEBRACKET_SYMS);
+  makeMultiT(S_URL_OPENPAREN, qsNonAccepting, S_URL_OPENPAREN_SYMS); // URL that begins with an opening bracket, followed by some symbols
+
+  makeMultiT(S_URL_OPENBRACE_Q, qsAccepting, S_URL_OPENBRACE_Q);
+  makeMultiT(S_URL_OPENBRACKET_Q, qsAccepting, S_URL_OPENBRACKET_Q);
+  makeMultiT(S_URL_OPENANGLEBRACKET_Q, qsAccepting, S_URL_OPENANGLEBRACKET_Q);
+  makeMultiT(S_URL_OPENPAREN_Q, qsAccepting, S_URL_OPENPAREN_Q);
+  makeMultiT(S_URL_OPENBRACE_Q, qsNonAccepting, S_URL_OPENBRACE_Q);
+  makeMultiT(S_URL_OPENBRACKET_Q, qsNonAccepting, S_URL_OPENBRACKET_Q);
+  makeMultiT(S_URL_OPENANGLEBRACKET_Q, qsNonAccepting, S_URL_OPENANGLEBRACKET_Q);
+  makeMultiT(S_URL_OPENPAREN_Q, qsNonAccepting, S_URL_OPENPAREN_Q);
+  makeMultiT(S_URL_OPENBRACE_SYMS, qsAccepting, S_URL_OPENBRACE_Q);
+  makeMultiT(S_URL_OPENBRACKET_SYMS, qsAccepting, S_URL_OPENBRACKET_Q);
+  makeMultiT(S_URL_OPENANGLEBRACKET_SYMS, qsAccepting, S_URL_OPENANGLEBRACKET_Q);
+  makeMultiT(S_URL_OPENPAREN_SYMS, qsAccepting, S_URL_OPENPAREN_Q);
+  makeMultiT(S_URL_OPENBRACE_SYMS, qsNonAccepting, S_URL_OPENBRACE_SYMS);
+  makeMultiT(S_URL_OPENBRACKET_SYMS, qsNonAccepting, S_URL_OPENBRACKET_SYMS);
+  makeMultiT(S_URL_OPENANGLEBRACKET_SYMS, qsNonAccepting, S_URL_OPENANGLEBRACKET_SYMS);
+  makeMultiT(S_URL_OPENPAREN_SYMS, qsNonAccepting, S_URL_OPENPAREN_SYMS); // Account for the query string
+
+  makeMultiT(S_URL, qsAccepting, S_URL);
+  makeMultiT(S_URL_NON_ACCEPTING, qsAccepting, S_URL);
+  makeMultiT(S_URL, qsNonAccepting, S_URL_NON_ACCEPTING);
+  makeMultiT(S_URL_NON_ACCEPTING, qsNonAccepting, S_URL_NON_ACCEPTING); // Email address-specific state definitions
+  // Note: We are not allowing '/' in email addresses since this would interfere
+  // with real URLs
+  // For addresses with the mailto prefix
+  // 'mailto:' followed by anything sane is a valid email
+
+  makeT(S_MAILTO, TLD, S_MAILTO_EMAIL);
+  makeT(S_MAILTO, DOMAIN, S_MAILTO_EMAIL);
+  makeT(S_MAILTO, NUM, S_MAILTO_EMAIL);
+  makeT(S_MAILTO, LOCALHOST, S_MAILTO_EMAIL); // Greedily get more potential valid email values
+
+  makeMultiT(S_MAILTO_EMAIL, qsAccepting, S_MAILTO_EMAIL);
+  makeMultiT(S_MAILTO_EMAIL, qsNonAccepting, S_MAILTO_EMAIL_NON_ACCEPTING);
+  makeMultiT(S_MAILTO_EMAIL_NON_ACCEPTING, qsAccepting, S_MAILTO_EMAIL);
+  makeMultiT(S_MAILTO_EMAIL_NON_ACCEPTING, qsNonAccepting, S_MAILTO_EMAIL_NON_ACCEPTING); // For addresses without the mailto prefix
+  // Tokens allowed in the localpart of the email
+
+  var localpartAccepting = [AMPERSAND, APOSTROPHE, ASTERISK, BACKSLASH, BACKTICK, CARET, CLOSEBRACE, DOLLAR, DOMAIN, EQUALS, HYPHEN, NUM, OPENBRACE, PERCENT, PIPE, PLUS, POUND, QUERY, SLASH, SYM, TILDE, TLD, UNDERSCORE]; // Some of the tokens in `localpartAccepting` are already accounted for here and
+  // will not be overwritten (don't worry)
+
+  makeMultiT(S_DOMAIN, localpartAccepting, S_LOCALPART);
+  makeT(S_DOMAIN, AT, S_LOCALPART_AT);
+  makeMultiT(S_TLD, localpartAccepting, S_LOCALPART);
+  makeT(S_TLD, AT, S_LOCALPART_AT);
+  makeMultiT(S_DOMAIN_DOT, localpartAccepting, S_LOCALPART); // Now in localpart of address
+  // TODO: IP addresses and what if the email starts with numbers?
+
+  makeMultiT(S_LOCALPART, localpartAccepting, S_LOCALPART);
+  makeT(S_LOCALPART, AT, S_LOCALPART_AT); // close to an email address now
+
+  makeT(S_LOCALPART, DOT, S_LOCALPART_DOT);
+  makeMultiT(S_LOCALPART_DOT, localpartAccepting, S_LOCALPART);
+  makeT(S_LOCALPART_AT, TLD, S_EMAIL_DOMAIN);
+  makeT(S_LOCALPART_AT, DOMAIN, S_EMAIL_DOMAIN);
+  makeT(S_LOCALPART_AT, NUM, S_EMAIL_DOMAIN);
+  makeT(S_LOCALPART_AT, LOCALHOST, S_EMAIL); // States following `@` defined above
+
+  return S_START;
+}
+/**
+ * Run the parser state machine on a list of scanned string-based tokens to
+ * create a list of multi tokens, each of which represents a URL, email address,
+ * plain text, etc.
+ *
+ * @param {State} start parser start state
+ * @param {string} input the original input used to generate the given tokens
+ * @param {{t: string, v: string, s: number, e: number}[]} tokens list of scanned tokens
+ * @returns {MultiToken[]}
+ */
+
+function run(start, input, tokens) {
+  var len = tokens.length;
+  var cursor = 0;
+  var multis = [];
+  var textTokens = [];
+
+  while (cursor < len) {
+    var state = start;
+    var secondState = null;
+    var nextState = null;
+    var multiLength = 0;
+    var latestAccepting = null;
+    var sinceAccepts = -1;
+
+    while (cursor < len && !(secondState = takeT(state, tokens[cursor].t))) {
+      // Starting tokens with nowhere to jump to.
+      // Consider these to be just plain text
+      textTokens.push(tokens[cursor++]);
+    }
+
+    while (cursor < len && (nextState = secondState || takeT(state, tokens[cursor].t))) {
+      // Get the next state
+      secondState = null;
+      state = nextState; // Keep track of the latest accepting state
+
+      if (state.accepts()) {
+        sinceAccepts = 0;
+        latestAccepting = state;
+      } else if (sinceAccepts >= 0) {
+        sinceAccepts++;
+      }
+
+      cursor++;
+      multiLength++;
+    }
+
+    if (sinceAccepts < 0) {
+      // No accepting state was found, part of a regular text token
+      // Add all the tokens we looked at to the text tokens array
+      for (var i = cursor - multiLength; i < cursor; i++) {
+        textTokens.push(tokens[i]);
+      }
+    } else {
+      // Accepting state!
+      // First close off the textTokens (if available)
+      if (textTokens.length > 0) {
+        multis.push(parserCreateMultiToken(Text, input, textTokens));
+        textTokens = [];
+      } // Roll back to the latest accepting state
+
+
+      cursor -= sinceAccepts;
+      multiLength -= sinceAccepts; // Create a new multitoken
+
+      var Multi = latestAccepting.t;
+      var subtokens = tokens.slice(cursor - multiLength, cursor);
+      multis.push(parserCreateMultiToken(Multi, input, subtokens));
+    }
+  } // Finally close off the textTokens (if available)
+
+
+  if (textTokens.length > 0) {
+    multis.push(parserCreateMultiToken(Text, input, textTokens));
+  }
+
+  return multis;
+}
+/**
+ * Utility function for instantiating a new multitoken with all the relevant
+ * fields during parsing.
+ * @param {Class<MultiToken>} Multi class to instantiate
+ * @param {string} input original input string
+ * @param {{t: string, v: string, s: number, e: number}[]} tokens consecutive tokens scanned from input string
+ * @returns {MultiToken}
+ */
+
+function parserCreateMultiToken(Multi, input, tokens) {
+  var startIdx = tokens[0].s;
+  var endIdx = tokens[tokens.length - 1].e;
+  var value = input.substr(startIdx, endIdx - startIdx);
+  return new Multi(value, tokens);
+}
+
+var warn$1 = typeof console !== 'undefined' && console && console.warn || function () {}; // Side-effect initialization state
+
+
+var INIT = {
+  scanner: null,
+  parser: null,
+  pluginQueue: [],
+  customProtocols: [],
+  initialized: false
+};
+/**
+ * De-register all plugins and reset the internal state-machine. Used for
+ * testing; not required in practice.
+ * @private
+ */
+
+function reset() {
+  INIT.scanner = null;
+  INIT.parser = null;
+  INIT.pluginQueue = [];
+  INIT.customProtocols = [];
+  INIT.initialized = false;
+}
+/**
+ * Register a linkify extension plugin
+ * @param {string} name of plugin to register
+ * @param {Function} plugin function that accepts mutable linkify state
+ */
+
+function registerPlugin(name, plugin) {
+  for (var i = 0; i < INIT.pluginQueue.length; i++) {
+    if (name === INIT.pluginQueue[i][0]) {
+      warn$1("linkifyjs: plugin \"".concat(name, "\" already registered - will be overwritten"));
+      INIT.pluginQueue[i] = [name, plugin];
+      return;
+    }
+  }
+
+  INIT.pluginQueue.push([name, plugin]);
+
+  if (INIT.initialized) {
+    warn$1("linkifyjs: already initialized - will not register plugin \"".concat(name, "\" until you manually call linkify.init(). To avoid this warning, please register all plugins before invoking linkify the first time."));
+  }
+}
+/**
+ * Detect URLs with the following additional protocol. Anything following
+ * "protocol:" will be considered a link.
+ * @param {string} protocol
+ */
+
+function registerCustomProtocol(protocol) {
+  if (INIT.initialized) {
+    warn$1("linkifyjs: already initialized - will not register custom protocol \"".concat(protocol, "\" until you manually call linkify.init(). To avoid this warning, please register all custom protocols before invoking linkify the first time."));
+  }
+
+  if (!/^[a-z-]+$/.test(protocol)) {
+    throw Error('linkifyjs: protocols containing characters other than a-z or - (hyphen) are not supported');
+  }
+
+  INIT.customProtocols.push(protocol);
+}
+/**
+ * Initialize the linkify state machine. Called automatically the first time
+ * linkify is called on a string, but may be called manually as well.
+ */
+
+function init() {
+  // Initialize state machines
+  INIT.scanner = {
+    start: init$2(INIT.customProtocols),
+    tokens: text
+  };
+  INIT.parser = {
+    start: init$1(),
+    tokens: multi
+  };
+  var utils = {
+    createTokenClass: createTokenClass
+  }; // Initialize plugins
+
+  for (var i = 0; i < INIT.pluginQueue.length; i++) {
+    INIT.pluginQueue[i][1]({
+      scanner: INIT.scanner,
+      parser: INIT.parser,
+      utils: utils
+    });
+  }
+
+  INIT.initialized = true;
+}
+/**
+	Parse a string into tokens that represent linkable and non-linkable sub-components
+	@param {string} str
+	@return {MultiToken[]} tokens
+*/
+
+function tokenize(str) {
+  if (!INIT.initialized) {
+    init();
+  }
+
+  return run(INIT.parser.start, str, run$1(INIT.scanner.start, str));
+}
+/**
+	Find a list of linkable items in the given string.
+	@param {string} str string to find links in
+	@param {string} [type] (optional) only find links of a specific type, e.g.,
+	'url' or 'email'
+*/
+
+function find(str) {
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var tokens = tokenize(str);
+  var filtered = [];
+
+  for (var i = 0; i < tokens.length; i++) {
+    var token = tokens[i];
+
+    if (token.isLink && (!type || token.t === type)) {
+      filtered.push(token.toObject());
+    }
+  }
+
+  return filtered;
+}
+/**
+ * Is the given string valid linkable text of some sort. Note that this does not
+ * trim the text for you.
+ *
+ * Optionally pass in a second `type` param, which is the type of link to test
+ * for.
+ *
+ * For example,
+ *
+ *     linkify.test(str, 'email');
+ *
+ * Returns `true` if str is a valid email.
+ * @param {string} str string to test for links
+ * @param {string} [type] optional specific link type to look for
+ * @returns boolean true/false
+ */
+
+function test(str) {
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var tokens = tokenize(str);
+  return tokens.length === 1 && tokens[0].isLink && (!type || tokens[0].t === type);
+}
+
+var Options_1 = Options;
+var find_1 = find;
+var init_1 = init;
+var options_1 = options;
+var registerCustomProtocol_1 = registerCustomProtocol;
+var registerPlugin_1 = registerPlugin;
+var reset_1 = reset;
+var test_1 = test;
+var tokenize_1 = tokenize;
+
+var linkify = /*#__PURE__*/Object.defineProperty({
+	Options: Options_1,
+	find: find_1,
+	init: init_1,
+	options: options_1,
+	registerCustomProtocol: registerCustomProtocol_1,
+	registerPlugin: registerPlugin_1,
+	reset: reset_1,
+	test: test_1,
+	tokenize: tokenize_1
+}, '__esModule', {value: true});
+
+var linkifyjs = linkify;
+
 const Link = Mark$1.create({
     name: 'link',
     priority: 1000,
     inclusive: false,
-    defaultOptions: {
-        openOnClick: true,
-        linkOnPaste: true,
-        HTMLAttributes: {
-            target: '_blank',
-            rel: 'noopener noreferrer nofollow',
-        },
+    addOptions() {
+        return {
+            openOnClick: true,
+            linkOnPaste: true,
+            HTMLAttributes: {
+                target: '_blank',
+                rel: 'noopener noreferrer nofollow',
+            },
+        };
     },
     addAttributes() {
         return {
@@ -66058,7 +69618,22 @@ const Link = Mark$1.create({
     },
     addPasteRules() {
         return [
-            markPasteRule(pasteRegex$1, this.type, match => ({ href: match[0] })),
+            markPasteRule({
+                find: text => linkifyjs.find(text)
+                    .filter(link => link.isLink)
+                    .map(link => ({
+                    text: link.value,
+                    index: link.start,
+                    data: link,
+                })),
+                type: this.type,
+                getAttributes: match => {
+                    var _a;
+                    return ({
+                        href: (_a = match.data) === null || _a === void 0 ? void 0 : _a.href,
+                    });
+                },
+            }),
         ];
     },
     addProseMirrorPlugins() {
@@ -66095,11 +69670,13 @@ const Link = Mark$1.create({
                         slice.content.forEach(node => {
                             textContent += node.textContent;
                         });
-                        if (!textContent || !textContent.match(pasteRegexExact)) {
+                        const link = linkifyjs.find(textContent)
+                            .find(item => item.isLink && item.value === textContent);
+                        if (!textContent || !link) {
                             return false;
                         }
                         this.editor.commands.setMark(this.type, {
-                            href: textContent,
+                            href: link.href,
                         });
                         return true;
                     },
@@ -66246,13 +69823,15 @@ const Superscript = Mark$1.create({
     },
 });
 
-const inputRegex = /(?:^|\s)((?:==)((?:[^~]+))(?:==))$/gm;
-const pasteRegex = /(?:^|\s)((?:==)((?:[^~]+))(?:==))/gm;
+const inputRegex = /(?:^|\s)((?:==)((?:[^~]+))(?:==))$/;
+const pasteRegex = /(?:^|\s)((?:==)((?:[^~]+))(?:==))/g;
 const Highlight = Mark$1.create({
     name: 'highlight',
-    defaultOptions: {
-        multicolor: false,
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            multicolor: false,
+            HTMLAttributes: {},
+        };
     },
     addAttributes() {
         if (!this.options.multicolor) {
@@ -66304,12 +69883,18 @@ const Highlight = Mark$1.create({
     },
     addInputRules() {
         return [
-            markInputRule(inputRegex, this.type),
+            markInputRule({
+                find: inputRegex,
+                type: this.type,
+            }),
         ];
     },
     addPasteRules() {
         return [
-            markPasteRule(pasteRegex, this.type),
+            markPasteRule({
+                find: pasteRegex,
+                type: this.type,
+            }),
         ];
     },
 });
@@ -68454,7 +72039,7 @@ Fragment.prototype.descendants = function descendants (f) {
   this.nodesBetween(0, this.size, f);
 };
 
-// :: (number, number, ?string, ?string) → string
+// :: (number, number, ?string, ?string | ?(leafNode: Node) -> string) → string
 // Extract the text between `from` and `to`. See the same method on
 // [`Node`](#model.Node.textBetween).
 Fragment.prototype.textBetween = function textBetween (from, to, blockSeparator, leafText) {
@@ -68464,7 +72049,7 @@ Fragment.prototype.textBetween = function textBetween (from, to, blockSeparator,
       text += node.text.slice(Math.max(from, pos) - pos, to - pos);
       separated = !blockSeparator;
     } else if (node.isLeaf && leafText) {
-      text += leafText;
+      text += typeof leafText === 'function' ? leafText(node): leafText;
       separated = !blockSeparator;
     } else if (!separated && node.isBlock) {
       text += blockSeparator;
@@ -69443,7 +73028,7 @@ Node$1.prototype.descendants = function descendants (f) {
 // children.
 prototypeAccessors$3$1.textContent.get = function () { return this.textBetween(0, this.content.size, "") };
 
-// :: (number, number, ?string, ?string) → string
+// :: (number, number, ?string, ?string | ?(leafNode: Node) -> string) → string
 // Get all text between positions `from` and `to`. When
 // `blockSeparator` is given, it will be inserted whenever a new
 // block node is started. When `leafText` is given, it'll be
@@ -72505,7 +76090,10 @@ function coveredDepths($from, $to) {
         $to.end(d) > $to.pos + ($to.depth - d) ||
         $from.node(d).type.spec.isolating ||
         $to.node(d).type.spec.isolating) { break }
-    if (start == $to.start(d)) { result.push(d); }
+    if (start == $to.start(d) ||
+        (d == $from.depth && d == $to.depth && $from.parent.inlineContent && $to.parent.inlineContent &&
+         d && $to.start(d - 1) == start - 1))
+      { result.push(d); }
   }
   return result
 }
@@ -73649,16 +77237,18 @@ class TableView {
 
 const Table = Node$2.create({
     name: 'table',
-    defaultOptions: {
-        HTMLAttributes: {},
-        resizable: false,
-        handleWidth: 5,
-        cellMinWidth: 25,
-        // TODO: fix
-        // @ts-ignore
-        View: TableView,
-        lastColumnResizable: true,
-        allowTableNodeSelection: false,
+    // @ts-ignore
+    addOptions() {
+        return {
+            HTMLAttributes: {},
+            resizable: false,
+            handleWidth: 5,
+            cellMinWidth: 25,
+            // TODO: fix
+            View: TableView,
+            lastColumnResizable: true,
+            allowTableNodeSelection: false,
+        };
     },
     content: 'tableRow+',
     tableRole: 'table',
@@ -73793,6 +77383,7 @@ const Table = Node$2.create({
         const context = {
             name: extension.name,
             options: extension.options,
+            storage: extension.storage,
         };
         return {
             tableRole: callOrReturn(getExtensionField(extension, 'tableRole', context)),
@@ -73802,8 +77393,10 @@ const Table = Node$2.create({
 
 const TableRow = Node$2.create({
     name: 'tableRow',
-    defaultOptions: {
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            HTMLAttributes: {},
+        };
     },
     content: '(tableCell | tableHeader)*',
     tableRole: 'row',
@@ -73819,8 +77412,10 @@ const TableRow = Node$2.create({
 
 const TableCell = Node$2.create({
     name: 'tableCell',
-    defaultOptions: {
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            HTMLAttributes: {},
+        };
     },
     content: 'block+',
     addAttributes() {
@@ -73857,8 +77452,10 @@ const TableCell = Node$2.create({
 
 const TableHeader = Node$2.create({
     name: 'tableHeader',
-    defaultOptions: {
-        HTMLAttributes: {},
+    addOptions() {
+        return {
+            HTMLAttributes: {},
+        };
     },
     content: 'block+',
     addAttributes() {
@@ -73961,30 +77558,34 @@ var script$l = {
     iconTypes: {
       info: {
         icon: 'mdi-information',
-        color: 'rgb(0, 82, 204)'
+        color: 'rgb(0, 82, 204)',
+        title: 'Инфо'
       },
       note: {
         icon: 'mdi-text-box',
-        color: 'rgb(82, 67, 170)'
+        color: 'rgb(82, 67, 170)',
+        title: 'Заметка'
       },
       success: {
         icon: 'mdi-check-circle',
-        color: 'rgb(0, 135, 90)'
+        color: 'rgb(0, 135, 90)',
+        title: 'Успешно'
       },
       warning: {
         icon: 'mdi-alert',
-        color: 'rgb(255, 153, 31)'
+        color: 'rgb(255, 153, 31)',
+        title: 'Внимание'
       },
       cross: {
         icon: 'mdi-close-circle',
-        color: 'rgb(222, 53, 11)'
+        color: 'rgb(222, 53, 11)',
+        title: 'Ошибка'
       }
     }
   }),
   components: {
     NodeViewWrapper,
-    NodeViewContent,
-    VPopover
+    NodeViewContent
   },
   directives: {
     clickaway: directive_1
@@ -74092,7 +77693,7 @@ var __vue_render__$l = function () {
       "data-type": _vm.infoType,
       "data-id": _vm.tooltipId
     }
-  }, [_c('v-popover', {
+  }, [_c('au-popover', {
     directives: [{
       name: "clickaway",
       rawName: "v-clickaway",
@@ -74101,7 +77702,7 @@ var __vue_render__$l = function () {
     }],
     staticClass: "editor-information-panel__content",
     attrs: {
-      "popoverInnerClass": "editor-information-panel__popover",
+      "popover-inner-class": "info-panel-popover",
       "popover-arrow-class": "none",
       "trigger": "manual",
       "auto-hide": false,
@@ -74113,7 +77714,7 @@ var __vue_render__$l = function () {
       key: "popover",
       fn: function () {
         return [_c('div', {
-          staticClass: "editor-information-panel__popover"
+          staticClass: "info-panel-popover"
         }, [_vm._l(_vm.iconTypes, function (item, key) {
           return _c('div', {
             key: "icon-" + key,
@@ -74127,7 +77728,7 @@ var __vue_render__$l = function () {
             }
           }, [_c('span', {
             staticClass: "icon-tooltip"
-          }, [_vm._v(_vm._s(key))]), _vm._v(" "), _c('au-icon', {
+          }, [_vm._v(_vm._s(_vm.iconTypes[key].title))]), _vm._v(" "), _c('au-icon', {
             attrs: {
               "icon": _vm.iconTypes[key].icon,
               "color": _vm.iconTypes[key].color,
@@ -74143,7 +77744,7 @@ var __vue_render__$l = function () {
           }
         }, [_c('span', {
           staticClass: "icon-tooltip"
-        }, [_vm._v("delete")]), _vm._v(" "), _c('au-icon', {
+        }, [_vm._v("Удалить")]), _vm._v(" "), _c('au-icon', {
           attrs: {
             "icon": "mdi-trash-can",
             "size": 18
@@ -74174,8 +77775,8 @@ var __vue_staticRenderFns__$l = [];
 
 const __vue_inject_styles__$l = function (inject) {
   if (!inject) return;
-  inject("data-v-1468fbcd_0", {
-    source: ".editor-information-panel{display:flex;align-items:center;width:100%;padding:5px 10px;margin:5px 0;background:#deebff;transition:box-shadow .2s ease-in-out;cursor:pointer}.editor-information-panel:hover{box-shadow:inset 0 0 0 2px rgba(136,162,212,.77)}.comment-info .editor-information-panel,.incident-item__description .editor-information-panel,.page__description .editor-information-panel,.table-striped__invert .editor-information-panel{cursor:default}.comment-info .editor-information-panel:hover,.incident-item__description .editor-information-panel:hover,.page__description .editor-information-panel:hover,.table-striped__invert .editor-information-panel:hover{box-shadow:unset}.page__description .editor-information-panel p{margin-bottom:0}.incident-item__description .editor-information-panel p{margin-bottom:0}.editor-information-panel__text{padding-left:15px;padding-top:3px;padding-bottom:3px}.editor-information-panel__text p{line-height:1;margin-top:4px!important;margin-bottom:4px!important}.comment-content .editor-information-panel__text p{margin-bottom:0}.editor-information-panel--focused .editor-information-panel__text p{cursor:text}.comment-content .editor-information-panel__text,.incident-item__description .editor-information-panel__text,.page__description .editor-information-panel__text,.table-striped__invert .editor-information-panel__text{padding-left:30px}.editor-information-panel--focused{cursor:default;box-shadow:inset 0 0 0 2px rgba(136,162,212,.77)}.editor-information-panel--delete{cursor:default;box-shadow:inset 0 0 0 2px #ff2c2c}.editor-information-panel--info{background:#deebff}.editor-information-panel--note{background:#eae6ff}.editor-information-panel--success{background:#e3fcef}.editor-information-panel--warning{background:#fffae6}.editor-information-panel--cross{background:#ffebe6}.editor-information-panel__content{display:flex;width:100%}.editor-information-panel__content .trigger{display:flex!important;justify-content:center;align-items:center}.editor-information-panel__content div{width:100%}.editor-information-panel__popover{display:flex;justify-content:space-between;align-items:center;border-radius:4px;box-shadow:0 0 1px rgba(9,30,66,.11),0 4px 8px -2px rgba(9,30,66,.15);background:#fff}.icon-item{position:relative;display:flex;align-items:center;justify-content:center;margin-right:3px;padding:5px;border-radius:4px;cursor:pointer;transition:background .2s ease-in-out}.icon-item.separator:before{position:absolute;content:\"\";display:block;left:-4px;background:#9f9f9f;width:1px;height:80%}.icon-item.active{background:#b4dabb}.icon-item.active .icon{fill:#fff}.icon-item.delete{margin-left:6px}.icon-item.delete:hover{background:#ff2c2c}.icon-item:hover{background:#b4dabb}.icon-item:hover .icon-tooltip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(-30px)}.icon-item:last-child{margin-right:0}.icon-tooltip{position:absolute;white-space:nowrap;left:50%;transform:translateX(-50%) translateY(-44px);opacity:0;visibility:hidden;transition:transform .35s ease-in-out,opacity .2s ease-in-out,visibility .2s ease-in-out}",
+  inject("data-v-777dd2ef_0", {
+    source: ".editor-information-panel{display:flex;align-items:center;width:100%;padding:5px 10px;margin:5px 0;background:#deebff;transition:box-shadow .2s ease-in-out;cursor:pointer}.editor-information-panel:hover{box-shadow:inset 0 0 0 2px rgba(136,162,212,.77)}.comment-info .editor-information-panel,.incident-item__description .editor-information-panel,.page__description .editor-information-panel,.table-striped__invert .editor-information-panel{cursor:default}.comment-info .editor-information-panel:hover,.incident-item__description .editor-information-panel:hover,.page__description .editor-information-panel:hover,.table-striped__invert .editor-information-panel:hover{box-shadow:unset}.page__description .editor-information-panel p{margin-bottom:0}.incident-item__description .editor-information-panel p{margin-bottom:0}.editor-information-panel__text{padding-left:15px;padding-top:3px;padding-bottom:3px}.editor-information-panel__text p{line-height:1;margin-top:4px!important;margin-bottom:4px!important}.comment-content .editor-information-panel__text p{margin-bottom:0}.editor-information-panel--focused .editor-information-panel__text p{cursor:text}.comment-content .editor-information-panel__text,.incident-item__description .editor-information-panel__text,.page__description .editor-information-panel__text,.table-striped__invert .editor-information-panel__text{padding-left:30px}.editor-information-panel--focused{cursor:default;box-shadow:inset 0 0 0 2px rgba(136,162,212,.77)}.editor-information-panel--delete{cursor:default;box-shadow:inset 0 0 0 2px #ff2c2c}.editor-information-panel--info{background:#deebff}.editor-information-panel--note{background:#eae6ff}.editor-information-panel--success{background:#e3fcef}.editor-information-panel--warning{background:#fffae6}.editor-information-panel--cross{background:#ffebe6}.editor-information-panel__content{display:flex;width:100%}.editor-information-panel__content .trigger{display:flex!important;justify-content:center;align-items:center}.editor-information-panel__content div{width:100%}.info-panel-popover{display:flex;justify-content:space-between;padding:4px;align-items:center;background:#fff}.icon-item{position:relative;display:flex;align-items:center;justify-content:center;margin-right:3px;padding:5px;border-radius:4px;cursor:pointer;transition:background .2s ease-in-out}.icon-item.separator:before{position:absolute;content:\"\";display:block;left:-4px;background:#9f9f9f;width:1px;height:80%}.icon-item.active{background:#b4dabb}.icon-item.active .icon{fill:#fff}.icon-item.delete{margin-left:6px}.icon-item.delete:hover{background:#ff2c2c}.icon-item:hover{background:#b4dabb}.icon-item:hover .icon-tooltip{opacity:1;visibility:visible;padding:4px;border-radius:4px;transform:translateX(-50%) translateY(-30px);background:#fff}.icon-item:last-child{margin-right:0}.icon-tooltip{position:absolute;white-space:nowrap;left:50%;opacity:0;visibility:hidden}",
     map: undefined,
     media: undefined
   });
@@ -74228,9 +77829,10 @@ var InfoPanel = Node$2.create({
     }];
   },
 
-  renderHTML({
-    HTMLAttributes
-  }) {
+  renderHTML(_ref) {
+    let {
+      HTMLAttributes
+    } = _ref;
     return ['div', {
       type: HTMLAttributes.type,
       'data-type': HTMLAttributes.type,
@@ -74242,9 +77844,10 @@ var InfoPanel = Node$2.create({
 
   addCommands() {
     return {
-      toggleInfoPanel: () => ({
-        commands
-      }) => {
+      toggleInfoPanel: () => _ref2 => {
+        let {
+          commands
+        } = _ref2;
         commands.toggleWrap('info_panel');
       }
     };
@@ -74720,8 +78323,8 @@ var __vue_staticRenderFns__$k = [];
 
 const __vue_inject_styles__$k = function (inject) {
   if (!inject) return;
-  inject("data-v-39dafa22_0", {
-    source: ".tooltip{outline:unset}.tooltip .wrapper{overflow:visible;margin:8px 0}.info-status{position:relative;display:inline-block;border-radius:4px;padding:4px 4px 4px 0}.editor-information-panel .info-status{padding:4px 12px 4px 0}.info-status__content{display:inline-block;margin:0 5px;line-height:1;border-radius:4px;cursor:pointer;transition:box-shadow .15s ease-in-out}.incident-item__description .info-status__content:hover{cursor:default;box-shadow:unset}.incident-item__description .info-status__content p{cursor:text;margin-bottom:0}.comment-content .info-status__content:hover,.page__description .info-status__content:hover{cursor:default;box-shadow:unset}.comment-content .info-status__content p,.page__description .info-status__content p{cursor:text;margin-bottom:0}.info-status__content:hover{box-shadow:0 0 1px 1px rgba(136,162,212,.77)}.info-status__content.open{box-shadow:0 0 1px 1px rgba(136,162,212,.77)}.info-status__text{display:inline-flex;padding:4px 6px;max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#000}.info-status__text.hidden{position:absolute;font-size:0}.info-status__form{padding:0 8px}.info-status.has-focus .info-status__form{opacity:1;visibility:visible}.info-status__form-input{box-shadow:0 0 0 1px rgba(20,20,20,.15)}.info-status__form-color{display:flex;justify-content:space-between;margin-top:8px}.info-status__form-color__item{width:24px;height:24px;border-radius:4px;margin-right:7px;cursor:pointer;transition:filter .1s ease-in-out,transform .15s ease-in-out}.info-status__form-color__item.active{filter:brightness(115%);transform:scale(1.08)}.info-status__form-color__item.active:hover{filter:brightness(115%);transform:scale(1.08)}.info-status__form-color__item:hover{filter:brightness(105%);transform:scale(1.08)}.info-status__form-color__item:last-child{margin-right:0}.info-status__content--default,.info-status__form-color__item--default{background-color:#dfe1e6;border:1px solid #505f79;color:#505f79}.info-status__content--blue,.info-status__form-color__item--blue{background-color:#deebff;border:1px solid #0052cc;color:#0052cc}.info-status__content--yellow,.info-status__form-color__item--yellow{background-color:#fff0b3;border:1px solid #ff991f;color:#ff991f}.info-status__content--red,.info-status__form-color__item--red{background-color:#ffebe6;border:1px solid #de350b;color:#de350b}.info-status__content--purple,.info-status__form-color__item--purple{background-color:#eae6ff;border:1px solid #5243aa;color:#5243aa}.info-status__content--green,.info-status__form-color__item--green{background-color:#e3fcef;border:1px solid #00875a;color:#00875a}",
+  inject("data-v-2e185ab1_0", {
+    source: ".info-status[data-v-2e185ab1]{position:relative;display:inline-block;border-radius:4px;padding:4px 4px 4px 0}.editor-information-panel .info-status[data-v-2e185ab1]{padding:4px 12px 4px 0}.info-status__content[data-v-2e185ab1]{display:inline-block;margin:0 5px;line-height:1;border-radius:4px;cursor:pointer;transition:box-shadow .15s ease-in-out}.incident-item__description .info-status__content[data-v-2e185ab1]:hover{cursor:default;box-shadow:unset}.incident-item__description .info-status__content p[data-v-2e185ab1]{cursor:text;margin-bottom:0}.comment-content .info-status__content[data-v-2e185ab1]:hover,.page__description .info-status__content[data-v-2e185ab1]:hover{cursor:default;box-shadow:unset}.comment-content .info-status__content p[data-v-2e185ab1],.page__description .info-status__content p[data-v-2e185ab1]{cursor:text;margin-bottom:0}.info-status__content[data-v-2e185ab1]:hover{box-shadow:0 0 1px 1px rgba(136,162,212,.77)}.info-status__content.open[data-v-2e185ab1]{box-shadow:0 0 1px 1px rgba(136,162,212,.77)}.info-status__text[data-v-2e185ab1]{display:inline-flex;padding:4px 6px;max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#000}.info-status__text.hidden[data-v-2e185ab1]{position:absolute;font-size:0}.info-status__form[data-v-2e185ab1]{padding:8px;background-color:#fff}.info-status.has-focus .info-status__form[data-v-2e185ab1]{opacity:1;visibility:visible}.info-status__form-input[data-v-2e185ab1]{box-shadow:0 0 0 1px rgba(20,20,20,.15)}.info-status__form-color[data-v-2e185ab1]{display:flex;justify-content:space-between;margin-top:8px}.info-status__form-color__item[data-v-2e185ab1]{width:24px;height:24px;border-radius:4px;margin-right:7px;cursor:pointer;transition:filter .1s ease-in-out,transform .15s ease-in-out}.info-status__form-color__item.active[data-v-2e185ab1]{filter:brightness(115%);transform:scale(1.08)}.info-status__form-color__item.active[data-v-2e185ab1]:hover{filter:brightness(115%);transform:scale(1.08)}.info-status__form-color__item[data-v-2e185ab1]:hover{filter:brightness(105%);transform:scale(1.08)}.info-status__form-color__item[data-v-2e185ab1]:last-child{margin-right:0}.info-status__content--default[data-v-2e185ab1],.info-status__form-color__item--default[data-v-2e185ab1]{background-color:#dfe1e6;border:1px solid #505f79;color:#505f79}.info-status__content--blue[data-v-2e185ab1],.info-status__form-color__item--blue[data-v-2e185ab1]{background-color:#deebff;border:1px solid #0052cc;color:#0052cc}.info-status__content--yellow[data-v-2e185ab1],.info-status__form-color__item--yellow[data-v-2e185ab1]{background-color:#fff0b3;border:1px solid #ff991f;color:#ff991f}.info-status__content--red[data-v-2e185ab1],.info-status__form-color__item--red[data-v-2e185ab1]{background-color:#ffebe6;border:1px solid #de350b;color:#de350b}.info-status__content--purple[data-v-2e185ab1],.info-status__form-color__item--purple[data-v-2e185ab1]{background-color:#eae6ff;border:1px solid #5243aa;color:#5243aa}.info-status__content--green[data-v-2e185ab1],.info-status__form-color__item--green[data-v-2e185ab1]{background-color:#e3fcef;border:1px solid #00875a;color:#00875a}",
     map: undefined,
     media: undefined
   });
@@ -74729,7 +78332,7 @@ const __vue_inject_styles__$k = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$k = undefined;
+const __vue_scope_id__$k = "data-v-2e185ab1";
 /* module identifier */
 
 const __vue_module_identifier__$i = undefined;
@@ -74780,9 +78383,10 @@ var InfoStatus = Node$2.create({
     }];
   },
 
-  renderHTML({
-    HTMLAttributes
-  }) {
+  renderHTML(_ref) {
+    let {
+      HTMLAttributes
+    } = _ref;
     return ['span', {
       'data-type-status': HTMLAttributes.type,
       type: HTMLAttributes.type,
@@ -74797,9 +78401,10 @@ var InfoStatus = Node$2.create({
 
   addCommands() {
     return {
-      toggleInfoStatus: () => ({
-        commands
-      }) => {
+      toggleInfoStatus: () => _ref2 => {
+        let {
+          commands
+        } = _ref2;
         // return (attrs) => setInlineBlockType(type, attrs);
         // commands.setNode('info_status');
         commands.insertContent([{
@@ -74863,7 +78468,7 @@ var script$j = {
   mounted() {
     const self = this;
     this.editor = new Editor({
-      extensions: [StarterKit, Image, Link, Underline, Subscript, Superscript, Highlight, Table, TableRow, TableCell, TableHeader, ...this.extensions, InfoPanel, InfoStatus],
+      extensions: [StarterKit, Image, Link, Blockquote, Underline, Subscript, Superscript, Highlight, Table, TableRow, TableCell, TableHeader, ...this.extensions, InfoPanel, InfoStatus],
       content: this.value,
       onUpdate: () => {
         self.$emit('input', this.editor.getHTML());
@@ -74916,8 +78521,8 @@ var __vue_staticRenderFns__$j = [];
 
 const __vue_inject_styles__$j = function (inject) {
   if (!inject) return;
-  inject("data-v-62783c79_0", {
-    source: ".au-editor[data-v-62783c79]{width:100%;border:1px solid #ddd;border-radius:4px;background-color:#fafafa}.au-editor-tiptap[data-v-62783c79]{width:100%;padding:0 12px}[data-v-62783c79] .au-editor-tiptap>div{outline:0!important;min-height:160px}[data-v-62783c79] .au-editor-tiptap b,[data-v-62783c79] .au-editor-tiptap strong{font-weight:500}[data-v-62783c79] .au-editor-tiptap em,[data-v-62783c79] .au-editor-tiptap i{font-style:italic}[data-v-62783c79] .au-editor-tiptap ol li,[data-v-62783c79] .au-editor-tiptap ul li{margin-left:24px}[data-v-62783c79] .au-editor-tiptap p{margin:12px 0}[data-v-62783c79] .au-editor-tiptap a{text-decoration:underline;cursor:pointer}[data-v-62783c79] .au-editor-tiptap a:hover{color:#1e90ff}[data-v-62783c79] .au-editor-tiptap h1,[data-v-62783c79] .au-editor-tiptap h2,[data-v-62783c79] .au-editor-tiptap h3,[data-v-62783c79] .au-editor-tiptap h4,[data-v-62783c79] .au-editor-tiptap h5{padding:0;margin:9px 0;font-weight:500}[data-v-62783c79] .au-editor-tiptap h1{font-size:26px}[data-v-62783c79] .au-editor-tiptap h2{font-size:22px}[data-v-62783c79] .au-editor-tiptap h3{font-size:20px}[data-v-62783c79] .au-editor-tiptap h4{font-size:18px}[data-v-62783c79] .au-editor-tiptap h5{font-size:22px}[data-v-62783c79] .au-editor-tiptap table{border-collapse:collapse;table-layout:fixed;margin:12px 0;overflow:hidden}[data-v-62783c79] .au-editor-tiptap table p{margin:0;padding:0}[data-v-62783c79] .au-editor-tiptap table td,[data-v-62783c79] .au-editor-tiptap table th{min-width:1em;border:1px solid #ced4da;padding:4px 6px;vertical-align:top;box-sizing:border-box;position:relative}[data-v-62783c79] .au-editor-tiptap table td>*,[data-v-62783c79] .au-editor-tiptap table th>*{margin-bottom:0}[data-v-62783c79] .au-editor-tiptap table th{font-weight:700;text-align:left;background-color:#f1f3f5}[data-v-62783c79] .au-editor-tiptap table .selectedCell:after{z-index:2;position:absolute;content:\"\";left:0;right:0;top:0;bottom:0;background:rgba(200,200,255,.4);pointer-events:none}[data-v-62783c79] .au-editor-tiptap table .column-resize-handle{position:absolute;right:-2px;top:0;bottom:-2px;width:4px;background-color:#adf;pointer-events:none}",
+  inject("data-v-768db60b_0", {
+    source: ".au-editor[data-v-768db60b]{width:100%;border:1px solid #ddd;border-radius:4px;background-color:#fafafa}.au-editor-tiptap[data-v-768db60b]{width:100%;padding:0 12px}[data-v-768db60b] .au-editor-tiptap>div{outline:0!important;min-height:160px}[data-v-768db60b] .au-editor-tiptap b,[data-v-768db60b] .au-editor-tiptap strong{font-weight:500}[data-v-768db60b] .au-editor-tiptap em,[data-v-768db60b] .au-editor-tiptap i{font-style:italic}[data-v-768db60b] .au-editor-tiptap ol li,[data-v-768db60b] .au-editor-tiptap ul li{margin-left:24px}[data-v-768db60b] .au-editor-tiptap p{margin:12px 0}[data-v-768db60b] .au-editor-tiptap a{text-decoration:underline;cursor:pointer}[data-v-768db60b] .au-editor-tiptap a:hover{color:#1e90ff}[data-v-768db60b] .au-editor-tiptap blockquote{padding:1px 6px 1px 12px;border-left:3px solid #ccc}[data-v-768db60b] .au-editor-tiptap blockquote p{margin:6px 0}[data-v-768db60b] .au-editor-tiptap h1,[data-v-768db60b] .au-editor-tiptap h2,[data-v-768db60b] .au-editor-tiptap h3,[data-v-768db60b] .au-editor-tiptap h4,[data-v-768db60b] .au-editor-tiptap h5{padding:0;margin:9px 0;font-weight:500}[data-v-768db60b] .au-editor-tiptap h1{font-size:26px}[data-v-768db60b] .au-editor-tiptap h2{font-size:22px}[data-v-768db60b] .au-editor-tiptap h3{font-size:20px}[data-v-768db60b] .au-editor-tiptap h4{font-size:18px}[data-v-768db60b] .au-editor-tiptap h5{font-size:22px}[data-v-768db60b] .au-editor-tiptap table{border-collapse:collapse;table-layout:fixed;margin:12px 0;overflow:hidden}[data-v-768db60b] .au-editor-tiptap table p{margin:0;padding:0}[data-v-768db60b] .au-editor-tiptap table td,[data-v-768db60b] .au-editor-tiptap table th{min-width:1em;border:1px solid #ced4da;padding:4px 6px;vertical-align:top;box-sizing:border-box;position:relative}[data-v-768db60b] .au-editor-tiptap table td>*,[data-v-768db60b] .au-editor-tiptap table th>*{margin-bottom:0}[data-v-768db60b] .au-editor-tiptap table th{font-weight:700;text-align:left;background-color:#f1f3f5}[data-v-768db60b] .au-editor-tiptap table .selectedCell:after{z-index:2;position:absolute;content:\"\";left:0;right:0;top:0;bottom:0;background:rgba(200,200,255,.4);pointer-events:none}[data-v-768db60b] .au-editor-tiptap table .column-resize-handle{position:absolute;right:-2px;top:0;bottom:-2px;width:4px;background-color:#adf;pointer-events:none}",
     map: undefined,
     media: undefined
   });
@@ -74925,7 +78530,7 @@ const __vue_inject_styles__$j = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$j = "data-v-62783c79";
+const __vue_scope_id__$j = "data-v-768db60b";
 /* module identifier */
 
 const __vue_module_identifier__$h = undefined;
@@ -75038,7 +78643,7 @@ var script$i = {
     defaultSchema() {
       return {
         pilcrow: {
-          icon: 'format-pilcrow',
+          icon: 'mdi-format-pilcrow',
           command: null,
           title: 'Заголовки',
           children: [{
@@ -75076,68 +78681,73 @@ var script$i = {
           }]
         },
         bold: {
-          icon: 'format-bold',
+          icon: 'mdi-format-bold',
           command: 'toggleBold',
           title: 'Полужирный'
         },
         italic: {
-          icon: 'format-italic',
+          icon: 'mdi-format-italic',
           command: 'toggleItalic',
           title: 'Курсивный'
         },
         strike: {
-          icon: 'format-strikethrough',
+          icon: 'mdi-format-strikethrough',
           command: 'toggleStrike',
           title: 'Зачеркнутый'
         },
         underline: {
-          icon: 'format-underline',
+          icon: 'mdi-format-underline',
           command: 'toggleUnderline',
           title: 'Подчеркнутый'
         },
         subscript: {
-          icon: 'format-subscript',
+          icon: 'mdi-format-subscript',
           command: 'toggleSubscript',
           title: 'Подстрочный'
         },
         superscript: {
-          icon: 'format-superscript',
+          icon: 'mdi-format-superscript',
           command: 'toggleSuperscript',
           title: 'Надстрочный'
         },
         highlight: {
-          icon: 'format-color-highlight',
+          icon: 'mdi-format-color-highlight',
           command: 'toggleHighlight',
           title: 'Выделение',
           arg: {}
         },
         clearNodes: {
-          icon: 'format-clear',
+          icon: 'mdi-format-clear',
           command: 'unsetAllMarks',
           title: 'Очистить форматирование'
         },
+        blockquote: {
+          icon: 'mdi-format-quote-close',
+          command: 'toggleBlockquote',
+          title: 'Цитата'
+        },
         bulletList: {
-          icon: 'format-list-bulleted',
+          icon: 'mdi-format-list-bulleted',
           command: 'toggleBulletList',
           title: 'Маркированый список'
         },
         orderedList: {
-          icon: 'format-list-numbered',
+          icon: 'mdi-format-list-numbered',
           command: 'toggleOrderedList',
           title: 'Нумерованый список'
         },
         linkCustom: {
-          icon: 'link',
+          icon: 'mdi-link',
           component: 'au-editor-link',
           title: 'Ссылка'
         },
         tables: {
-          icon: 'table',
+          icon: 'mdi-table',
           command: null,
           title: 'Таблицы',
           children: [{
             name: 'table-insert',
-            icon: 'table-large-plus',
+            icon: 'mdi-table-large-plus',
             command: 'insertTable',
             arg: {
               rows: 3,
@@ -75147,61 +78757,61 @@ var script$i = {
             title: 'Вставить таблицу'
           }, {
             name: 'table-remove',
-            icon: 'table-large-remove',
+            icon: 'mdi-table-large-remove',
             command: 'deleteTable',
             title: 'Удалить таблицу'
           }, {
             name: 'table-merge',
-            icon: 'table-merge-cells',
+            icon: 'mdi-table-merge-cells',
             command: 'mergeCells',
             title: 'Объединить ячейки'
           }, {
             name: 'table-split',
-            icon: 'table-split-cell',
+            icon: 'mdi-table-split-cell',
             command: 'splitCell',
             title: 'Разделить ячейку'
           }, // Столбцы и строки - add
           {
             name: 'table-add-column-before',
-            icon: 'table-column-plus-before',
+            icon: 'mdi-table-column-plus-before',
             command: 'addColumnBefore',
             title: 'Вставить столбец слева'
           }, {
             name: 'table-add-column-after',
-            icon: 'table-column-plus-after',
+            icon: 'mdi-table-column-plus-after',
             command: 'addColumnAfter',
             title: 'Вставить столбец справа'
           }, {
             name: 'table-add-row-before',
-            icon: 'table-row-plus-before',
+            icon: 'mdi-table-row-plus-before',
             command: 'addRowBefore',
             title: 'Вставить строку сверху'
           }, {
             name: 'table-add-row-after',
-            icon: 'table-row-plus-after',
+            icon: 'mdi-table-row-plus-after',
             command: 'addRowAfter',
             title: 'Вставить строку снизу'
           }, // Столбцы и строки - delete
           {
             name: 'table-delete-column',
-            icon: 'table-column-remove',
+            icon: 'mdi-table-column-remove',
             command: 'deleteColumn',
             title: 'Удалить столбец'
           }, {
             name: 'table-delete-row',
-            icon: 'table-row-remove',
+            icon: 'mdi-table-row-remove',
             command: 'deleteRow',
             title: 'Удалить строку'
           }, // Заголовки
           {
             name: 'table-cell-heading',
-            icon: 'page-layout-header-footer',
+            icon: 'mdi-page-layout-header-footer',
             command: 'toggleHeaderCell',
             title: 'Сделать ячейку заголовком'
           }]
         },
         customBlocks: {
-          icon: 'plus-thick',
+          icon: 'mdi-plus-thick',
           command: null,
           title: 'Дополнительно',
           children: [{
@@ -75220,11 +78830,11 @@ var script$i = {
         ...this.extendSchema,
         // Иконки справа
         undo: {
-          icon: 'undo',
+          icon: 'mdi-undo',
           command: 'undo'
         },
         redo: {
-          icon: 'redo',
+          icon: 'mdi-redo',
           command: 'redo'
         }
       };
@@ -75232,11 +78842,14 @@ var script$i = {
 
   },
   methods: {
-    runCommand(command, arg = null) {
+    runCommand(command) {
+      let arg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       this.editor.chain().focus()[command](arg).run();
     },
 
-    isDisabled(command, arg = null, isCustom) {
+    isDisabled(command) {
+      let arg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      let isCustom = arguments.length > 2 ? arguments[2] : undefined;
       if (isCustom) return false;
       if (!command) return false;
       return !this.editor.can()[command](arg);
@@ -75271,10 +78884,10 @@ var __vue_render__$i = function () {
     }) : item.children ? _c('div', {
       key: key,
       staticClass: "toolbar-item toolbar-parent",
-      class: [item.icon]
+      class: "group-" + key
     }, [_c('au-icon', {
       attrs: {
-        "icon": "mdi-" + item.icon,
+        "icon": item.icon,
         "size": _vm.iconSize,
         "color": _vm.iconColor
       }
@@ -75305,7 +78918,7 @@ var __vue_render__$i = function () {
         }
       }, [subitem.icon ? _c('au-icon', {
         attrs: {
-          "icon": "mdi-" + subitem.icon,
+          "icon": subitem.icon,
           "size": _vm.iconSize,
           "color": _vm.iconColor
         }
@@ -75327,7 +78940,7 @@ var __vue_render__$i = function () {
       }
     }, [_c('au-icon', {
       attrs: {
-        "icon": "mdi-" + item.icon,
+        "icon": item.icon,
         "size": _vm.iconSize,
         "color": _vm.iconColor
       }
@@ -75340,12 +78953,12 @@ var __vue_staticRenderFns__$i = [];
 
 const __vue_inject_styles__$i = function (inject) {
   if (!inject) return;
-  inject("data-v-2a97f38a_0", {
+  inject("data-v-68ec5b7a_0", {
     source: ".toolbar-item{display:flex;flex:0 0 auto;align-items:center;justify-content:center;width:32px;height:32px;padding:8px;margin:2px 2px 2px 0;border-radius:4px;cursor:pointer;user-select:none;transition:background-color .15s linear}.toolbar-item:hover{background-color:#3f6ada}.toolbar-item:hover>.au-icon{background-color:#fff!important}.toolbar-item.is-active{background-color:#3f6ada}.toolbar-item.is-active>.au-icon{background-color:#fff!important}.toolbar-item.is-active.is-text{color:#fff}.toolbar-item.is-text{width:auto;display:block}.toolbar-item.is-text:hover{color:#fff}.toolbar-item.is-text[disabled]{color:#999}.toolbar-item[disabled]{background-color:#fff;pointer-events:none}.toolbar-item[disabled]>.au-icon{background-color:#aaa!important}.toolbar-item-title{text-align:left}",
     map: undefined,
     media: undefined
-  }), inject("data-v-2a97f38a_1", {
-    source: ".au-editor-toolbar[data-v-2a97f38a]{display:flex;flex-wrap:wrap;margin-bottom:4px;padding:0 0 0 3px;background-color:#fff;border:1px solid #ddd;border-radius:4px}.au-editor .au-editor-toolbar[data-v-2a97f38a]{border-width:0 0 1px 0;border-radius:4px 4px 0 0}.toolbar-item.undo[data-v-2a97f38a]{margin-left:auto}.toolbar-parent[data-v-2a97f38a]{position:relative;width:42px;padding:8px 6px 8px 8px}.toolbar-parent:hover .toolbar-children[data-v-2a97f38a]{display:block}.toolbar-children[data-v-2a97f38a]{position:absolute;z-index:2;top:31px;left:0;display:none;flex-wrap:wrap;padding:2px 0 2px 4px;background-color:#fff;border-radius:5px;box-shadow:0 0 2px 2px #ddd;cursor:default}.table .toolbar-children[data-v-2a97f38a]{width:144px}.format-pilcrow .toolbar-children[data-v-2a97f38a]{width:178px}.table:hover .toolbar-children[data-v-2a97f38a]{display:flex}",
+  }), inject("data-v-68ec5b7a_1", {
+    source: ".au-editor-toolbar[data-v-68ec5b7a]{display:flex;flex-wrap:wrap;margin-bottom:4px;padding:0 0 0 3px;background-color:#fff;border:1px solid #ddd;border-radius:4px}.au-editor .au-editor-toolbar[data-v-68ec5b7a]{border-width:0 0 1px 0;border-radius:4px 4px 0 0}.toolbar-item.undo[data-v-68ec5b7a]{margin-left:auto}.toolbar-parent[data-v-68ec5b7a]{position:relative;width:42px;padding:8px 6px 8px 8px}.toolbar-parent:hover .toolbar-children[data-v-68ec5b7a]{display:block}.toolbar-children[data-v-68ec5b7a]{position:absolute;z-index:2;top:31px;left:0;display:none;flex-wrap:wrap;padding:2px 0 2px 4px;background-color:#fff;border-radius:5px;box-shadow:0 0 2px 2px #ddd;cursor:default}.group-tables .toolbar-children[data-v-68ec5b7a]{width:144px}.group-pilcrow .toolbar-children[data-v-68ec5b7a]{width:178px}.group-tables:hover .toolbar-children[data-v-68ec5b7a]{display:flex}",
     map: undefined,
     media: undefined
   });
@@ -75353,7 +78966,7 @@ const __vue_inject_styles__$i = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$i = "data-v-2a97f38a";
+const __vue_scope_id__$i = "data-v-68ec5b7a";
 /* module identifier */
 
 const __vue_module_identifier__$g = undefined;
@@ -75535,7 +79148,7 @@ var __vue_render__$h = function () {
     }
   }, [_c('au-icon', {
     attrs: {
-      "icon": "mdi-" + _vm.icon,
+      "icon": _vm.icon,
       "size": _vm.iconSize,
       "color": _vm.iconColor
     }
@@ -75547,8 +79160,8 @@ var __vue_staticRenderFns__$h = [];
 
 const __vue_inject_styles__$h = function (inject) {
   if (!inject) return;
-  inject("data-v-2f9dcae6_0", {
-    source: ".au-editor-link-popover[data-v-2f9dcae6]{display:flex;align-items:flex-end;width:480px;padding:10px 16px}.au-editor-link-popover .au-button[data-v-2f9dcae6]{margin-left:12px}",
+  inject("data-v-12afe528_0", {
+    source: ".au-editor-link-popover[data-v-12afe528]{display:flex;align-items:flex-end;width:480px;padding:10px 16px}.au-editor-link-popover .au-button[data-v-12afe528]{margin-left:12px}",
     map: undefined,
     media: undefined
   });
@@ -75556,7 +79169,7 @@ const __vue_inject_styles__$h = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$h = "data-v-2f9dcae6";
+const __vue_scope_id__$h = "data-v-12afe528";
 /* module identifier */
 
 const __vue_module_identifier__$f = undefined;
@@ -76863,6 +80476,12 @@ var script$b = {
     disabled: {
       type: Boolean,
       default: false
+    },
+    popoverInnerClass: {
+      type: String
+    },
+    popoverArrowClass: {
+      type: String
     }
   }
 };
@@ -76881,6 +80500,8 @@ var __vue_render__$b = function () {
   return _c('v-popover', {
     attrs: {
       "popover-class": "au-popover",
+      "popoverInnerClass": _vm.popoverInnerClass,
+      "popoverArrowClass": _vm.popoverArrowClass,
       "open": _vm.open,
       "placement": _vm.placement,
       "trigger": _vm.trigger,
@@ -76901,7 +80522,7 @@ var __vue_staticRenderFns__$b = [];
 
 const __vue_inject_styles__$b = function (inject) {
   if (!inject) return;
-  inject("data-v-7b5c5ea0_0", {
+  inject("data-v-eb3787fa_0", {
     source: ".tooltip{display:block!important;z-index:10000;box-shadow:0 0 29px rgba(11,66,136,.3),0 0 9px rgba(11,66,136,.12);font-family:inherit}.tooltip:not(.au-popover){font-size:11px;line-height:14px;font-weight:500}.tooltip .tooltip-inner{background:#000;color:#fff;border-radius:5px;padding:5px 10px 4px}.tooltip .popover-arrow,.tooltip .tooltip-arrow{width:0;height:0;border-style:solid;position:absolute;margin:5px;border-color:#000;z-index:1}.tooltip .popover-arrow{margin:10px}.tooltip[x-placement^=top]{margin-bottom:5px}.tooltip[x-placement^=top] .tooltip-arrow{border-width:5px 5px 0 5px;border-left-color:transparent!important;border-right-color:transparent!important;border-bottom-color:transparent!important;bottom:-5px;left:calc(50% - 5px);margin-top:0;margin-bottom:0}.tooltip[x-placement^=top] .popover-arrow{border-width:10px 10px 0 10px;bottom:-10px;left:calc(50% - 10px)}.tooltip[x-placement^=bottom]{margin-top:5px}.tooltip[x-placement^=bottom] .tooltip-arrow{border-width:0 5px 5px 5px;border-left-color:transparent!important;border-right-color:transparent!important;border-top-color:transparent!important;top:-5px;left:calc(50% - 5px);margin-top:0;margin-bottom:0}.tooltip[x-placement^=bottom] .popover-arrow{border-width:0 10px 10px 10px;top:-10px;left:calc(50% - 10px)}.tooltip[x-placement^=right]{margin-left:5px}.tooltip[x-placement^=right] .tooltip-arrow{border-width:5px 5px 5px 0;border-left-color:transparent!important;border-top-color:transparent!important;border-bottom-color:transparent!important;left:-5px;top:calc(50% - 5px);margin-left:0;margin-right:0}.tooltip[x-placement^=right] .popover-arrow{border-width:8px 8px 8px 0;left:-8px;top:calc(50% - 8px)}.tooltip[x-placement^=left]{margin-right:5px}.tooltip[x-placement^=left] .tooltip-arrow{border-width:5px 0 5px 5px;border-top-color:transparent!important;border-right-color:transparent!important;border-bottom-color:transparent!important;right:-5px;top:calc(50% - 5px);margin-left:0;margin-right:0}.tooltip[x-placement^=left] .popover-arrow{border-width:8px 0 8px 8px;right:-8px;top:calc(50% - 8px)}.tooltip.au-popover{border-radius:5px}.tooltip.au-popover .popover-inner{background:#f9f9f9;color:#000;padding:0;box-shadow:0 5px 30px rgba(0,0,0,.1)}.tooltip.au-popover .popover-arrow{border-color:#f9f9f9}.tooltip.au-popover[x-placement^=top]{margin-bottom:10px}.tooltip.au-popover[x-placement^=bottom]{margin-top:10px}.tooltip.au-popover[x-placement^=right]{margin-left:8px}.tooltip.au-popover[x-placement^=left]{margin-right:8px}.tooltip[aria-hidden=true]{visibility:hidden;opacity:0;transition:opacity .15s,visibility .15s}.tooltip[aria-hidden=false]{visibility:visible;opacity:1;transition:opacity .15s}",
     map: undefined,
     media: undefined
@@ -80766,7 +84387,8 @@ var components = /*#__PURE__*/Object.freeze({
 // Import vue components
 
 const install = function installAtlasUiKit(Vue) {
-  Object.entries(components).forEach(([componentName, component]) => {
+  Object.entries(components).forEach(_ref => {
+    let [componentName, component] = _ref;
     Vue.component(componentName, component);
   });
 }; // Create module definition for Vue.use()

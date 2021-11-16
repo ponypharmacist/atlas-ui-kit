@@ -175,15 +175,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.tooltip {
-  outline: unset;
-  .wrapper {
-    overflow: visible;
-    margin: 8px 0;
-  }
-}
-
+<style lang="scss" scoped>
 .info-status {
   position: relative;
   display: inline-block;
@@ -250,7 +242,8 @@ export default {
 }
 
 .info-status__form {
-  padding: 0 8px;
+  padding: 8px;
+  background-color: #fff;
 
   .info-status.has-focus & {
     opacity: 1;

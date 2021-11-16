@@ -18,6 +18,7 @@ import { Editor, EditorContent } from '@tiptap/vue-2';
 import StarterKit from '@tiptap/starter-kit';
 import ExtensionImage from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
+import Blockquote from '@tiptap/extension-blockquote';
 import Underline from '@tiptap/extension-underline';
 import Subscript from '@tiptap/extension-subscript';
 import Superscript from '@tiptap/extension-superscript';
@@ -83,6 +84,7 @@ export default {
         StarterKit,
         ExtensionImage,
         Link,
+        Blockquote,
         Underline,
         Subscript,
         Superscript,
@@ -161,6 +163,15 @@ export default {
 
     &:hover {
       color: dodgerblue;
+    }
+  }
+
+  blockquote {
+    padding: 1px 6px 1px 12px;
+    border-left: 3px solid #ccc;
+
+    p {
+      margin: 6px 0;
     }
   }
 

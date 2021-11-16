@@ -2,6 +2,8 @@
 
 <v-popover
   popover-class="au-popover"
+  :popoverInnerClass="popoverInnerClass"
+  :popoverArrowClass="popoverArrowClass"
   :open="open"
   :placement="placement"
   :trigger="trigger"
@@ -43,6 +45,12 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
+    },
+    popoverInnerClass: {
+      type: String,
+    },
+    popoverArrowClass: {
+      type: String,
     },
   },
 };

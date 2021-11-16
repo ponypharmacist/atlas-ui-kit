@@ -10,8 +10,8 @@
   :data-type="infoType"
   :data-id="tooltipId"
 >
-  <v-popover
-    popoverInnerClass="editor-information-panel__popover"
+  <au-popover
+    popover-inner-class="info-panel-popover"
     class="editor-information-panel__content"
     popover-arrow-class="none"
     trigger="manual"
@@ -36,14 +36,14 @@
     <template
       #popover
     >
-      <div class="editor-information-panel__popover">
+      <div class="info-panel-popover">
         <div
           v-for="(item, key) in iconTypes"
           :key="`icon-${key}`"
           :class="['icon-item', { active: infoType === key }]"
           @click="passType(key)"
         >
-          <span class="icon-tooltip">{{ key }}</span>
+          <span class="icon-tooltip">{{ iconTypes[key].title }}</span>
           <au-icon
             :icon="iconTypes[key].icon"
             :color="iconTypes[key].color"
@@ -57,12 +57,12 @@
           @mouseenter="deleteStatus"
           @mouseleave="deleteStatus"
         >
-          <span class="icon-tooltip">delete</span>
+          <span class="icon-tooltip">Удалить</span>
           <au-icon icon="mdi-trash-can" :size="18"/>
         </div>
       </div>
     </template>
-  </v-popover>
+  </au-popover>
 </node-view-wrapper>
 
 </template>
@@ -71,7 +71,6 @@
 import uniqueId from 'lodash/uniqueId';
 import { directive as clickaway } from 'vue-clickaway';
 import { NodeViewWrapper, NodeViewContent } from '@tiptap/vue-2';
-import { VPopover } from 'v-tooltip';
 
 export default {
   name: 'editor-information-panel',
@@ -83,18 +82,37 @@ export default {
     tooltipId: null,
     showId: null,
     iconTypes: {
-      info: { icon: 'mdi-information', color: 'rgb(0, 82, 204)' },
-      note: { icon: 'mdi-text-box', color: 'rgb(82, 67, 170)' },
-      success: { icon: 'mdi-check-circle', color: 'rgb(0, 135, 90)' },
-      warning: { icon: 'mdi-alert', color: 'rgb(255, 153, 31)' },
-      cross: { icon: 'mdi-close-circle', color: 'rgb(222, 53, 11)' },
+      info: {
+        icon: 'mdi-information',
+        color: 'rgb(0, 82, 204)',
+        title: 'Инфо',
+      },
+      note: {
+        icon: 'mdi-text-box',
+        color: 'rgb(82, 67, 170)',
+        title: 'Заметка',
+      },
+      success: {
+        icon: 'mdi-check-circle',
+        color: 'rgb(0, 135, 90)',
+        title: 'Успешно',
+      },
+      warning: {
+        icon: 'mdi-alert',
+        color: 'rgb(255, 153, 31)',
+        title: 'Внимание',
+      },
+      cross: {
+        icon: 'mdi-close-circle',
+        color: 'rgb(222, 53, 11)',
+        title: 'Ошибка',
+      },
     },
   }),
 
   components: {
     NodeViewWrapper,
     NodeViewContent,
-    VPopover,
   },
 
   directives: { clickaway },
@@ -283,12 +301,11 @@ export default {
   }
 }
 
-.editor-information-panel__popover {
+.info-panel-popover {
   display: flex;
   justify-content: space-between;
+  padding: 4px;
   align-items: center;
-  border-radius: 4px;
-  box-shadow: 0px 0px 1px rgba(9, 30, 66, 0.11), 0px 4px 8px -2px rgba(9, 30, 66, 0.15);
   background: #ffffff;
 }
 
@@ -336,7 +353,10 @@ export default {
     .icon-tooltip {
       opacity: 1;
       visibility: visible;
+      padding: 4px;
+      border-radius: 4px;
       transform: translateX(-50%) translateY(-30px);
+      background: #fff;
     }
   }
 
@@ -349,10 +369,8 @@ export default {
   position: absolute;
   white-space: nowrap;
   left: 50%;
-  transform: translateX(-50%) translateY(-44px);
   opacity: 0;
   visibility: hidden;
-  transition: transform .35s ease-in-out, opacity .2s ease-in-out, visibility .2s ease-in-out;
 }
 
 </style>

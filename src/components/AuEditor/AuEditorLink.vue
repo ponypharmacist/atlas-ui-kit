@@ -10,7 +10,7 @@
       class="toolbar-item"
       @click="checkLink"
     >
-      <au-icon :icon="`mdi-${icon}`" :size="iconSize" :color="iconColor"/>
+      <au-icon :icon="icon" :size="iconSize" :color="iconColor"/>
     </div>
 
     <template #popover>
