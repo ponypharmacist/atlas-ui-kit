@@ -431,10 +431,12 @@ export default {
   .multiple-values {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     width: 100%;
 
     input {
       width: 100%;
+      height: 26px;
     }
 
     .input-chip {
@@ -448,7 +450,8 @@ export default {
   }
 
   .au-input-content {
-    padding-right: 28px;
+    padding: 5px 28px 5px 12px;
+    height: auto;
   }
 
   &.is-small {

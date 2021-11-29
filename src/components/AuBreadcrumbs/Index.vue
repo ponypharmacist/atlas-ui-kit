@@ -1,6 +1,8 @@
 <template>
 
 <div class="au-breadcrumbs">
+  <slot name="prefix"/>
+
   <div
     class="breadcrumb-item"
     v-for="(route, index) in routes"

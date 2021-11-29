@@ -24,7 +24,9 @@
       </a>
     </div>
 
-    <pre>&lt;au-breadcrumbs/&gt;</pre>
+    <pre>&lt;au-breadcrumbs&gt;
+  #prefix - слот перед первым пунктом крошек
+&lt;/au-breadcrumbs&gt;</pre>
 
     <p>Компонент использует настройки vue-router для определения пути.
       Для этого в <b>meta</b> роута должен быть прописан параметр <b>breadcrumb</b>.</p>

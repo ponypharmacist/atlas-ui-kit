@@ -1,37 +1,11 @@
 <template>
-  <!-- <router-link v-if="!!to" :to="to" :class="classObject">
-    <au-icon :icon="icon" :size="iconSize" :class="iconClass" mask />
-    <span v-if="label" class="label">{{ label }}</span>
-    <slot v-else></slot>
-  </router-link>
-
-  <a v-else-if="!!href" :href="href" :class="classObject">
-    <au-icon :icon="icon" :size="iconSize" :class="iconClass" mask />
-    <span v-if="label" class="label">{{ label }}</span>
-    <slot v-else></slot>
-  </a>
-
-  <button
-    v-else
-    :class="classObject"
-    :type="type"
-    @click.stop="$emit('click', $event)"
-  >
-    <au-icon :icon="icon" :size="iconSize" :class="iconClass" mask />
-    <span v-if="label" class="label">{{ label }}</span>
-    <slot v-else></slot>
-
-    <div v-if="isLoading" class="button-loader">
-      <au-spinner :color="spinnerColor" />
-    </div>
-  </button> -->
-
   <component
     :is="tag"
     :to="to"
     :href="href"
     :type="type"
     :class="classObject"
+    :title="title"
     @click.stop="$emit('click', $event)"
   >
     <slot name="icon"/>
@@ -85,6 +59,10 @@ export default {
       default: null,
     },
     label: {
+      type: String,
+      default: null,
+    },
+    title: {
       type: String,
       default: null,
     },
@@ -157,6 +135,7 @@ export default {
         'is-tiny': this.tiny,
         'is-link': this.link,
         'is-loading': this.isLoading,
+        'no-label': !this.label,
         disabled: this.disabled,
       };
     },

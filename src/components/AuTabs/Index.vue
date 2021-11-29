@@ -33,7 +33,6 @@ export default {
 
   data: () => ({
     activeItem: null,
-    isResolved: false,
     tabs: [],
     uid: null,
     showFiltersMenu: false,
@@ -180,7 +179,7 @@ export default {
 
   h5 {
     font-size: 14px;
-    margin-bottom: 0;
+    margin: 0;
     color: inherit;
     font-weight: 500;
     white-space: nowrap;

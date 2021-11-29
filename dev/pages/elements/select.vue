@@ -21,6 +21,7 @@
       value-field="title"
       id-field="id"
       multiselect
+      placeholder="Множественный выбер с чипами"
     />
     <au-select :placeholder="null" noDataText="`:placeholder='null' - если нужен пустой плейсхолдер`" />
     <au-select
@@ -64,7 +65,7 @@
 
   @change
   @showList
-  @autocompleteInput
+  @autocompleteInput (нужно писать внешнюю логику для автокомплитов)
 /&gt;
 
 #item={ item } - slot, кастомный шаблон для элемента списка</pre>

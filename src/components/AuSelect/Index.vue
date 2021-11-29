@@ -85,7 +85,12 @@
         class="au-select-item"
         @click="onItemClick(item)"
       >
-        <slot name="item" :item="item">{{ item[valueField] || item }}</slot>
+        <slot name="item" :item="item">
+          {{ item[valueField] || item }}
+          <au-checkbox v-if="multiselect"
+            :value="isSelected(item)"
+          />
+        </slot>
       </li>
     </ul>
   </div>
@@ -415,6 +420,10 @@ export default {
     background-color: white;
     padding: 0 8px;
     cursor: pointer;
+
+    .au-checkbox {
+      margin-left: auto;
+    }
   }
 
   .au-select-placeholder {
@@ -518,6 +527,7 @@ export default {
   .au-select-list {
     position: absolute;
     width: 100%;
+    padding: 0;
     background-color: white;
     border: 1px solid $gray-blue-border;
     box-shadow: 0 2px 2px rgba(100,100,100, 0.15);
