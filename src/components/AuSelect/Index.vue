@@ -528,6 +528,8 @@ export default {
     position: absolute;
     width: 100%;
     padding: 0;
+    margin: 0;
+    box-sizing: border-box;
     background-color: white;
     border: 1px solid $gray-blue-border;
     box-shadow: 0 2px 2px rgba(100,100,100, 0.15);

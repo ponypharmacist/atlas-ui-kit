@@ -27,7 +27,7 @@
       icon="mdi-close"
       color="#bbb"
       :size="22"
-      @click.native="files = null"
+      @click.native="clearValue"
     />
     <!-- <div class="file-name">{{ fileName || 'no filename' }}</div> -->
     <!-- <pre>{{ files[0].name || 'no files list' }}</pre> -->
@@ -93,7 +93,14 @@ export default {
 
         if (!this.multiple) this.$emit('input', this.files[0]);
         else console.log('No multiple files option implemented... ');
+      } else {
+        this.$emit('input', null);
       }
+    },
+
+    clearValue() {
+      this.files = null;
+      this.$emit('input', null);
     },
   },
 };
