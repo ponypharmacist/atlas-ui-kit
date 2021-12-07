@@ -7,6 +7,10 @@
       <au-file
         v-model="value"
       />
+      <au-file
+        v-model="value"
+        disabled
+      />
     </div>
 
     <pre>&lt;au-file

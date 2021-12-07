@@ -479,6 +479,12 @@ export default {
   &.is-disabled {
     opacity: .7;
     pointer-events: none;
+
+    .au-select-selected {
+      &::after {
+        background-color: #999;
+      }
+    }
   }
 
   &.is-inverse {

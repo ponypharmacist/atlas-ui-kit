@@ -15,6 +15,7 @@
 
     <au-button
       :label="label"
+      :disabled="disabled"
       @click.prevent
     />
 
@@ -40,10 +41,10 @@ export default {
 
   props: {
     // Content
-    // value: {
-    //   type: String,
-    //   default: null,
-    // },
+    value: {
+      type: Object,
+      default: null,
+    },
     label: {
       type: String,
       default: 'Выберите файл',
@@ -61,8 +62,6 @@ export default {
       type: Boolean,
       default: false,
     },
-
-    // Styling
   },
 
   data() {
@@ -72,11 +71,19 @@ export default {
     };
   },
 
+  watch: {
+    value(newVal) {
+      if (!newVal) {
+        this.files = null;
+      }
+    },
+  },
+
   computed: {
     classObject() {
       return {
         [this.$options.name]: true,
-        // disabled: this.disabled,
+        disabled: this.disabled,
       };
     },
 
@@ -120,6 +127,19 @@ export default {
   border-radius: 4px;
   border: 1px dashed #dee3ec;
   background-color: #fafafa;
+
+  .placeholder {
+    padding-left: 16px;
+    padding-right: 12px;
+  }
+
+  &.disabled {
+    pointer-events: none;
+
+    .placeholder {
+      color: #aaa;
+    }
+  }
 }
 
 .file-input {
@@ -133,10 +153,6 @@ export default {
   border-radius: 4px;
   cursor: pointer;
   z-index: 1;
-}
-
-.placeholder {
-  padding-left: 16px;
 }
 
 .au-icon {
