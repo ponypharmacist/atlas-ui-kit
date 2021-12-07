@@ -1,7 +1,10 @@
 <template>
 
 <div :class="classObject">
-  <div v-if="label" class="range-slider-label">{{ label }}</div>
+  <div v-if="label" class="range-slider-label">
+    {{ label }}
+    <asterisk v-if="required" />
+  </div>
 
   <div class="range-slider-box">
     <div v-if="!isSingle" class="range-slider-min">{{ model[0] }}</div>
@@ -55,6 +58,11 @@ export default {
     label: {
       type: String,
       default: null,
+    },
+
+    required: {
+      type: Boolean,
+      default: false,
     },
     disabled: {
       type: Boolean,

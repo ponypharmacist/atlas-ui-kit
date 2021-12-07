@@ -21,6 +21,7 @@
 
     <div class="placeholder">
       {{ fileName || 'Файл не выбран...' }}
+      <asterisk v-if="!fileName && required"/>
     </div>
 
     <au-icon
@@ -42,7 +43,6 @@ export default {
   props: {
     // Content
     value: {
-      type: Object,
       default: null,
     },
     label: {
@@ -59,6 +59,10 @@ export default {
       default: false,
     },
     disabled: {
+      type: Boolean,
+      default: false,
+    },
+    required: {
       type: Boolean,
       default: false,
     },

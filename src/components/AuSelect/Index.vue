@@ -5,7 +5,10 @@
     :id="`au-select--${selectId}`"
   >
 
-    <label v-if="label">{{ label }}</label>
+    <label v-if="label">
+      {{ label }}
+      <asterisk v-if="required" />
+    </label>
 
     <div
       :class="{ active: isActive }"
@@ -160,6 +163,10 @@ export default {
     clearable: {
       type: Boolean,
       default: true,
+    },
+    required: {
+      type: Boolean,
+      default: false,
     },
     disabled: {
       type: Boolean,

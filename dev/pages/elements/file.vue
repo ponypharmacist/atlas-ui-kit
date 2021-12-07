@@ -17,6 +17,7 @@
   v-model
   label
 
+  required
   multiple
   accept
   disabled

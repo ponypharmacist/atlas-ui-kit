@@ -32,3 +32,6 @@ export { default as AuAlerts } from './AuAlerts';
 
 // Экзотика
 export { default as AuColorPicker } from './AuColorPicker';
+
+// Вспомогательные элементы
+export { Asterisk } from './helpers/index';

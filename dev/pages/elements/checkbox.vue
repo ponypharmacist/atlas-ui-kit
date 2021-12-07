@@ -13,6 +13,13 @@
     <div class="checkbox-wrap">
       <au-checkbox
         v-model="checkboxTrue"
+        label="required"
+        required
+      />
+    </div>
+    <div class="checkbox-wrap">
+      <au-checkbox
+        v-model="checkboxTrue"
         label="disabled"
         disabled
       />
@@ -72,6 +79,7 @@
   disabled
   color
   rounded
+  required
 
   @input
 /&gt;</pre>

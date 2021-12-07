@@ -10,7 +10,10 @@
     :style="checkboxStyle"
   />
 
-  <label v-if="label">{{ label }}</label>
+  <label v-if="label">
+    {{ label }}
+    <asterisk v-if="required"/>
+  </label>
 </div>
 
 </template>
@@ -51,6 +54,10 @@ export default {
     color: {
       type: String,
       default: '#3F6ADA',
+    },
+    required: {
+      type: Boolean,
+      default: false,
     },
   },
 

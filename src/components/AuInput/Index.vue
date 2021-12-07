@@ -7,7 +7,10 @@
     @mouseleave="$emit('mouseleave', $event)"
     @mousemove="$emit('mousemove', $event)"
   >
-    <label v-if="label" :for="name">{{ label }}</label>
+    <label v-if="label" :for="name">
+      {{ label }}
+      <asterisk v-if="required"/>
+    </label>
 
     <div :class="{ 'has-icon': !!this.icon || this.$slots.icon }" class="au-input-content">
       <slot name="icon"></slot>

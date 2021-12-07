@@ -58,6 +58,7 @@
   multiselect
   autocomplete
   clearable
+  required
   disabled
   inverse
   small

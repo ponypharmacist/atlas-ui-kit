@@ -10,6 +10,13 @@
     />
 
     <au-input
+      v-model="inputModel"
+      placeholder="placeholder"
+      label="Required"
+      required
+    />
+
+    <au-input
       value="small"
       icon="mdi-eye"
       small

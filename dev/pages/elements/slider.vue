@@ -48,6 +48,8 @@
   max: Number
   interval: Number | 1
   label: String
+
+  required
   disabled
 
   @input

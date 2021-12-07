@@ -44,6 +44,7 @@
         class="range-wrap-label"
       >
         {{ label }}
+        <asterisk v-if="required"/>
       </div>
 
       <au-input
