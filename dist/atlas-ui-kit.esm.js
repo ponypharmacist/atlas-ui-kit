@@ -2135,43 +2135,6 @@ const __vue_component__$V = /*#__PURE__*/normalizeComponent$2({
 var __vue_component__$W = __vue_component__$V;
 
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var script$w = {
   name: 'au-file',
   props: {
@@ -2203,6 +2166,7 @@ var script$w = {
 
   data() {
     return {
+      inputId: null,
       reload: false,
       files: null
     };
@@ -2232,6 +2196,11 @@ var script$w = {
     }
 
   },
+
+  created() {
+    this.inputId = uniqueId_1('tooltip');
+  },
+
   methods: {
     inputOnChange(_ref) {
       let {
@@ -2240,8 +2209,9 @@ var script$w = {
 
       if (target.files.length) {
         this.files = target.files;
-        if (!this.multiple) this.$emit('input', this.files[0]);else console.log('No multiple files option implemented... ');
+        if (!this.multiple) this.$emit('input', this.files[0]);else console.log('🍒 No multiple files option implemented... ');
       } else {
+        this.files = null;
         this.$emit('input', null);
       }
     },
@@ -2249,6 +2219,7 @@ var script$w = {
     clearValue() {
       this.files = null;
       this.$emit('input', null);
+      document.getElementById(this.inputId).value = null;
     }
 
   }
@@ -2272,6 +2243,7 @@ var __vue_render__$w = function () {
     staticClass: "file-input",
     attrs: {
       "type": "file",
+      "id": _vm.inputId,
       "accept": _vm.accept,
       "multiple": _vm.multiple,
       "disabled": _vm.disabled
@@ -2310,8 +2282,8 @@ var __vue_staticRenderFns__$w = [];
 
 const __vue_inject_styles__$w = function (inject) {
   if (!inject) return;
-  inject("data-v-0804176c_0", {
-    source: ".au-file[data-v-0804176c]{position:relative;display:inline-flex;align-items:center;flex:0 0 auto;min-width:360px;padding:12px 12px 12px 12px;border-radius:4px;border:1px dashed #dee3ec;background-color:#fafafa}.au-file .placeholder[data-v-0804176c]{padding-left:16px;padding-right:12px}.au-file.disabled[data-v-0804176c]{pointer-events:none}.au-file.disabled .placeholder[data-v-0804176c]{color:#aaa}.file-input[data-v-0804176c]{opacity:0;position:absolute;width:100%;height:100%;left:0;top:0;background-color:#ff69b4;border-radius:4px;cursor:pointer;z-index:1}.au-icon[data-v-0804176c]{margin-left:auto;z-index:2;cursor:pointer}.au-icon[data-v-0804176c]:hover{background-color:#ff2c2c!important}",
+  inject("data-v-abf03634_0", {
+    source: ".au-file[data-v-abf03634]{position:relative;display:inline-flex;align-items:center;flex:0 0 auto;min-width:360px;padding:12px 12px 12px 12px;border-radius:4px;border:1px dashed #dee3ec;background-color:#fafafa}.au-file .placeholder[data-v-abf03634]{padding-left:16px;padding-right:12px}.au-file.disabled[data-v-abf03634]{pointer-events:none}.au-file.disabled .placeholder[data-v-abf03634]{color:#aaa}.file-input[data-v-abf03634]{opacity:0;position:absolute;width:100%;height:100%;left:0;top:0;background-color:#ff69b4;border-radius:4px;cursor:pointer;z-index:1}.au-icon[data-v-abf03634]{margin-left:auto;z-index:2;cursor:pointer}.au-icon[data-v-abf03634]:hover{background-color:#ff2c2c!important}",
     map: undefined,
     media: undefined
   });
@@ -2319,7 +2291,7 @@ const __vue_inject_styles__$w = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$w = "data-v-0804176c";
+const __vue_scope_id__$w = "data-v-abf03634";
 /* module identifier */
 
 const __vue_module_identifier__$v = undefined;

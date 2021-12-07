@@ -2149,45 +2149,7 @@ var __vue_component__$V = /*#__PURE__*/normalizeComponent$2({
   staticRenderFns: __vue_staticRenderFns__$x
 }, __vue_inject_styles__$x, __vue_script__$x, __vue_scope_id__$x, __vue_is_functional_template__$x, __vue_module_identifier__$w, false, undefined, createInjectorSSR, undefined);
 
-var __vue_component__$W = __vue_component__$V;//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var script$w = {
+var __vue_component__$W = __vue_component__$V;var script$w = {
   name: 'au-file',
   props: {
     // Content
@@ -2217,6 +2179,7 @@ var script$w = {
   },
   data: function data() {
     return {
+      inputId: null,
       reload: false,
       files: null
     };
@@ -2241,20 +2204,25 @@ var script$w = {
       return null;
     }
   },
+  created: function created() {
+    this.inputId = uniqueId_1('tooltip');
+  },
   methods: {
     inputOnChange: function inputOnChange(_ref2) {
       var target = _ref2.target;
 
       if (target.files.length) {
         this.files = target.files;
-        if (!this.multiple) this.$emit('input', this.files[0]);else console.log('No multiple files option implemented... ');
+        if (!this.multiple) this.$emit('input', this.files[0]);else console.log('🍒 No multiple files option implemented... ');
       } else {
+        this.files = null;
         this.$emit('input', null);
       }
     },
     clearValue: function clearValue() {
       this.files = null;
       this.$emit('input', null);
+      document.getElementById(this.inputId).value = null;
     }
   }
 };/* script */
@@ -2270,7 +2238,7 @@ var __vue_render__$w = function __vue_render__() {
 
   return _c('div', {
     class: _vm.classObject
-  }, [_vm._t("default"), _vm._ssrNode(" " + (!_vm.reload ? "<input type=\"file\"" + _vm._ssrAttr("accept", _vm.accept) + _vm._ssrAttr("multiple", _vm.multiple) + _vm._ssrAttr("disabled", _vm.disabled) + " class=\"file-input\" data-v-0804176c>" : "<!---->") + " "), _c('au-button', {
+  }, [_vm._t("default"), _vm._ssrNode(" " + (!_vm.reload ? "<input type=\"file\"" + _vm._ssrAttr("id", _vm.inputId) + _vm._ssrAttr("accept", _vm.accept) + _vm._ssrAttr("multiple", _vm.multiple) + _vm._ssrAttr("disabled", _vm.disabled) + " class=\"file-input\" data-v-abf03634>" : "<!---->") + " "), _c('au-button', {
     attrs: {
       "label": _vm.label,
       "disabled": _vm.disabled
@@ -2280,7 +2248,7 @@ var __vue_render__$w = function __vue_render__() {
         $event.preventDefault();
       }
     }
-  }), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"placeholder\" data-v-0804176c>", "</div>", [_vm._ssrNode(_vm._ssrEscape("\n    " + _vm._s(_vm.fileName || 'Файл не выбран...') + "\n    ")), !_vm.fileName && _vm.required ? _c('asterisk') : _vm._e()], 2), _vm._ssrNode(" "), _vm.fileName ? _c('au-icon', {
+  }), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"placeholder\" data-v-abf03634>", "</div>", [_vm._ssrNode(_vm._ssrEscape("\n    " + _vm._s(_vm.fileName || 'Файл не выбран...') + "\n    ")), !_vm.fileName && _vm.required ? _c('asterisk') : _vm._e()], 2), _vm._ssrNode(" "), _vm.fileName ? _c('au-icon', {
     attrs: {
       "icon": "mdi-close",
       "color": "#bbb",
@@ -2299,8 +2267,8 @@ var __vue_staticRenderFns__$w = [];
 
 var __vue_inject_styles__$w = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-0804176c_0", {
-    source: ".au-file[data-v-0804176c]{position:relative;display:inline-flex;align-items:center;flex:0 0 auto;min-width:360px;padding:12px 12px 12px 12px;border-radius:4px;border:1px dashed #dee3ec;background-color:#fafafa}.au-file .placeholder[data-v-0804176c]{padding-left:16px;padding-right:12px}.au-file.disabled[data-v-0804176c]{pointer-events:none}.au-file.disabled .placeholder[data-v-0804176c]{color:#aaa}.file-input[data-v-0804176c]{opacity:0;position:absolute;width:100%;height:100%;left:0;top:0;background-color:#ff69b4;border-radius:4px;cursor:pointer;z-index:1}.au-icon[data-v-0804176c]{margin-left:auto;z-index:2;cursor:pointer}.au-icon[data-v-0804176c]:hover{background-color:#ff2c2c!important}",
+  inject("data-v-abf03634_0", {
+    source: ".au-file[data-v-abf03634]{position:relative;display:inline-flex;align-items:center;flex:0 0 auto;min-width:360px;padding:12px 12px 12px 12px;border-radius:4px;border:1px dashed #dee3ec;background-color:#fafafa}.au-file .placeholder[data-v-abf03634]{padding-left:16px;padding-right:12px}.au-file.disabled[data-v-abf03634]{pointer-events:none}.au-file.disabled .placeholder[data-v-abf03634]{color:#aaa}.file-input[data-v-abf03634]{opacity:0;position:absolute;width:100%;height:100%;left:0;top:0;background-color:#ff69b4;border-radius:4px;cursor:pointer;z-index:1}.au-icon[data-v-abf03634]{margin-left:auto;z-index:2;cursor:pointer}.au-icon[data-v-abf03634]:hover{background-color:#ff2c2c!important}",
     map: undefined,
     media: undefined
   });
@@ -2308,10 +2276,10 @@ var __vue_inject_styles__$w = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$w = "data-v-0804176c";
+var __vue_scope_id__$w = "data-v-abf03634";
 /* module identifier */
 
-var __vue_module_identifier__$v = "data-v-0804176c";
+var __vue_module_identifier__$v = "data-v-abf03634";
 /* functional template */
 
 var __vue_is_functional_template__$w = false;

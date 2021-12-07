@@ -7,6 +7,7 @@
       ref="input"
       class="file-input"
       type="file"
+      :id="inputId"
       :accept="accept"
       :multiple="multiple"
       :disabled="disabled"
@@ -37,6 +38,8 @@
 </template>
 
 <script>
+import uniqueId from 'lodash/uniqueId';
+
 export default {
   name: 'au-file',
 
@@ -70,6 +73,7 @@ export default {
 
   data() {
     return {
+      inputId: null,
       reload: false,
       files: null,
     };
@@ -97,14 +101,19 @@ export default {
     },
   },
 
+  created() {
+    this.inputId = uniqueId('tooltip');
+  },
+
   methods: {
     inputOnChange({ target }) {
       if (target.files.length) {
         this.files = target.files;
 
         if (!this.multiple) this.$emit('input', this.files[0]);
-        else console.log('No multiple files option implemented... ');
+        else console.log('🍒 No multiple files option implemented... ');
       } else {
+        this.files = null;
         this.$emit('input', null);
       }
     },
@@ -112,6 +121,7 @@ export default {
     clearValue() {
       this.files = null;
       this.$emit('input', null);
+      document.getElementById(this.inputId).value = null;
     },
   },
 };
