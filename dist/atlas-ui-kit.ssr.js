@@ -79797,6 +79797,35 @@ var __vue_render__$b = function __vue_render__() {
       "trigger": _vm.trigger,
       "disabled": _vm.disabled
     },
+    on: {
+      "show": function show($event) {
+        return _vm.$emit('show', $event);
+      },
+      "apply-show": function applyShow($event) {
+        return _vm.$emit('apply-show', $event);
+      },
+      "hide": function hide($event) {
+        return _vm.$emit('hide', $event);
+      },
+      "apply-hide": function applyHide($event) {
+        return _vm.$emit('apply-hide', $event);
+      },
+      "dispose": function dispose($event) {
+        return _vm.$emit('dispose', $event);
+      },
+      "auto-hide": function autoHide($event) {
+        return _vm.$emit('auto-hide', $event);
+      },
+      "close-directive": function closeDirective($event) {
+        return _vm.$emit('close-directive', $event);
+      },
+      "close-group": function closeGroup($event) {
+        return _vm.$emit('close-group', $event);
+      },
+      "resize": function resize($event) {
+        return _vm.$emit('resize', $event);
+      }
+    },
     scopedSlots: _vm._u([{
       key: "popover",
       fn: function fn() {
@@ -79812,7 +79841,7 @@ var __vue_staticRenderFns__$b = [];
 
 var __vue_inject_styles__$b = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-eb3787fa_0", {
+  inject("data-v-4d15ae3a_0", {
     source: ".tooltip{display:block!important;z-index:10000;box-shadow:0 0 29px rgba(11,66,136,.3),0 0 9px rgba(11,66,136,.12);font-family:inherit}.tooltip:not(.au-popover){font-size:11px;line-height:14px;font-weight:500}.tooltip .tooltip-inner{background:#000;color:#fff;border-radius:5px;padding:5px 10px 4px}.tooltip .popover-arrow,.tooltip .tooltip-arrow{width:0;height:0;border-style:solid;position:absolute;margin:5px;border-color:#000;z-index:1}.tooltip .popover-arrow{margin:10px}.tooltip[x-placement^=top]{margin-bottom:5px}.tooltip[x-placement^=top] .tooltip-arrow{border-width:5px 5px 0 5px;border-left-color:transparent!important;border-right-color:transparent!important;border-bottom-color:transparent!important;bottom:-5px;left:calc(50% - 5px);margin-top:0;margin-bottom:0}.tooltip[x-placement^=top] .popover-arrow{border-width:10px 10px 0 10px;bottom:-10px;left:calc(50% - 10px)}.tooltip[x-placement^=bottom]{margin-top:5px}.tooltip[x-placement^=bottom] .tooltip-arrow{border-width:0 5px 5px 5px;border-left-color:transparent!important;border-right-color:transparent!important;border-top-color:transparent!important;top:-5px;left:calc(50% - 5px);margin-top:0;margin-bottom:0}.tooltip[x-placement^=bottom] .popover-arrow{border-width:0 10px 10px 10px;top:-10px;left:calc(50% - 10px)}.tooltip[x-placement^=right]{margin-left:5px}.tooltip[x-placement^=right] .tooltip-arrow{border-width:5px 5px 5px 0;border-left-color:transparent!important;border-top-color:transparent!important;border-bottom-color:transparent!important;left:-5px;top:calc(50% - 5px);margin-left:0;margin-right:0}.tooltip[x-placement^=right] .popover-arrow{border-width:8px 8px 8px 0;left:-8px;top:calc(50% - 8px)}.tooltip[x-placement^=left]{margin-right:5px}.tooltip[x-placement^=left] .tooltip-arrow{border-width:5px 0 5px 5px;border-top-color:transparent!important;border-right-color:transparent!important;border-bottom-color:transparent!important;right:-5px;top:calc(50% - 5px);margin-left:0;margin-right:0}.tooltip[x-placement^=left] .popover-arrow{border-width:8px 0 8px 8px;right:-8px;top:calc(50% - 8px)}.tooltip.au-popover{border-radius:5px}.tooltip.au-popover .popover-inner{background:#f9f9f9;color:#000;padding:0;box-shadow:0 5px 30px rgba(0,0,0,.1)}.tooltip.au-popover .popover-arrow{border-color:#f9f9f9}.tooltip.au-popover[x-placement^=top]{margin-bottom:10px}.tooltip.au-popover[x-placement^=bottom]{margin-top:10px}.tooltip.au-popover[x-placement^=right]{margin-left:8px}.tooltip.au-popover[x-placement^=left]{margin-right:8px}.tooltip[aria-hidden=true]{visibility:hidden;opacity:0;transition:opacity .15s,visibility .15s}.tooltip[aria-hidden=false]{visibility:visible;opacity:1;transition:opacity .15s}",
     map: undefined,
     media: undefined
@@ -79824,7 +79853,7 @@ var __vue_inject_styles__$b = function __vue_inject_styles__(inject) {
 var __vue_scope_id__$b = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$a = "data-v-eb3787fa";
+var __vue_module_identifier__$a = "data-v-4d15ae3a";
 /* functional template */
 
 var __vue_is_functional_template__$b = false;

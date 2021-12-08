@@ -8,6 +8,15 @@
   :placement="placement"
   :trigger="trigger"
   :disabled="disabled"
+  @show="$emit('show', $event)"
+  @apply-show="$emit('apply-show', $event)"
+  @hide="$emit('hide', $event)"
+  @apply-hide="$emit('apply-hide', $event)"
+  @dispose="$emit('dispose', $event)"
+  @auto-hide="$emit('auto-hide', $event)"
+  @close-directive="$emit('close-directive', $event)"
+  @close-group="$emit('close-group', $event)"
+  @resize="$emit('resize', $event)"
 >
   <slot/>
 
