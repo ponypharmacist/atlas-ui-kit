@@ -11,7 +11,7 @@
   />
 
   <au-draggable-list
-    v-model="items"
+    :value="items"
     :search="draggableSearch"
     @updateList="updateList"
   />

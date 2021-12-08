@@ -44088,10 +44088,10 @@ var script$m = {
   computed: {
     itemsList: {
       get: function get() {
-        return this.value;
+        return JSON.parse(JSON.stringify(this.value));
       },
-      set: function set(value) {
-        this.$emit('updateList', value);
+      set: function set(val) {
+        this.$emit('updateList', val);
       }
     },
     visibleItems: function visibleItems() {
@@ -44109,6 +44109,12 @@ var script$m = {
         return item.title;
       });
     }
+  },
+  methods: {
+    checkboxInput: function checkboxInput(val, index) {
+      this.itemsList[index].active = val;
+      this.$emit('updateList', this.itemsList);
+    }
   }
 };/* script */
 var __vue_script__$m = script$m;
@@ -44124,6 +44130,11 @@ var __vue_render__$m = function __vue_render__() {
   return _c('div', {
     staticClass: "au-draggable-list"
   }, [_c('draggable', {
+    on: {
+      "sort": function sort($event) {
+        return _vm.$emit('updateList', _vm.itemsList);
+      }
+    },
     model: {
       value: _vm.itemsList,
       callback: function callback($$v) {
@@ -44149,12 +44160,13 @@ var __vue_render__$m = function __vue_render__() {
     }), _vm._v(" "), _c('span', {
       staticClass: "au-draggable-item-title"
     }, [_vm._v(_vm._s(item.title))]), _vm._v(" "), _c('au-checkbox', {
-      model: {
-        value: _vm.itemsList[index].active,
-        callback: function callback($$v) {
-          _vm.$set(_vm.itemsList[index], "active", $$v);
-        },
-        expression: "itemsList[index].active"
+      attrs: {
+        "value": _vm.itemsList[index].active
+      },
+      on: {
+        "input": function input(val) {
+          return _vm.checkboxInput(val, index);
+        }
       }
     })], 1);
   }), 0)], 1);
@@ -44165,8 +44177,8 @@ var __vue_staticRenderFns__$m = [];
 
 var __vue_inject_styles__$m = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-accb1920_0", {
-    source: ".au-draggable-list[data-v-accb1920]{width:100%}.au-draggable-list-item[data-v-accb1920]{position:relative;display:flex;align-items:center;height:40px;padding:12px;font-size:12px;line-height:16px;font-weight:500;margin:0 0 4px;color:#dcddde;background-color:#fbfcfd;transition:color .15s linear;user-select:none;cursor:pointer}.au-draggable-list-item.active[data-v-accb1920]{color:inherit;background-color:#f8f9fb}.au-draggable-list-item.invisible[data-v-accb1920]{overflow:hidden;height:0;padding:0;margin:4px 0;border:4px solid #fbfcfd}.au-draggable-list-item.invisible.active[data-v-accb1920]{border-color:#f8f9fb}.au-draggable-list-item .icon-drag[data-v-accb1920]{position:absolute;left:-20px;cursor:move;opacity:0;transition:opacity .15s linear}.au-draggable-list-item[data-v-accb1920]:hover{color:#3f6ada}.au-draggable-list-item:hover .icon-drag[data-v-accb1920]{opacity:1}.au-draggable-list-item[data-v-accb1920]:hover:before{opacity:1}.au-draggable-item-title[data-v-accb1920]{margin-right:auto}",
+  inject("data-v-f3cc0e44_0", {
+    source: ".au-draggable-list[data-v-f3cc0e44]{width:100%}.au-draggable-list-item[data-v-f3cc0e44]{position:relative;display:flex;align-items:center;height:40px;padding:12px;font-size:12px;line-height:16px;font-weight:500;margin:0 0 4px;color:#dcddde;background-color:#fbfcfd;transition:color .15s linear;user-select:none;cursor:pointer}.au-draggable-list-item.active[data-v-f3cc0e44]{color:inherit;background-color:#f8f9fb}.au-draggable-list-item.invisible[data-v-f3cc0e44]{overflow:hidden;height:0;padding:0;margin:4px 0;border:4px solid #fbfcfd}.au-draggable-list-item.invisible.active[data-v-f3cc0e44]{border-color:#f8f9fb}.au-draggable-list-item .icon-drag[data-v-f3cc0e44]{position:absolute;left:-20px;cursor:move;opacity:0;transition:opacity .15s linear}.au-draggable-list-item[data-v-f3cc0e44]:hover{color:#3f6ada}.au-draggable-list-item:hover .icon-drag[data-v-f3cc0e44]{opacity:1}.au-draggable-list-item[data-v-f3cc0e44]:hover:before{opacity:1}.au-draggable-item-title[data-v-f3cc0e44]{margin-right:auto}",
     map: undefined,
     media: undefined
   });
@@ -44174,10 +44186,10 @@ var __vue_inject_styles__$m = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$m = "data-v-accb1920";
+var __vue_scope_id__$m = "data-v-f3cc0e44";
 /* module identifier */
 
-var __vue_module_identifier__$l = "data-v-accb1920";
+var __vue_module_identifier__$l = "data-v-f3cc0e44";
 /* functional template */
 
 var __vue_is_functional_template__$m = false;

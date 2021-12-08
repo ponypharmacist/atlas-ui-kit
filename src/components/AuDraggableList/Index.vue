@@ -1,7 +1,7 @@
 <template>
 
 <div class="au-draggable-list">
-  <draggable v-model="itemsList">
+  <draggable v-model="itemsList" @sort="$emit('updateList', itemsList)">
     <div
       v-for="(item, index) in itemsList"
       :key="`draggable-${index}`"
@@ -10,7 +10,10 @@
     >
       <au-icon class="icon-drag" icon="mdi-drag-vertical" :size="24" color="#d8d8d8"/>
       <span class="au-draggable-item-title">{{ item.title }}</span>
-      <au-checkbox v-model="itemsList[index].active"/>
+      <au-checkbox
+        :value="itemsList[index].active"
+        @input="(val) => checkboxInput(val, index)"
+      />
     </div>
   </draggable>
 </div>
@@ -39,13 +42,12 @@ export default {
   computed: {
     itemsList: {
       get() {
-        return this.value;
+        return JSON.parse(JSON.stringify(this.value));
       },
-      set(value) {
-        this.$emit('updateList', value);
+      set(val) {
+        this.$emit('updateList', val);
       },
     },
-
     visibleItems() {
       if (this.search) {
         return this.itemsList
@@ -54,6 +56,13 @@ export default {
       }
 
       return this.itemsList.map((item) => item.title);
+    },
+  },
+
+  methods: {
+    checkboxInput(val, index) {
+      this.itemsList[index].active = val;
+      this.$emit('updateList', this.itemsList);
     },
   },
 };
