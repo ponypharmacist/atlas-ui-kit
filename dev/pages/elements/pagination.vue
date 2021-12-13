@@ -18,6 +18,7 @@
   per-page: Number | 10
   per-page-options: Array | [10, 25, 50, 100]
   hide-per-page
+  compact-count - краткая запись "1-10 из 120"
   @changePage - возвращает новое значение страницы
   @changePerPage - новый размер страницы
 /&gt;</pre>

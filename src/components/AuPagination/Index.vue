@@ -2,7 +2,7 @@
   <nav :class="$options.name">
     <div class="au-pagination-left">
       <div
-        v-if="pagesCount > 5"
+        v-if="pagesCount > 5 && !compactCount"
         :class="{ disabled: page === 1 }"
         class="au-pagination-item start"
         @click.prevent="$emit('changePage', 1)"
@@ -31,13 +31,18 @@
       />
 
       <div
+        v-if="!compactCount"
         :class="{ disabled: page === pagesCount }"
         class="au-pagination-item end"
         @click.prevent="$emit('changePage', pagesCount)"
       />
     </div>
 
-    <div class="au-pagination-center">
+    <div v-if="compactCount" class="au-pagination-center">
+      {{ (page - 1) * perPage + 1 }}-{{ itemsShownTo }} из {{ total }}
+    </div>
+
+    <div v-else class="au-pagination-center">
       Показаны записи с {{ (page - 1) * perPage + 1 }}
        по {{ itemsShownTo }}
        из {{ total }}
@@ -78,6 +83,10 @@ export default {
       default: () => [10, 25, 50, 100],
     },
     hidePerPage: {
+      type: Boolean,
+      default: false,
+    },
+    compactCount: {
       type: Boolean,
       default: false,
     },

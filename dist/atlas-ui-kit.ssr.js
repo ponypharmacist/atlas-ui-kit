@@ -79196,6 +79196,7 @@ var __vue_component__$q = __vue_component__$p;//
 //
 //
 //
+//
 var script$d = {
   name: 'au-table',
   props: {
@@ -79256,6 +79257,10 @@ var script$d = {
       default: 'По вашему запросу ничего не подошло'
     },
     hidePagination: {
+      type: Boolean,
+      default: false
+    },
+    compactCount: {
       type: Boolean,
       default: false
     },
@@ -79404,7 +79409,7 @@ var __vue_render__$d = function __vue_render__() {
 
   return _c('div', {
     staticClass: "au-table"
-  }, [_vm._ssrNode("<table data-v-7efafaeb>", "</table>", [!_vm.hideThead ? _vm._ssrNode("<thead data-v-7efafaeb>", "</thead>", [_vm._ssrNode("<tr data-v-7efafaeb>", "</tr>", [_vm.selectable ? _vm._ssrNode("<th class=\"checkbox-cell\" data-v-7efafaeb>", "</th>", [_vm._ssrNode("<div class=\"cell-content\" data-v-7efafaeb>", "</div>", [_c('au-checkbox', {
+  }, [_vm._ssrNode("<table data-v-47668bf0>", "</table>", [!_vm.hideThead ? _vm._ssrNode("<thead data-v-47668bf0>", "</thead>", [_vm._ssrNode("<tr data-v-47668bf0>", "</tr>", [_vm.selectable ? _vm._ssrNode("<th class=\"checkbox-cell\" data-v-47668bf0>", "</th>", [_vm._ssrNode("<div class=\"cell-content\" data-v-47668bf0>", "</div>", [_c('au-checkbox', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -79423,17 +79428,17 @@ var __vue_render__$d = function __vue_render__() {
   }), _vm._ssrNode(" "), _vm.selectableRadio ? _vm._t("header.selectable") : _vm._e()], 2)]) : _vm._e(), _vm._ssrNode(" "), _vm._l(_vm.columns, function (column) {
     return _vm._ssrNode("<th" + _vm._ssrStyle(null, {
       width: column.width ? column.width + 'px' : null
-    }, null) + " data-v-7efafaeb>", "</th>", [_vm._ssrNode("<div class=\"cell-content\" data-v-7efafaeb>", "</div>", [_vm._t("header." + column.key, function () {
+    }, null) + " data-v-47668bf0>", "</th>", [_vm._ssrNode("<div class=\"cell-content\" data-v-47668bf0>", "</div>", [_vm._t("header." + column.key, function () {
       return [_c('span', [_vm._v(_vm._s(column.title))])];
     }, {
       "item": column
-    }), _vm._ssrNode(" "), column.sortable ? _vm._ssrNode("<div class=\"column-sorting\" data-v-7efafaeb>", "</div>", [_c('au-icon', {
+    }), _vm._ssrNode(" "), column.sortable ? _vm._ssrNode("<div class=\"column-sorting\" data-v-47668bf0>", "</div>", [_c('au-icon', {
       attrs: {
         "size": 10,
         "icon": _vm.iconSort(column)
       }
     })], 1) : _vm._e()], 2)]);
-  }), _vm._ssrNode(" "), _vm.settingsIcon ? _vm._ssrNode("<th class=\"settings-cell\" data-v-7efafaeb>", "</th>", [_vm._ssrNode("<div class=\"cell-content\" data-v-7efafaeb>", "</div>", [_vm.settingsIcon ? _c('au-icon', {
+  }), _vm._ssrNode(" "), _vm.settingsIcon ? _vm._ssrNode("<th class=\"settings-cell\" data-v-47668bf0>", "</th>", [_vm._ssrNode("<div class=\"cell-content\" data-v-47668bf0>", "</div>", [_vm.settingsIcon ? _c('au-icon', {
     staticClass: "au-table-settings",
     attrs: {
       "icon": "mdi-cog",
@@ -79445,11 +79450,11 @@ var __vue_render__$d = function __vue_render__() {
         return _vm.$emit('settingsIcon');
       }
     }
-  }) : _vm._e()], 1)]) : _vm._e()], 2)]) : _vm._e(), _vm._ssrNode(" "), _vm._ssrNode("<tbody data-v-7efafaeb>", "</tbody>", [_vm._l(_vm.pageContent, function (row, rowIndex) {
+  }) : _vm._e()], 1)]) : _vm._e()], 2)]) : _vm._e(), _vm._ssrNode(" "), _vm._ssrNode("<tbody data-v-47668bf0>", "</tbody>", [_vm._l(_vm.pageContent, function (row, rowIndex) {
     return [_vm._ssrNode("<tr" + _vm._ssrClass(null, {
       even: rowIndex % 2 != 0,
       odd: rowIndex % 2 === 0
-    }) + " data-v-7efafaeb>", "</tr>", [_vm.selectable ? _vm._ssrNode("<td class=\"checkbox-cell\" data-v-7efafaeb>", "</td>", [_vm._ssrNode("<div class=\"cell-content\" data-v-7efafaeb>", "</div>", [_c('au-checkbox', {
+    }) + " data-v-47668bf0>", "</tr>", [_vm.selectable ? _vm._ssrNode("<td class=\"checkbox-cell\" data-v-47668bf0>", "</td>", [_vm._ssrNode("<div class=\"cell-content\" data-v-47668bf0>", "</div>", [_c('au-checkbox', {
       attrs: {
         "value": row.selected,
         "rounded": _vm.selectableRadio
@@ -79460,7 +79465,7 @@ var __vue_render__$d = function __vue_render__() {
         }
       }
     })], 1)]) : _vm._e(), _vm._ssrNode(" "), _vm._l(_vm.columns, function (column, colIndex) {
-      return _vm._ssrNode("<td" + _vm._ssrAttr("colspan", _vm.settingsIcon && colIndex === _vm.columns.length - 1 ? 2 : 1) + " data-v-7efafaeb>", "</td>", [_vm._ssrNode("<div" + _vm._ssrClass("cell-content", "align-" + (column.align || 'unset')) + " data-v-7efafaeb>", "</div>", [_vm._t("item." + column.key, function () {
+      return _vm._ssrNode("<td" + _vm._ssrAttr("colspan", _vm.settingsIcon && colIndex === _vm.columns.length - 1 ? 2 : 1) + " data-v-47668bf0>", "</td>", [_vm._ssrNode("<div" + _vm._ssrClass("cell-content", "align-" + (column.align || 'unset')) + " data-v-47668bf0>", "</div>", [_vm._t("item." + column.key, function () {
         return [_vm._v("\n                " + _vm._s(row[column.key] || '-') + "\n              ")];
       }, {
         "item": row,
@@ -79485,12 +79490,12 @@ var __vue_render__$d = function __vue_render__() {
     })], 2), _vm._ssrNode(" "), _vm.isExpanded(row[_vm.expandedKey]) ? _vm._ssrNode("<tr" + _vm._ssrClass("au-table-expanded", {
       even: rowIndex % 2 != 0,
       odd: rowIndex % 2 === 0
-    }) + " data-v-7efafaeb>", "</tr>", [_vm._ssrNode("<td" + _vm._ssrAttr("colspan", _vm.colspanMassActions + 1) + " data-v-7efafaeb>", "</td>", [_vm._ssrNode("<div class=\"cell-content\" data-v-7efafaeb>", "</div>", [_vm._t("item.expanded", null, {
+    }) + " data-v-47668bf0>", "</tr>", [_vm._ssrNode("<td" + _vm._ssrAttr("colspan", _vm.colspanMassActions + 1) + " data-v-47668bf0>", "</td>", [_vm._ssrNode("<div class=\"cell-content\" data-v-47668bf0>", "</div>", [_vm._t("item.expanded", null, {
       "item": row
     })], 2)])]) : _vm._e()];
   }), _vm._ssrNode(" " + _vm._ssrList(_vm.placeholderCount, function (placeholder, index) {
-    return "<tr class=\"placeholder-tr\" data-v-7efafaeb><td" + _vm._ssrAttr("colspan", _vm.colspanMassActions + 1) + " data-v-7efafaeb><div class=\"cell-content\" data-v-7efafaeb></div></td></tr>";
-  }) + " "), _vm.selectable && _vm.pageContent.length && !_vm.selectableRadio ? _vm._ssrNode("<tr class=\"mass-actions\" data-v-7efafaeb>", "</tr>", [_vm._ssrNode("<td class=\"checkbox-cell\" data-v-7efafaeb>", "</td>", [_vm._ssrNode("<div class=\"cell-content\" data-v-7efafaeb>", "</div>", [!_vm.isLoading ? _c('au-checkbox', {
+    return "<tr class=\"placeholder-tr\" data-v-47668bf0><td" + _vm._ssrAttr("colspan", _vm.colspanMassActions + 1) + " data-v-47668bf0><div class=\"cell-content\" data-v-47668bf0></div></td></tr>";
+  }) + " "), _vm.selectable && _vm.pageContent.length && !_vm.selectableRadio ? _vm._ssrNode("<tr class=\"mass-actions\" data-v-47668bf0>", "</tr>", [_vm._ssrNode("<td class=\"checkbox-cell\" data-v-47668bf0>", "</td>", [_vm._ssrNode("<div class=\"cell-content\" data-v-47668bf0>", "</div>", [!_vm.isLoading ? _c('au-checkbox', {
     attrs: {
       "value": _vm.selectionSummary,
       "partial": _vm.selectionSummaryPartial
@@ -79500,7 +79505,7 @@ var __vue_render__$d = function __vue_render__() {
         return _vm.$emit('selectAll');
       }
     }
-  }) : _vm._e()], 1)]), _vm._ssrNode(" "), _vm._ssrNode("<td" + _vm._ssrAttr("colspan", _vm.colspanMassActions) + " data-v-7efafaeb>", "</td>", [!_vm.isLoading ? _vm._ssrNode("<div class=\"cell-content\" data-v-7efafaeb>", "</div>", [_vm._t("massactions")], 2) : _vm._e()])], 2) : _vm._e(), _vm._ssrNode(" " + (!_vm.pageContent.length && !_vm.isLoading ? "<tr data-v-7efafaeb><td" + _vm._ssrAttr("colspan", _vm.colspanNotFound) + " class=\"not-found\" data-v-7efafaeb><div class=\"cell-content\" data-v-7efafaeb>" + _vm._ssrEscape(_vm._s(_vm.noDataText || 'Ничего не найдено')) + "</div></td></tr>" : "<!---->"))], 2)], 2), _vm._ssrNode(" "), _vm.isLoading ? _vm._ssrNode("<div class=\"is-loading-overlay\" data-v-7efafaeb>", "</div>", [_c('au-spinner', {
+  }) : _vm._e()], 1)]), _vm._ssrNode(" "), _vm._ssrNode("<td" + _vm._ssrAttr("colspan", _vm.colspanMassActions) + " data-v-47668bf0>", "</td>", [!_vm.isLoading ? _vm._ssrNode("<div class=\"cell-content\" data-v-47668bf0>", "</div>", [_vm._t("massactions")], 2) : _vm._e()])], 2) : _vm._e(), _vm._ssrNode(" " + (!_vm.pageContent.length && !_vm.isLoading ? "<tr data-v-47668bf0><td" + _vm._ssrAttr("colspan", _vm.colspanNotFound) + " class=\"not-found\" data-v-47668bf0><div class=\"cell-content\" data-v-47668bf0>" + _vm._ssrEscape(_vm._s(_vm.noDataText || 'Ничего не найдено')) + "</div></td></tr>" : "<!---->"))], 2)], 2), _vm._ssrNode(" "), _vm.isLoading ? _vm._ssrNode("<div class=\"is-loading-overlay\" data-v-47668bf0>", "</div>", [_c('au-spinner', {
     attrs: {
       "color": "dodgerblue",
       "size": 80
@@ -79510,13 +79515,14 @@ var __vue_render__$d = function __vue_render__() {
       "page": _vm.tableSettings.page,
       "per-page": _vm.tableSettings.perPage,
       "total": _vm.tableSettings.total || _vm.items.length,
-      "hide-per-page": _vm.hidePerPage
+      "hide-per-page": _vm.hidePerPage,
+      "compactCount": _vm.compactCount
     },
     on: {
       "changePage": _vm.changePage,
       "changePerPage": _vm.changePerPage
     }
-  }) : _vm._e(), _vm._ssrNode(" " + (_vm.isLoading && !_vm.hidePagination ? "<div class=\"pagination-placeholder\" data-v-7efafaeb></div>" : "<!---->"))], 2);
+  }) : _vm._e(), _vm._ssrNode(" " + (_vm.isLoading && !_vm.hidePagination ? "<div class=\"pagination-placeholder\" data-v-47668bf0></div>" : "<!---->"))], 2);
 };
 
 var __vue_staticRenderFns__$d = [];
@@ -79524,8 +79530,8 @@ var __vue_staticRenderFns__$d = [];
 
 var __vue_inject_styles__$d = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-7efafaeb_0", {
-    source: ".au-table[data-v-7efafaeb]{position:relative}.au-table table[data-v-7efafaeb]{width:100%;margin-bottom:16px;text-align:left;border-spacing:0;border-collapse:separate}.au-table thead th[data-v-7efafaeb]{font-weight:500;border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear;cursor:pointer}.au-table thead th[data-v-7efafaeb]:hover{border-color:#e1e9f7;background-color:#e1e8f5}.au-table thead th[data-v-7efafaeb]:not(:last-child){border-right:0}.au-table thead th:not(:last-child) .cell-content[data-v-7efafaeb]{padding-right:10px}.au-table thead th[data-v-7efafaeb]:first-child{border-radius:4px 0 0 4px}.au-table thead th[data-v-7efafaeb]:last-child{border-radius:0 4px 4px 0}.au-table tbody .even[data-v-7efafaeb]{background-color:#f3f6f9}.au-table tbody .odd[data-v-7efafaeb]{background-color:#fff}.au-table td[data-v-7efafaeb],.au-table th[data-v-7efafaeb]{padding:0;vertical-align:middle}.au-table .mass-actions td[data-v-7efafaeb]{border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear}.au-table .mass-actions td[data-v-7efafaeb]:not(:last-child){border-right:0}.au-table .mass-actions td[data-v-7efafaeb]:first-child{border-radius:4px 0 0 4px}.au-table .mass-actions td[data-v-7efafaeb]:last-child{border-radius:0 4px 4px 0}.au-table .checkbox-cell[data-v-7efafaeb]{width:38px}.au-table .settings-cell[data-v-7efafaeb]{width:32px}.au-table .cell-content[data-v-7efafaeb]{display:flex;align-items:center;min-height:32px;padding:8px 11px;font-size:12px;line-height:16px}.au-table .cell-content.align-left[data-v-7efafaeb]{justify-content:flex-start}.au-table .cell-content.align-right[data-v-7efafaeb]{justify-content:flex-end}.au-table .cell-content.align-center[data-v-7efafaeb]{justify-content:center}.au-table .not-found[data-v-7efafaeb]{font-size:12px;line-height:16px;text-align:center;background-color:#f3f6f9}.au-table .not-found .cell-content[data-v-7efafaeb]{justify-content:center}.au-table .column-sorting[data-v-7efafaeb]{margin-left:auto;height:12px}.expand-arrow[data-v-7efafaeb]{margin-left:auto;margin-top:-2px;margin-bottom:-2px;cursor:pointer;transition:all .25s ease}.expand-arrow[data-v-7efafaeb]:hover{opacity:.9}.expand-arrow.expanded[data-v-7efafaeb]{transform:rotate(180deg);background-color:#3f6ada!important}.au-table-settings[data-v-7efafaeb]{cursor:pointer}.au-table-settings[data-v-7efafaeb]:hover{background-color:#3f6ada!important}.pagination-placeholder[data-v-7efafaeb]{height:32px;background-color:#fafafa;border-radius:5px}.is-loading-overlay[data-v-7efafaeb]{position:absolute;display:flex;align-items:center;justify-content:center;width:100%;height:calc(100% - 48px);left:0;top:0;background-color:rgba(64,58,116,.1);border-radius:3px}",
+  inject("data-v-47668bf0_0", {
+    source: ".au-table[data-v-47668bf0]{position:relative}.au-table table[data-v-47668bf0]{width:100%;margin-bottom:16px;text-align:left;border-spacing:0;border-collapse:separate}.au-table thead th[data-v-47668bf0]{font-weight:500;border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear;cursor:pointer}.au-table thead th[data-v-47668bf0]:hover{border-color:#e1e9f7;background-color:#e1e8f5}.au-table thead th[data-v-47668bf0]:not(:last-child){border-right:0}.au-table thead th:not(:last-child) .cell-content[data-v-47668bf0]{padding-right:10px}.au-table thead th[data-v-47668bf0]:first-child{border-radius:4px 0 0 4px}.au-table thead th[data-v-47668bf0]:last-child{border-radius:0 4px 4px 0}.au-table tbody .even[data-v-47668bf0]{background-color:#f3f6f9}.au-table tbody .odd[data-v-47668bf0]{background-color:#fff}.au-table td[data-v-47668bf0],.au-table th[data-v-47668bf0]{padding:0;vertical-align:middle}.au-table .mass-actions td[data-v-47668bf0]{border:1px solid #ebeff6;background-color:#f0f4fb;transition:background-color .15s linear}.au-table .mass-actions td[data-v-47668bf0]:not(:last-child){border-right:0}.au-table .mass-actions td[data-v-47668bf0]:first-child{border-radius:4px 0 0 4px}.au-table .mass-actions td[data-v-47668bf0]:last-child{border-radius:0 4px 4px 0}.au-table .checkbox-cell[data-v-47668bf0]{width:38px}.au-table .settings-cell[data-v-47668bf0]{width:32px}.au-table .cell-content[data-v-47668bf0]{display:flex;align-items:center;min-height:32px;padding:8px 11px;font-size:12px;line-height:16px}.au-table .cell-content.align-left[data-v-47668bf0]{justify-content:flex-start}.au-table .cell-content.align-right[data-v-47668bf0]{justify-content:flex-end}.au-table .cell-content.align-center[data-v-47668bf0]{justify-content:center}.au-table .not-found[data-v-47668bf0]{font-size:12px;line-height:16px;text-align:center;background-color:#f3f6f9}.au-table .not-found .cell-content[data-v-47668bf0]{justify-content:center}.au-table .column-sorting[data-v-47668bf0]{margin-left:auto;height:12px}.expand-arrow[data-v-47668bf0]{margin-left:auto;margin-top:-2px;margin-bottom:-2px;cursor:pointer;transition:all .25s ease}.expand-arrow[data-v-47668bf0]:hover{opacity:.9}.expand-arrow.expanded[data-v-47668bf0]{transform:rotate(180deg);background-color:#3f6ada!important}.au-table-settings[data-v-47668bf0]{cursor:pointer}.au-table-settings[data-v-47668bf0]:hover{background-color:#3f6ada!important}.pagination-placeholder[data-v-47668bf0]{height:32px;background-color:#fafafa;border-radius:5px}.is-loading-overlay[data-v-47668bf0]{position:absolute;display:flex;align-items:center;justify-content:center;width:100%;height:calc(100% - 48px);left:0;top:0;background-color:rgba(64,58,116,.1);border-radius:3px}",
     map: undefined,
     media: undefined
   });
@@ -79533,10 +79539,10 @@ var __vue_inject_styles__$d = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$d = "data-v-7efafaeb";
+var __vue_scope_id__$d = "data-v-47668bf0";
 /* module identifier */
 
-var __vue_module_identifier__$c = "data-v-7efafaeb";
+var __vue_module_identifier__$c = "data-v-47668bf0";
 /* functional template */
 
 var __vue_is_functional_template__$d = false;
@@ -79548,6 +79554,11 @@ var __vue_component__$n = /*#__PURE__*/normalizeComponent$2({
 }, __vue_inject_styles__$d, __vue_script__$d, __vue_scope_id__$d, __vue_is_functional_template__$d, __vue_module_identifier__$c, false, undefined, createInjectorSSR, undefined);
 
 var __vue_component__$o = __vue_component__$n;//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -79629,6 +79640,10 @@ var script$c = {
     hidePerPage: {
       type: Boolean,
       default: false
+    },
+    compactCount: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -79691,20 +79706,20 @@ var __vue_render__$c = function __vue_render__() {
 
   return _c('nav', {
     class: _vm.$options.name
-  }, [_vm._ssrNode("<div class=\"au-pagination-left\" data-v-814f18dc>" + (_vm.pagesCount > 5 ? "<div" + _vm._ssrClass("au-pagination-item start", {
+  }, [_vm._ssrNode("<div class=\"au-pagination-left\" data-v-0b900445>" + (_vm.pagesCount > 5 && !_vm.compactCount ? "<div" + _vm._ssrClass("au-pagination-item start", {
     disabled: _vm.page === 1
-  }) + " data-v-814f18dc></div>" : "<!---->") + " " + (_vm.pagesCount > 5 ? "<div" + _vm._ssrClass("au-pagination-item prev", {
+  }) + " data-v-0b900445></div>" : "<!---->") + " " + (_vm.pagesCount > 5 ? "<div" + _vm._ssrClass("au-pagination-item prev", {
     disabled: _vm.page === 1
-  }) + " data-v-814f18dc></div>" : "<!---->") + " " + _vm._ssrList(_vm.paginationItems, function (pageItem) {
+  }) + " data-v-0b900445></div>" : "<!---->") + " " + _vm._ssrList(_vm.paginationItems, function (pageItem) {
     return "<div" + _vm._ssrClass("au-pagination-item", {
       active: pageItem === _vm.page,
       disabled: pageItem === '...'
-    }) + " data-v-814f18dc>" + _vm._ssrEscape(_vm._s(pageItem)) + "</div>";
+    }) + " data-v-0b900445>" + _vm._ssrEscape(_vm._s(pageItem)) + "</div>";
   }) + " <div" + _vm._ssrClass("au-pagination-item next", {
     disabled: _vm.page + 1 > _vm.pagesCount
-  }) + " data-v-814f18dc></div> <div" + _vm._ssrClass("au-pagination-item end", {
+  }) + " data-v-0b900445></div> " + (!_vm.compactCount ? "<div" + _vm._ssrClass("au-pagination-item end", {
     disabled: _vm.page === _vm.pagesCount
-  }) + " data-v-814f18dc></div></div> <div class=\"au-pagination-center\" data-v-814f18dc>" + _vm._ssrEscape("\n    Показаны записи с " + _vm._s((_vm.page - 1) * _vm.perPage + 1) + "\n     по " + _vm._s(_vm.itemsShownTo) + "\n     из " + _vm._s(_vm.total) + "\n  ") + "</div> "), !_vm.hidePerPage ? _vm._ssrNode("<div class=\"au-pagination-right\" data-v-814f18dc>", "</div>", [_vm._ssrNode("<span data-v-814f18dc>Показывать по: </span> "), _c('au-select', {
+  }) + " data-v-0b900445></div>" : "<!---->") + "</div> " + (_vm.compactCount ? "<div class=\"au-pagination-center\" data-v-0b900445>" + _vm._ssrEscape("\n    " + _vm._s((_vm.page - 1) * _vm.perPage + 1) + "-" + _vm._s(_vm.itemsShownTo) + " из " + _vm._s(_vm.total) + "\n  ") + "</div>" : "<div class=\"au-pagination-center\" data-v-0b900445>" + _vm._ssrEscape("\n    Показаны записи с " + _vm._s((_vm.page - 1) * _vm.perPage + 1) + "\n     по " + _vm._s(_vm.itemsShownTo) + "\n     из " + _vm._s(_vm.total) + "\n  ") + "</div>") + " "), !_vm.hidePerPage ? _vm._ssrNode("<div class=\"au-pagination-right\" data-v-0b900445>", "</div>", [_vm._ssrNode("<span data-v-0b900445>Показывать по: </span> "), _c('au-select', {
     attrs: {
       "value": _vm.perPage,
       "list": _vm.perPageOptions,
@@ -79722,8 +79737,8 @@ var __vue_staticRenderFns__$c = [];
 
 var __vue_inject_styles__$c = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-814f18dc_0", {
-    source: ".au-pagination[data-v-814f18dc]{display:flex;align-items:center}.au-pagination-left[data-v-814f18dc]{display:flex;align-items:center;margin-right:auto}.au-pagination-item[data-v-814f18dc]{position:relative;display:flex;justify-content:center;align-items:center;font-size:12px;font-weight:500;background-color:#fff;border:1px solid #e0e8f0;border-left:none;width:32px;height:32px;transition:background-color .3s;cursor:pointer}.au-pagination-item[data-v-814f18dc]:first-child{border-left:1px solid #e0e8f0}.au-pagination-item.active[data-v-814f18dc]{background-color:#f0f4fb;pointer-events:none;cursor:default}.au-pagination-item.disabled[data-v-814f18dc]{pointer-events:none;color:#e6e6e6}.au-pagination-item[data-v-814f18dc]:hover{background-color:#f8fafb;color:#3f6ada}.au-pagination-item.end[data-v-814f18dc],.au-pagination-item.next[data-v-814f18dc],.au-pagination-item.prev[data-v-814f18dc],.au-pagination-item.start[data-v-814f18dc]{position:relative}.au-pagination-item.end[data-v-814f18dc]:before,.au-pagination-item.next[data-v-814f18dc]:before,.au-pagination-item.prev[data-v-814f18dc]:before,.au-pagination-item.start[data-v-814f18dc]:before{content:\"\";position:absolute;background-color:#000}.au-pagination-item.end[data-v-814f18dc]:hover::before,.au-pagination-item.next[data-v-814f18dc]:hover::before,.au-pagination-item.prev[data-v-814f18dc]:hover::before,.au-pagination-item.start[data-v-814f18dc]:hover::before{background-color:#3f6ada}.au-pagination-item.end.disabled[data-v-814f18dc]::before,.au-pagination-item.next.disabled[data-v-814f18dc]::before,.au-pagination-item.prev.disabled[data-v-814f18dc]::before,.au-pagination-item.start.disabled[data-v-814f18dc]::before{background-color:#aaa}.au-pagination-item.next[data-v-814f18dc]:before,.au-pagination-item.prev[data-v-814f18dc]:before{width:6px;height:10px;-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%}.au-pagination-item.end[data-v-814f18dc]:before,.au-pagination-item.start[data-v-814f18dc]:before{width:12px;height:10px;-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOS4xMSAyOCI+PHBhdGggZD0iTTE2LjM3IDE0Ljc0bC0xMi44NCAxM2ExLjA2IDEuMDYgMCAwMS0xLjQ5IDBIMkwuMzEgMjZhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTAuNjggMTQgLjMxIDMuNTNBMS4wNiAxLjA2IDAgMDEuMzEgMkwyIC4zMWExLjA2IDEuMDYgMCAwMTEuNDkgMGwxMi44NCAxM2ExIDEgMCAwMTAgMS40OHoiLz48cGF0aCBkYXRhLW5hbWU9ImFuZ2xlLWxlZnQiIGQ9Ik0yOC44IDE0Ljc0TDE2IDI3LjY5YTEgMSAwIDAxLTEuNDggMEwxMi43NCAyNmExIDEgMCAwMTAtMS40OUwyMy4xIDE0IDEyLjczIDMuNTNhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTQuNDcuMzFhMSAxIDAgMDExLjUzIDBsMTIuODUgMTNhMSAxIDAgMDEwIDEuNDh6Ii8+PC9zdmc+) no-repeat 0 0/100% 100%;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOS4xMSAyOCI+PHBhdGggZD0iTTE2LjM3IDE0Ljc0bC0xMi44NCAxM2ExLjA2IDEuMDYgMCAwMS0xLjQ5IDBIMkwuMzEgMjZhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTAuNjggMTQgLjMxIDMuNTNBMS4wNiAxLjA2IDAgMDEuMzEgMkwyIC4zMWExLjA2IDEuMDYgMCAwMTEuNDkgMGwxMi44NCAxM2ExIDEgMCAwMTAgMS40OHoiLz48cGF0aCBkYXRhLW5hbWU9ImFuZ2xlLWxlZnQiIGQ9Ik0yOC44IDE0Ljc0TDE2IDI3LjY5YTEgMSAwIDAxLTEuNDggMEwxMi43NCAyNmExIDEgMCAwMTAtMS40OUwyMy4xIDE0IDEyLjczIDMuNTNhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTQuNDcuMzFhMSAxIDAgMDExLjUzIDBsMTIuODUgMTNhMSAxIDAgMDEwIDEuNDh6Ii8+PC9zdmc+) no-repeat 0 0/100% 100%}.au-pagination-item.prev[data-v-814f18dc]:before,.au-pagination-item.start[data-v-814f18dc]:before{transform:rotate(180deg)}.au-pagination-center[data-v-814f18dc]{font-size:12px;line-height:16px;font-weight:500}.au-pagination-right[data-v-814f18dc]{display:inline-flex;align-items:center;margin-left:auto}.au-pagination-right span[data-v-814f18dc]{margin-right:10px;font-size:12px;line-height:16px;font-weight:500}",
+  inject("data-v-0b900445_0", {
+    source: ".au-pagination[data-v-0b900445]{display:flex;align-items:center}.au-pagination-left[data-v-0b900445]{display:flex;align-items:center;margin-right:auto}.au-pagination-item[data-v-0b900445]{position:relative;display:flex;justify-content:center;align-items:center;font-size:12px;font-weight:500;background-color:#fff;border:1px solid #e0e8f0;border-left:none;width:32px;height:32px;transition:background-color .3s;cursor:pointer}.au-pagination-item[data-v-0b900445]:first-child{border-left:1px solid #e0e8f0}.au-pagination-item.active[data-v-0b900445]{background-color:#f0f4fb;pointer-events:none;cursor:default}.au-pagination-item.disabled[data-v-0b900445]{pointer-events:none;color:#e6e6e6}.au-pagination-item[data-v-0b900445]:hover{background-color:#f8fafb;color:#3f6ada}.au-pagination-item.end[data-v-0b900445],.au-pagination-item.next[data-v-0b900445],.au-pagination-item.prev[data-v-0b900445],.au-pagination-item.start[data-v-0b900445]{position:relative}.au-pagination-item.end[data-v-0b900445]:before,.au-pagination-item.next[data-v-0b900445]:before,.au-pagination-item.prev[data-v-0b900445]:before,.au-pagination-item.start[data-v-0b900445]:before{content:\"\";position:absolute;background-color:#000}.au-pagination-item.end[data-v-0b900445]:hover::before,.au-pagination-item.next[data-v-0b900445]:hover::before,.au-pagination-item.prev[data-v-0b900445]:hover::before,.au-pagination-item.start[data-v-0b900445]:hover::before{background-color:#3f6ada}.au-pagination-item.end.disabled[data-v-0b900445]::before,.au-pagination-item.next.disabled[data-v-0b900445]::before,.au-pagination-item.prev.disabled[data-v-0b900445]::before,.au-pagination-item.start.disabled[data-v-0b900445]::before{background-color:#aaa}.au-pagination-item.next[data-v-0b900445]:before,.au-pagination-item.prev[data-v-0b900445]:before{width:6px;height:10px;-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi42NzkiIGhlaWdodD0iMjgiPjxwYXRoIGQ9Ik0xNi4zNzEgMTQuNzQ0TDMuNTI4IDI3LjY5MmExLjA1MSAxLjA1MSAwIDAxLTEuNDg3IDBMLjMwOSAyNS45NmExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wxMC42NzUgMTQgLjMwOCAzLjUyOGExLjA1MSAxLjA1MSAwIDAxMC0xLjQ4N0wyLjA0LjMwOWExLjA1MSAxLjA1MSAwIDAxMS40ODcgMGwxMi44NDQgMTIuOTQ3YTEuMDUxIDEuMDUxIDAgMDEwIDEuNDg4eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) no-repeat 0 0/100% 100%}.au-pagination-item.end[data-v-0b900445]:before,.au-pagination-item.start[data-v-0b900445]:before{width:12px;height:10px;-webkit-mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOS4xMSAyOCI+PHBhdGggZD0iTTE2LjM3IDE0Ljc0bC0xMi44NCAxM2ExLjA2IDEuMDYgMCAwMS0xLjQ5IDBIMkwuMzEgMjZhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTAuNjggMTQgLjMxIDMuNTNBMS4wNiAxLjA2IDAgMDEuMzEgMkwyIC4zMWExLjA2IDEuMDYgMCAwMTEuNDkgMGwxMi44NCAxM2ExIDEgMCAwMTAgMS40OHoiLz48cGF0aCBkYXRhLW5hbWU9ImFuZ2xlLWxlZnQiIGQ9Ik0yOC44IDE0Ljc0TDE2IDI3LjY5YTEgMSAwIDAxLTEuNDggMEwxMi43NCAyNmExIDEgMCAwMTAtMS40OUwyMy4xIDE0IDEyLjczIDMuNTNhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTQuNDcuMzFhMSAxIDAgMDExLjUzIDBsMTIuODUgMTNhMSAxIDAgMDEwIDEuNDh6Ii8+PC9zdmc+) no-repeat 0 0/100% 100%;mask:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOS4xMSAyOCI+PHBhdGggZD0iTTE2LjM3IDE0Ljc0bC0xMi44NCAxM2ExLjA2IDEuMDYgMCAwMS0xLjQ5IDBIMkwuMzEgMjZhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTAuNjggMTQgLjMxIDMuNTNBMS4wNiAxLjA2IDAgMDEuMzEgMkwyIC4zMWExLjA2IDEuMDYgMCAwMTEuNDkgMGwxMi44NCAxM2ExIDEgMCAwMTAgMS40OHoiLz48cGF0aCBkYXRhLW5hbWU9ImFuZ2xlLWxlZnQiIGQ9Ik0yOC44IDE0Ljc0TDE2IDI3LjY5YTEgMSAwIDAxLTEuNDggMEwxMi43NCAyNmExIDEgMCAwMTAtMS40OUwyMy4xIDE0IDEyLjczIDMuNTNhMS4wNiAxLjA2IDAgMDEwLTEuNDlMMTQuNDcuMzFhMSAxIDAgMDExLjUzIDBsMTIuODUgMTNhMSAxIDAgMDEwIDEuNDh6Ii8+PC9zdmc+) no-repeat 0 0/100% 100%}.au-pagination-item.prev[data-v-0b900445]:before,.au-pagination-item.start[data-v-0b900445]:before{transform:rotate(180deg)}.au-pagination-center[data-v-0b900445]{font-size:12px;line-height:16px;font-weight:500}.au-pagination-right[data-v-0b900445]{display:inline-flex;align-items:center;margin-left:auto}.au-pagination-right span[data-v-0b900445]{margin-right:10px;font-size:12px;line-height:16px;font-weight:500}",
     map: undefined,
     media: undefined
   });
@@ -79731,10 +79746,10 @@ var __vue_inject_styles__$c = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$c = "data-v-814f18dc";
+var __vue_scope_id__$c = "data-v-0b900445";
 /* module identifier */
 
-var __vue_module_identifier__$b = "data-v-814f18dc";
+var __vue_module_identifier__$b = "data-v-0b900445";
 /* functional template */
 
 var __vue_is_functional_template__$c = false;

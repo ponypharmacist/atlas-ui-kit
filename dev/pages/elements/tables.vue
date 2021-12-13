@@ -53,6 +53,7 @@
   no-data-text: String
   hide-pagination
   hide-per-page
+  compact-count - краткая запись "1-10 из 120"
   hide-thead
   show-placeholders - показывать пустые строки вместо недостающего до perPage контента
 

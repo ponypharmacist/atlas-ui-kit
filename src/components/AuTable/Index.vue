@@ -192,6 +192,7 @@
     :per-page="tableSettings.perPage"
     :total="tableSettings.total || items.length"
     :hide-per-page="hidePerPage"
+    :compactCount="compactCount"
     @changePage="changePage"
     @changePerPage="changePerPage"
   />
@@ -260,6 +261,10 @@ export default {
       default: 'По вашему запросу ничего не подошло',
     },
     hidePagination: {
+      type: Boolean,
+      default: false,
+    },
+    compactCount: {
       type: Boolean,
       default: false,
     },
