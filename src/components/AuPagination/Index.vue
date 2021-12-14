@@ -39,11 +39,11 @@
     </div>
 
     <div v-if="compactCount" class="au-pagination-center">
-      {{ (page - 1) * perPage + 1 }}-{{ itemsShownTo }} из {{ total }}
+      {{ itemsShownFrom }}-{{ itemsShownTo }} из {{ total }}
     </div>
 
     <div v-else class="au-pagination-center">
-      Показаны записи с {{ (page - 1) * perPage + 1 }}
+      Показаны записи с {{ itemsShownFrom }}
        по {{ itemsShownTo }}
        из {{ total }}
     </div>
@@ -122,6 +122,12 @@ export default {
       }
 
       return result;
+    },
+
+    itemsShownFrom() {
+      if (!this.total) return 0;
+
+      return (this.page - 1) * this.perPage + 1;
     },
 
     itemsShownTo() {

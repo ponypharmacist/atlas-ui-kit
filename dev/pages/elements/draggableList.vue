@@ -10,14 +10,28 @@
     style="margin-bottom: 16px;"
   />
 
-  <au-draggable-list
-    :value="items"
-    :search="draggableSearch"
-    @updateList="updateList"
-  />
+  <div class="d-flex align-center">
+    <div style="width: 500px;">
+      <au-draggable-list
+        :value="items"
+        :search="draggableSearch"
+        @updateList="updateList"
+      />
+    </div>
+
+    <div style="width: 500px;">
+      <au-draggable-list
+        :value="items"
+        :search="draggableSearch"
+        select-all
+        @updateList="updateList"
+      />
+    </div>
+  </div>
 
   <pre>&lt;au-draggable-list
   v-model: Array
+  select-all
   search: String - ограничить список по вхождению search в title
   @updateList
 /&gt;</pre>

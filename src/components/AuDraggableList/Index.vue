@@ -1,6 +1,20 @@
 <template>
 
 <div class="au-draggable-list">
+  <!-- Выбрать все -->
+  <div
+    v-if="selectAll"
+    class="au-draggable-list-item active no-hover"
+  >
+    <au-checkbox
+      :value="allSelected"
+      label="Выбрать все"
+      label-left
+      class="select-all-checkbox"
+      @input="selectAllOptions"
+    />
+  </div>
+
   <draggable v-model="itemsList" @sort="$emit('updateList', itemsList)">
     <div
       v-for="(item, index) in itemsList"
@@ -37,6 +51,10 @@ export default {
       type: String,
       default: null,
     },
+    selectAll: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
@@ -48,6 +66,15 @@ export default {
         this.$emit('updateList', val);
       },
     },
+
+    allSelected() {
+      return this.itemsList.filter((i) => i.active).length === this.itemsList.length;
+    },
+
+    noneSelected() {
+      return this.itemsList.filter((i) => !i.active).length === this.itemsList.length;
+    },
+
     visibleItems() {
       if (this.search) {
         return this.itemsList
@@ -62,6 +89,19 @@ export default {
   methods: {
     checkboxInput(val, index) {
       this.itemsList[index].active = val;
+      this.$emit('updateList', this.itemsList);
+    },
+
+    selectAllOptions() {
+      this.itemsList.forEach((item, index) => {
+        if (!this.allSelected) {
+          if (!item.active) this.itemsList[index].active = true;
+        }
+        if (this.noneSelected || this.allSelected) {
+          if (item.active) this.itemsList[index].active = false;
+        }
+      });
+
       this.$emit('updateList', this.itemsList);
     },
   },
@@ -130,6 +170,16 @@ $bg-active: #f8f9fb;
     &:before {
       opacity: 1;
     }
+
+    &.no-hover {
+      color: #2c3e50;
+      cursor: default;
+    }
+  }
+
+  .select-all-checkbox {
+    margin-left: auto;
+    margin-right: 2px;
   }
 }
 

@@ -61,7 +61,7 @@
       v-if="isActive"
     >
       <div
-        v-if="list.length > 15 || searchQuery || autocomplete"
+        v-if="list.length > 10 || searchQuery || autocomplete"
         class="au-select-list__search"
       >
         <au-input

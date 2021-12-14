@@ -122,6 +122,16 @@
         </tr>
       </template>
 
+      <!-- Если ничего не нашли/не нафильтровали -->
+      <tr v-if="!pageContent.length && !isLoading">
+        <td
+          class="not-found"
+          :colspan="colspanNotFound"
+        >
+          <div class="cell-content">{{ noDataText || 'Ничего не найдено' }}</div>
+        </td>
+      </tr>
+
       <tr
         v-for="(placeholder, index) in placeholderCount"
         :key="`placeholder-tr-${index}`"
@@ -152,16 +162,6 @@
           <div v-if="!isLoading" class="cell-content">
             <slot name="massactions"/>
           </div>
-        </td>
-      </tr>
-
-      <!-- Если ничего не нашли/не нафильтровали -->
-      <tr v-if="!pageContent.length && !isLoading">
-        <td
-          class="not-found"
-          :colspan="colspanNotFound"
-        >
-          <div class="cell-content">{{ noDataText || 'Ничего не найдено' }}</div>
         </td>
       </tr>
 
