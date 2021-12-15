@@ -44125,8 +44125,9 @@ var script$m = {
     }
   },
   methods: {
-    checkboxInput: function checkboxInput(val, index) {
-      this.itemsList[index].active = val;
+    checkboxInput: function checkboxInput(index) {
+      var val = this.itemsList[index].active;
+      this.itemsList[index].active = !val;
       this.$emit('updateList', this.itemsList);
     },
     selectAllOptions: function selectAllOptions() {
@@ -44157,7 +44158,7 @@ var __vue_render__$m = function __vue_render__() {
 
   return _c('div', {
     staticClass: "au-draggable-list"
-  }, [_vm.selectAll ? _vm._ssrNode("<div class=\"au-draggable-list-item active no-hover\" data-v-15f6bd74>", "</div>", [_c('au-checkbox', {
+  }, [_vm.selectAll ? _vm._ssrNode("<div class=\"au-draggable-list-item active no-hover\" data-v-0fe9bf64>", "</div>", [_c('au-checkbox', {
     staticClass: "select-all-checkbox",
     attrs: {
       "value": _vm.allSelected,
@@ -44187,6 +44188,11 @@ var __vue_render__$m = function __vue_render__() {
       class: {
         active: _vm.itemsList[index].active,
         invisible: !_vm.visibleItems.includes(item.title)
+      },
+      on: {
+        "click": function click($event) {
+          return _vm.checkboxInput(index);
+        }
       }
     }, [_c('au-icon', {
       staticClass: "icon-drag",
@@ -44200,11 +44206,6 @@ var __vue_render__$m = function __vue_render__() {
     }, [_vm._v(_vm._s(item.title))]), _vm._v(" "), _c('au-checkbox', {
       attrs: {
         "value": _vm.itemsList[index].active
-      },
-      on: {
-        "input": function input(val) {
-          return _vm.checkboxInput(val, index);
-        }
       }
     })], 1);
   }), 0)], 2);
@@ -44215,8 +44216,8 @@ var __vue_staticRenderFns__$m = [];
 
 var __vue_inject_styles__$m = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-15f6bd74_0", {
-    source: ".au-draggable-list[data-v-15f6bd74]{width:100%}.au-draggable-list-item[data-v-15f6bd74]{position:relative;display:flex;align-items:center;height:40px;padding:12px;font-size:12px;line-height:16px;font-weight:500;margin:0 0 4px;color:#dcddde;background-color:#fbfcfd;transition:color .15s linear;user-select:none;cursor:pointer}.au-draggable-list-item.active[data-v-15f6bd74]{color:inherit;background-color:#f8f9fb}.au-draggable-list-item.invisible[data-v-15f6bd74]{overflow:hidden;height:0;padding:0;margin:4px 0;border:4px solid #fbfcfd}.au-draggable-list-item.invisible.active[data-v-15f6bd74]{border-color:#f8f9fb}.au-draggable-list-item .icon-drag[data-v-15f6bd74]{position:absolute;left:-20px;cursor:move;opacity:0;transition:opacity .15s linear}.au-draggable-list-item[data-v-15f6bd74]:hover{color:#3f6ada}.au-draggable-list-item:hover .icon-drag[data-v-15f6bd74]{opacity:1}.au-draggable-list-item[data-v-15f6bd74]:hover:before{opacity:1}.au-draggable-list-item:hover.no-hover[data-v-15f6bd74]{color:#2c3e50;cursor:default}.au-draggable-list-item .select-all-checkbox[data-v-15f6bd74]{margin-left:auto;margin-right:2px}.au-draggable-item-title[data-v-15f6bd74]{margin-right:auto}",
+  inject("data-v-0fe9bf64_0", {
+    source: ".au-draggable-list[data-v-0fe9bf64]{width:100%}.au-draggable-list-item[data-v-0fe9bf64]{position:relative;display:flex;align-items:center;height:40px;padding:12px;font-size:12px;line-height:16px;font-weight:500;margin:0 0 4px;color:#dcddde;background-color:#fbfcfd;transition:color .15s linear;user-select:none;cursor:pointer}.au-draggable-list-item.active[data-v-0fe9bf64]{color:inherit;background-color:#f8f9fb}.au-draggable-list-item.invisible[data-v-0fe9bf64]{overflow:hidden;height:0;padding:0;margin:4px 0;border:4px solid #fbfcfd}.au-draggable-list-item.invisible.active[data-v-0fe9bf64]{border-color:#f8f9fb}.au-draggable-list-item .icon-drag[data-v-0fe9bf64]{position:absolute;left:-20px;cursor:move;opacity:0;transition:opacity .15s linear}.au-draggable-list-item[data-v-0fe9bf64]:hover{color:#3f6ada}.au-draggable-list-item:hover .icon-drag[data-v-0fe9bf64]{opacity:1}.au-draggable-list-item[data-v-0fe9bf64]:hover:before{opacity:1}.au-draggable-list-item:hover.no-hover[data-v-0fe9bf64]{color:#2c3e50;cursor:default}.au-draggable-list-item .select-all-checkbox[data-v-0fe9bf64]{margin-left:auto;margin-right:2px}.au-draggable-item-title[data-v-0fe9bf64]{margin-right:auto}",
     map: undefined,
     media: undefined
   });
@@ -44224,10 +44225,10 @@ var __vue_inject_styles__$m = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$m = "data-v-15f6bd74";
+var __vue_scope_id__$m = "data-v-0fe9bf64";
 /* module identifier */
 
-var __vue_module_identifier__$l = "data-v-15f6bd74";
+var __vue_module_identifier__$l = "data-v-0fe9bf64";
 /* functional template */
 
 var __vue_is_functional_template__$m = false;

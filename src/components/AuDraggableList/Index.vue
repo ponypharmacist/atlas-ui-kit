@@ -21,12 +21,12 @@
       :key="`draggable-${index}`"
       class="au-draggable-list-item"
       :class="{ active: itemsList[index].active, invisible: !visibleItems.includes(item.title) }"
+      @click="checkboxInput(index)"
     >
       <au-icon class="icon-drag" icon="mdi-drag-vertical" :size="24" color="#d8d8d8"/>
       <span class="au-draggable-item-title">{{ item.title }}</span>
       <au-checkbox
         :value="itemsList[index].active"
-        @input="(val) => checkboxInput(val, index)"
       />
     </div>
   </draggable>
@@ -87,8 +87,9 @@ export default {
   },
 
   methods: {
-    checkboxInput(val, index) {
-      this.itemsList[index].active = val;
+    checkboxInput(index) {
+      const val = this.itemsList[index].active;
+      this.itemsList[index].active = !val;
       this.$emit('updateList', this.itemsList);
     },
 
