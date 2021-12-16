@@ -31,7 +31,7 @@
   <div
     v-if="data.length && showNumber"
     class="bar-number"
-    :style="`color: ${data[defaultIndex].color};`"
+    :style="`color: ${numberColor || data[defaultIndex].color};`"
   >
     {{ `${data[defaultIndex].percent}%` }}
   </div>
@@ -55,6 +55,10 @@ export default {
     defaultIndex: {
       type: Number,
       default: 0,
+    },
+    numberColor: {
+      type: String,
+      default: null,
     },
     showNumber: {
       type: Boolean,

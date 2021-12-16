@@ -165,13 +165,14 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 4px;
   font-size: 12px;
   font-weight: 500;
   background-color: white;
   border: 1px solid $gray-blue-border;
   border-left: none;
-  width: 32px;
-  height: 32px;
   transition: background-color 0.3s;
   cursor: pointer;
 
