@@ -3,7 +3,8 @@
 <div class="au-percent-bar">
   <div
     class="bar-wrap"
-    :style="`background-color: ${defaultColor};`"
+    :style="barWrapStyle"
+    :class="{ rounded: rounded }"
   >
     <template v-if="showTooltips">
         <div
@@ -22,7 +23,7 @@
       <div
         v-for="item in data"
         :key="item.color"
-        :style="`background-color: ${item.color}; width: ${item.percent}%;`"
+        :style="sectionStyle(item)"
         class="bar-section"
       />
     </template>
@@ -48,9 +49,21 @@ export default {
       type: Array,
       default: () => [],
     },
+    height: {
+      type: Number,
+      default: 10,
+    },
     defaultColor: {
       type: String,
       default: '#f1f1f1',
+    },
+    borderWidth: {
+      type: Number,
+      default: 1,
+    },
+    borderColor: {
+      type: String,
+      default: '#fff',
     },
     defaultIndex: {
       type: Number,
@@ -68,9 +81,31 @@ export default {
       type: Boolean,
       default: false,
     },
+    rounded: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
+    barWrapStyle() {
+      const height = `height: ${this.height}px;`;
+      const bg = `background-color: ${this.defaultColor};`;
+      const radius = `border-radius: ${this.rounded ? this.height / 2 : 0}px;`;
+      const border = `border: ${this.borderWidth}px solid ${this.borderColor}`;
+
+      return `${height}${bg}${radius}${border}`;
+    },
+  },
+
+  methods: {
+    sectionStyle(item) {
+      const width = `width: ${item.percent}%;`;
+      const bg = `background-color: ${item.color};`;
+      const border = `border-right: ${this.borderWidth}px solid ${this.borderColor}`;
+
+      return `${width}${bg}${border}`;
+    },
   },
 };
 </script>
@@ -86,20 +121,22 @@ export default {
 .bar-wrap {
   display: flex;
   width: 100%;
-  height: 10px;
-  border: 1px solid #fff;
+
+  &.rounded {
+    overflow: hidden;
+  }
 }
 
 .bar-section {
   display: flex;
-  height: 8px;
+  height: 100%;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.03);
   background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 100%);
   transition: opacity 0.25s ease;
   cursor: pointer;
 
-  &:not(:last-child) {
-    border-right: 1px solid #fff;
+  &:last-child {
+    border-right-width: 0;
   }
 
   &:hover {

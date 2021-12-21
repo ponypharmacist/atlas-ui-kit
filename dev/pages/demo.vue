@@ -54,6 +54,8 @@ Vue.use(atlasUiKit);</pre>
 
   <demo-modals/>
 
+  <demo-collapsible/>
+
   <demo-percent-bar/>
 
   <demo-chart/>
@@ -90,6 +92,7 @@ import DemoColorPicker from './elements/colorPicker.vue';
 import DemoPopups from './elements/popups.vue';
 import DemoPopover from './elements/popover.vue';
 import DemoModals from './elements/modals.vue';
+import DemoCollapsible from './elements/collapsible.vue';
 import DemoPercentBar from './elements/percentBar.vue';
 import DemoChart from './elements/chart.vue';
 import DemoTree from './elements/tree.vue';
@@ -121,6 +124,7 @@ export default {
     DemoPopups,
     DemoPopover,
     DemoModals,
+    DemoCollapsible,
     DemoPercentBar,
     DemoChart,
     DemoTree,
@@ -158,6 +162,7 @@ export default {
         { title: 'Поповер', alias: 'au-popover' },
         { title: 'Тултип', alias: 'au-tooltip' },
         { title: 'Модальное окно', alias: 'au-modal' },
+        { title: 'Сворачиваемый блок', alias: 'au-collapsible' },
         { title: 'Процетная шкала', alias: 'au-percent-bar' },
         { title: 'График', alias: 'au-chart' },
         { title: 'Дерево элементов', alias: 'au-tree' },

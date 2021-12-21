@@ -25,6 +25,7 @@ export { default as AuPopover } from './AuPopover';
 export { default as AuTooltip } from './AuTooltip';
 export { default as AuSidePopup } from './AuSidePopup';
 export { default as AuModal } from './AuModal';
+export { default as AuCollapsible } from './AuCollapsible';
 export { default as AuPercentBar } from './AuPercentBar';
 export { default as AuChart } from './AuChart';
 export { default as AuTree } from './AuTree';

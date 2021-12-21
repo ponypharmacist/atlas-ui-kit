@@ -3,17 +3,22 @@
 <div class="demo-percent-bar">
   <h2 id="au-percent-bar">Процентная шкала</h2>
   <div class="demo-item">
-    <au-percent-bar :data="barData" show-number number-color="black"/>
+    <au-percent-bar :data="barData" rounded show-number number-color="black"/>
+    <pre>&lt;au-percent-bar :data="barData" rounded show-number number-color="black"&gt;/</pre>
     <au-percent-bar :data="barData"/>
     <au-percent-bar :data="barData2"/>
     <au-percent-bar :data="barData3" show-tooltips/>
 
   <pre>&lt;au-percent-bar
   data: Array
+  height: Number
   default-color: String
   default-index: Number | Какое из значений будет выведено справа от полоски
   show-number | Показывать число справа от полоски или нет
   number-color: String
+  rounded
+  borderWidth: Number
+  borderColor: String
   show-tooltips
 /&gt;</pre>
 
