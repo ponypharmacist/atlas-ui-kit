@@ -150,6 +150,7 @@ export default {
 }
 
 .bar-number {
+  flex: 0 0 auto;
   width: 40px;
   text-align: right;
   font-size: 14px;

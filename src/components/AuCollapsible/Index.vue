@@ -13,7 +13,7 @@
     <div class="au-collapsible-close">
       <au-icon
         v-if="!hideArrow && !isSwitch"
-        :class="{ isOpen, hoverable: true }"
+        :class="{ open: isOpen, hoverable: true }"
         icon="mdi-chevron-down"
         :size="20"
         color="#c6d5ee"

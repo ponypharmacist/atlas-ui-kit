@@ -43,6 +43,7 @@ export default {
 
 <style lang="scss" scoped>
 .au-switch {
+  flex: 0 0 auto;
   position: relative;
   width: 36px;
   height: 20px;
