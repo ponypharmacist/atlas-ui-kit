@@ -98,6 +98,8 @@
   autofocus
   multiple
 
+  emit-event - $emit('input', event) вместо event.target.value, нужно для встраивания в v-calendar
+
   full-width
   small
   tiny

@@ -20,6 +20,8 @@ Vue.use(atlasUiKit);</pre>
 
   <demo-inputs/>
 
+  <demo-textarea/>
+
   <demo-file/>
 
   <demo-slider/>
@@ -75,6 +77,7 @@ import DemoIcons from './elements/icons.vue';
 import DemoButtons from './elements/buttons.vue';
 import DemoCheckbox from './elements/checkbox.vue';
 import DemoInputs from './elements/inputs.vue';
+import DemoTextarea from './elements/textarea.vue';
 import DemoFile from './elements/file.vue';
 import DemoSlider from './elements/slider.vue';
 import DemoDate from './elements/date.vue';
@@ -107,6 +110,7 @@ export default {
     DemoButtons,
     DemoCheckbox,
     DemoInputs,
+    DemoTextarea,
     DemoFile,
     DemoSlider,
     DemoDate,
@@ -141,6 +145,7 @@ export default {
         { title: 'Чекбокс', alias: 'au-checkbox' },
         { title: 'Переключатель', alias: 'au-switch' },
         { title: 'Поле ввода', alias: 'au-input' },
+        { title: 'Textarea', alias: 'au-textarea' },
         { title: 'Файл', alias: 'au-file' },
         { title: 'Слайдер / диапазон', alias: 'au-range-slider' },
         { title: 'Дата и время', alias: 'au-date-picker' },

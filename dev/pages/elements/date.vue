@@ -12,6 +12,8 @@
       />
     </div>
 
+    <pre>{{ dateRangeSelected }}</pre>
+
     <div style="max-width: 320px;">
       <au-date-picker
         v-model="dateSelected"

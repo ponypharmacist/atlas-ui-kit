@@ -24,7 +24,7 @@
       :tiny="tiny"
       :inverse="inverse"
       full-width
-      readonly
+      emit-event
       v-on="inputEvents"
     >
       <template #suffix>
@@ -57,7 +57,7 @@
         :small="small"
         :tiny="tiny"
         :inverse="inverse"
-        readonly
+        emit-event
         v-on="inputEvents.start"
       >
         <template #suffix>
@@ -76,7 +76,7 @@
         :small="small"
         :tiny="tiny"
         :inverse="inverse"
-        readonly
+        emit-event
         v-on="inputEvents.end"
       >
         <template #suffix>
