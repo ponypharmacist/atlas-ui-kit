@@ -256,7 +256,7 @@ export default {
 
   &.is-small {
     .au-input-content {
-      padding: 0 10px;
+      padding: 6px 10px;
       border-radius: 2px;
     }
 
@@ -273,7 +273,7 @@ export default {
 
   &.is-tiny {
     .au-input-content {
-      padding: 0 6px;
+      padding: 6px 6px;
       border-radius: 2px;
     }
 
